@@ -1,3 +1,4 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/pages/deviceSelect_page/deviceSelect_page.dart';
@@ -6,6 +7,15 @@ import 'package:mc_hub/theme/custom_theme.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
+
+  doWhenWindowReady(() {
+    const initialSize = Size(600, 450);
+    appWindow.minSize = initialSize;
+    appWindow.size = initialSize;
+    // appWindow.alignment = Alignment.center;
+    appWindow.title = "MC Hub";
+    appWindow.show();
+  });
 }
 
 class MyApp extends HookConsumerWidget {
@@ -14,6 +24,7 @@ class MyApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       themeMode: ThemeMode.dark,
+      title: "MC Hub",
       theme: CustomTheme().darkTheme,
       initialRoute: AppRoute.deviceSelect.path,
       routes: {

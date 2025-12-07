@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   hooks_riverpod: ^3.0.3
   bitsdojo_window: ^0.1.6
+  import_sorter: ^4.6.0
 
 dev_dependencies:
   flutter_test:
