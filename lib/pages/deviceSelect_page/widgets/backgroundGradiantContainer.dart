@@ -14,12 +14,14 @@ class Backgroundgradiantcontainer extends HookConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: [
-            Theme.of(context).colorScheme.surfaceContainerHighest,
-            Theme.of(context).colorScheme.surfaceContainerLow,
-            Theme.of(context).colorScheme.surfaceContainerLowest,
+            Theme.of(context).colorScheme.surface,
+            Theme.of(context).colorScheme.surface,
+            Theme.of(context).colorScheme.surface,
+            Theme.of(context).colorScheme.surface,
+            Theme.of(context).colorScheme.primary,
           ],
         ),
       ),
