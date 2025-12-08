@@ -1,5 +1,10 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
+// Flutter imports:
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomAppbar extends HookConsumerWidget {

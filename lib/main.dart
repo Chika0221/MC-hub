@@ -1,6 +1,13 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
+// Flutter imports:
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
 import 'package:mc_hub/pages/deviceSelect_page/deviceSelect_page.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
