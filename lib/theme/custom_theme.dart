@@ -5,6 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:mc_hub/theme/custom_color.dart';
 
 class CustomTheme {
-  ThemeData get darkTheme =>
-      ThemeData(useMaterial3: true, colorScheme: CustomColorSchema().schema);
+  ThemeData get mainTheme => ThemeData(
+    useMaterial3: true,
+    colorScheme: CustomColorSchema().schema,
+    fontFamily: Fonts.WDXLLubrifont.name,
+  );
+  ThemeData get titleTheme => ThemeData(
+    useMaterial3: true,
+    colorScheme: CustomColorSchema().schema,
+    fontFamily: Fonts.LunaChord.name,
+  );
 }
+
+enum Fonts { WDXLLubrifont, LunaChord }

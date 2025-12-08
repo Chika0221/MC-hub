@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+// Project imports:
+import 'package:mc_hub/theme/custom_theme.dart';
+
 class CustomAppbar extends HookConsumerWidget {
   const CustomAppbar({super.key});
   @override
@@ -35,9 +38,13 @@ class CustomAppbar extends HookConsumerWidget {
               child: MoveWindow(
                 child: Row(
                   children: [
-                    Icon(Icons.add),
+                    // TODO 後でアイコンを作成
+                    // Icon(Icons.add),
                     SizedBox(width: 4),
-                    Text("MC Hub"),
+                    Text(
+                      "MC Hub",
+                      style: TextStyle(fontFamily: Fonts.LunaChord.name),
+                    ),
                   ],
                 ),
               ),

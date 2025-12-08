@@ -32,7 +32,7 @@ class MyApp extends HookConsumerWidget {
     return MaterialApp(
       themeMode: ThemeMode.dark,
       title: "MC Hub",
-      theme: CustomTheme().darkTheme,
+      theme: CustomTheme().mainTheme,
       initialRoute: AppRoute.deviceSelect.path,
       routes: {
         AppRoute.deviceSelect.path: (context) => const DeviceSelectPage(),
