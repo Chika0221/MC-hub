@@ -50,6 +50,10 @@ class CustomAppbar extends HookConsumerWidget {
               ),
             ),
           ),
+          WindowButton(
+            iconBuilder:
+                (context) => Icon(Icons.arrow_back, size: 20), //TODO peinter必要
+          ),
           MinimizeWindowButton(colors: buttonColors),
           MaximizeWindowButton(colors: buttonColors),
           CloseWindowButton(colors: closeButtonColors),

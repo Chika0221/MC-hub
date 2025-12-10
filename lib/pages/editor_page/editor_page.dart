@@ -43,13 +43,110 @@ class EditorPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppbar().build(context, ref),
-      body: Center(
-        child: OutlinedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(keyDownEvents.value.join(" + ")),
-        ),
+      // body: Center(
+      //   child: OutlinedButton(
+      //     onPressed: () {
+      //       Navigator.of(context).pop();
+      //     },
+      //     child: Text(keyDownEvents.value.join(" + ")),
+      //   ),
+      // ),
+      body: Column(
+        children: [
+          Flexible(
+            flex: 4,
+            child: Container(
+              child: Center(
+                child: Draggable(
+                  data: "yes_data",
+                  child: Text("こっちで設定"),
+                  feedback: Material(
+                    child: Text("うわぁ～"),
+                    color: Colors.transparent,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.5,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color:
+                              Theme.of(context).colorScheme.secondaryContainer,
+                        ),
+                        child: Center(
+                          child: Text(
+                            keyDownEvents.value.join(" + "),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.displayMedium?.copyWith(
+                              color:
+                                  Theme.of(
+                                    context,
+                                  ).colorScheme.onSecondaryContainer,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: Icon(
+                        Icons.keyboard_arrow_right_rounded,
+                        size: MediaQuery.of(context).size.width * 0.03,
+                      ),
+                    ),
+                    Flexible(
+                      flex: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color:
+                              Theme.of(context).colorScheme.secondaryContainer,
+                        ),
+                        child: DragTarget(
+                          onAcceptWithDetails: (data) {
+                            if (data.data is String) {
+                              print(data.data);
+                            }
+                          },
+
+                          builder: (
+                            BuildContext context,
+                            List<Object?> candidateData,
+                            List<dynamic> rejectedData,
+                          ) {
+                            return Center(
+                              child: Text(candidateData.toString()),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 4,
+            child: Container(
+              color: Theme.of(context).colorScheme.surfaceContainer,
+              child: Center(child: Text("こっちにキーボード")),
+            ),
+          ),
+        ],
       ),
     );
   }
