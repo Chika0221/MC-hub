@@ -8,6 +8,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/main.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
 
 class CustomAppbar extends HookConsumerWidget {
@@ -33,14 +34,17 @@ class CustomAppbar extends HookConsumerWidget {
       preferredSize: Size.fromHeight(kToolbarHeight),
       child: Row(
         children: [
+          // if (ModalRoute.of(context)?.settings.name !=
+          //     AppRoute.deviceSelect.path)
+          //   WindowButton(
+          //     iconBuilder: (WindowButtonContext context) => ,
+          //   ),
           Expanded(
             child: WindowTitleBarBox(
               child: MoveWindow(
                 child: Row(
                   children: [
-                    // TODO 後でアイコンを作成
-                    // Icon(Icons.add),
-                    SizedBox(width: 4),
+                    SizedBox(width: 8),
                     Text(
                       "MC Hub",
                       style: TextStyle(fontFamily: Fonts.LunaChord.name),
@@ -50,12 +54,10 @@ class CustomAppbar extends HookConsumerWidget {
               ),
             ),
           ),
-          WindowButton(
-            iconBuilder:
-                (context) => Icon(Icons.arrow_back, size: 20), //TODO peinter必要
-          ),
           MinimizeWindowButton(colors: buttonColors),
-          MaximizeWindowButton(colors: buttonColors),
+          appWindow.isMaximized
+              ? RestoreWindowButton(colors: buttonColors)
+              : MaximizeWindowButton(colors: buttonColors),
           CloseWindowButton(colors: closeButtonColors),
         ],
       ),

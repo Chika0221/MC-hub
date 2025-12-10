@@ -54,6 +54,7 @@ class DeviceSelectPage extends HookConsumerWidget {
                             width: 1,
                           ),
                         ),
+                        // borderRadius: BorderRadius.circular(10),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(10),
                           onTap: () {
