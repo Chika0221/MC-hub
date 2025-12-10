@@ -21,7 +21,10 @@ class EditorPage extends HookConsumerWidget {
       keyboardEvent.startListening((keyEvent) {
         if (keyEvent.isKeyDown &&
             !keyDownEvents.value.contains(keyEvent.vkName)) {
-          keyDownEvents.value = [...keyDownEvents.value, keyEvent.vkName];
+          keyDownEvents.value = [
+            ...keyDownEvents.value,
+            keyEvent.vkName,
+          ]; //2キー以上の入力に対応
         } else {
           keyDownEvents.value = [];
         }
