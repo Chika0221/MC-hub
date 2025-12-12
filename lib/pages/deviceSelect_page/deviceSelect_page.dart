@@ -1,9 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:glass_kit/glass_kit.dart';
 
 // Package imports:
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:glass_kit/glass_kit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rive/rive.dart';
 
