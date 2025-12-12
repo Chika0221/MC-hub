@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   bitsdojo_window_windows
   keyboard_event
+  rive_native
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

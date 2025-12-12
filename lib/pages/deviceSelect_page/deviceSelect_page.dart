@@ -1,8 +1,11 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:glass_kit/glass_kit.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:rive/rive.dart';
 
 // Project imports:
 import 'package:mc_hub/main.dart';
@@ -17,11 +20,6 @@ class DeviceSelectPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // late final fileLoader = FileLoader.fromAsset(
-    //   "assets/animations/fondKeyboard.riv",
-    //   riveFactory: Factory.rive,
-    // );
-
     final devices = [1];
 
     return Scaffold(
@@ -36,9 +34,13 @@ class DeviceSelectPage extends HookConsumerWidget {
               flex: 1,
               child: Text(
                 "MC Hub",
-                style: CustomTheme().titleTheme.textTheme.titleLarge?.copyWith(
-                  fontSize: MediaQuery.of(context).size.height * 0.05,
-                ),
+                style: CustomTheme()
+                    .titleTheme(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(
+                      fontSize: MediaQuery.of(context).size.height * 0.08,
+                    ),
               ),
             ),
             Flexible(

@@ -18,9 +18,9 @@ class Backgroundgradiantcontainer extends HookConsumerWidget {
           end: Alignment.bottomCenter,
           colors: [
             Theme.of(context).colorScheme.surface,
-            Theme.of(context).colorScheme.surface,
-            Theme.of(context).colorScheme.surface,
-            Theme.of(context).colorScheme.surface,
+            // Theme.of(context).colorScheme.surface,
+            // Theme.of(context).colorScheme.surface,
+            // Theme.of(context).colorScheme.surface,
             Theme.of(context).colorScheme.primary,
           ],
         ),

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 class CustomColorSchema {
-  ColorScheme get schema => const ColorScheme(
+  ColorScheme get darkSchema => const ColorScheme(
     brightness: Brightness.dark,
     primary: Color(0xfff1c84b),
     onPrimary: Color(0xff26210C),
@@ -51,5 +51,58 @@ class CustomColorSchema {
     outline: Color(0xff90909A),
     outlineVariant: Color(0xff424754),
     inversePrimary: Color(0xff755C00),
+  );
+
+  ColorScheme get lightSchema => const ColorScheme(
+    brightness: Brightness.light,
+    primary: Color(0xff2f80ed),
+    onPrimary: Color(0xffffffff),
+    secondary: Color(0xff56ccf2),
+    onSecondary: Color(0xff00344a),
+    error: Color(0xffb00020),
+    onError: Color(0xffffffff),
+    surface: Color(0xfff6fbff),
+    onSurface: Color(0xff0f1b2b),
+    tertiary: Color(0xff6fcf97),
+    onTertiary: Color(0xff0c2719),
+    shadow: Color(0xff000000),
+    surfaceTint: Color(0xff2f80ed),
+    inverseSurface: Color(0xff132033),
+    onInverseSurface: Color(0xffe8f1fb),
+
+    primaryContainer: Color(0xffd8e8ff),
+    onPrimaryContainer: Color(0xff0a2f63),
+    primaryFixed: Color(0xffd8e8ff),
+    primaryFixedDim: Color(0xffa8c8ff),
+    onPrimaryFixed: Color(0xff0a2f63),
+    onPrimaryFixedVariant: Color(0xff103f84),
+
+    secondaryContainer: Color(0xffd3f4ff),
+    onSecondaryContainer: Color(0xff0d3a4a),
+    secondaryFixed: Color(0xffd3f4ff),
+    secondaryFixedDim: Color(0xffa1e4ff),
+    onSecondaryFixed: Color(0xff0d3a4a),
+    onSecondaryFixedVariant: Color(0xff125267),
+
+    tertiaryContainer: Color(0xffd7f5e5),
+    onTertiaryContainer: Color(0xff0e3a24),
+    tertiaryFixed: Color(0xffd7f5e5),
+    tertiaryFixedDim: Color(0xffa8e8c6),
+    onTertiaryFixed: Color(0xff0e3a24),
+    onTertiaryFixedVariant: Color(0xff155437),
+
+    errorContainer: Color(0xffffdad6),
+    onErrorContainer: Color(0xff40000a),
+    surfaceDim: Color(0xffe0e8f2),
+    surfaceBright: Color(0xffffffff),
+    surfaceContainerLowest: Color(0xffffffff),
+    surfaceContainerLow: Color(0xfff0f6fd),
+    surfaceContainer: Color(0xffe8f1fb),
+    surfaceContainerHigh: Color(0xffdde9f7),
+    surfaceContainerHighest: Color(0xffd1deef),
+    onSurfaceVariant: Color(0xff41556f),
+    outline: Color(0xff6a7b93),
+    outlineVariant: Color(0xffc7d2e2),
+    inversePrimary: Color(0xffa8c8ff),
   );
 }

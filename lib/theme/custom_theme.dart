@@ -5,14 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:mc_hub/theme/custom_color.dart';
 
 class CustomTheme {
-  ThemeData get mainTheme => ThemeData(
+  ThemeData get mainDarkTheme => ThemeData(
     useMaterial3: true,
-    colorScheme: CustomColorSchema().schema,
+    colorScheme: CustomColorSchema().darkSchema,
     fontFamily: Fonts.WDXLLubrifont.name,
   );
-  ThemeData get titleTheme => ThemeData(
+
+  ThemeData get mainLightTheme => ThemeData(
     useMaterial3: true,
-    colorScheme: CustomColorSchema().schema,
+    colorScheme: CustomColorSchema().lightSchema,
+    fontFamily: Fonts.WDXLLubrifont.name,
+  );
+
+  ThemeData titleTheme(BuildContext context) => ThemeData(
+    useMaterial3: true,
+    colorScheme:
+        Theme.of(context).brightness == Brightness.dark
+            ? CustomColorSchema().darkSchema
+            : CustomColorSchema().lightSchema,
     fontFamily: Fonts.LunaChord.name,
   );
 }
