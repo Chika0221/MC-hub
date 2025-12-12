@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:rive/rive.dart';
 
 // Project imports:
 import 'package:mc_hub/main.dart';
@@ -17,10 +18,10 @@ class DeviceSelectPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // late final fileLoader = FileLoader.fromAsset(
-    //   "assets/animations/fondKeyboard.riv",
-    //   riveFactory: Factory.rive,
-    // );
+    late final animation = FileLoader.fromAsset(
+      "assets/animations/fondKeyboard.riv",
+      riveFactory: Factory.rive,
+    );
 
     final devices = [1];
 
