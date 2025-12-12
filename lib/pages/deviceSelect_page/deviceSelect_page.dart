@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,6 +16,11 @@ class DeviceSelectPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    late final animation = FileLoader.fromAsset(
+      "assets/animations/fondKeyboard.riv",
+      riveFactory: Factory.rive,
+    );
+
     final devices = [1, 1, 1, 1, 1];
 
     return Scaffold(
@@ -64,9 +68,25 @@ class DeviceSelectPage extends HookConsumerWidget {
                               context,
                             ).pushNamed(AppRoute.editor.path);
                           },
-                          child: const RiveAnimation.asset(
-                            "assets/animations/fondKeyboard.riv",
-                            fit: BoxFit.cover,
+                          child: RiveWidgetBuilder(
+                            fileLoader: animation,
+                            builder:
+                                (
+                                  BuildContext context,
+                                  RiveState state,
+                                ) => switch (state) {
+                                  RiveLoading() => const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                  RiveFailed() => ErrorWidget.withDetails(
+                                    message: state.error.toString(),
+                                    error: FlutterError(state.error.toString()),
+                                  ),
+                                  RiveLoaded() => RiveWidget(
+                                    controller: state.controller,
+                                    fit: Fit.cover,
+                                  ),
+                                },
                           ),
                         ),
                       );
