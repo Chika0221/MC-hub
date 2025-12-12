@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mc_hub/main.dart';
 
 // Project imports:
 import 'package:mc_hub/theme/custom_theme.dart';
@@ -31,11 +32,15 @@ class CustomAppbar extends HookConsumerWidget {
       preferredSize: Size.fromHeight(kToolbarHeight),
       child: Row(
         children: [
-          // if (ModalRoute.of(context)?.settings.name !=
-          //     AppRoute.deviceSelect.path)
-          //   WindowButton(
-          //     iconBuilder: (WindowButtonContext context) => ,
-          //   ),
+          if (ModalRoute.of(context)?.settings.name !=
+              AppRoute.deviceSelect.path)
+            WindowButton(
+              iconBuilder:
+                  (WindowButtonContext context) => Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
           Expanded(
             child: WindowTitleBarBox(
               child: MoveWindow(
