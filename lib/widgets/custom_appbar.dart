@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mc_hub/main.dart';
 
 // Project imports:
-import 'package:mc_hub/main.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
 
 class CustomAppbar extends HookConsumerWidget {
