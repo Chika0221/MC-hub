@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:rive/rive.dart';
 
 // Project imports:
 import 'package:mc_hub/main.dart';
@@ -16,11 +17,6 @@ class DeviceSelectPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // late final fileLoader = FileLoader.fromAsset(
-    //   "assets/animations/fondKeyboard.riv",
-    //   riveFactory: Factory.rive,
-    // );
-
     final devices = [1, 1, 1, 1, 1];
 
     return Scaffold(
@@ -68,22 +64,10 @@ class DeviceSelectPage extends HookConsumerWidget {
                               context,
                             ).pushNamed(AppRoute.editor.path);
                           },
-                          // child: RiveWidgetBuilder(
-                          //   fileLoader: fileLoader,
-                          //   builder:
-                          //       (context, state) => switch (state) {
-                          //         RiveLoading() => const Center(
-                          //           child: CircularProgressIndicator(),
-                          //         ),
-                          //         RiveFailed() => ErrorWidget.withDetails(
-                          //           message: state.error.toString(),
-                          //           error: FlutterError(state.error.toString()),
-                          //         ),
-                          //         RiveLoaded() => RiveWidget(
-                          //           controller: state.controller,
-                          //           fit: Fit.cover,
-                          //         ),
-                          //       },
+                          child: const RiveAnimation.asset(
+                            "assets/animations/fondKeyboard.riv",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       );
                     }),

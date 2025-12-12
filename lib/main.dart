@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/pages/deviceSelect_page/deviceSelect_page.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
-// import 'package:rive/rive.dart';
+import 'package:rive/rive.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
