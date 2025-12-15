@@ -11,7 +11,8 @@ import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
 import 'package:mc_hub/pages/editor_page/key_palette.dart';
 
 // State provider for key mappings
-final keyMappingProvider = StateProvider<Map<String, String>>((ref) => {});
+// final keyMappingProvider = NotifierProvider<Map<String, String>>((ref) => {});
+final keyMappingProvider = Provider<Map<String, String>>((ref) => {});
 
 class EditorPage extends HookConsumerWidget {
   const EditorPage({super.key});
@@ -38,10 +39,10 @@ class EditorPage extends HookConsumerWidget {
                     keyMappings: keyMappings,
                     onKeyRemap: (keyId, newMapping) {
                       final currentMap = ref.read(keyMappingProvider);
-                      ref.read(keyMappingProvider.notifier).state = {
-                        ...currentMap,
-                        keyId: newMapping,
-                      };
+                      // ref.read(keyMappingProvider.notifier).state = {
+                      //   ...currentMap,
+                      //   keyId: newMapping,
+                      // };
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -58,13 +59,13 @@ class EditorPage extends HookConsumerWidget {
           ),
 
           // Divider
-          Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
+          Divider(
+            height: 1,
+            color: Theme.of(context).colorScheme.outlineVariant,
+          ),
 
           // Bottom section: Key Palette
-          const Expanded(
-            flex: 2,
-            child: KeyPalette(),
-          ),
+          const Expanded(flex: 2, child: KeyPalette()),
         ],
       ),
     );
