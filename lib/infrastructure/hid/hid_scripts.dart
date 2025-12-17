@@ -11,5 +11,7 @@ Future<List<HidDevice>> deviceList() async {
   // vendorId=0xfeed,
   // productId=0x0,
 
-  return [devices.first];
+  // return [devices.first];
+  print(devices);
+  return devices;
 }
