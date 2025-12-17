@@ -1,17 +1,17 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:glass_kit/glass_kit.dart';
+import 'package:hid4flutter/hid4flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:rive/rive.dart';
-
+import 'package:mc_hub/infrastructure/hid/hid_scripts.dart';
 // Project imports:
 import 'package:mc_hub/main.dart';
 import 'package:mc_hub/pages/deviceSelect_page/widgets/backgroundGradiantContainer.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
+import 'package:rive/rive.dart';
 
 part 'widgets/select_device_container.dart';
 
@@ -20,7 +20,15 @@ class DeviceSelectPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final devices = [1];
+    final devices = useState<List<HidDevice>>([]);
+
+    void getHidDevice() async {
+      devices.value = await deviceList();
+    }
+
+    useEffect(() {
+      getHidDevice();
+    }, []);
 
     return Scaffold(
       appBar: CustomAppbar().build(context, ref),
@@ -53,7 +61,9 @@ class DeviceSelectPage extends HookConsumerWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       spacing: 16,
-                      children: List.generate(devices.length, (int index) {
+                      children: List.generate(devices.value.length, (
+                        int index,
+                      ) {
                         return SelectDeviceContainer();
                       }),
                     ),
