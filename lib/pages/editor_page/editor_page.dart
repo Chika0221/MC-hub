@@ -9,20 +9,42 @@ import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/pages/editor_page/layout_data.dart';
 import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
 import 'package:mc_hub/pages/editor_page/key_palette.dart';
-
-// State provider for key mappings
-// final keyMappingProvider = NotifierProvider<Map<String, String>>((ref) => {});
-final keyMappingProvider = Provider<Map<String, String>>((ref) => {});
+import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 
 class EditorPage extends HookConsumerWidget {
   const EditorPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final keyMappings = ref.watch(keyMappingProvider);
+    final vialState = ref.watch(vialProvider);
+    final keyMappings = vialState.keyMappings;
 
     return Scaffold(
-      appBar: CustomAppbar().build(context, ref),
+      appBar: AppBar(
+        title: const Text("Editor"),
+        actions: [
+          if (vialState.statusMessage != null)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  vialState.statusMessage!,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+            ),
+          IconButton(
+            icon: Icon(vialState.isConnected ? Icons.link_off : Icons.link),
+            onPressed: () {
+              if (vialState.isConnected) {
+                ref.read(vialProvider.notifier).disconnect();
+              } else {
+                ref.read(vialProvider.notifier).connect();
+              }
+            },
+          ),
+        ],
+      ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
@@ -38,11 +60,9 @@ class EditorPage extends HookConsumerWidget {
                     layoutData: keyboardLayout60,
                     keyMappings: keyMappings,
                     onKeyRemap: (keyId, newMapping) {
-                      final currentMap = ref.read(keyMappingProvider);
-                      // ref.read(keyMappingProvider.notifier).state = {
-                      //   ...currentMap,
-                      //   keyId: newMapping,
-                      // };
+                      ref
+                          .read(vialProvider.notifier)
+                          .updateKey(keyId, newMapping);
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
