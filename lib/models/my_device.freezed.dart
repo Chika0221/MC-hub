@@ -22,10 +22,10 @@ MyDevice _$MyDeviceFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MyDevice {
   String get name => throw _privateConstructorUsedError;
-  String get vendorId => throw _privateConstructorUsedError;
-  String get productId => throw _privateConstructorUsedError;
-  String get usegePage => throw _privateConstructorUsedError;
-  String get usege => throw _privateConstructorUsedError;
+  int get vendorId => throw _privateConstructorUsedError;
+  int get productId => throw _privateConstructorUsedError;
+  int get usegePage => throw _privateConstructorUsedError;
+  int get usege => throw _privateConstructorUsedError;
 
   /// Serializes this MyDevice to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,10 +44,10 @@ abstract class $MyDeviceCopyWith<$Res> {
   @useResult
   $Res call({
     String name,
-    String vendorId,
-    String productId,
-    String usegePage,
-    String usege,
+    int vendorId,
+    int productId,
+    int usegePage,
+    int usege,
   });
 }
 
@@ -83,22 +83,22 @@ class _$MyDeviceCopyWithImpl<$Res, $Val extends MyDevice>
                 null == vendorId
                     ? _value.vendorId
                     : vendorId // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             productId:
                 null == productId
                     ? _value.productId
                     : productId // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             usegePage:
                 null == usegePage
                     ? _value.usegePage
                     : usegePage // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             usege:
                 null == usege
                     ? _value.usege
                     : usege // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
           )
           as $Val,
     );
@@ -116,10 +116,10 @@ abstract class _$$MyDeviceImplCopyWith<$Res>
   @useResult
   $Res call({
     String name,
-    String vendorId,
-    String productId,
-    String usegePage,
-    String usege,
+    int vendorId,
+    int productId,
+    int usegePage,
+    int usege,
   });
 }
 
@@ -154,22 +154,22 @@ class __$$MyDeviceImplCopyWithImpl<$Res>
             null == vendorId
                 ? _value.vendorId
                 : vendorId // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         productId:
             null == productId
                 ? _value.productId
                 : productId // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         usegePage:
             null == usegePage
                 ? _value.usegePage
                 : usegePage // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         usege:
             null == usege
                 ? _value.usege
                 : usege // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
       ),
     );
   }
@@ -192,13 +192,13 @@ class _$MyDeviceImpl implements _MyDevice {
   @override
   final String name;
   @override
-  final String vendorId;
+  final int vendorId;
   @override
-  final String productId;
+  final int productId;
   @override
-  final String usegePage;
+  final int usegePage;
   @override
-  final String usege;
+  final int usege;
 
   @override
   String toString() {
@@ -242,10 +242,10 @@ class _$MyDeviceImpl implements _MyDevice {
 abstract class _MyDevice implements MyDevice {
   const factory _MyDevice({
     required final String name,
-    required final String vendorId,
-    required final String productId,
-    required final String usegePage,
-    required final String usege,
+    required final int vendorId,
+    required final int productId,
+    required final int usegePage,
+    required final int usege,
   }) = _$MyDeviceImpl;
 
   factory _MyDevice.fromJson(Map<String, dynamic> json) =
@@ -254,13 +254,13 @@ abstract class _MyDevice implements MyDevice {
   @override
   String get name;
   @override
-  String get vendorId;
+  int get vendorId;
   @override
-  String get productId;
+  int get productId;
   @override
-  String get usegePage;
+  int get usegePage;
   @override
-  String get usege;
+  int get usege;
 
   /// Create a copy of MyDevice
   /// with the given fields replaced by the non-null parameter values.

@@ -8,10 +8,10 @@ part 'my_device.g.dart';
 class MyDevice with _$MyDevice {
   const factory MyDevice({
     required String name,
-    required String vendorId,
-    required String productId,
-    required String usegePage,
-    required String usege,
+    required int vendorId,
+    required int productId,
+    required int usegePage,
+    required int usege,
   }) = _MyDevice;
 
   factory MyDevice.fromJson(Map<String, dynamic> json) =>

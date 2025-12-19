@@ -9,10 +9,10 @@ part of 'my_device.dart';
 _$MyDeviceImpl _$$MyDeviceImplFromJson(Map<String, dynamic> json) =>
     _$MyDeviceImpl(
       name: json['name'] as String,
-      vendorId: json['vendorId'] as String,
-      productId: json['productId'] as String,
-      usegePage: json['usegePage'] as String,
-      usege: json['usege'] as String,
+      vendorId: (json['vendorId'] as num).toInt(),
+      productId: (json['productId'] as num).toInt(),
+      usegePage: (json['usegePage'] as num).toInt(),
+      usege: (json['usege'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$MyDeviceImplToJson(_$MyDeviceImpl instance) =>
