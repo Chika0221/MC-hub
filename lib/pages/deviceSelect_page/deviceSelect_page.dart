@@ -1,3 +1,5 @@
+// Flutterのインポート:
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -14,6 +16,10 @@ import 'package:mc_hub/main.dart';
 import 'package:mc_hub/pages/deviceSelect_page/widgets/backgroundGradiantContainer.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
+
+// パッケージのインポート:
+
+// プロジェクトのインポート:
 
 part 'widgets/select_device_container.dart';
 

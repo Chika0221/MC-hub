@@ -7,6 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/pages/editor_page/key_palette.dart';
+import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
+import 'package:mc_hub/pages/editor_page/layout_data.dart';
 
 class EditorPage extends HookConsumerWidget {
   const EditorPage({super.key});

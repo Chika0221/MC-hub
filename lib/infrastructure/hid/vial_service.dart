@@ -1,3 +1,5 @@
+// Dartのインポート:
+
 // Dart imports:
 import 'dart:async';
 import 'dart:typed_data';
@@ -8,11 +10,15 @@ import 'package:hid4flutter/hid4flutter.dart';
 // Project imports:
 import 'package:mc_hub/models/my_device.dart';
 
+// パッケージのインポート:
+
+// プロジェクトのインポート:
+
 class VialService {
   HidDevice? _device;
   bool get isConnected => _device != null;
 
-  /// Connects to a device matching the definitions.
+  /// 定義に一致するデバイスに接続します。
   Future<bool> connect(MyDevice deviceDefinition) async {
     try {
       final devices = await Hid.getDevices();
@@ -25,14 +31,14 @@ class VialService {
               d.usage == deviceDefinition.usege,
         );
       } catch (e) {
-        // Fallback: relax usage page check if not found exactly (common issue on some OS)
-        // or just try vendor/product
+        // フォールバック: 正確に見つからない場合はUsage Pageのチェックを緩和します（一部のOSでよくある問題）
+        // またはベンダー/プロダクトIDのみで試行します
         try {
           _device = devices.firstWhere(
             (d) =>
                 d.vendorId == deviceDefinition.vendorId &&
                 d.productId == deviceDefinition.productId &&
-                d.usagePage == 0xFF60, // Common Vial/Via usage page
+                d.usagePage == 0xFF60, // 一般的なVial/ViaのUsage Page
           );
         } catch (_) {
           return false;
@@ -55,36 +61,36 @@ class VialService {
     _device = null;
   }
 
-  /// Sends a raw 32-byte report.
+  /// 生の32バイトレポートを送信します。
   Future<void> sendRaw(Uint8List data) async {
     if (_device == null) throw Exception("Device not connected");
-    // Ensure 32 bytes (plus report ID 0 implicitly handled by hid4flutter often, or explicit)
-    // hid4flutter sendReport: prefix with reportId if needed.
-    // Usually QMK RawHID uses report ID 0.
-    // If data is 32 bytes, we send it.
+    // 32バイトであることを確認します（hid4flutterによって暗黙的に処理されるか、明示的なレポートID 0を含む）
+    // hid4flutter sendReport: 必要に応じてreportIdをプレフィックスとして付加します。
+    // 通常、QMK RawHIDはレポートID 0を使用します。
+    // データが32バイトの場合、そのまま送信します。
 
-    // Note: Some platforms need report ID. QMK Raw HID usually expects the data directly if report ID is 0.
-    // hid4flutter `sendReport` signature: `sendReport({int reportId = 0x00, required Uint8List reportData})`
+    // 注意: 一部のプラットフォームではレポートIDが必要です。QMK Raw HIDは通常、レポートIDが0の場合、データを直接期待します。
+    // hid4flutterのsendReportシグネチャ: `sendReport({int reportId = 0x00, required Uint8List reportData})`
     await _device!.sendReport(data, reportId: 0x00);
   }
 
-  /// Receive a report (expecting 32 bytes).
+  /// レポートを受信します（32バイトを想定）。
   Future<Uint8List> receiveRaw() async {
     if (_device == null) throw Exception("Device not connected");
-    // QMK Raw HID packet size is usually 32.
-    // Timeout is important to avoid hanging.
+    // QMK Raw HIDのパケットサイズは通常32です。
+    // ハングアップを防ぐためにタイムアウトが重要です。
     try {
       final data = await _device!.receiveReport(
         32,
         timeout: const Duration(seconds: 1),
       );
-      // First byte might be report ID depending on implementation, but hid4flutter usually strips it or returns the raw buffer.
-      // Based on docs: "First byte is always the reportId."
-      // So if we expect 32 bytes of *payload*, we might get 33 bytes?
-      // QMK RawHID packet is 32 bytes including everything usually.
-      // Let's assume we get [ReportID, Data...].
+      // 実装によっては最初のバイトがレポートIDである可能性がありますが、hid4flutterは通常それを削除するか、生のバッファを返します。
+      // ドキュメントに基づく: "最初のバイトは常にreportIdです。"
+      // したがって、32バイトの*ペイロード*を期待する場合、33バイト取得する可能性があります。
+      // QMK RawHIDパケットは通常、すべてを含めて32バイトです。
+      // [ReportID, Data...] の形式で取得すると仮定します。
       if (data.length > 32) {
-        // strip report ID
+        // レポートIDを削除
         return data.sublist(1);
       }
       if (data.length == 33 && data[0] == 0) {
@@ -98,36 +104,36 @@ class VialService {
 
   Future<int> getProtocolVersion() async {
     final cmd = Uint8List(32);
-    cmd[0] = 0x01; // vial_get_protocol_version or via_get_protocol_version
+    cmd[0] = 0x01; // vial_get_protocol_version または via_get_protocol_version
     await sendRaw(cmd);
     final response = await receiveRaw();
-    // Response: [0x01, VersionHigh, VersionLow, ...]
+    // レスポンス: [0x01, VersionHigh, VersionLow, ...]
     if (response[0] != 0x01) {
-      // Try QMK ID command if 0x01 fails? No, standard VIA is 0x01.
+      // 0x01が失敗した場合、QMK IDコマンドを試すべきか？いいえ、標準的なVIAは0x01です。
       throw Exception("Invalid protocol version response");
     }
     return (response[1] << 8) | response[2];
   }
 
   Future<void> unlock() async {
-    // Vial unlock. often not strictly needed for basic VIA commands, but good to have.
-    // Command: vial_unlock
-    // But wait, if we are just using VIA compatible commands, we might skip this.
-    // Let's leave it empty for now or implement generic unlock if requested.
+    // Vialのロック解除。基本的なVIAコマンドには厳密には必要ないことが多いですが、あると良いでしょう。
+    // コマンド: vial_unlock
+    // しかし、VIA互換コマンドのみを使用している場合は、これをスキップできるかもしれません。
+    // 今のところ空にしておくか、必要に応じて一般的なロック解除を実装します。
   }
 
-  /// Reads the keymap buffer.
-  /// offset: byte offset in the EEPROM/memory
-  /// size: number of bytes to read (max 28 per packet usually)
+  /// キーマップバッファを読み取ります。
+  /// offset: EEPROM/メモリ内のバイトオフセット
+  /// size: 読み取るバイト数（通常、パケットあたり最大28バイト）
   Future<Uint8List> dynamicKeymapGetBuffer(int offset, int size) async {
     final cmd = Uint8List(32);
     cmd[0] = 0x12; // id_dynamic_keymap_get_buffer
-    // offset (2 bytes, big endian usually in VIA? No, VIA uses big endian for offset)
-    // VIA Protocol:
+    // offset (2バイト、VIAでは通常ビッグエンディアン？はい、VIAはオフセットにビッグエンディアンを使用します)
+    // VIAプロトコル:
     // 0: ID (0x12)
-    // 1: offset MSB
-    // 2: offset LSB
-    // 3: size
+    // 1: オフセット MSB
+    // 2: オフセット LSB
+    // 3: サイズ
     cmd[1] = (offset >> 8) & 0xFF;
     cmd[2] = offset & 0xFF;
     cmd[3] = size;
@@ -135,23 +141,23 @@ class VialService {
     await sendRaw(cmd);
     final response = await receiveRaw();
 
-    // Response:
+    // レスポンス:
     // 0: ID (0x12)
-    // 1..size: data
+    // 1..size: データ
     if (response[0] != 0x12) {
       throw Exception("Invalid dynamic_keymap_get_buffer response");
     }
     return response.sublist(
       4,
       4 + size,
-    ); // Wait, VIA response payload usually starts at byte 4?
-    // Let's check generic VIA protocol.
-    // Request: [0x12, offH, offL, size]
-    // Response: [0x12, offH, offL, size, data...]
-    // So data starts at index 4.
+    ); // 待ってください、VIAレスポンスのペイロードは通常バイト4から始まりますか？
+    // 一般的なVIAプロトコルを確認しましょう。
+    // リクエスト: [0x12, offH, offL, size]
+    // レスポンス: [0x12, offH, offL, size, data...]
+    // したがって、データはインデックス4から始まります。
   }
 
-  /// Writes to the keymap buffer.
+  /// キーマップバッファに書き込みます。
   Future<void> dynamicKeymapSetBuffer(int offset, Uint8List data) async {
     if (data.length > 28) throw Exception("Data too long for single packet");
 
@@ -166,22 +172,22 @@ class VialService {
     }
 
     await sendRaw(cmd);
-    // Usually no response for set_buffer, or echoed.
+    // 通常、set_bufferに対するレスポンスはないか、エコーされます。
   }
 
-  /// Helper to get the full keymap
-  /// layers: number of layers
-  /// rows: number of rows
-  /// cols: number of cols
+  /// 完全なキーマップを取得するためのヘルパー
+  /// layers: レイヤー数
+  /// rows: 行数
+  /// cols: 列数
   Future<List<List<List<int>>>> getKeymap({
     required int layers,
     required int rows,
     required int cols,
   }) async {
-    // 2 bytes per keycode
+    // キーコードあたり2バイト
     final totalBytes = layers * rows * cols * 2;
     final buffer = Uint8List(totalBytes);
-    const blockSize = 28; // safe chunk size
+    const blockSize = 28; // 安全なチャンクサイズ
 
     for (int offset = 0; offset < totalBytes; offset += blockSize) {
       int size = blockSize;
@@ -194,7 +200,7 @@ class VialService {
       }
     }
 
-    // Parse buffer into [layer][row][col]
+    // バッファを [layer][row][col] にパース
     List<List<List<int>>> map = [];
     int ptr = 0;
     for (int l = 0; l < layers; l++) {
@@ -202,8 +208,8 @@ class VialService {
       for (int r = 0; r < rows; r++) {
         List<int> row = [];
         for (int c = 0; c < cols; c++) {
-          // Little endian keycodes usually in QMK?
-          // QMK EEPROM is usually little endian.
+          // QMKでは通常リトルエンディアンのキーコードですか？
+          // QMK EEPROMは通常リトルエンディアンです。
           final keycode = buffer[ptr] | (buffer[ptr + 1] << 8);
           row.add(keycode);
           ptr += 2;
@@ -223,7 +229,7 @@ class VialService {
     int totalRows,
     int totalCols,
   ) async {
-    // Calculate offset
+    // オフセットを計算
     // offset = (layer * rows * cols * 2) + (row * cols * 2) + (col * 2)
     final offset =
         (layer * totalRows * totalCols * 2) + (row * totalCols * 2) + (col * 2);
