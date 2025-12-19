@@ -25,7 +25,8 @@ class DeviceSelectPage extends HookConsumerWidget {
     final devices = useState<List<HidDevice>>([]);
 
     void getHidDevice() async {
-      devices.value = await deviceList();
+      // devices.value = await deviceList();
+      devices.value = [];
     }
 
     useEffect(() {
