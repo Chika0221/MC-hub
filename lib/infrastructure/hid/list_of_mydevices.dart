@@ -10,3 +10,19 @@ final myDevices = [
     usege: 0x61,
   ),
 ];
+
+class DeviceLayoutConfig {
+  final int layers;
+  final int rows;
+  final int cols;
+
+  const DeviceLayoutConfig({
+    required this.layers,
+    required this.rows,
+    required this.cols,
+  });
+}
+
+final deviceLayouts = {
+  "MCKeyboard": const DeviceLayoutConfig(layers: 4, rows: 5, cols: 14),
+};
