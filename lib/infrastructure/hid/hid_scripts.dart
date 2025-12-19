@@ -23,7 +23,7 @@ Future<List<HidDevice>> deviceList() async {
   print(devices);
   final keyboards = filterMyKeyboards(devices);
   print(keyboards);
-  return keyboards;
+  return devices;
 }
 
 // class VialKeyboardService {
