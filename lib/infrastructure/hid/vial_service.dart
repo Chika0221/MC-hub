@@ -1,7 +1,11 @@
+// Dart imports:
 import 'dart:async';
 import 'dart:typed_data';
 
+// Package imports:
 import 'package:hid4flutter/hid4flutter.dart';
+
+// Project imports:
 import 'package:mc_hub/models/my_device.dart';
 
 class VialService {
@@ -24,7 +28,7 @@ class VialService {
         // Fallback: relax usage page check if not found exactly (common issue on some OS)
         // or just try vendor/product
         try {
-           _device = devices.firstWhere(
+          _device = devices.firstWhere(
             (d) =>
                 d.vendorId == deviceDefinition.vendorId &&
                 d.productId == deviceDefinition.productId &&
@@ -61,7 +65,7 @@ class VialService {
 
     // Note: Some platforms need report ID. QMK Raw HID usually expects the data directly if report ID is 0.
     // hid4flutter `sendReport` signature: `sendReport({int reportId = 0x00, required Uint8List reportData})`
-    await _device!.sendReport(reportId: 0x00, reportData: data);
+    await _device!.sendReport(data, reportId: 0x00);
   }
 
   /// Receive a report (expecting 32 bytes).
@@ -70,7 +74,10 @@ class VialService {
     // QMK Raw HID packet size is usually 32.
     // Timeout is important to avoid hanging.
     try {
-      final data = await _device!.receiveReport(32, timeout: const Duration(seconds: 1));
+      final data = await _device!.receiveReport(
+        32,
+        timeout: const Duration(seconds: 1),
+      );
       // First byte might be report ID depending on implementation, but hid4flutter usually strips it or returns the raw buffer.
       // Based on docs: "First byte is always the reportId."
       // So if we expect 32 bytes of *payload*, we might get 33 bytes?
@@ -81,7 +88,7 @@ class VialService {
         return data.sublist(1);
       }
       if (data.length == 33 && data[0] == 0) {
-          return data.sublist(1);
+        return data.sublist(1);
       }
       return data;
     } catch (e) {
@@ -96,17 +103,17 @@ class VialService {
     final response = await receiveRaw();
     // Response: [0x01, VersionHigh, VersionLow, ...]
     if (response[0] != 0x01) {
-       // Try QMK ID command if 0x01 fails? No, standard VIA is 0x01.
-       throw Exception("Invalid protocol version response");
+      // Try QMK ID command if 0x01 fails? No, standard VIA is 0x01.
+      throw Exception("Invalid protocol version response");
     }
     return (response[1] << 8) | response[2];
   }
 
   Future<void> unlock() async {
-     // Vial unlock. often not strictly needed for basic VIA commands, but good to have.
-     // Command: vial_unlock
-     // But wait, if we are just using VIA compatible commands, we might skip this.
-     // Let's leave it empty for now or implement generic unlock if requested.
+    // Vial unlock. often not strictly needed for basic VIA commands, but good to have.
+    // Command: vial_unlock
+    // But wait, if we are just using VIA compatible commands, we might skip this.
+    // Let's leave it empty for now or implement generic unlock if requested.
   }
 
   /// Reads the keymap buffer.
@@ -134,7 +141,10 @@ class VialService {
     if (response[0] != 0x12) {
       throw Exception("Invalid dynamic_keymap_get_buffer response");
     }
-    return response.sublist(4, 4 + size); // Wait, VIA response payload usually starts at byte 4?
+    return response.sublist(
+      4,
+      4 + size,
+    ); // Wait, VIA response payload usually starts at byte 4?
     // Let's check generic VIA protocol.
     // Request: [0x12, offH, offL, size]
     // Response: [0x12, offH, offL, size, data...]
@@ -163,7 +173,11 @@ class VialService {
   /// layers: number of layers
   /// rows: number of rows
   /// cols: number of cols
-  Future<List<List<List<int>>>> getKeymap({required int layers, required int rows, required int cols}) async {
+  Future<List<List<List<int>>>> getKeymap({
+    required int layers,
+    required int rows,
+    required int cols,
+  }) async {
     // 2 bytes per keycode
     final totalBytes = layers * rows * cols * 2;
     final buffer = Uint8List(totalBytes);
@@ -201,14 +215,22 @@ class VialService {
     return map;
   }
 
-  Future<void> setKey(int layer, int row, int col, int keycode, int totalRows, int totalCols) async {
-     // Calculate offset
-     // offset = (layer * rows * cols * 2) + (row * cols * 2) + (col * 2)
-     final offset = (layer * totalRows * totalCols * 2) + (row * totalCols * 2) + (col * 2);
-     final data = Uint8List(2);
-     data[0] = keycode & 0xFF;
-     data[1] = (keycode >> 8) & 0xFF;
+  Future<void> setKey(
+    int layer,
+    int row,
+    int col,
+    int keycode,
+    int totalRows,
+    int totalCols,
+  ) async {
+    // Calculate offset
+    // offset = (layer * rows * cols * 2) + (row * cols * 2) + (col * 2)
+    final offset =
+        (layer * totalRows * totalCols * 2) + (row * totalCols * 2) + (col * 2);
+    final data = Uint8List(2);
+    data[0] = keycode & 0xFF;
+    data[1] = (keycode >> 8) & 0xFF;
 
-     await dynamicKeymapSetBuffer(offset, data);
+    await dynamicKeymapSetBuffer(offset, data);
   }
 }

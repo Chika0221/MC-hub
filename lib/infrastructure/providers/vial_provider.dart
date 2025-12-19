@@ -1,7 +1,10 @@
+// Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
+import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 import 'package:mc_hub/infrastructure/hid/vial_service.dart';
 import 'package:mc_hub/models/my_device.dart';
-import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 
 // State to hold connection status and potentially cached data
 class VialState {

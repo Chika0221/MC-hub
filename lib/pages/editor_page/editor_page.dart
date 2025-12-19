@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:mc_hub/pages/editor_page/key_palette.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
+import 'package:mc_hub/pages/editor_page/key_palette.dart';
 
 class EditorPage extends HookConsumerWidget {
   const EditorPage({super.key});
