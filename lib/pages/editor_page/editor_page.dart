@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:mc_hub/widgets/custom_appbar.dart';
-import 'package:mc_hub/pages/editor_page/layout_data.dart';
-import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
 import 'package:mc_hub/pages/editor_page/key_palette.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 
