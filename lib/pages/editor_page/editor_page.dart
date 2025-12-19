@@ -2,150 +2,70 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:keyboard_event/keyboard_event.dart';
 
 // Project imports:
 import 'package:mc_hub/widgets/custom_appbar.dart';
+import 'package:mc_hub/pages/editor_page/layout_data.dart';
+import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
+import 'package:mc_hub/pages/editor_page/key_palette.dart';
+
+// State provider for key mappings
+// final keyMappingProvider = NotifierProvider<Map<String, String>>((ref) => {});
+final keyMappingProvider = Provider<Map<String, String>>((ref) => {});
 
 class EditorPage extends HookConsumerWidget {
   const EditorPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    late final KeyboardEvent keyboardEvent;
-    final keyDownEvents = useState<List<String?>>([]);
-
-    Future<void> initKeyboard() async {
-      await KeyboardEvent.init(); // 仮想キー情報の初期化[web:1]
-      keyboardEvent.startListening((keyEvent) {
-        if (keyEvent.isKeyDown &&
-            !keyDownEvents.value.contains(keyEvent.vkName)) {
-          keyDownEvents.value = [
-            ...keyDownEvents.value,
-            keyEvent.vkName,
-          ]; //2キー以上の入力に対応
-        } else {
-          keyDownEvents.value = [];
-        }
-        // debugPrint(keyEvent.toString());
-        debugPrint(keyDownEvents.value.join(" + "));
-      });
-    }
-
-    useEffect(() {
-      keyboardEvent = KeyboardEvent();
-      initKeyboard();
-      return () {
-        keyboardEvent.cancelListening();
-      };
-    }, []);
+    final keyMappings = ref.watch(keyMappingProvider);
 
     return Scaffold(
       appBar: CustomAppbar().build(context, ref),
-      // body: Center(
-      //   child: OutlinedButton(
-      //     onPressed: () {
-      //       Navigator.of(context).pop();
-      //     },
-      //     child: Text(keyDownEvents.value.join(" + ")),
-      //   ),
-      // ),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
-          Flexible(
-            flex: 4,
+          // Top section: Keyboard Visualization
+          Expanded(
+            flex: 3,
             child: Container(
+              width: double.infinity,
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               child: Center(
-                child: Draggable(
-                  data: "yes_data",
-                  child: Text("こっちで設定"),
-                  feedback: Material(
-                    child: Text("うわぁ～"),
-                    color: Colors.transparent,
+                child: SingleChildScrollView(
+                  child: KeyboardLayout(
+                    layoutData: keyboardLayout60,
+                    keyMappings: keyMappings,
+                    onKeyRemap: (keyId, newMapping) {
+                      final currentMap = ref.read(keyMappingProvider);
+                      // ref.read(keyMappingProvider.notifier).state = {
+                      //   ...currentMap,
+                      //   keyId: newMapping,
+                      // };
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Mapped $newMapping to key"),
+                          duration: const Duration(milliseconds: 500),
+                          behavior: SnackBarBehavior.floating,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
             ),
           ),
-          Flexible(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      flex: 4,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color:
-                              Theme.of(context).colorScheme.secondaryContainer,
-                        ),
-                        child: Center(
-                          child: Text(
-                            keyDownEvents.value.join(" + "),
-                            style: Theme.of(
-                              context,
-                            ).textTheme.displayMedium?.copyWith(
-                              color:
-                                  Theme.of(
-                                    context,
-                                  ).colorScheme.onSecondaryContainer,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 2,
-                      child: Icon(
-                        Icons.keyboard_arrow_right_rounded,
-                        size: MediaQuery.of(context).size.width * 0.03,
-                      ),
-                    ),
-                    Flexible(
-                      flex: 4,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color:
-                              Theme.of(context).colorScheme.secondaryContainer,
-                        ),
-                        child: DragTarget(
-                          onAcceptWithDetails: (data) {
-                            if (data.data is String) {
-                              print(data.data);
-                            }
-                          },
 
-                          builder: (
-                            BuildContext context,
-                            List<Object?> candidateData,
-                            List<dynamic> rejectedData,
-                          ) {
-                            return Center(
-                              child: Text(candidateData.toString()),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          // Divider
+          Divider(
+            height: 1,
+            color: Theme.of(context).colorScheme.outlineVariant,
           ),
-          Flexible(
-            flex: 4,
-            child: Container(
-              color: Theme.of(context).colorScheme.surfaceContainer,
-              child: Center(child: Text("こっちにキーボード")),
-            ),
-          ),
+
+          // Bottom section: Key Palette
+          const Expanded(flex: 2, child: KeyPalette()),
         ],
       ),
     );
