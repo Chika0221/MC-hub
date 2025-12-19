@@ -1,8 +1,4 @@
-// Dart imports:
-import 'dart:typed_data';
-
 // Package imports:
-import 'package:hid4flutter/hid4flutter.dart';
 import 'package:hid4flutter/hid4flutter.dart';
 
 // Project imports:
