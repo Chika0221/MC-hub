@@ -9,6 +9,7 @@ import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/pages/editor_page/key_palette.dart';
 import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
 import 'package:mc_hub/pages/editor_page/layout_data.dart';
+import 'package:mc_hub/widgets/custom_appbar.dart';
 
 class EditorPage extends HookConsumerWidget {
   const EditorPage({super.key});
@@ -19,31 +20,7 @@ class EditorPage extends HookConsumerWidget {
     final keyMappings = vialState.keyMappings;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Editor"),
-        actions: [
-          if (vialState.statusMessage != null)
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(
-                  vialState.statusMessage!,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-              ),
-            ),
-          IconButton(
-            icon: Icon(vialState.isConnected ? Icons.link_off : Icons.link),
-            onPressed: () {
-              if (vialState.isConnected) {
-                ref.read(vialProvider.notifier).disconnect();
-              } else {
-                ref.read(vialProvider.notifier).connect();
-              }
-            },
-          ),
-        ],
-      ),
+      appBar: CustomAppbar().build(context, ref),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
