@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
+import 'package:mc_hub/pages/editor_page/key_data.dart';
 import 'package:mc_hub/pages/editor_page/key_palette.dart';
 import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
 import 'package:mc_hub/pages/editor_page/layout_data.dart';
@@ -18,6 +19,34 @@ class EditorPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final vialState = ref.watch(vialProvider);
     final keyMappings = vialState.keyMappings;
+
+    // Determine layout to show
+    List<List<KeyData>> activeLayout;
+
+    if (vialState.matrix != null && vialState.matrix!.isNotEmpty) {
+      // Construct dynamic layout from matrix
+      // Using Layer 0 for visualization
+      final layer0 = vialState.matrix![0];
+      activeLayout = [];
+      for (int r = 0; r < layer0.length; r++) {
+        final List<KeyData> row = [];
+        for (int c = 0; c < layer0[r].length; c++) {
+          final keycode = layer0[r][c];
+          row.add(
+            KeyData(
+              id: "$r,$c",
+              defaultLabel: VialNotifier.keycodeToLabel(keycode),
+              // All keys are 1u in matrix view
+              width: 1.0,
+            ),
+          );
+        }
+        activeLayout.add(row);
+      }
+    } else {
+      // Fallback to static layout
+      activeLayout = keyboardLayout60;
+    }
 
     return Scaffold(
       appBar: CustomAppbar().build(context, ref),
@@ -33,7 +62,7 @@ class EditorPage extends HookConsumerWidget {
               child: Center(
                 child: SingleChildScrollView(
                   child: KeyboardLayout(
-                    layoutData: keyboardLayout60,
+                    layoutData: activeLayout,
                     keyMappings: keyMappings,
                     onKeyRemap: (keyId, newMapping) {
                       ref
