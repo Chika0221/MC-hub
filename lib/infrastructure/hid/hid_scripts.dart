@@ -13,10 +13,10 @@ List<HidDevice> filterMyKeyboards(List<HidDevice> devices) {
       .where(
         (device) => myDevices.any((myDevice) {
           return device.vendorId == myDevice.vendorId &&
-              device.productId == myDevice.productId;
-          // device.productId == myDevice.productId &&
-          // device.usagePage == myDevice.usegePage &&
-          // device.usage == myDevice.usege;
+              // device.productId == myDevice.productId;
+          device.productId == myDevice.productId &&
+          device.usagePage == myDevice.usegePage &&
+          device.usage == myDevice.usege;
         }),
       )
       .toList();
@@ -27,7 +27,7 @@ Future<List<HidDevice>> deviceList() async {
   print(devices);
   final keyboards = filterMyKeyboards(devices);
   print(keyboards);
-  return devices;
+  return keyboards;
 }
 
 // class VialKeyboardService {
