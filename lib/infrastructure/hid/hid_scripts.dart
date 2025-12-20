@@ -14,9 +14,9 @@ List<HidDevice> filterMyKeyboards(List<HidDevice> devices) {
         (device) => myDevices.any((myDevice) {
           return device.vendorId == myDevice.vendorId &&
               // device.productId == myDevice.productId;
-          device.productId == myDevice.productId &&
-          device.usagePage == myDevice.usegePage &&
-          device.usage == myDevice.usege;
+              device.productId == myDevice.productId &&
+              device.usagePage == myDevice.usegePage &&
+              device.usage == myDevice.usege;
         }),
       )
       .toList();
@@ -24,11 +24,15 @@ List<HidDevice> filterMyKeyboards(List<HidDevice> devices) {
 
 Future<List<HidDevice>> deviceList() async {
   final devices = await Hid.getDevices();
-  print(devices);
+  // print(devices);
   final keyboards = filterMyKeyboards(devices);
   print(keyboards);
+  
+
   return keyboards;
 }
+
+
 
 // class VialKeyboardService {
 //   // ターゲットとするキーボードのID（ご自身のキーボードに合わせて変更してください）
