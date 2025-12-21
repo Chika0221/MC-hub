@@ -5,7 +5,7 @@ final myDevices = [
   MyDevice(
     name: "MCKeyboard",
     vendorId: 0xfeed,
-    productId: 0x0,
+    productId: 0x6D63,
     usegePage: 0xFF60,
     usege: 0x61,
   ),
