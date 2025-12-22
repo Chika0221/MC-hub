@@ -17,10 +17,7 @@ import 'package:mc_hub/pages/deviceSelect_page/widgets/backgroundGradiantContain
 import 'package:mc_hub/theme/custom_theme.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 
-// パッケージのインポート:
-
-// プロジェクトのインポート:
-
+// 専用ボックス
 part 'widgets/select_device_container.dart';
 
 class DeviceSelectPage extends HookConsumerWidget {
@@ -74,7 +71,9 @@ class DeviceSelectPage extends HookConsumerWidget {
                       children: List.generate(devices.value.length, (
                         int index,
                       ) {
-                        return SelectDeviceContainer();
+                        return SelectDeviceContainer(
+                          device: devices.value[index],
+                        );
                       }),
                     ),
                   ),

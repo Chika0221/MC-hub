@@ -1,7 +1,10 @@
 part of '../deviceSelect_page.dart';
 
 class SelectDeviceContainer extends HookConsumerWidget {
-  const SelectDeviceContainer({super.key});
+  const SelectDeviceContainer({super.key, required this.device});
+
+  final HidDevice device;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     late final fileLoader = FileLoader.fromAsset(
@@ -9,56 +12,71 @@ class SelectDeviceContainer extends HookConsumerWidget {
       riveFactory: Factory.rive,
     );
 
-    // late final riveController;
-    // late final file;
-
-    // void initRive() async {
-    //   file = await File.asset(
-    //     "assets/animations/fondKeyboard.riv",
-    //     riveFactory: Factory.rive,
-    //   );
-
-    //   riveController = useMemoized(
-    //     () => RiveWidgetController(
-    //       file,
-    //       stateMachineSelector: StateMachineSelector.byIndex(0),
-    //     ),
-    //     [],
-    //   );
-    // }
-
     useEffect(() {
-      // initRive();
-
       return () {
         fileLoader.dispose();
       };
     }, []);
 
-    return GlassContainer.clearGlass(
+    return Container(
       width: MediaQuery.of(context).size.height * 0.7,
       height: MediaQuery.of(context).size.height * 0.6,
-      borderRadius: BorderRadius.circular(10),
-      child: RiveWidgetBuilder(
-        fileLoader: fileLoader,
-        builder:
-            (context, state) => switch (state) {
-              RiveLoading() => const Center(child: CircularProgressIndicator()),
-              RiveFailed() => ErrorWidget.withDetails(
-                message: state.error.toString(),
-                error: FlutterError(state.error.toString()),
-              ),
-              RiveLoaded() => InkWell(
-                onTap: () async {
-                  await Future.delayed(Duration(milliseconds: 100));
-                  Navigator.of(context).pushNamed(AppRoute.editor.path);
-                },
-                child: RiveWidget(
-                  controller: state.controller,
-                  fit: Fit.contain,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: RiveWidgetBuilder(
+              fileLoader: fileLoader,
+              builder:
+                  (context, state) => switch (state) {
+                    RiveLoading() => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    RiveFailed() => ErrorWidget.withDetails(
+                      message: state.error.toString(),
+                      error: FlutterError(state.error.toString()),
+                    ),
+                    RiveLoaded() => InkWell(
+                      onTap: () async {
+                        await Future.delayed(Duration(milliseconds: 100));
+                        Navigator.of(context).pushNamed(AppRoute.editor.path);
+                      },
+                      child: RiveWidget(
+                        controller: state.controller,
+                        fit: Fit.contain,
+                      ),
+                    ),
+                  },
+            ),
+          ),
+          SizedBox(height: 16),
+          Text(
+            device.productName,
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
+          SizedBox(height: 16),
+          Container(
+            decoration: ShapeDecoration(
+              shape: StadiumBorder(
+                side: BorderSide(
+                  width: 2.0,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
               ),
-            },
+              color: Theme.of(
+                context,
+              ).colorScheme.surfaceContainer.withAlpha(125),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
+              "${device.vendorId} : ${device.productId}",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+          SizedBox(height: 16),
+        ],
       ),
     );
   }

@@ -1,5 +1,3 @@
-// Dartのインポート:
-
 // Dart imports:
 import 'dart:async';
 import 'dart:typed_data';
@@ -9,10 +7,6 @@ import 'package:hid4flutter/hid4flutter.dart';
 
 // Project imports:
 import 'package:mc_hub/models/my_device.dart';
-
-// パッケージのインポート:
-
-// プロジェクトのインポート:
 
 class VialService {
   HidDevice? _device;
@@ -32,13 +26,11 @@ class VialService {
         );
       } catch (e) {
         // フォールバック: 正確に見つからない場合はUsage Pageのチェックを緩和します（一部のOSでよくある問題）
-        // またはベンダー/プロダクトIDのみで試行します
         try {
           _device = devices.firstWhere(
             (d) =>
                 d.vendorId == deviceDefinition.vendorId &&
-                d.productId == deviceDefinition.productId &&
-                d.usagePage == 0xFF60, // 一般的なVial/ViaのUsage Page
+                d.productId == deviceDefinition.productId,
           );
         } catch (_) {
           return false;
