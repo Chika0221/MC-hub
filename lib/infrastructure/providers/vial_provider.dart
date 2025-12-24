@@ -227,131 +227,133 @@ class VialNotifier extends Notifier<VialState> {
         return "B";
       case 0x600:
         return "C";
-      case 0x7000:
+      case 0x700:
         return "D";
-      case 0x08:
+      case 0x800:
         return "E";
-      case 0x09:
+      case 0x900:
         return "F";
-      case 0x0A:
+      case 0xA00:
         return "G";
-      case 0x0B:
+      case 0xB00:
         return "H";
-      case 0x0C:
+      case 0xC00:
         return "I";
-      case 0x0D:
+      case 0xD00:
         return "J";
-      case 0x0E:
+      case 0xE00:
         return "K";
-      case 0x0F:
+      case 0xF00:
         return "L";
-      case 0x10:
+      case 0x1000:
         return "M";
-      case 0x11:
+      case 0x1100:
         return "N";
-      case 0x12:
+      case 0x1200:
         return "O";
-      case 0x13:
+      case 0x1300:
         return "P";
-      case 0x14:
+      case 0x1400:
         return "Q";
-      case 0x15:
+      case 0x1500:
         return "R";
-      case 0x16:
+      case 0x1600:
         return "S";
-      case 0x17:
+      case 0x1700:
         return "T";
-      case 0x18:
+      case 0x1800:
         return "U";
-      case 0x19:
+      case 0x1900:
         return "V";
-      case 0x1A:
+      case 0x1A00:
         return "W";
-      case 0x1B:
+      case 0x1B00:
         return "X";
-      case 0x1C:
+      case 0x1C00:
         return "Y";
-      case 0x1D:
+      case 0x1D00:
         return "Z";
 
-      case 0x1E:
+      case 0x1E00:
         return "1";
-      case 0x1F:
+      case 0x1F00:
         return "2";
-      case 0x20:
+      case 0x2000:
         return "3";
-      case 0x21:
+      case 0x2100:
         return "4";
-      case 0x22:
+      case 0x2200:
         return "5";
-      case 0x23:
+      case 0x2300:
         return "6";
-      case 0x24:
+      case 0x2400:
         return "7";
-      case 0x25:
+      case 0x2500:
         return "8";
-      case 0x26:
+      case 0x2600:
         return "9";
-      case 0x27:
+      case 0x2700:
         return "0";
 
-      case 0x28:
+      case 0x2800:
         return "Enter";
-      case 0x29:
+      case 0x2900:
         return "Esc";
-      case 0x2A:
+      case 0x2A00:
         return "Bksp";
-      case 0x2B:
+      case 0x2B00:
         return "Tab";
-      case 0x2C:
+      case 0x2C00:
         return "Space";
 
-      case 0x2D:
+      case 0x2D00:
         return "-";
-      case 0x2E:
+      case 0x2E00:
         return "=";
-      case 0x2F:
+      case 0x2F00:
         return "[";
-      case 0x30:
+      case 0x3000:
         return "]";
-      case 0x31:
+      case 0x3100:
         return "\\";
 
-      case 0x33:
+      case 0x3300:
         return ";";
-      case 0x34:
+      case 0x3400:
         return "'";
-      case 0x36:
+      case 0x3500:
+        return "`";
+      case 0x3600:
         return ",";
-      case 0x37:
+      case 0x3700:
         return ".";
-      case 0x38:
+      case 0x3800:
         return "/";
 
-      case 0x39:
+      case 0x3900:
         return "Caps";
 
-      case 0x3A:
+      case 0x3A00:
         return "F1";
-      case 0x3B:
+      case 0x3B00:
         return "F2";
       // ...
 
-      case 0xE0:
+      case 0xE000:
         return "LCtrl";
-      case 0xE1:
+      case 0xE100:
         return "LShift";
-      case 0xE2:
+      case 0xE200:
         return "LAlt";
-      case 0xE3:
+      case 0xE300:
         return "Win";
-      case 0xE4:
+      case 0xE400:
         return "RCtrl";
-      case 0xE5:
+      case 0xE500:
         return "RShift";
-      case 0xE6:
+      case 0xE600:
         return "RAlt";
-      case 0xE7:
+      case 0xE700:
         return "RWin";
 
       default:
@@ -363,29 +365,29 @@ class VialNotifier extends Notifier<VialState> {
     // Basic QMK Keycodes
     switch (label.toUpperCase()) {
       case "A":
-        return 0x04;
+        return 0x4;
       case "B":
-        return 0x05;
+        return 0x5;
       case "C":
-        return 0x06;
+        return 0x6;
       case "D":
-        return 0x07;
+        return 0x7;
       case "E":
-        return 0x08;
+        return 0x8;
       case "F":
-        return 0x09;
+        return 0x9;
       case "G":
-        return 0x0A;
+        return 0xA;
       case "H":
-        return 0x0B;
+        return 0xB;
       case "I":
-        return 0x0C;
+        return 0xC;
       case "J":
-        return 0x0D;
+        return 0xD;
       case "K":
-        return 0x0E;
+        return 0xE;
       case "L":
-        return 0x0F;
+        return 0xF;
       case "M":
         return 0x10;
       case "N":
@@ -500,7 +502,7 @@ class VialNotifier extends Notifier<VialState> {
         return 0xE7;
 
       default:
-        return 0x00; // Unknown
+        return 0x0; // Unknown
     }
   }
 }
