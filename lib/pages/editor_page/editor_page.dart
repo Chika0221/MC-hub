@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
+import 'package:mc_hub/models/vial_state.dart';
 import 'package:mc_hub/pages/editor_page/key_data.dart';
 import 'package:mc_hub/pages/editor_page/key_palette.dart';
 import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
@@ -19,6 +20,10 @@ class EditorPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final vialState = ref.watch(vialProvider);
     final keyMappings = vialState.keyMappings;
+
+    ref.listen(vialProvider, (VialState? previousState, VialState newState) {
+      print(newState.statusMessage);
+    });
 
     // Determine layout to show
     List<List<KeyData>> activeLayout;

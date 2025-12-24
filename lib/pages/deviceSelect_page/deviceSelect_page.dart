@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:glass_kit/glass_kit.dart';
 import 'package:hid4flutter/hid4flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rive/rive.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/hid/hid_scripts.dart';
+import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/main.dart';
 import 'package:mc_hub/pages/deviceSelect_page/widgets/backgroundGradiantContainer.dart';
 import 'package:mc_hub/theme/custom_theme.dart';

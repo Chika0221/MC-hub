@@ -42,6 +42,7 @@ class SelectDeviceContainer extends HookConsumerWidget {
                       onTap: () async {
                         await Future.delayed(Duration(milliseconds: 100));
                         Navigator.of(context).pushNamed(AppRoute.editor.path);
+                        ref.read(vialProvider.notifier).connect();
                       },
                       child: RiveWidget(
                         controller: state.controller,
@@ -71,7 +72,7 @@ class SelectDeviceContainer extends HookConsumerWidget {
             ),
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
-              "${device.vendorId} : ${device.productId}",
+              "0x${device.vendorId.toRadixString(16)} : 0x${device.productId.toRadixString(16)}",
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),

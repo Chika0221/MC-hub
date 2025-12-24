@@ -182,7 +182,7 @@ class VialNotifier extends Notifier<VialState> {
       // Get dimensions from config
       final deviceDef = myDevices.first;
       final config = deviceLayouts[deviceDef.name];
-      final rows = config?.rows ?? 5; // Default fallback
+      final rows = config?.rows ?? 4; // Default fallback
       final cols = config?.cols ?? 14;
 
       try {
@@ -221,13 +221,13 @@ class VialNotifier extends Notifier<VialState> {
     // Since labelToKeycode maps multiple strings to same int, this might be ambiguous (e.g. LSHIFT vs SHIFT).
     // We pick canonical names.
     switch (keycode) {
-      case 0x04:
+      case 0x400:
         return "A";
-      case 0x05:
+      case 0x500:
         return "B";
-      case 0x06:
+      case 0x600:
         return "C";
-      case 0x07:
+      case 0x7000:
         return "D";
       case 0x08:
         return "E";
