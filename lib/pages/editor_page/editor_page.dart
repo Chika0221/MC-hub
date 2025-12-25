@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
@@ -41,8 +42,7 @@ class EditorPage extends HookConsumerWidget {
             KeyData(
               id: "$r,$c",
               defaultLabel: VialNotifier.keycodeToLabel(keycode),
-              // All keys are 1u in matrix view
-              width: 1.0,
+              width: myDevices.first.keys[r][c].width,
             ),
           );
         }

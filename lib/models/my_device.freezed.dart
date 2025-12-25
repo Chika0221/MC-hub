@@ -15,10 +15,6 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
-MyDevice _$MyDeviceFromJson(Map<String, dynamic> json) {
-  return _MyDevice.fromJson(json);
-}
-
 /// @nodoc
 mixin _$MyDevice {
   String get name => throw _privateConstructorUsedError;
@@ -26,9 +22,7 @@ mixin _$MyDevice {
   int get productId => throw _privateConstructorUsedError;
   int get usegePage => throw _privateConstructorUsedError;
   int get usege => throw _privateConstructorUsedError;
-
-  /// Serializes this MyDevice to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<List<KeyData>> get keys => throw _privateConstructorUsedError;
 
   /// Create a copy of MyDevice
   /// with the given fields replaced by the non-null parameter values.
@@ -48,6 +42,7 @@ abstract class $MyDeviceCopyWith<$Res> {
     int productId,
     int usegePage,
     int usege,
+    List<List<KeyData>> keys,
   });
 }
 
@@ -71,6 +66,7 @@ class _$MyDeviceCopyWithImpl<$Res, $Val extends MyDevice>
     Object? productId = null,
     Object? usegePage = null,
     Object? usege = null,
+    Object? keys = null,
   }) {
     return _then(
       _value.copyWith(
@@ -99,6 +95,11 @@ class _$MyDeviceCopyWithImpl<$Res, $Val extends MyDevice>
                     ? _value.usege
                     : usege // ignore: cast_nullable_to_non_nullable
                         as int,
+            keys:
+                null == keys
+                    ? _value.keys
+                    : keys // ignore: cast_nullable_to_non_nullable
+                        as List<List<KeyData>>,
           )
           as $Val,
     );
@@ -120,6 +121,7 @@ abstract class _$$MyDeviceImplCopyWith<$Res>
     int productId,
     int usegePage,
     int usege,
+    List<List<KeyData>> keys,
   });
 }
 
@@ -142,6 +144,7 @@ class __$$MyDeviceImplCopyWithImpl<$Res>
     Object? productId = null,
     Object? usegePage = null,
     Object? usege = null,
+    Object? keys = null,
   }) {
     return _then(
       _$MyDeviceImpl(
@@ -170,13 +173,18 @@ class __$$MyDeviceImplCopyWithImpl<$Res>
                 ? _value.usege
                 : usege // ignore: cast_nullable_to_non_nullable
                     as int,
+        keys:
+            null == keys
+                ? _value._keys
+                : keys // ignore: cast_nullable_to_non_nullable
+                    as List<List<KeyData>>,
       ),
     );
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$MyDeviceImpl implements _MyDevice {
   const _$MyDeviceImpl({
     required this.name,
@@ -184,10 +192,8 @@ class _$MyDeviceImpl implements _MyDevice {
     required this.productId,
     required this.usegePage,
     required this.usege,
-  });
-
-  factory _$MyDeviceImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MyDeviceImplFromJson(json);
+    required final List<List<KeyData>> keys,
+  }) : _keys = keys;
 
   @override
   final String name;
@@ -199,10 +205,17 @@ class _$MyDeviceImpl implements _MyDevice {
   final int usegePage;
   @override
   final int usege;
+  final List<List<KeyData>> _keys;
+  @override
+  List<List<KeyData>> get keys {
+    if (_keys is EqualUnmodifiableListView) return _keys;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_keys);
+  }
 
   @override
   String toString() {
-    return 'MyDevice(name: $name, vendorId: $vendorId, productId: $productId, usegePage: $usegePage, usege: $usege)';
+    return 'MyDevice(name: $name, vendorId: $vendorId, productId: $productId, usegePage: $usegePage, usege: $usege, keys: $keys)';
   }
 
   @override
@@ -217,13 +230,20 @@ class _$MyDeviceImpl implements _MyDevice {
                 other.productId == productId) &&
             (identical(other.usegePage, usegePage) ||
                 other.usegePage == usegePage) &&
-            (identical(other.usege, usege) || other.usege == usege));
+            (identical(other.usege, usege) || other.usege == usege) &&
+            const DeepCollectionEquality().equals(other._keys, _keys));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, vendorId, productId, usegePage, usege);
+  int get hashCode => Object.hash(
+    runtimeType,
+    name,
+    vendorId,
+    productId,
+    usegePage,
+    usege,
+    const DeepCollectionEquality().hash(_keys),
+  );
 
   /// Create a copy of MyDevice
   /// with the given fields replaced by the non-null parameter values.
@@ -232,11 +252,6 @@ class _$MyDeviceImpl implements _MyDevice {
   @pragma('vm:prefer-inline')
   _$$MyDeviceImplCopyWith<_$MyDeviceImpl> get copyWith =>
       __$$MyDeviceImplCopyWithImpl<_$MyDeviceImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MyDeviceImplToJson(this);
-  }
 }
 
 abstract class _MyDevice implements MyDevice {
@@ -246,10 +261,8 @@ abstract class _MyDevice implements MyDevice {
     required final int productId,
     required final int usegePage,
     required final int usege,
+    required final List<List<KeyData>> keys,
   }) = _$MyDeviceImpl;
-
-  factory _MyDevice.fromJson(Map<String, dynamic> json) =
-      _$MyDeviceImpl.fromJson;
 
   @override
   String get name;
@@ -261,6 +274,8 @@ abstract class _MyDevice implements MyDevice {
   int get usegePage;
   @override
   int get usege;
+  @override
+  List<List<KeyData>> get keys;
 
   /// Create a copy of MyDevice
   /// with the given fields replaced by the non-null parameter values.
