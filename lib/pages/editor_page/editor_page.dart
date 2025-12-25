@@ -42,7 +42,7 @@ class EditorPage extends HookConsumerWidget {
             KeyData(
               id: "$r,$c",
               defaultLabel: VialNotifier.keycodeToLabel(keycode),
-              width: myDevices.first.keys[r][c].width,
+              width: 1.0,
             ),
           );
         }
