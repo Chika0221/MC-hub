@@ -13,7 +13,6 @@ import 'package:rive/rive.dart';
 import 'package:mc_hub/infrastructure/hid/hid_scripts.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/main.dart';
-import 'package:mc_hub/pages/deviceSelect_page/widgets/backgroundGradiantContainer.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 
