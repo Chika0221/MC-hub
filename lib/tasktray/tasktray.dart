@@ -49,7 +49,7 @@ class _TaskTrayState extends ConsumerState<TaskTray> with TrayListener {
     trayManager.popUpContextMenu();
   }
 
-  void onTrayMenuItemClick(MenuItem menuItem) async {
+  void onTrayMenuItemClick(MenuItem menuItem) {
     if (menuItem.key == 'show') {
       appWindow.show();
     } else if (menuItem.key == 'exit') {
