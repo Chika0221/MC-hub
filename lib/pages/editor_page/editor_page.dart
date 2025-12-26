@@ -36,19 +36,16 @@ class EditorPage extends HookConsumerWidget {
       activeLayout = [];
       for (int r = 0; r < layer0.length; r++) {
         final List<KeyData> row = [];
-        for (int c = 0; c < layer0[r].length; c++) {
-          final keycode = layer0[r][c];
-          row.add(
-            KeyData(
-              id: "$r,$c",
-              defaultLabel: VialNotifier.keycodeToLabel(keycode),
-              width:
-                  myDevices.first.keys
-                      .firstWhere(
-                        (key) => key.id == "$r,$c",
-                        orElse: () => const KeyData(id: "", defaultLabel: "", width: 1.0),
-                      )
-                      .width,
+              width: myDevices.first.keys
+                  .firstWhere(
+                    (key) => key.id == "$r,$c",
+                    orElse: () => const KeyData(
+                      id: "",
+                      defaultLabel: "",
+                      width: 1,
+                    ),
+                  )
+                  .width,
             ),
           );
         }
