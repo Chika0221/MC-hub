@@ -21,9 +21,9 @@ void main() async {
   runApp(ProviderScope(child: TaskTray(child: MyApp())));
 
   doWhenWindowReady(() {
-    const initialSize = Size(600, 450);
-    appWindow.minSize = initialSize;
-    appWindow.size = initialSize;
+    // const initialSize = Size(600, 450);
+    // appWindow.minSize = initialSize;
+    // appWindow.size = initialSize;
     appWindow.show();
   });
 }

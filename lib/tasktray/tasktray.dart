@@ -5,9 +5,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tray_manager/tray_manager.dart';
-import 'package:window_watcher/window_watcher.dart';
 
 class TaskTray extends StatefulHookConsumerWidget {
   const TaskTray({super.key, required this.child});
@@ -24,17 +24,13 @@ class _TaskTrayState extends ConsumerState<TaskTray> with TrayListener {
   @override
   void initState() {
     unawaited(() async {
-      await trayManager.setIcon("assets/icons/tray_icon.png");
-      await trayManager.setToolTip("MC Hub");
+      await trayManager.setIcon("assets/icons/tray_icon.ico");
+      await trayManager.setToolTip("MCHub");
       await trayManager.setContextMenu(
         Menu(
           items: [
-            MenuItem(key: 'show', label: 'Show App'),
-            MenuItem(
-              icon: "assets/icons/tray_icon.png",
-              key: 'exit',
-              label: '閉じる',
-            ),
+            MenuItem(key: 'show', label: 'MCHubを開く'),
+            MenuItem(key: 'exit', label: '閉じる'),
           ],
         ),
       );
@@ -54,19 +50,10 @@ class _TaskTrayState extends ConsumerState<TaskTray> with TrayListener {
   }
 
   void onTrayMenuItemClick(MenuItem menuItem) async {
-    final List<Window> windows = await WindowWatcher.getWindows(getExe: true);
-    final mcHubWindow = windows.firstWhere(
-      (window) => window.title.contains("mc_hub"),
-    );
-
     if (menuItem.key == 'show') {
-      // Handle showing the app
-      print("いえい");
-      mcHubWindow.show(forced: true);
+      appWindow.show();
     } else if (menuItem.key == 'exit') {
-      // Handle exiting the app
-      print("ばいばい");
-      
+      appWindow.close();
     }
   }
 
