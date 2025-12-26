@@ -55,20 +55,17 @@ class SelectDeviceContainer extends HookConsumerWidget {
           SizedBox(height: 16),
           Text(
             device.productName,
-            style: Theme.of(context).textTheme.headlineLarge,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
           SizedBox(height: 16),
           Container(
             decoration: ShapeDecoration(
               shape: StadiumBorder(
                 side: BorderSide(
-                  width: 2.0,
-                  color: Theme.of(context).colorScheme.surface,
+                  width: 4.0,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
-              color: Theme.of(
-                context,
-              ).colorScheme.surfaceContainer.withAlpha(125),
             ),
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(

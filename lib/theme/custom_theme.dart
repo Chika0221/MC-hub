@@ -7,13 +7,13 @@ import 'package:mc_hub/theme/custom_color.dart';
 class CustomTheme {
   ThemeData get mainDarkTheme => ThemeData(
     useMaterial3: true,
-    colorScheme: CustomColorSchema().darkSchema,
+    colorScheme: CustomColorSchema().zawaDarkSchema,
     fontFamily: Fonts.WDXLLubrifont.name,
   );
 
   ThemeData get mainLightTheme => ThemeData(
     useMaterial3: true,
-    colorScheme: CustomColorSchema().lightSchema,
+    colorScheme: CustomColorSchema().zawaLightSchema,
     fontFamily: Fonts.WDXLLubrifont.name,
   );
 
@@ -21,8 +21,8 @@ class CustomTheme {
     useMaterial3: true,
     colorScheme:
         Theme.of(context).brightness == Brightness.dark
-            ? CustomColorSchema().darkSchema
-            : CustomColorSchema().lightSchema,
+            ? CustomColorSchema().zawaDarkSchema
+            : CustomColorSchema().zawaLightSchema,
     fontFamily: Fonts.LunaChord.name,
   );
 }
