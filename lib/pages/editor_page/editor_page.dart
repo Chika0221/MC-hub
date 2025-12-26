@@ -44,15 +44,9 @@ class EditorPage extends HookConsumerWidget {
               defaultLabel: VialNotifier.keycodeToLabel(keycode),
               width:
                   myDevices.first.keys
-                      .where((key) => key.id == "$r,$c")
                       .firstWhere(
-                        (key) => true,
-                        orElse:
-                            () => const KeyData(
-                              id: "",
-                              defaultLabel: "",
-                              width: 1,
-                            ),
+                        (key) => key.id == "$r,$c",
+                        orElse: () => const KeyData(id: "", defaultLabel: "", width: 1.0),
                       )
                       .width,
             ),
