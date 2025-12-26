@@ -10,6 +10,7 @@
 #include <hid4flutter/hid4flutter_plugin_c_api.h>
 #include <keyboard_event/keyboard_event_plugin.h>
 #include <rive_native/rive_native_plugin.h>
+#include <tray_manager/tray_manager_plugin.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   BitsdojoWindowPluginRegisterWithRegistrar(
@@ -20,4 +21,6 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("KeyboardEventPlugin"));
   RiveNativePluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("RiveNativePlugin"));
+  TrayManagerPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("TrayManagerPlugin"));
 }

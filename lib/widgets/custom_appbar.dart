@@ -60,7 +60,31 @@ class CustomAppbar extends HookConsumerWidget {
           appWindow.isMaximized
               ? RestoreWindowButton(colors: buttonColors)
               : MaximizeWindowButton(colors: buttonColors),
-          CloseWindowButton(colors: closeButtonColors),
+          CloseWindowButton(
+            colors: closeButtonColors,
+            onPressed: () {
+              final alertDialog = AlertDialog(
+                title: Text("ソフトを終了しますか？"),
+                actions: [
+                  FilledButton(
+                    onPressed: () {
+                      appWindow.hide();
+                      Navigator.of(
+                        context,
+                      ).pushNamed(AppRoute.deviceSelect.path);
+                    },
+                    child: Text("タスクトレイに収納"),
+                  ),
+                  OutlinedButton(
+                    onPressed: () => appWindow.close(),
+                    child: Text("ソフトを終了"),
+                  ),
+                ],
+              );
+
+              showDialog(context: context, builder: (context) => alertDialog);
+            },
+          ),
         ],
       ),
     );

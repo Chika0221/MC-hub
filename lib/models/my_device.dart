@@ -1,6 +1,8 @@
 // Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
 import 'package:mc_hub/pages/editor_page/key_data.dart';
 
 part 'my_device.freezed.dart';
@@ -13,7 +15,7 @@ class MyDevice with _$MyDevice {
     required int productId,
     required int usegePage,
     required int usege,
-    required List<List<KeyData>> keys,
+    required List<KeyData> keys,
   }) = _MyDevice;
 
   // factory MyDevice.fromJson(Map<String, dynamic> json) =>

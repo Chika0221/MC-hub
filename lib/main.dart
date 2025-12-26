@@ -9,6 +9,7 @@ import 'package:rive/rive.dart';
 // Project imports:
 import 'package:mc_hub/pages/deviceSelect_page/deviceSelect_page.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
+import 'package:mc_hub/tasktray/tasktray.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
 
 // import 'package:rive/rive.dart';
@@ -17,13 +18,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await RiveNative.init();
 
-  runApp(ProviderScope(child: MyApp()));
+  runApp(ProviderScope(child: TaskTray(child: MyApp())));
 
   doWhenWindowReady(() {
-    const initialSize = Size(600, 450);
-    appWindow.minSize = initialSize;
-    appWindow.size = initialSize;
-    // appWindow.alignment = Alignment.center;
+    // const initialSize = Size(600, 450);
+    // appWindow.minSize = initialSize;
+    // appWindow.size = initialSize;
     appWindow.show();
   });
 }

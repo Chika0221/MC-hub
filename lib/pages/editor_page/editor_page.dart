@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/models/vial_state.dart';
 import 'package:mc_hub/pages/editor_page/key_data.dart';
@@ -32,17 +32,20 @@ class EditorPage extends HookConsumerWidget {
     if (vialState.matrix != null && vialState.matrix!.isNotEmpty) {
       // Construct dynamic layout from matrix
       // Using Layer 0 for visualization
-      final layer0 = vialState.matrix![0];
+      final layer0 = vialState.matrix![1];
       activeLayout = [];
       for (int r = 0; r < layer0.length; r++) {
         final List<KeyData> row = [];
-        for (int c = 0; c < layer0[r].length; c++) {
-          final keycode = layer0[r][c];
-          row.add(
-            KeyData(
-              id: "$r,$c",
-              defaultLabel: VialNotifier.keycodeToLabel(keycode),
-              width: myDevices.first.keys[r][c].width,
+              width: myDevices.first.keys
+                  .firstWhere(
+                    (key) => key.id == "$r,$c",
+                    orElse: () => const KeyData(
+                      id: "",
+                      defaultLabel: "",
+                      width: 1,
+                    ),
+                  )
+                  .width,
             ),
           );
         }
