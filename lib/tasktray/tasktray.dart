@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tray_manager/tray_manager.dart';
-import 'package:window_watcher/get_windows/window.dart';
 import 'package:window_watcher/window_watcher.dart';
 
 class TaskTray extends StatefulHookConsumerWidget {
