@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/models/vial_state.dart';
 import 'package:mc_hub/pages/editor_page/key_data.dart';
