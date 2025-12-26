@@ -22,7 +22,7 @@ mixin _$MyDevice {
   int get productId => throw _privateConstructorUsedError;
   int get usegePage => throw _privateConstructorUsedError;
   int get usege => throw _privateConstructorUsedError;
-  List<List<KeyData>> get keys => throw _privateConstructorUsedError;
+  List<KeyData> get keys => throw _privateConstructorUsedError;
 
   /// Create a copy of MyDevice
   /// with the given fields replaced by the non-null parameter values.
@@ -42,7 +42,7 @@ abstract class $MyDeviceCopyWith<$Res> {
     int productId,
     int usegePage,
     int usege,
-    List<List<KeyData>> keys,
+    List<KeyData> keys,
   });
 }
 
@@ -99,7 +99,7 @@ class _$MyDeviceCopyWithImpl<$Res, $Val extends MyDevice>
                 null == keys
                     ? _value.keys
                     : keys // ignore: cast_nullable_to_non_nullable
-                        as List<List<KeyData>>,
+                        as List<KeyData>,
           )
           as $Val,
     );
@@ -121,7 +121,7 @@ abstract class _$$MyDeviceImplCopyWith<$Res>
     int productId,
     int usegePage,
     int usege,
-    List<List<KeyData>> keys,
+    List<KeyData> keys,
   });
 }
 
@@ -177,7 +177,7 @@ class __$$MyDeviceImplCopyWithImpl<$Res>
             null == keys
                 ? _value._keys
                 : keys // ignore: cast_nullable_to_non_nullable
-                    as List<List<KeyData>>,
+                    as List<KeyData>,
       ),
     );
   }
@@ -192,7 +192,7 @@ class _$MyDeviceImpl implements _MyDevice {
     required this.productId,
     required this.usegePage,
     required this.usege,
-    required final List<List<KeyData>> keys,
+    required final List<KeyData> keys,
   }) : _keys = keys;
 
   @override
@@ -205,9 +205,9 @@ class _$MyDeviceImpl implements _MyDevice {
   final int usegePage;
   @override
   final int usege;
-  final List<List<KeyData>> _keys;
+  final List<KeyData> _keys;
   @override
-  List<List<KeyData>> get keys {
+  List<KeyData> get keys {
     if (_keys is EqualUnmodifiableListView) return _keys;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_keys);
@@ -261,7 +261,7 @@ abstract class _MyDevice implements MyDevice {
     required final int productId,
     required final int usegePage,
     required final int usege,
-    required final List<List<KeyData>> keys,
+    required final List<KeyData> keys,
   }) = _$MyDeviceImpl;
 
   @override
@@ -275,7 +275,7 @@ abstract class _MyDevice implements MyDevice {
   @override
   int get usege;
   @override
-  List<List<KeyData>> get keys;
+  List<KeyData> get keys;
 
   /// Create a copy of MyDevice
   /// with the given fields replaced by the non-null parameter values.

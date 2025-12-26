@@ -15,7 +15,7 @@ class MyDevice with _$MyDevice {
     required int productId,
     required int usegePage,
     required int usege,
-    required List<List<KeyData>> keys,
+    required List<KeyData> keys,
   }) = _MyDevice;
 
   // factory MyDevice.fromJson(Map<String, dynamic> json) =>

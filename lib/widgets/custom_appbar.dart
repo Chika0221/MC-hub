@@ -13,6 +13,10 @@ class CustomAppbar extends HookConsumerWidget {
   const CustomAppbar({super.key});
   @override
   PreferredSizeWidget build(BuildContext context, WidgetRef ref) {
+    void onClose() {
+      Navigator.of(context).pushNamed(AppRoute.deviceSelect.path);
+    }
+
     final buttonColors = WindowButtonColors(
       iconNormal: Theme.of(context).colorScheme.secondary,
       mouseOver: Theme.of(context).colorScheme.primaryContainer,
@@ -67,7 +71,12 @@ class CustomAppbar extends HookConsumerWidget {
                 title: Text("ソフトを終了しますか？"),
                 actions: [
                   FilledButton(
-                    onPressed: () => appWindow.hide(),
+                    onPressed: () {
+                      appWindow.hide();
+                      Navigator.of(
+                        context,
+                      ).pushNamed(AppRoute.deviceSelect.path);
+                    },
                     child: Text("タスクトレイに収納"),
                   ),
                   OutlinedButton(
