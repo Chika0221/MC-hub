@@ -112,6 +112,8 @@ class CustomColorSchema {
     onPrimary: Color(0xff005fa2),
     secondary: Color(0xff005fa2),
     onSecondary: Color(0xffffdb72),
+    tertiary: Color(0xff963257),
+    onTertiary: Color(0xffb3babb),
     error: Color(0xffff0000),
     onError: Color(0xffffffff),
     surface: Color(0xffb3babb),

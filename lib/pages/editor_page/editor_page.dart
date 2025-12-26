@@ -12,6 +12,7 @@ import 'package:mc_hub/pages/editor_page/key_data.dart';
 import 'package:mc_hub/pages/editor_page/key_palette.dart';
 import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
 import 'package:mc_hub/pages/editor_page/layout_data.dart';
+import 'package:mc_hub/pages/editor_page/widgets/layer_button.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 
 class EditorPage extends HookConsumerWidget {
@@ -87,40 +88,56 @@ class EditorPage extends HookConsumerWidget {
           // Top section: Keyboard Visualization
           Expanded(
             flex: 3,
-            child: Container(
-              width: double.infinity,
-              color: Theme.of(context).colorScheme.surfaceContainerLow,
-              child: Center(
-                child: SingleChildScrollView(
-                  child: KeyboardLayout(
-                    layoutData: activeLayout,
-                    keyMappings: keyMappings,
-                    onKeyRemap: (keyId, newMapping) {
-                      ref
-                          .read(vialProvider.notifier)
-                          .updateKey(keyId, newMapping);
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Mapped $newMapping to key"),
-                          duration: const Duration(milliseconds: 500),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                    },
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 84,
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      spacing: 8,
+                      children: [
+                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
+                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
+                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
+                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
+                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    color: Theme.of(context).colorScheme.surfaceContainerLow,
+                    child: Center(
+                      child: SingleChildScrollView(
+                        child: KeyboardLayout(
+                          layoutData: activeLayout,
+                          keyMappings: keyMappings,
+                          onKeyRemap: (keyId, newMapping) {
+                            ref
+                                .read(vialProvider.notifier)
+                                .updateKey(keyId, newMapping);
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Mapped $newMapping to key"),
+                                duration: const Duration(milliseconds: 500),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
 
-          // Divider
-          Divider(
-            height: 1,
-            color: Theme.of(context).colorScheme.outlineVariant,
-          ),
-
-          // Bottom section: Key Palette
+          SizedBox(height: 8),
           const Expanded(flex: 2, child: KeyPalette()),
         ],
       ),

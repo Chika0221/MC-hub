@@ -77,7 +77,7 @@ class CustomAppbar extends HookConsumerWidget {
                     },
                     child: Text("タスクトレイに収納"),
                   ),
-                  OutlinedButton(
+                  FilledButton.tonal(
                     onPressed: () => appWindow.close(),
                     child: Text("ソフトを終了"),
                   ),

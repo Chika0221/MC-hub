@@ -10,20 +10,50 @@ class KeyPalette extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Standard keys to be available in the palette
-    final List<String> alphaKeys = List.generate(26, (index) => String.fromCharCode(65 + index));
-    final List<String> numberKeys = List.generate(10, (index) => index.toString());
-    final List<String> modifiers = ["Ctrl", "Shift", "Alt", "Win", "Tab", "Esc", "Bksp", "Enter", "Space"];
-    final List<String> functionKeys = List.generate(12, (index) => "F${index + 1}");
+    final List<String> alphaKeys = List.generate(
+      26,
+      (index) => String.fromCharCode(65 + index),
+    );
+    final List<String> numberKeys = List.generate(
+      10,
+      (index) => index.toString(),
+    );
+    final List<String> modifiers = [
+      "Ctrl",
+      "Shift",
+      "Alt",
+      "Win",
+      "Tab",
+      "Esc",
+      "Bksp",
+      "Enter",
+      "Space",
+    ];
+    final List<String> functionKeys = List.generate(
+      12,
+      (index) => "F${index + 1}",
+    );
 
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: Theme.of(context).colorScheme.outlineVariant,
+            color: Theme.of(context).colorScheme.onSurface,
+            width: 4,
+          ),
+          right: BorderSide(
+            color: Theme.of(context).colorScheme.onSurface,
+            width: 4,
+          ),
+          left: BorderSide(
+            color: Theme.of(context).colorScheme.onSurface,
+            width: 4,
           ),
         ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
       ),
       child: DefaultTabController(
         length: 4,
@@ -40,10 +70,20 @@ class KeyPalette extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  _buildGrid(
-                    [...alphaKeys, ...numberKeys, ...modifiers, ...functionKeys],
-                  ),
-                  _buildGrid(["VolUp", "VolDn", "Mute", "Play", "Next", "Prev"]),
+                  _buildGrid([
+                    ...alphaKeys,
+                    ...numberKeys,
+                    ...modifiers,
+                    ...functionKeys,
+                  ]),
+                  _buildGrid([
+                    "VolUp",
+                    "VolDn",
+                    "Mute",
+                    "Play",
+                    "Next",
+                    "Prev",
+                  ]),
                   Center(child: Text("Macros coming soon")),
                   Center(child: Text("Layers coming soon")),
                 ],
@@ -61,9 +101,10 @@ class KeyPalette extends StatelessWidget {
       child: Wrap(
         spacing: 8.0,
         runSpacing: 8.0,
-        children: items.map((label) {
-          return KeySource(label: label, data: label);
-        }).toList(),
+        children:
+            items.map((label) {
+              return KeySource(label: label, data: label);
+            }).toList(),
       ),
     );
   }
