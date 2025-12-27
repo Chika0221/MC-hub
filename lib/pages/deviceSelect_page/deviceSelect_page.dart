@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hid4flutter/hid4flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,6 +32,9 @@ class DeviceSelectPage extends HookConsumerWidget {
     }
 
     useEffect(() {
+      appWindow.size = const Size(1200, 800);
+      appWindow.alignment = Alignment.center;
+
       getHidDevice();
 
       return null;

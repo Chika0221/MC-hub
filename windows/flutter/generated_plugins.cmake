@@ -8,6 +8,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   keyboard_event
   rive_native
   tray_manager
+  windows_notification
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

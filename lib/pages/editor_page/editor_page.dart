@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:windows_notification/notification_message.dart';
+import 'package:windows_notification/windows_notification.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
+import 'package:mc_hub/main.dart';
 import 'package:mc_hub/models/vial_state.dart';
 import 'package:mc_hub/pages/editor_page/key_data.dart';
 import 'package:mc_hub/pages/editor_page/key_palette.dart';
@@ -102,7 +105,27 @@ class EditorPage extends HookConsumerWidget {
                         LayerButton(icon: Icon(Icons.star), onPressed: () {}),
                         LayerButton(icon: Icon(Icons.star), onPressed: () {}),
                         LayerButton(icon: Icon(Icons.star), onPressed: () {}),
-                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
+                        LayerButton(
+                          icon: Icon(Icons.star),
+                          onPressed: () {
+                            final _winNotifyPlugin = WindowsNotification(
+                              applicationId: "MC_hub",
+                            );
+
+                            NotificationMessage
+                            message = NotificationMessage.fromPluginTemplate(
+                              "noti1",
+                              "温度が変化しました",
+                              "300℃",
+                              image:
+                                  "C:\Users\chika\dev\keyboard\2025-10\mc_hub\assets\icons\app_icon.png",
+                            );
+
+                            _winNotifyPlugin.showNotificationPluginTemplate(
+                              message,
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
