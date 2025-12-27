@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:local_notifier/local_notifier.dart';
 import 'package:rive/rive.dart';
 
 // Project imports:
@@ -19,6 +20,11 @@ import 'package:mc_hub/theme/custom_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await RiveNative.init();
+
+  await localNotifier.setup(
+    appName: 'MC Hub',
+    shortcutPolicy: ShortcutPolicy.requireCreate,
+  );
 
   runApp(ProviderScope(child: TaskTray(child: MyApp())));
 

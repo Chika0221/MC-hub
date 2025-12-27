@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:elegant_notification/elegant_notification.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:local_notifier/local_notifier.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
@@ -107,12 +107,10 @@ class EditorPage extends HookConsumerWidget {
                         SizedBox(height: 16),
                         IconButton(
                           onPressed: () {
-                            ElegantNotification.info(
-                              title: const Text("Test"),
-                              description: const Text(
-                                "This is a custom popup notification",
-                              ),
-                            ).show(context);
+                            LocalNotification(
+                              title: "Test",
+                              body: "This is a native popup notification",
+                            ).show();
                           },
                           icon: Icon(Icons.notifications),
                           tooltip: "Test Notification",
@@ -134,10 +132,10 @@ class EditorPage extends HookConsumerWidget {
                                 .read(vialProvider.notifier)
                                 .updateKey(keyId, newMapping);
 
-                            ElegantNotification.success(
-                              title: const Text("Key Remapped"),
-                              description: Text("Mapped $newMapping to key"),
-                            ).show(context);
+                            LocalNotification(
+                              title: "Key Remapped",
+                              body: "Mapped $newMapping to key",
+                            ).show();
                           },
                         ),
                       ),
