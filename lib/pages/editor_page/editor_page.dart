@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
@@ -103,6 +104,19 @@ class EditorPage extends HookConsumerWidget {
                         LayerButton(icon: Icon(Icons.star), onPressed: () {}),
                         LayerButton(icon: Icon(Icons.star), onPressed: () {}),
                         LayerButton(icon: Icon(Icons.star), onPressed: () {}),
+                        SizedBox(height: 16),
+                        IconButton(
+                          onPressed: () {
+                            ElegantNotification.info(
+                              title: const Text("Test"),
+                              description: const Text(
+                                "This is a custom popup notification",
+                              ),
+                            ).show(context);
+                          },
+                          icon: Icon(Icons.notifications),
+                          tooltip: "Test Notification",
+                        ),
                       ],
                     ),
                   ),
@@ -120,13 +134,10 @@ class EditorPage extends HookConsumerWidget {
                                 .read(vialProvider.notifier)
                                 .updateKey(keyId, newMapping);
 
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text("Mapped $newMapping to key"),
-                                duration: const Duration(milliseconds: 500),
-                                behavior: SnackBarBehavior.floating,
-                              ),
-                            );
+                            ElegantNotification.success(
+                              title: const Text("Key Remapped"),
+                              description: Text("Mapped $newMapping to key"),
+                            ).show(context);
                           },
                         ),
                       ),
