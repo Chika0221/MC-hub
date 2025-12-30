@@ -6,12 +6,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomNavigationRail extends HookConsumerWidget {
-  const CustomNavigationRail({super.key});
+  const CustomNavigationRail({super.key, required this.selectedIndex});
+
+  final ValueNotifier<int> selectedIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedIndex = useState(0);
-
     return Container(
       width: 80,
       height: double.infinity,
