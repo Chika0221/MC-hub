@@ -1,7 +1,10 @@
 // Flutter imports:
+
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:easy_animated_indexed_stack/easy_animated_indexed_stack.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,8 +25,13 @@ class HomePage extends HookConsumerWidget {
         children: [
           CustomNavigationRail(selectedIndex: selectedIndex),
           Expanded(
-            child: IndexedStack(
+            child: EasyAnimatedIndexedStack(
               index: selectedIndex.value,
+              animationBuilder:
+                  (context, animation, child) =>
+                      FadeTransition(opacity: animation, child: child),
+              curve: Curves.easeInOutSine,
+              duration: Duration(milliseconds: 240),
               children: [DeviceSelectPage(), BeamSettingPage()],
             ),
           ),
