@@ -7,6 +7,7 @@
 #include "generated_plugin_registrant.h"
 
 #include <bitsdojo_window_windows/bitsdojo_window_plugin.h>
+#include <firebase_core/firebase_core_plugin_c_api.h>
 #include <hid4flutter/hid4flutter_plugin_c_api.h>
 #include <keyboard_event/keyboard_event_plugin.h>
 #include <rive_native/rive_native_plugin.h>
@@ -16,6 +17,8 @@
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   BitsdojoWindowPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("BitsdojoWindowPlugin"));
+  FirebaseCorePluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FirebaseCorePluginCApi"));
   Hid4flutterPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("Hid4flutterPluginCApi"));
   KeyboardEventPluginRegisterWithRegistrar(
