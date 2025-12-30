@@ -12,7 +12,10 @@ import 'package:mc_hub/main.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
 
 class CustomAppbar extends HookConsumerWidget {
-  const CustomAppbar({super.key});
+  const CustomAppbar({super.key, this.isShowTitle = true});
+
+  final isShowTitle;
+
   @override
   PreferredSizeWidget build(BuildContext context, WidgetRef ref) {
     final buttonColors = WindowButtonColors(
@@ -34,8 +37,7 @@ class CustomAppbar extends HookConsumerWidget {
       preferredSize: Size.fromHeight(kToolbarHeight),
       child: Row(
         children: [
-          if (ModalRoute.of(context)?.settings.name !=
-              AppRoute.deviceSelect.path)
+          if (ModalRoute.of(context)?.settings.name != AppRoute.home.path)
             WindowButton(
               iconBuilder:
                   (WindowButtonContext context) => Icon(Icons.arrow_back),
@@ -49,10 +51,11 @@ class CustomAppbar extends HookConsumerWidget {
                 child: Row(
                   children: [
                     SizedBox(width: 8),
-                    Text(
-                      "MC Hub",
-                      style: TextStyle(fontFamily: Fonts.LunaChord.name),
-                    ),
+                    if (isShowTitle)
+                      Text(
+                        "MC Hub",
+                        style: TextStyle(fontFamily: Fonts.LunaChord.name),
+                      ),
                   ],
                 ),
               ),

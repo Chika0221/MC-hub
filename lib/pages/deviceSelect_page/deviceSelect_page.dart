@@ -41,7 +41,7 @@ class DeviceSelectPage extends HookConsumerWidget {
     }, []);
 
     return Scaffold(
-      appBar: CustomAppbar().build(context, ref),
+      appBar: CustomAppbar(isShowTitle: false).build(context, ref),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,

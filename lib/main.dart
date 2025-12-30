@@ -11,6 +11,7 @@ import 'package:rive/rive.dart';
 // Project imports:
 import 'package:mc_hub/pages/deviceSelect_page/deviceSelect_page.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
+import 'package:mc_hub/pages/home_page/home_page.dart';
 import 'package:mc_hub/tasktray/tasktray.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
 
@@ -40,10 +41,11 @@ class MyApp extends HookConsumerWidget {
       title: "MC Hub",
       theme: CustomTheme().mainLightTheme,
       darkTheme: CustomTheme().mainDarkTheme,
-      initialRoute: AppRoute.deviceSelect.path,
+      initialRoute: AppRoute.home.path,
       routes: {
         AppRoute.deviceSelect.path: (context) => const DeviceSelectPage(),
         AppRoute.editor.path: (context) => const EditorPage(),
+        AppRoute.home.path: (context) => const HomePage(),
       },
     );
   }
@@ -51,7 +53,8 @@ class MyApp extends HookConsumerWidget {
 
 enum AppRoute {
   deviceSelect("/deviceSelect"),
-  editor("/editor");
+  editor("/editor"),
+  home("/home");
 
   const AppRoute(this.path);
   final String path;
