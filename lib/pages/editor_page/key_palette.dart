@@ -53,7 +53,7 @@ class KeyPalette extends StatelessWidget {
             width: 4,
           ),
         ),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
       ),
       child: DefaultTabController(
         length: 4,

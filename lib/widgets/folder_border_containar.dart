@@ -35,12 +35,12 @@ class FolderBorderContainar extends HookConsumerWidget {
                   decoration: BoxDecoration(
                     color: backgroundColor,
                     borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(16),
+                      top: Radius.circular(8),
                     ),
                   ),
                   child: Center(
                     child: Text(
-                      "タイトルである",
+                      "コード一覧",
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: Theme.of(context).colorScheme.onTertiary,
                       ),
@@ -50,27 +50,23 @@ class FolderBorderContainar extends HookConsumerWidget {
                 Expanded(
                   child: Stack(
                     children: [
-                      Container(
-                        width: double.infinity,
-                        color: Theme.of(context).colorScheme.surface,
-                      ),
                       Align(
-                        alignment: Alignment.topLeft,
+                        alignment: Alignment(-1, 0),
                         child: Container(
-                          width: 64,
+                          width: 128,
                           height: titletabHeight,
                           color: backgroundColor,
                         ),
                       ),
                       Align(
-                        alignment: Alignment.topLeft,
+                        alignment: Alignment(-1, 0),
                         child: Container(
-                          width: 64,
+                          width: 300,
                           height: titletabHeight,
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(16),
+                              bottomLeft: Radius.circular(8),
                             ),
                           ),
                         ),
@@ -88,12 +84,12 @@ class FolderBorderContainar extends HookConsumerWidget {
               decoration: BoxDecoration(
                 color: backgroundColor,
                 borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
-                  bottomLeft: Radius.circular(16),
+                  topRight: Radius.circular(8),
+                  bottomRight: Radius.circular(8),
+                  bottomLeft: Radius.circular(8),
                 ),
               ),
-              child: Expanded(child: child),
+              child: child,
             ),
           ),
         ],

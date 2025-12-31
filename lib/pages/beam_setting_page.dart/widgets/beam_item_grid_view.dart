@@ -9,13 +9,11 @@ class BeamItemGridView extends HookConsumerWidget {
     super.key,
     required this.itemCount,
     required this.itemBuilder,
-    required this.backgroundColor,
     required this.childrenAspectRatio,
   });
 
   final int itemCount;
   final Widget Function(BuildContext context, int index) itemBuilder;
-  final Color backgroundColor;
   final double childrenAspectRatio;
 
   @override

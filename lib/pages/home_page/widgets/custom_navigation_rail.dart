@@ -16,7 +16,7 @@ class CustomNavigationRail extends HookConsumerWidget {
       height: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.horizontal(right: Radius.circular(16)),
+        borderRadius: BorderRadius.horizontal(right: Radius.circular(8)),
       ),
       child: NavigationRail(
         selectedIndex: selectedIndex.value,

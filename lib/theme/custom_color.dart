@@ -111,6 +111,7 @@ class CustomColorSchema {
     primary: Color(0xffffdb72),
     onPrimary: Color(0xff005fa2),
     secondary: Color(0xff005fa2),
+    secondaryContainer: Color(0x7f005fa2),
     onSecondary: Color(0xffffdb72),
     tertiary: Color(0xff963257),
     onTertiary: Color(0xffb3babb),
