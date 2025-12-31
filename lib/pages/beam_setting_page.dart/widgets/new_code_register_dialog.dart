@@ -6,6 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/providers/firebase_unregistered_code_stream_provider.dart';
+import 'package:mc_hub/models/unregistered_code.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 
 class NewCodeRegisterDialog extends HookConsumerWidget {
@@ -16,6 +18,12 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
     const sizePadding = 8.0;
 
     final currentStep = useState(0);
+
+    final textController = useTextEditingController(text: "");
+
+    final unregisteredCodeStream = ref.watch(
+      firebaseUnregisterCodeStreamProvider,
+    );
 
     return SimpleDialog(
       title: CustomAppbar(isShowTitle: false),
@@ -30,7 +38,15 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
               height: size.height / 0.8,
               child: Stepper(
                 currentStep: currentStep.value,
-                onStepContinue: () => currentStep.value += 1,
+                onStepContinue: () {
+                  if (textController.text.isEmpty && currentStep.value == 0) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("コード名を入力してください")),
+                    );
+                    return;
+                  }
+                  currentStep.value += 1;
+                },
                 onStepCancel: () => currentStep.value -= 1,
                 controlsBuilder: (context, details) {
                   return Row(
@@ -49,7 +65,6 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
                     ],
                   );
                 },
-
                 steps: [
                   Step(
                     stepStyle: StepStyle(
@@ -58,28 +73,79 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
                     ),
                     title: Text("コードの名前の登録"),
                     content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(height: 8),
                         TextField(
+                          controller: textController,
                           decoration: InputDecoration(
                             filled: true,
                             border: OutlineInputBorder(),
                             labelText: 'コード名を入力してください',
                           ),
                         ),
+                        if (textController.text.isEmpty)
+                          Text(
+                            "コード名は必須です",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
+                          ),
                         SizedBox(height: 8),
                       ],
                     ),
                   ),
                   Step(
                     title: Text("コードの登録"),
-                    content: Container(
-                      height: 200,
-                      width: double.infinity,
-                      child: Center(
-                        child: Image.asset("assets/icons/app_icon.png"),
-                      ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(height: 8),
+                        unregisteredCodeStream.when(
+                          data: (data) {
+                            if (data == null) {
+                              return SizedBox(
+                                width: double.infinity,
+                                child: FilledButton(
+                                  onPressed:
+                                      () => ref
+                                          .read(
+                                            firebaseUnregisterCodeStreamProvider
+                                                .notifier,
+                                          )
+                                          .setUnregisteredCode(
+                                            UnregisteredCode(
+                                              name: textController.text,
+                                            ),
+                                          ),
+                                  child: Text("リモコンのコードの検索を始める"),
+                                ),
+                              );
+                            }
+                            return switch (data.state) {
+                              CodeRegisteredState.reading => Text(
+                                "リモコンからコードを送信してください: ${data.name}",
+                              ),
+                              CodeRegisteredState.done => Text(
+                                "コードを受信しました: ${data.name}",
+                              ),
+                              CodeRegisteredState.error => Text(
+                                "コードの受信に失敗しました。もう一度リモコンから送信してください: ${data.name}",
+                              ),
+                              null => Text("準備中..."),
+                            };
+                            // return Text("コードをリモコンで送信してください: ${data.name}");
+                          },
+                          error: (error, stackTrace) {
+                            return Text("エラーが発生しました: $error");
+                          },
+                          loading: () {
+                            return CircularProgressIndicator();
+                          },
+                        ),
+                        SizedBox(height: 8),
+                      ],
                     ),
                     stepStyle: StepStyle(
                       color: Theme.of(context).colorScheme.secondary,
