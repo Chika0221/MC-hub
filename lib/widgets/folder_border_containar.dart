@@ -10,11 +10,13 @@ class FolderBorderContainar extends HookConsumerWidget {
     required this.backgroundColor,
     required this.title,
     required this.child,
+    this.floatingActionButton = const SizedBox.shrink(),
   });
 
   final Color backgroundColor;
   final String title;
   final Widget child;
+  final Widget floatingActionButton;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,7 +44,7 @@ class FolderBorderContainar extends HookConsumerWidget {
                     child: Text(
                       "コード一覧",
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onTertiary,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -78,18 +80,25 @@ class FolderBorderContainar extends HookConsumerWidget {
             ),
           ),
           Expanded(
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(8),
-                  bottomRight: Radius.circular(8),
-                  bottomLeft: Radius.circular(8),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: backgroundColor,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(8),
+                        bottomRight: Radius.circular(8),
+                        bottomLeft: Radius.circular(8),
+                      ),
+                    ),
+                    child: child,
+                  ),
                 ),
-              ),
-              child: child,
+                Positioned(right: 16, bottom: 16, child: floatingActionButton),
+              ],
             ),
           ),
         ],

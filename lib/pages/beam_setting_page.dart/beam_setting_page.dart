@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
 import 'package:mc_hub/pages/beam_setting_page.dart/widgets/beam_item_grid_view.dart';
 import 'package:mc_hub/pages/beam_setting_page.dart/widgets/code_container.dart';
+import 'package:mc_hub/pages/beam_setting_page.dart/widgets/new_code_register_dialog.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/widgets/folder_border_containar.dart';
 
@@ -40,6 +41,12 @@ class BeamSettingPage extends HookConsumerWidget {
                   backgroundColor:
                       Theme.of(context).colorScheme.secondaryContainer,
                   title: "コード一覧",
+                  floatingActionButton: FloatingActionButton.extended(
+                    onPressed: () => showNewCodeRegisterDialog(context),
+                    label: Text("登録"),
+                    icon: Icon(Icons.add),
+                    elevation: 0,
+                  ),
                   child: BeamItemGridView(
                     childrenAspectRatio: 5,
                     itemCount: infraredCodes.length,
