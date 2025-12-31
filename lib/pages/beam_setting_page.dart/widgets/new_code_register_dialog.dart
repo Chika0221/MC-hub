@@ -25,6 +25,18 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
       firebaseUnregisterCodeStreamProvider,
     );
 
+    ref.listen<AsyncValue<UnregisteredCode?>>(
+      firebaseUnregisterCodeStreamProvider,
+      (previous, next) {
+        next.whenData((data) async {
+          if (data != null && data.state == CodeRegisteredState.done) {
+            await Future.delayed(const Duration(seconds: 1));
+            Navigator.of(context).pop();
+          }
+        });
+      },
+    );
+
     return SimpleDialog(
       title: CustomAppbar(isShowTitle: false),
       insetPadding: const EdgeInsets.all(sizePadding),
@@ -40,9 +52,6 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
                 currentStep: currentStep.value,
                 onStepContinue: () {
                   if (textController.text.isEmpty && currentStep.value == 0) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("コード名を入力してください")),
-                    );
                     return;
                   }
                   currentStep.value += 1;

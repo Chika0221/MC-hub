@@ -8,7 +8,7 @@ import 'package:mc_hub/models/unregistered_code.dart';
 class FirebaseUnregisteredCodeStreamNotifier
     extends StreamNotifier<UnregisteredCode?> {
   final unregi_collection = FirebaseFirestore.instance.collection(
-    "UnregisteredCodes",
+    "unregisteredCodes",
   );
   @override
   Stream<UnregisteredCode?> build() {
