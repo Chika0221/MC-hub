@@ -10,14 +10,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/main.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
+import 'package:mc_hub/widgets/custom_appbar_back_icon.dart';
 
-class CustomAppbar extends HookConsumerWidget {
-  const CustomAppbar({super.key, this.isShowTitle = true});
+class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
+  CustomAppbar({super.key, this.isShowTitle = true});
 
   final isShowTitle;
 
   @override
-  PreferredSizeWidget build(BuildContext context, WidgetRef ref) {
+  final Size preferredSize = Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     final buttonColors = WindowButtonColors(
       iconNormal: Theme.of(context).colorScheme.secondary,
       mouseOver: Theme.of(context).colorScheme.primaryContainer,
@@ -33,14 +37,15 @@ class CustomAppbar extends HookConsumerWidget {
       iconMouseOver: Theme.of(context).colorScheme.onError,
     );
 
-    return PreferredSize(
-      preferredSize: Size.fromHeight(kToolbarHeight),
+    return Container(
       child: Row(
         children: [
           if (ModalRoute.of(context)?.settings.name != AppRoute.home.path)
             WindowButton(
+              colors: buttonColors,
               iconBuilder:
-                  (WindowButtonContext context) => Icon(Icons.arrow_back),
+                  (WindowButtonContext context) =>
+                      CustomBackIcon(color: context.iconColor),
               onPressed: () {
                 Navigator.of(context).pop();
               },

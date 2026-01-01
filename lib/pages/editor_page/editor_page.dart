@@ -83,7 +83,7 @@ class EditorPage extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: CustomAppbar().build(context, ref),
+      appBar: CustomAppbar(),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
