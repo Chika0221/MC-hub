@@ -10,7 +10,7 @@ class CustomBackIcon extends StatelessWidget {
   final Color color;
   CustomBackIcon({Key? key, required this.color}) : super(key: key);
   @override
-  Widget build(BuildContext context) => _AlignedPaint(_MinimizePainter(color));
+  Widget build(BuildContext context) => _AlignedPaint(_BackPainter(color));
 }
 
 class _AlignedPaint extends StatelessWidget {
@@ -26,8 +26,8 @@ class _AlignedPaint extends StatelessWidget {
   }
 }
 
-class _MinimizePainter extends _IconPainter {
-  _MinimizePainter(Color color) : super(color);
+class _BackPainter extends _IconPainter {
+  _BackPainter(Color color) : super(color);
   @override
   void paint(Canvas canvas, Size size) {
     Paint p = getPaint(color);
@@ -41,11 +41,7 @@ class _MinimizePainter extends _IconPainter {
       Offset(size.width / 2, size.height),
       p,
     );
-    canvas.drawLine(
-      Offset(0, size.height / 2),
-      Offset(size.width / 2, 0),
-      p,
-    );
+    canvas.drawLine(Offset(0, size.height / 2), Offset(size.width / 2, 0), p);
   }
 }
 

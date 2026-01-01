@@ -15,7 +15,7 @@ import 'package:mc_hub/widgets/custom_appbar_back_icon.dart';
 class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
   CustomAppbar({super.key, this.isShowTitle = true});
 
-  final isShowTitle;
+  final bool isShowTitle;
 
   @override
   final Size preferredSize = Size.fromHeight(kToolbarHeight);
