@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/firebase_unregistered_code_stream_provider.dart';
 import 'package:mc_hub/models/unregistered_code.dart';
+import 'package:mc_hub/pages/beam_setting_page.dart/widgets/state_animation.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 
 class NewCodeRegisterDialog extends HookConsumerWidget {
@@ -132,19 +133,21 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
                                 ),
                               );
                             }
-                            return switch (data.state) {
-                              CodeRegisteredState.reading => Text(
-                                "リモコンからコードを送信してください: ${data.name}",
-                              ),
-                              CodeRegisteredState.done => Text(
-                                "コードを受信しました: ${data.name}",
-                              ),
-                              CodeRegisteredState.error => Text(
-                                "コードの受信に失敗しました。もう一度リモコンから送信してください: ${data.name}",
-                              ),
-                              null => Text("準備中..."),
-                            };
-                            // return Text("コードをリモコンで送信してください: ${data.name}");
+                            // return switch (data.state) {
+                            //   CodeRegisteredState.reading => Text(
+                            //     "リモコンからコードを送信してください: ${data.name}",
+                            //   ),
+                            //   CodeRegisteredState.done => Text(
+                            //     "コードを受信しました: ${data.name}",
+                            //   ),
+                            //   CodeRegisteredState.error => Text(
+                            //     "コードの受信に失敗しました。もう一度リモコンから送信してください: ${data.name}",
+                            //   ),
+                            //   null => Text("準備中..."),
+                            // };
+                            return StateAnimation(
+                              state: data.state ?? CodeRegisteredState.none,
+                            );
                           },
                           error: (error, stackTrace) {
                             return Text("エラーが発生しました: $error");

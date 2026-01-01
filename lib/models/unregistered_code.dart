@@ -16,4 +16,4 @@ class UnregisteredCode with _$UnregisteredCode {
       _$UnregisteredCodeFromJson(json);
 }
 
-enum CodeRegisteredState { reading, error, done }
+enum CodeRegisteredState { reading, error, done, none }
