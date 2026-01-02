@@ -21,6 +21,13 @@ class FirebaseCodesStreamNotifier extends StreamNotifier<List<InfraredCode>> {
 
     await querySnapshot.docs.first.reference.update(code.toJson());
   }
+
+  deleteCode(InfraredCode code) async {
+    final querySnapshot =
+        await code_collection.where("name", isEqualTo: code.name).get();
+
+    await querySnapshot.docs.first.reference.delete();
+  }
 }
 
 final firebaseCodesStreamProvider = StreamNotifierProvider.autoDispose<

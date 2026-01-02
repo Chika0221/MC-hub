@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
 import 'package:mc_hub/models/infrared_code.dart';
 
 class CodeContainer extends HookConsumerWidget {
@@ -39,7 +40,16 @@ class CodeContainer extends HookConsumerWidget {
                       title: Text(code.name),
                       content: Text("${code.code}"),
                       actions: [
-                        OutlinedButton(
+                        FilledButton.tonal(
+                          onPressed: () {
+                            ref
+                                .read(firebaseCodesStreamProvider.notifier)
+                                .deleteCode(code);
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("削除"),
+                        ),
+                        TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
