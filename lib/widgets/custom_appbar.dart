@@ -13,9 +13,9 @@ import 'package:mc_hub/theme/custom_theme.dart';
 import 'package:mc_hub/widgets/custom_appbar_back_icon.dart';
 
 class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
-  CustomAppbar({super.key, this.isShowTitle = true});
+  CustomAppbar({super.key, this.title});
 
-  final bool isShowTitle;
+  final String? title;
 
   @override
   final Size preferredSize = Size.fromHeight(kToolbarHeight);
@@ -38,62 +38,65 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
     );
 
     return Container(
-      child: Row(
+      child: Stack(
         children: [
-          if (ModalRoute.of(context)?.settings.name != AppRoute.home.path)
-            WindowButton(
-              colors: buttonColors,
-              iconBuilder:
-                  (WindowButtonContext context) =>
-                      CustomBackIcon(color: context.iconColor),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          Expanded(
-            child: WindowTitleBarBox(
-              child: MoveWindow(
-                child: Row(
-                  children: [
-                    SizedBox(width: 8),
-                    if (isShowTitle)
-                      Text(
-                        "MC Hub",
-                        style: TextStyle(fontFamily: Fonts.LunaChord.name),
-                      ),
-                  ],
+          if (title != null)
+            Positioned.fill(
+              child: Center(
+                child: Text(
+                  title!,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
               ),
             ),
-          ),
-          MinimizeWindowButton(colors: buttonColors),
-          appWindow.isMaximized
-              ? RestoreWindowButton(colors: buttonColors)
-              : MaximizeWindowButton(colors: buttonColors),
-          CloseWindowButton(
-            colors: closeButtonColors,
-            onPressed: () {
-              final alertDialog = AlertDialog(
-                title: Text("ソフトを終了しますか？"),
-                actions: [
-                  FilledButton(
-                    onPressed: () {
-                      appWindow.hide();
-                      Navigator.of(
-                        context,
-                      ).pushNamed(AppRoute.deviceSelect.path);
-                    },
-                    child: Text("タスクトレイに収納"),
-                  ),
-                  FilledButton.tonal(
-                    onPressed: () => appWindow.close(),
-                    child: Text("ソフトを終了"),
-                  ),
-                ],
-              );
+          Row(
+            children: [
+              if (ModalRoute.of(context)?.settings.name != AppRoute.home.path)
+                WindowButton(
+                  colors: buttonColors,
+                  iconBuilder:
+                      (WindowButtonContext context) =>
+                          CustomBackIcon(color: context.iconColor),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              Expanded(child: WindowTitleBarBox(child: MoveWindow())),
+              MinimizeWindowButton(colors: buttonColors),
+              appWindow.isMaximized
+                  ? RestoreWindowButton(colors: buttonColors)
+                  : MaximizeWindowButton(colors: buttonColors),
+              CloseWindowButton(
+                colors: closeButtonColors,
+                onPressed: () {
+                  final alertDialog = AlertDialog(
+                    title: Text("ソフトを終了しますか？"),
+                    actions: [
+                      FilledButton(
+                        onPressed: () {
+                          appWindow.hide();
+                          Navigator.of(
+                            context,
+                          ).pushNamed(AppRoute.deviceSelect.path);
+                        },
+                        child: Text("タスクトレイに収納"),
+                      ),
+                      FilledButton.tonal(
+                        onPressed: () => appWindow.close(),
+                        child: Text("ソフトを終了"),
+                      ),
+                    ],
+                  );
 
-              showDialog(context: context, builder: (context) => alertDialog);
-            },
+                  showDialog(
+                    context: context,
+                    builder: (context) => alertDialog,
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),

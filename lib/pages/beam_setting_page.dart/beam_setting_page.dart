@@ -19,7 +19,7 @@ class BeamSettingPage extends HookConsumerWidget {
     final codesAsyncValue = ref.watch(firebaseCodesStreamProvider);
 
     return Scaffold(
-      appBar: CustomAppbar(isShowTitle: false),
+      appBar: CustomAppbar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

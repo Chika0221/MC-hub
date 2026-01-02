@@ -61,7 +61,7 @@ class EditorPage extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: CustomAppbar(),
+      appBar: CustomAppbar(title: vialState.deviceName),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [

@@ -1,15 +1,23 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 // Project imports:
 import 'package:mc_hub/pages/editor_page/key_source.dart';
+import 'package:mc_hub/widgets/folder_border_container_tabs.dart';
 
-class KeyPalette extends StatelessWidget {
+class KeyPalette extends HookConsumerWidget {
   const KeyPalette({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // Standard keys to be available in the palette
+
+    final tabSelectedIndex = useState(0);
+
     final List<String> alphaKeys = List.generate(
       26,
       (index) => String.fromCharCode(65 + index),
@@ -34,63 +42,26 @@ class KeyPalette extends StatelessWidget {
       (index) => "F${index + 1}",
     );
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+    return Padding(
       padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        border: Border(
-          top: BorderSide(
-            color: Theme.of(context).colorScheme.onSurface,
-            width: 4,
-          ),
-          right: BorderSide(
-            color: Theme.of(context).colorScheme.onSurface,
-            width: 4,
-          ),
-          left: BorderSide(
-            color: Theme.of(context).colorScheme.onSurface,
-            width: 4,
-          ),
-        ),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-      ),
-      child: DefaultTabController(
-        length: 4,
-        child: Column(
-          children: [
-            const TabBar(
-              tabs: [
-                Tab(text: "Basic"),
-                Tab(text: "Media"),
-                Tab(text: "Macro"),
-                Tab(text: "Layer"),
-              ],
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  _buildGrid([
-                    ...alphaKeys,
-                    ...numberKeys,
-                    ...modifiers,
-                    ...functionKeys,
-                  ]),
-                  _buildGrid([
-                    "VolUp",
-                    "VolDn",
-                    "Mute",
-                    "Play",
-                    "Next",
-                    "Prev",
-                  ]),
-                  Center(child: Text("Macros coming soon")),
-                  Center(child: Text("Layers coming soon")),
-                ],
-              ),
-            ),
-          ],
-        ),
+      child: FolderBorderContainerTabs(
+        titles: ["Basic", "Media", "Macro", "Layer"],
+        children: [
+          _buildGrid([
+            ...alphaKeys,
+            ...numberKeys,
+            ...modifiers,
+            ...functionKeys,
+          ]),
+          _buildGrid(["VolUp", "VolDn", "Mute", "Play", "Next", "Prev"]),
+          Center(child: Text("Macros coming soon")),
+          Center(child: Text("Layers coming soon")),
+        ],
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+        selectedIndex: tabSelectedIndex.value,
+        onTabChanged: (int value) {
+          tabSelectedIndex.value = value;
+        },
       ),
     );
   }

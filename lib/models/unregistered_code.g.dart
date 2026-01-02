@@ -26,4 +26,5 @@ const _$CodeRegisteredStateEnumMap = {
   CodeRegisteredState.reading: 'reading',
   CodeRegisteredState.error: 'error',
   CodeRegisteredState.done: 'done',
+  CodeRegisteredState.none: 'none',
 };

@@ -39,7 +39,7 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
     );
 
     return SimpleDialog(
-      title: CustomAppbar(isShowTitle: false),
+      title: CustomAppbar(),
       insetPadding: const EdgeInsets.all(sizePadding),
       children: [
         SizedBox(

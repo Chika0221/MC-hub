@@ -20,7 +20,7 @@ class FolderBorderContainar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final double titletabHeight = 48;
+    final double titletabHeight = 32;
 
     return Expanded(
       child: Column(
@@ -43,7 +43,7 @@ class FolderBorderContainar extends HookConsumerWidget {
                   child: Center(
                     child: Text(
                       "コード一覧",
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
