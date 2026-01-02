@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:windows_notification/notification_message.dart';
-import 'package:windows_notification/windows_notification.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
@@ -54,26 +52,6 @@ class EditorPage extends HookConsumerWidget {
             );
             row.add(keydata);
           } catch (e) {}
-
-          // row.add(
-          //   KeyData(
-          //     id: "$r,$c",
-          //     defaultLabel: VialNotifier.keycodeToLabel(keycode),
-          //     width:
-          //         myDevices.first.keys
-          //             .where((key) => key.id == "$r,$c")
-          //             .firstWhere(
-          //               (key) => true,
-          //               orElse:
-          //                   () => const KeyData(
-          //                     id: "",
-          //                     defaultLabel: "",
-          //                     width: 1,
-          //                   ),
-          //             )
-          //             .width,
-          //   ),
-          // );
         }
         activeLayout.add(row);
       }
@@ -104,27 +82,7 @@ class EditorPage extends HookConsumerWidget {
                         LayerButton(icon: Icon(Icons.star), onPressed: () {}),
                         LayerButton(icon: Icon(Icons.star), onPressed: () {}),
                         LayerButton(icon: Icon(Icons.star), onPressed: () {}),
-                        LayerButton(
-                          icon: Icon(Icons.star),
-                          onPressed: () {
-                            final _winNotifyPlugin = WindowsNotification(
-                              applicationId: "MC_hub",
-                            );
-
-                            NotificationMessage
-                            message = NotificationMessage.fromPluginTemplate(
-                              "noti1",
-                              "温度が変化しました",
-                              "300℃",
-                              image:
-                                  "C:\Users\chika\dev\keyboard\2025-10\mc_hub\assets\icons\app_icon.png",
-                            );
-
-                            _winNotifyPlugin.showNotificationPluginTemplate(
-                              message,
-                            );
-                          },
-                        ),
+                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
                       ],
                     ),
                   ),
