@@ -25,7 +25,6 @@ class VialService {
               d.usage == deviceDefinition.usege,
         );
       } catch (e) {
-        // フォールバック: 正確に見つからない場合はUsage Pageのチェックを緩和します（一部のOSでよくある問題）
         try {
           _device = devices.firstWhere(
             (d) =>

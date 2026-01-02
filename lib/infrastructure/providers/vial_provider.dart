@@ -94,6 +94,8 @@ class VialNotifier extends Notifier<VialState> {
     if (success) {
       state = state.copyWith(
         isConnected: true,
+        // deviceName: _service.productName ?? deviceDef.name,
+        deviceName: myDevices.first.name,
         statusMessage: "Connected to ${deviceDef.name}",
       );
 

@@ -22,6 +22,7 @@ VialState _$VialStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$VialState {
   bool get isConnected => throw _privateConstructorUsedError;
+  String? get deviceName => throw _privateConstructorUsedError;
   String? get statusMessage => throw _privateConstructorUsedError;
   Map<String, String> get keyMappings => throw _privateConstructorUsedError;
   List<List<List<int>>>? get matrix => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $VialStateCopyWith<$Res> {
   @useResult
   $Res call({
     bool isConnected,
+    String? deviceName,
     String? statusMessage,
     Map<String, String> keyMappings,
     List<List<List<int>>>? matrix,
@@ -65,6 +67,7 @@ class _$VialStateCopyWithImpl<$Res, $Val extends VialState>
   @override
   $Res call({
     Object? isConnected = null,
+    Object? deviceName = freezed,
     Object? statusMessage = freezed,
     Object? keyMappings = null,
     Object? matrix = freezed,
@@ -76,6 +79,11 @@ class _$VialStateCopyWithImpl<$Res, $Val extends VialState>
                     ? _value.isConnected
                     : isConnected // ignore: cast_nullable_to_non_nullable
                         as bool,
+            deviceName:
+                freezed == deviceName
+                    ? _value.deviceName
+                    : deviceName // ignore: cast_nullable_to_non_nullable
+                        as String?,
             statusMessage:
                 freezed == statusMessage
                     ? _value.statusMessage
@@ -108,6 +116,7 @@ abstract class _$$VialStateImplCopyWith<$Res>
   @useResult
   $Res call({
     bool isConnected,
+    String? deviceName,
     String? statusMessage,
     Map<String, String> keyMappings,
     List<List<List<int>>>? matrix,
@@ -129,6 +138,7 @@ class __$$VialStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isConnected = null,
+    Object? deviceName = freezed,
     Object? statusMessage = freezed,
     Object? keyMappings = null,
     Object? matrix = freezed,
@@ -140,6 +150,11 @@ class __$$VialStateImplCopyWithImpl<$Res>
                 ? _value.isConnected
                 : isConnected // ignore: cast_nullable_to_non_nullable
                     as bool,
+        deviceName:
+            freezed == deviceName
+                ? _value.deviceName
+                : deviceName // ignore: cast_nullable_to_non_nullable
+                    as String?,
         statusMessage:
             freezed == statusMessage
                 ? _value.statusMessage
@@ -165,6 +180,7 @@ class __$$VialStateImplCopyWithImpl<$Res>
 class _$VialStateImpl implements _VialState {
   const _$VialStateImpl({
     this.isConnected = false,
+    this.deviceName,
     required this.statusMessage,
     final Map<String, String> keyMappings = const {},
     required final List<List<List<int>>>? matrix,
@@ -177,6 +193,8 @@ class _$VialStateImpl implements _VialState {
   @override
   @JsonKey()
   final bool isConnected;
+  @override
+  final String? deviceName;
   @override
   final String? statusMessage;
   final Map<String, String> _keyMappings;
@@ -200,7 +218,7 @@ class _$VialStateImpl implements _VialState {
 
   @override
   String toString() {
-    return 'VialState(isConnected: $isConnected, statusMessage: $statusMessage, keyMappings: $keyMappings, matrix: $matrix)';
+    return 'VialState(isConnected: $isConnected, deviceName: $deviceName, statusMessage: $statusMessage, keyMappings: $keyMappings, matrix: $matrix)';
   }
 
   @override
@@ -210,6 +228,8 @@ class _$VialStateImpl implements _VialState {
             other is _$VialStateImpl &&
             (identical(other.isConnected, isConnected) ||
                 other.isConnected == isConnected) &&
+            (identical(other.deviceName, deviceName) ||
+                other.deviceName == deviceName) &&
             (identical(other.statusMessage, statusMessage) ||
                 other.statusMessage == statusMessage) &&
             const DeepCollectionEquality().equals(
@@ -224,6 +244,7 @@ class _$VialStateImpl implements _VialState {
   int get hashCode => Object.hash(
     runtimeType,
     isConnected,
+    deviceName,
     statusMessage,
     const DeepCollectionEquality().hash(_keyMappings),
     const DeepCollectionEquality().hash(_matrix),
@@ -246,6 +267,7 @@ class _$VialStateImpl implements _VialState {
 abstract class _VialState implements VialState {
   const factory _VialState({
     final bool isConnected,
+    final String? deviceName,
     required final String? statusMessage,
     final Map<String, String> keyMappings,
     required final List<List<List<int>>>? matrix,
@@ -256,6 +278,8 @@ abstract class _VialState implements VialState {
 
   @override
   bool get isConnected;
+  @override
+  String? get deviceName;
   @override
   String? get statusMessage;
   @override

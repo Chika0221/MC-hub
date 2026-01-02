@@ -8,6 +8,7 @@ part 'vial_state.g.dart';
 class VialState with _$VialState {
   const factory VialState({
     @Default(false) bool isConnected,
+    String? deviceName,
     required String? statusMessage,
     @Default({}) Map<String, String> keyMappings,
     required List<List<List<int>>>? matrix,

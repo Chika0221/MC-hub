@@ -9,6 +9,7 @@ part of 'vial_state.dart';
 _$VialStateImpl _$$VialStateImplFromJson(Map<String, dynamic> json) =>
     _$VialStateImpl(
       isConnected: json['isConnected'] as bool? ?? false,
+      deviceName: json['deviceName'] as String?,
       statusMessage: json['statusMessage'] as String?,
       keyMappings:
           (json['keyMappings'] as Map<String, dynamic>?)?.map(
@@ -34,6 +35,7 @@ _$VialStateImpl _$$VialStateImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$VialStateImplToJson(_$VialStateImpl instance) =>
     <String, dynamic>{
       'isConnected': instance.isConnected,
+      'deviceName': instance.deviceName,
       'statusMessage': instance.statusMessage,
       'keyMappings': instance.keyMappings,
       'matrix': instance.matrix,
