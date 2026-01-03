@@ -4,7 +4,12 @@ import 'dart:ffi';
 import 'dart:isolate';
 
 // Package imports:
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
+
+// win32パッケージに含まれていない場合のための型定義（念のため）
+typedef CallNextHookExProc =
+    LRESULT Function(Int32 nCode, WPARAM wParam, LPARAM lParam);
 
 class KeyCodeEvent {
   final String vkCode;
@@ -68,5 +73,27 @@ class KeyboardMonitor {
       hookProc,
       exceptionalReturn: 0,
     );
+
+    final hInstance = GetModuleHandle(nullptr);
+    final hHook = SetWindowsHookEx(
+      WH_KEYBOARD_LL,
+      callback.nativeFunction,
+      hInstance,
+      0,
+    );
+
+    if (hHook == 0) {
+      print("sethook 失敗");
+      return;
+    }
+
+    final msg = calloc<MSG>();
+    while (GetMessage(msg, 0, 0, 0) != 0) {
+      TranslateMessage(msg);
+      DispatchMessage(msg);
+    }
+
+    UnhookWindowsHookEx(hHook);
+    calloc.free(msg);
   }
 }
