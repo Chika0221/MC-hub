@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// Project imports:
-import 'package:mc_hub/widgets/folder_border_containar.dart';
-
 class FolderBorderContainerTabs extends HookConsumerWidget {
   const FolderBorderContainerTabs({
     super.key,

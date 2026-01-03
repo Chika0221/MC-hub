@@ -9,7 +9,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/main.dart';
-import 'package:mc_hub/theme/custom_theme.dart';
 import 'package:mc_hub/widgets/custom_appbar_back_icon.dart';
 
 class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
