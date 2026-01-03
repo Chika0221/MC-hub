@@ -26,7 +26,7 @@ final myDevices = [
       KeyData(id: "0,13", defaultLabel: '}', width: 1.0),
       KeyData(id: "3,13", defaultLabel: 'Bksp', width: 2.0),
 
-    // Row 1
+      // Row 1
       KeyData(id: "1,0", defaultLabel: 'Tab', width: 1.25),
       KeyData(id: "1,1", defaultLabel: 'MO(2)', width: 1.25),
       KeyData(id: "1,2", defaultLabel: 'A', width: 1.0),
@@ -42,7 +42,7 @@ final myDevices = [
       KeyData(id: "1,12", defaultLabel: '"', width: 1.0),
       KeyData(id: "1,13", defaultLabel: 'Enter', width: 2.75),
 
-    // Row 2
+      // Row 2
       KeyData(id: "2,0", defaultLabel: 'LShift', width: 1.5),
       KeyData(id: "2,1", defaultLabel: 'MO(1)', width: 1.25),
       KeyData(id: "2,2", defaultLabel: 'Z', width: 1.0),
@@ -58,7 +58,7 @@ final myDevices = [
       KeyData(id: "2,12", defaultLabel: 'MO(3)', width: 1.5),
       KeyData(id: "2,13", defaultLabel: 'Up', width: 1.0),
 
-    // Row 3
+      // Row 3
       KeyData(id: "3,0", defaultLabel: 'LCtrl', width: 1.5),
       KeyData(id: "3,1", defaultLabel: 'LGui', width: 1.5),
       KeyData(id: "3,3", defaultLabel: 'LAlt', width: 1.5),
@@ -85,5 +85,5 @@ class DeviceLayoutConfig {
 }
 
 final deviceLayouts = {
-  "MCKeyboard": const DeviceLayoutConfig(layers: 4, rows: 5, cols: 14),
+  "MCKeyboard": const DeviceLayoutConfig(layers: 4, rows: 4, cols: 14),
 };
