@@ -12,12 +12,11 @@ import 'package:rive/rive.dart';
 
 // Project imports:
 import 'package:mc_hub/firebase_options.dart';
+import 'package:mc_hub/infrastructure/hooks/keyboard_hooks.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
 import 'package:mc_hub/pages/home_page/home_page.dart';
 import 'package:mc_hub/tasktray/tasktray.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
-
-// import 'package:rive/rive.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,23 +40,22 @@ class MyApp extends HookConsumerWidget {
     final lastLog = useState("キー入力待機中");
     final history = useState<List<String>>([]);
 
-    // useEffect(() {
-    //   final monitor = KeyboardMonitor(
-    //     onKeyDetected: (event) {
-    //       final log = "${event.vkCode} SCAN: ${event.scanCode}";
-    //       lastLog.value = log;
-    //       history.value.insert(0, log);
+    useEffect(() {
+      final monitor = KeyboardMonitor(
+        onKeyDetected: (event) {
+          final log = "${event.vkCode} SCAN: ${event.scanCode}";
+          lastLog.value = log;
+          history.value.insert(0, log);
+          print(log);
+        },
+      );
 
-    //       print(log);
-    //     },
-    //   );
+      monitor.start();
 
-    //   monitor.start();
-
-    //   return () {
-    //     monitor.stop();
-    //   };
-    // }, []);
+      return () {
+        monitor.stop();
+      };
+    }, []);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
