@@ -1,5 +1,8 @@
 // Flutter imports:
 
+// Dart imports:
+import 'dart:math';
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -13,6 +16,7 @@ import 'package:rive/rive.dart';
 // Project imports:
 import 'package:mc_hub/firebase_options.dart';
 import 'package:mc_hub/infrastructure/hooks/keyboard_hooks.dart';
+import 'package:mc_hub/infrastructure/hooks/run_macro.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
 import 'package:mc_hub/pages/home_page/home_page.dart';
 import 'package:mc_hub/tasktray/tasktray.dart';
@@ -37,16 +41,24 @@ class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lastLog = useState("キー入力待機中");
-    final history = useState<List<String>>([]);
+    final lastLog = useState(0);
 
     useEffect(() {
       final monitor = KeyboardMonitor(
         onKeyDetected: (event) {
-          final log = "${event.vkCode} SCAN: ${event.scanCode}";
-          lastLog.value = log;
-          history.value.insert(0, log);
-          print(log);
+          final log =
+              "0x${event.vkCode.toRadixString(16).padLeft(2, '0').toUpperCase()} SCAN: ${event.scanCode}";
+          lastLog.value = event.vkCode;
+
+          if (MonitorKeycodes.macro1.vkCode <= lastLog.value &&
+              lastLog.value <= MonitorKeycodes.macro12.vkCode) {
+            final macroService = MacroService(
+              keycode: MonitorKeycodes.values.firstWhere(
+                (kc) => kc.vkCode == lastLog.value,
+              ),
+            );
+            macroService.runMacro();
+          }
         },
       );
 

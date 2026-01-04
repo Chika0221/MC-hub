@@ -12,8 +12,8 @@ typedef CallNextHookExProc =
     LRESULT Function(Int32 nCode, WPARAM wParam, LPARAM lParam);
 
 class KeyCodeEvent {
-  final String vkCode;
-  final String scanCode;
+  final int vkCode;
+  final int scanCode;
 
   KeyCodeEvent(this.vkCode, this.scanCode);
 
@@ -40,7 +40,7 @@ class KeyboardMonitor {
     _isolate = await Isolate.spawn(_isolateEnteyPoint, _receivePort!.sendPort);
 
     _subscription = _receivePort!.listen((message) {
-      if (message is List<String>) {
+      if (message is List<int>) {
         onKeyDetected(KeyCodeEvent(message[0], message[1]));
       }
     });
@@ -58,10 +58,11 @@ class KeyboardMonitor {
       if (nCode >= 0 && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)) {
         final kbdStruct = Pointer<KBDLLHOOKSTRUCT>.fromAddress(lParam).ref;
 
-        final hexVk =
-            "0x${kbdStruct.vkCode.toRadixString(16).padLeft(2, '0').toUpperCase()}";
-        final hexScan =
-            "0x${kbdStruct.scanCode.toRadixString(16).padLeft(2, '0').toUpperCase()}";
+        final hexVk = kbdStruct.vkCode;
+        // "0x${kbdStruct.vkCode.toRadixString(16).padLeft(2, '0').toUpperCase()}";
+
+        final hexScan = kbdStruct.scanCode;
+        // "0x${kbdStruct.scanCode.toRadixString(16).padLeft(2, '0').toUpperCase()}";q
 
         sendPort.send([hexVk, hexScan]);
       }
