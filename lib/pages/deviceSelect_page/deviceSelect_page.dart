@@ -1,5 +1,8 @@
 // Flutterのインポート:
 
+// Dart imports:
+import 'dart:ui';
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -50,6 +53,7 @@ class DeviceSelectPage extends HookConsumerWidget {
           "assets/animations/background.riv",
           riveFactory: Factory.flutter,
         ),
+        artBoardName: "downLight",
         fit: Fit.scaleDown,
       ),
       foragroundWidget: Scaffold(
@@ -72,6 +76,10 @@ class DeviceSelectPage extends HookConsumerWidget {
                       fontSize: MediaQuery.of(context).size.height * 0.08,
                       fontWeight: FontWeight.bold,
                     ),
+                // style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                //   fontSize: MediaQuery.of(context).size.height * 0.08,
+                //   fontWeight: FontWeight.bold,
+                // ),
               ),
             ),
             Flexible(
