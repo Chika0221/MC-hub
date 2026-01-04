@@ -358,6 +358,18 @@ class VialNotifier extends Notifier<VialState> {
         return "RAlt";
       case 0xE700:
         return "RWin";
+      case 0x4A00:
+        return "Home";
+      case 0x4D00:
+        return "End";
+      case 0x4F00:
+        return "→";
+      case 0x5000:
+        return "←";
+      case 0x5100:
+        return "↓";
+      case 0x5200:
+        return "↑";
 
       default:
         return "0x${keycode.toRadixString(16).toUpperCase()}";

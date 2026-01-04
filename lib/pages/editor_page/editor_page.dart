@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
@@ -23,6 +24,8 @@ class EditorPage extends HookConsumerWidget {
     final vialState = ref.watch(vialProvider);
     final keyMappings = vialState.keyMappings;
 
+    final selectedLayer = useState<int>(0);
+
     ref.listen(vialProvider, (VialState? previousState, VialState newState) {
       print(newState.statusMessage);
     });
@@ -33,7 +36,7 @@ class EditorPage extends HookConsumerWidget {
     if (vialState.matrix != null && vialState.matrix!.isNotEmpty) {
       // Construct dynamic layout from matrix
       // Using Layer 0 for visualization
-      final layer0 = vialState.matrix![1];
+      final layer0 = vialState.matrix![selectedLayer.value];
       activeLayout = [];
       for (int r = 0; r < layer0.length; r++) {
         final List<KeyData> row = [];
@@ -77,13 +80,15 @@ class EditorPage extends HookConsumerWidget {
                     padding: EdgeInsets.all(16),
                     child: Column(
                       spacing: 8,
-                      children: [
-                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
-                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
-                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
-                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
-                        LayerButton(icon: Icon(Icons.star), onPressed: () {}),
-                      ],
+                      children: List.generate(4, (index) {
+                        return LayerButton(
+                          icon: Icon(Icons.add),
+                          onPressed:
+                              () => () {
+                                selectedLayer.value = index;
+                              },
+                        );
+                      }),
                     ),
                   ),
                 ),
