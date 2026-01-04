@@ -83,6 +83,7 @@ flutter:
   assets:
     - assets/animations/fondKeyboard.riv
     - assets/animations/unregister_code_state.riv
+    - assets/animations/background.riv
     - assets/icons/tray_icon.ico
     - assets/icons/app_icon.png
 
