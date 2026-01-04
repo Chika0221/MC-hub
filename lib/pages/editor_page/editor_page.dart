@@ -83,10 +83,10 @@ class EditorPage extends HookConsumerWidget {
                       children: List.generate(4, (index) {
                         return LayerButton(
                           icon: Icon(Icons.add),
-                          onPressed:
-                              () => () {
-                                selectedLayer.value = index;
-                              },
+                          onPressed: () {
+                            selectedLayer.value = index;
+                            print(index);
+                          },
                         );
                       }),
                     ),
