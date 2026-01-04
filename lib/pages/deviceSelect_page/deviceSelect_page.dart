@@ -95,7 +95,7 @@ class DeviceSelectPage extends HookConsumerWidget {
                       children: List.generate(devices.value.length, (
                         int index,
                       ) {
-                        return SelectDeviceContainer(
+                      return SelectDeviceContainer(
                           device: devices.value[index],
                         );
                       }),
