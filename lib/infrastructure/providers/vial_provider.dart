@@ -1,9 +1,10 @@
 // Package imports:
+import 'package:hid4flutter/hid4flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
-import 'package:mc_hub/infrastructure/hid/vial_service.dart';
+import 'package:mc_hub/infrastructure/hid/vial_service%20copy.dart';
 import 'package:mc_hub/models/vial_state.dart';
 
 class VialNotifier extends Notifier<VialState> {
@@ -86,10 +87,10 @@ class VialNotifier extends Notifier<VialState> {
     return VialState(statusMessage: null, matrix: null);
   }
 
-  Future<void> connect() async {
+  Future<void> connect(HidDevice selectDevice) async {
     state = state.copyWith(statusMessage: "Connecting...");
     final deviceDef = myDevices.first;
-    final success = await _service.connect(deviceDef);
+    final success = await _service.connect(selectDevice);
 
     if (success) {
       state = state.copyWith(

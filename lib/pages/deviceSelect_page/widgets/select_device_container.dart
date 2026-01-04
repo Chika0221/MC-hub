@@ -42,7 +42,7 @@ class SelectDeviceContainer extends HookConsumerWidget {
                       onTap: () async {
                         await Future.delayed(Duration(milliseconds: 100));
                         Navigator.of(context).pushNamed(AppRoute.editor.path);
-                        ref.read(vialProvider.notifier).connect();
+                        ref.read(vialProvider.notifier).connect(device);
                       },
                       child: RiveWidget(
                         controller: state.controller,

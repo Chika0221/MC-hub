@@ -12,7 +12,6 @@ import 'package:rive/rive.dart';
 
 // Project imports:
 import 'package:mc_hub/firebase_options.dart';
-import 'package:mc_hub/pages/deviceSelect_page/deviceSelect_page.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
 import 'package:mc_hub/pages/home_page/home_page.dart';
 import 'package:mc_hub/tasktray/tasktray.dart';
@@ -68,7 +67,6 @@ class MyApp extends HookConsumerWidget {
       darkTheme: CustomTheme().mainDarkTheme,
       initialRoute: AppRoute.home.path,
       routes: {
-        AppRoute.deviceSelect.path: (context) => const DeviceSelectPage(),
         AppRoute.editor.path: (context) => const EditorPage(),
         AppRoute.home.path: (context) => const HomePage(),
       },
@@ -77,7 +75,6 @@ class MyApp extends HookConsumerWidget {
 }
 
 enum AppRoute {
-  deviceSelect("/deviceSelect"),
   editor("/editor"),
   home("/home");
 

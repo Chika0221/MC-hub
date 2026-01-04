@@ -1,8 +1,5 @@
 // Flutterのインポート:
 
-// Dart imports:
-import 'dart:ui';
-
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -51,7 +48,7 @@ class DeviceSelectPage extends HookConsumerWidget {
         size: Size.infinite,
         fileLoader: FileLoader.fromAsset(
           "assets/animations/background.riv",
-          riveFactory: Factory.flutter,
+          riveFactory: Factory.rive,
         ),
         artBoardName: "downLight",
         fit: Fit.scaleDown,

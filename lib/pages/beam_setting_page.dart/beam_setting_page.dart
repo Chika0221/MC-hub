@@ -19,15 +19,13 @@ class BeamSettingPage extends HookConsumerWidget {
   const BeamSettingPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final codesAsyncValue = ref.watch(firebaseCodesStreamProvider);
-
     return CustomBackground(
       byRail: true,
       backGroundWidget: CustomRiveAnimation(
         size: Size.infinite,
         fileLoader: FileLoader.fromAsset(
           "assets/animations/background.riv",
-          riveFactory: Factory.flutter,
+          riveFactory: Factory.rive,
         ),
         fit: Fit.fitWidth,
       ),
@@ -49,47 +47,59 @@ class BeamSettingPage extends HookConsumerWidget {
                   ),
                 ),
               ),
-              codesAsyncValue.when(
-                data: (infraredCodes) {
-                  return FolderBorderContainar(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    title: "コード一覧",
-                    floatingActionButton: FloatingActionButton.extended(
-                      onPressed: () => showNewCodeRegisterDialog(context),
-                      label: Text("登録"),
-                      icon: Icon(Icons.add),
-                      elevation: 0,
-                    ),
-                    child: BeamItemGridView(
-                      childrenAspectRatio: 5,
-                      itemCount: infraredCodes.length,
-                      itemBuilder: (context, index) {
-                        return CodeContainer(
-                          code: infraredCodes[index],
-                          onPressed: () {
-                            ref
-                                .read(firebaseCodesStreamProvider.notifier)
-                                .updateCodes(
-                                  infraredCodes[index].copyWith(state: true),
-                                );
-                          },
-                        );
-                      },
-                    ),
-                  );
-                },
-                error: (error, stackTrace) {
-                  return Center(child: Text("エラーが発生 $error"));
-                },
-                loading: () {
-                  return Center(child: CircularProgressIndicator());
-                },
-              ),
+              BeamSendingContainer(),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+
+
+
+
+
+class BeamSendingContainer extends HookConsumerWidget {
+  const BeamSendingContainer({super.key});
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final codesAsyncValue = ref.watch(firebaseCodesStreamProvider);
+
+    return codesAsyncValue.when(
+      data: (infraredCodes) {
+        return FolderBorderContainar(
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          title: "コード一覧",
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () => showNewCodeRegisterDialog(context),
+            label: Text("登録"),
+            icon: Icon(Icons.add),
+            elevation: 0,
+          ),
+          child: BeamItemGridView(
+            childrenAspectRatio: 5,
+            itemCount: infraredCodes.length,
+            itemBuilder: (context, index) {
+              return CodeContainer(
+                code: infraredCodes[index],
+                onPressed: () {
+                  ref
+                      .read(firebaseCodesStreamProvider.notifier)
+                      .updateCodes(infraredCodes[index].copyWith(state: true));
+                },
+              );
+            },
+          ),
+        );
+      },
+      error: (error, stackTrace) {
+        return Center(child: Text("エラーが発生 $error"));
+      },
+      loading: () {
+        return Center(child: CircularProgressIndicator());
+      },
     );
   }
 }

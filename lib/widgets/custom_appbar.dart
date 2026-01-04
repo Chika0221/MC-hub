@@ -76,9 +76,7 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
                       FilledButton(
                         onPressed: () {
                           appWindow.hide();
-                          Navigator.of(
-                            context,
-                          ).pushNamed(AppRoute.deviceSelect.path);
+                          Navigator.of(context).pushNamed(AppRoute.home.path);
                         },
                         child: Text("タスクトレイに収納"),
                       ),
