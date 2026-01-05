@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/pages/editor_page/key_macro_source.dart';
 import 'package:mc_hub/pages/editor_page/key_source.dart';
 import 'package:mc_hub/widgets/folder_border_container_tabs.dart';
 
@@ -42,6 +43,11 @@ class KeyPalette extends HookConsumerWidget {
       (index) => "F${index + 1}",
     );
 
+    final List<String> macroKeys = List.generate(
+      12,
+      (index) => "M${index + 1}",
+    );
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: FolderBorderContainerTabs(
@@ -54,7 +60,7 @@ class KeyPalette extends HookConsumerWidget {
             ...functionKeys,
           ]),
           _buildGrid(["VolUp", "VolDn", "Mute", "Play", "Next", "Prev"]),
-          Center(child: Text("Macros coming soon")),
+          _buildMacroGrid(macroKeys),
           Center(child: Text("Layers coming soon")),
         ],
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
@@ -75,6 +81,20 @@ class KeyPalette extends HookConsumerWidget {
         children:
             items.map((label) {
               return KeySource(label: label, data: label);
+            }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildMacroGrid(List<String> items) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Wrap(
+        spacing: 8.0,
+        runSpacing: 8.0,
+        children:
+            items.map((label) {
+              return KeyMacroSource(label: label, data: label);
             }).toList(),
       ),
     );

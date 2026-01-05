@@ -19,14 +19,19 @@ import 'package:mc_hub/widgets/custom_appbar.dart';
 class EditorPage extends HookConsumerWidget {
   const EditorPage({super.key});
 
-  Map<String, String> _keyMappingsForLayer(VialState vialState, int layerIndex) {
+  Map<String, String> _keyMappingsForLayer(
+    VialState vialState,
+    int layerIndex,
+  ) {
     final matrix = vialState.matrix;
     if (matrix == null || matrix.isEmpty) {
       return vialState.keyMappings;
     }
 
-    final safeLayerIndex =
-        layerIndex.clamp(0, matrix.length - 1); // avoid out-of-range
+    final safeLayerIndex = layerIndex.clamp(
+      0,
+      matrix.length - 1,
+    ); // avoid out-of-range
     final layer = matrix[safeLayerIndex];
 
     final Map<String, String> mappings = {};
@@ -119,7 +124,11 @@ class EditorPage extends HookConsumerWidget {
                           onKeyRemap: (keyId, newMapping) {
                             ref
                                 .read(vialProvider.notifier)
-                                .updateKey(selectedLayer.value, keyId, newMapping);
+                                .updateKey(
+                                  selectedLayer.value,
+                                  keyId,
+                                  newMapping,
+                                );
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text("Mapped $newMapping to key"),
