@@ -448,147 +448,257 @@ class VialNotifier extends Notifier<VialState> {
   }
 
   static int labelToKeycode(String label) {
-    // Basic QMK Keycodes
-    switch (label.toUpperCase()) {
+    // `keycodeToLabel` 側が扱っているのは「上位バイトにHID keycode」を載せた16bit値（例: A=0x0400）なので、
+    // ここも同じ形式で返す。
+    // 例外: "No" は 0x0000。
+    final normalized = label.trim();
+    if (normalized.isEmpty) return 0x0000;
+
+    final upper = normalized.toUpperCase();
+    switch (upper) {
+      case "NO":
+        return 0x0000;
+
       case "A":
-        return 0x4;
+        return 0x0400;
       case "B":
-        return 0x5;
+        return 0x0500;
       case "C":
-        return 0x6;
+        return 0x0600;
       case "D":
-        return 0x7;
+        return 0x0700;
       case "E":
-        return 0x8;
+        return 0x0800;
       case "F":
-        return 0x9;
+        return 0x0900;
       case "G":
-        return 0xA;
+        return 0x0A00;
       case "H":
-        return 0xB;
+        return 0x0B00;
       case "I":
-        return 0xC;
+        return 0x0C00;
       case "J":
-        return 0xD;
+        return 0x0D00;
       case "K":
-        return 0xE;
+        return 0x0E00;
       case "L":
-        return 0xF;
+        return 0x0F00;
       case "M":
-        return 0x10;
+        return 0x1000;
       case "N":
-        return 0x11;
+        return 0x1100;
       case "O":
-        return 0x12;
+        return 0x1200;
       case "P":
-        return 0x13;
+        return 0x1300;
       case "Q":
-        return 0x14;
+        return 0x1400;
       case "R":
-        return 0x15;
+        return 0x1500;
       case "S":
-        return 0x16;
+        return 0x1600;
       case "T":
-        return 0x17;
+        return 0x1700;
       case "U":
-        return 0x18;
+        return 0x1800;
       case "V":
-        return 0x19;
+        return 0x1900;
       case "W":
-        return 0x1A;
+        return 0x1A00;
       case "X":
-        return 0x1B;
+        return 0x1B00;
       case "Y":
-        return 0x1C;
+        return 0x1C00;
       case "Z":
-        return 0x1D;
+        return 0x1D00;
 
       case "1":
-        return 0x1E;
+        return 0x5900;
       case "2":
-        return 0x1F;
+        return 0x5A00;
       case "3":
-        return 0x20;
+        return 0x5B00;
       case "4":
-        return 0x21;
+        return 0x5C00;
       case "5":
-        return 0x22;
+        return 0x5D00;
       case "6":
-        return 0x23;
+        return 0x5E00;
       case "7":
-        return 0x24;
+        return 0x5F00;
       case "8":
-        return 0x25;
+        return 0x6000;
       case "9":
-        return 0x26;
+        return 0x6100;
       case "0":
-        return 0x27;
+        return 0x6200;
 
       case "ENTER":
-        return 0x28;
+        return 0x2800;
       case "ESC":
-        return 0x29;
+        return 0x2900;
       case "BKSP":
-        return 0x2A;
+      case "BSPC":
+      case "BACKSPACE":
+        return 0x2A00;
       case "TAB":
-        return 0x2B;
+        return 0x2B00;
       case "SPACE":
-        return 0x2C;
+        return 0x2C00;
 
       case "-":
-        return 0x2D;
+        return 0x2D00;
       case "=":
-        return 0x2E;
+        return 0x2E00;
       case "[":
-        return 0x2F;
+        return 0x2F00;
       case "]":
-        return 0x30;
+        return 0x3000;
       case "\\":
-        return 0x31;
+        return 0x3100;
 
       case ";":
-        return 0x33;
+        return 0x3300;
       case "'":
-        return 0x34;
+        return 0x3400;
+      case "`":
+        return 0x3500;
       case ",":
-        return 0x36;
+        return 0x3600;
       case ".":
-        return 0x37;
+        return 0x3700;
       case "/":
-        return 0x38;
+        return 0x3800;
 
       case "CAPS":
-        return 0x39;
+      case "CAPSLOCK":
+        return 0x3900;
 
       case "F1":
-        return 0x3A;
+        return 0x3A00;
       case "F2":
-        return 0x3B;
-      // ... add more as needed
+        return 0x3B00;
+      case "F3":
+        return 0x3C00;
+      case "F4":
+        return 0x3D00;
+      case "F5":
+        return 0x3E00;
+      case "F6":
+        return 0x3F00;
+      case "F7":
+        return 0x4000;
+      case "F8":
+        return 0x4100;
+      case "F9":
+        return 0x4200;
+      case "F10":
+        return 0x4300;
+      case "F11":
+        return 0x4400;
+      case "F12":
+        return 0x4500;
 
       case "LCTRL":
       case "CTRL":
-        return 0xE0;
+        return 0xE000;
       case "LSHIFT":
       case "SHIFT":
-        return 0xE1;
+        return 0xE100;
       case "LALT":
       case "ALT":
-        return 0xE2;
+        return 0xE200;
       case "LGUI":
       case "WIN":
-        return 0xE3;
+        return 0xE300;
       case "RCTRL":
-        return 0xE4;
+        return 0xE400;
       case "RSHIFT":
-        return 0xE5;
+        return 0xE500;
       case "RALT":
-        return 0xE6;
+        return 0xE600;
       case "RGUI":
-        return 0xE7;
+      case "RWIN":
+        return 0xE700;
+
+      case "HOME":
+        return 0x4A00;
+      case "PGUP":
+      case "PAGEUP":
+        return 0x4B00;
+      case "END":
+        return 0x4D00;
+      case "PGDN":
+      case "PAGEDOWN":
+        return 0x4E00;
+      case "→":
+      case "RIGHT":
+        return 0x4F00;
+      case "←":
+      case "LEFT":
+        return 0x5000;
+      case "↓":
+      case "DOWN":
+        return 0x5100;
+      case "↑":
+      case "UP":
+        return 0x5200;
+
+      // シフト記号（`keycodeToLabel` に合わせた表現）
+      case "!":
+        return 0x1E02;
+      case "@":
+        return 0x1F02;
+      case "#":
+        return 0x2002;
+      case "\$":
+        return 0x2102;
+      case "%":
+        return 0x2202;
+      case "^":
+        return 0x2302;
+      case "&":
+        return 0x2402;
+      case "*":
+        return 0x2502;
+      case "(":
+        return 0x2602;
+      case ")":
+        return 0x2702;
+      case "_":
+        return 0x2D02;
+
+      // Macro
+      case "M1":
+        return 0x6800;
+      case "M2":
+        return 0x6900;
+      case "M3":
+        return 0x6A00;
+      case "M4":
+        return 0x6B00;
+      case "M5":
+        return 0x6C00;
+      case "M6":
+        return 0x6D00;
+      case "M7":
+        return 0x6E00;
+      case "M8":
+        return 0x6F00;
+      case "M9":
+        return 0x7000;
+      case "M10":
+        return 0x7100;
+      case "M11":
+        return 0x7200;
+      case "M12":
+        return 0x7300;
+
+      case "◯":
+        return 0x0100;
 
       default:
-        return 0x0; // Unknown
+        return 0x0000; // Unknown
     }
   }
 }
