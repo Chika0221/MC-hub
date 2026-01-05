@@ -1,5 +1,8 @@
 // Flutter imports:
 
+// Dart imports:
+import 'dart:io';
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -81,7 +84,10 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
                         child: Text("タスクトレイに収納"),
                       ),
                       FilledButton.tonal(
-                        onPressed: () => appWindow.close(),
+                        onPressed: () {
+                          appWindow.close();
+                          exit(0);
+                        },
                         child: Text("ソフトを終了"),
                       ),
                     ],

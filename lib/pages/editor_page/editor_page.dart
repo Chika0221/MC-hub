@@ -19,25 +19,32 @@ import 'package:mc_hub/widgets/custom_appbar.dart';
 class EditorPage extends HookConsumerWidget {
   const EditorPage({super.key});
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final vialState = ref.watch(vialProvider);
-    final keyMappings = vialState.keyMappings;
+  Map<String, String> _keyMappingsForLayer(VialState vialState, int layerIndex) {
+    final matrix = vialState.matrix;
+    if (matrix == null || matrix.isEmpty) {
+      return vialState.keyMappings;
+    }
 
-    final selectedLayer = useState<int>(0);
+    final safeLayerIndex =
+        layerIndex.clamp(0, matrix.length - 1); // avoid out-of-range
+    final layer = matrix[safeLayerIndex];
 
-    ref.listen(vialProvider, (VialState? previousState, VialState newState) {
-      print(newState.statusMessage);
-    });
+    final Map<String, String> mappings = {};
+    for (int r = 0; r < layer.length; r++) {
+      for (int c = 0; c < layer[r].length; c++) {
+        mappings["$r,$c"] = VialNotifier.keycodeToLabel(layer[r][c]);
+      }
+    }
+    return mappings;
+  }
 
-    // Determine layout to show
-    List<List<KeyData>> activeLayout;
+  List<List<KeyData>> setLayout(VialState vialState, int index) {
+    List<List<KeyData>> activeLayout = [];
 
     if (vialState.matrix != null && vialState.matrix!.isNotEmpty) {
-      // Construct dynamic layout from matrix
-      // Using Layer 0 for visualization
-      final layer0 = vialState.matrix![selectedLayer.value];
-      activeLayout = [];
+      final matrix = vialState.matrix!;
+      final safeLayerIndex = index.clamp(0, matrix.length - 1);
+      final layer0 = matrix[safeLayerIndex];
       for (int r = 0; r < layer0.length; r++) {
         final List<KeyData> row = [];
         for (int c = 0; c < layer0[r].length; c++) {
@@ -59,9 +66,19 @@ class EditorPage extends HookConsumerWidget {
         activeLayout.add(row);
       }
     } else {
-      // Fallback to static layout
       activeLayout = keyboardLayout60;
     }
+
+    return activeLayout;
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final vialState = ref.watch(vialProvider);
+    final selectedLayer = useState<int>(0);
+
+    final layoutData = setLayout(vialState, selectedLayer.value);
+    final keyMappings = _keyMappingsForLayer(vialState, selectedLayer.value);
 
     return Scaffold(
       appBar: CustomAppbar(title: vialState.deviceName),
@@ -85,7 +102,6 @@ class EditorPage extends HookConsumerWidget {
                           icon: Icon(Icons.add),
                           onPressed: () {
                             selectedLayer.value = index;
-                            print(index);
                           },
                         );
                       }),
@@ -98,13 +114,12 @@ class EditorPage extends HookConsumerWidget {
                     child: Center(
                       child: SingleChildScrollView(
                         child: KeyboardLayout(
-                          layoutData: activeLayout,
+                          layoutData: layoutData,
                           keyMappings: keyMappings,
                           onKeyRemap: (keyId, newMapping) {
                             ref
                                 .read(vialProvider.notifier)
-                                .updateKey(keyId, newMapping);
-
+                                .updateKey(selectedLayer.value, keyId, newMapping);
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text("Mapped $newMapping to key"),

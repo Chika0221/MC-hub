@@ -149,7 +149,7 @@ class VialNotifier extends Notifier<VialState> {
     );
   }
 
-  Future<void> updateKey(String keyId, String newLabel) async {
+  Future<void> updateKey(int layer, String keyId, String newLabel) async {
     if (!state.isConnected) {
       state = state.copyWith(statusMessage: "Not connected");
       return;
@@ -189,7 +189,7 @@ class VialNotifier extends Notifier<VialState> {
       final cols = config?.cols ?? 14;
 
       try {
-        await _service.setKey(0, row, col, keycode, rows, cols);
+        await _service.setKey(layer, row, col, keycode, rows, cols);
 
         final newMap = Map<String, String>.from(state.keyMappings);
         newMap[keyId] = newLabel;
@@ -201,13 +201,14 @@ class VialNotifier extends Notifier<VialState> {
           // Proper way: copy structure.
           // For now, let's assume we re-fetch or just update the UI map.
           // Updating the matrix in memory:
-          newMatrix[0][row][col] = keycode;
+          final safeLayer = layer.clamp(0, newMatrix.length - 1);
+          newMatrix[safeLayer][row][col] = keycode;
         }
 
         state = state.copyWith(
           keyMappings: newMap,
           matrix: newMatrix,
-          statusMessage: "Updated $keyId to $newLabel",
+          statusMessage: "Updated L$layer $keyId to $newLabel",
         );
       } catch (e) {
         state = state.copyWith(statusMessage: "Failed to write: $e");
@@ -277,25 +278,25 @@ class VialNotifier extends Notifier<VialState> {
       case 0x1D00:
         return "Z";
 
-      case 0x1E00:
+      case 0x5900:
         return "1";
-      case 0x1F00:
+      case 0x5A00:
         return "2";
-      case 0x2000:
+      case 0x5B00:
         return "3";
-      case 0x2100:
+      case 0x5C00:
         return "4";
-      case 0x2200:
+      case 0x5D00:
         return "5";
-      case 0x2300:
+      case 0x5E00:
         return "6";
-      case 0x2400:
+      case 0x5F00:
         return "7";
-      case 0x2500:
+      case 0x6000:
         return "8";
-      case 0x2600:
+      case 0x6100:
         return "9";
-      case 0x2700:
+      case 0x6200:
         return "0";
 
       case 0x2800:
@@ -333,14 +334,30 @@ class VialNotifier extends Notifier<VialState> {
       case 0x3800:
         return "/";
 
-      case 0x3900:
-        return "Caps";
-
       case 0x3A00:
         return "F1";
       case 0x3B00:
         return "F2";
-      // ...
+      case 0x3C00:
+        return "F3";
+      case 0x3D00:
+        return "F4";
+      case 0x3E00:
+        return "F5";
+      case 0x3F00:
+        return "F6";
+      case 0x4000:
+        return "F7";
+      case 0x4100:
+        return "F8";
+      case 0x4200:
+        return "F9";
+      case 0x4300:
+        return "F10";
+      case 0x4400:
+        return "F11";
+      case 0x4500:
+        return "F12";
 
       case 0xE000:
         return "LCtrl";
@@ -360,8 +377,12 @@ class VialNotifier extends Notifier<VialState> {
         return "RWin";
       case 0x4A00:
         return "Home";
+      case 0x4B00:
+        return "PgUp";
       case 0x4D00:
         return "End";
+      case 0x4E00:
+        return "PgDn";
       case 0x4F00:
         return "→";
       case 0x5000:
@@ -370,6 +391,32 @@ class VialNotifier extends Notifier<VialState> {
         return "↓";
       case 0x5200:
         return "↑";
+
+      case 0x1E02:
+        return "!";
+      case 0x1F02:
+        return "@";
+      case 0x2002:
+        return "#";
+      case 0x2102:
+        return "\$";
+      case 0x2202:
+        return "%";
+      case 0x2302:
+        return "^";
+      case 0x2402:
+        return "&";
+      case 0x2502:
+        return "*";
+      case 0x2602:
+        return "(";
+      case 0x2702:
+        return ")";
+      case 0x2D02:
+        return "_";
+
+      case 0x100:
+        return "◯";
 
       default:
         return "0x${keycode.toRadixString(16).toUpperCase()}";

@@ -1,5 +1,6 @@
 // Dart imports:
 import 'dart:async';
+import 'dart:io';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
@@ -54,6 +55,7 @@ class _TaskTrayState extends ConsumerState<TaskTray> with TrayListener {
       appWindow.show();
     } else if (menuItem.key == 'exit') {
       appWindow.close();
+      exit(0);
     }
   }
 
