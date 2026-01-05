@@ -414,6 +414,30 @@ class VialNotifier extends Notifier<VialState> {
         return ")";
       case 0x2D02:
         return "_";
+      case 0x6800:
+        return "M1";
+      case 0x6900:
+        return "M2";
+      case 0x6A00:
+        return "M3";
+      case 0x6B00:
+        return "M4";
+      case 0x6C00:
+        return "M5";
+      case 0x6D00:
+        return "M6";
+      case 0x6E00:
+        return "M7";
+      case 0x6F00:
+        return "M8";
+      case 0x7000:
+        return "M9";
+      case 0x7100:
+        return "M10";
+      case 0x7200:
+        return "M11";
+      case 0x7300:
+        return "M12";
 
       case 0x100:
         return "◯";
