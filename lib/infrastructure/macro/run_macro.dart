@@ -1,3 +1,6 @@
+// Project imports:
+import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
+
 class MacroService {
   final MonitorKeycodes keycode;
 
@@ -7,6 +10,13 @@ class MacroService {
     switch (keycode) {
       case MonitorKeycodes.macro1:
         print("Running Macro 1");
+        final hit = VialKey.fromLabel("Space");
+
+        final sendCode = (hit!.code >> 8) + 0x3D;
+
+        print("Hit: 0x${hit!.code.toRadixString(16)}");
+        print("Semd: 0x${sendCode.toRadixString(16)}");
+
         // Add your macro logic here
         break;
       case MonitorKeycodes.macro2:

@@ -7,6 +7,168 @@ import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 import 'package:mc_hub/infrastructure/hid/vial_service%20copy.dart';
 import 'package:mc_hub/models/vial_state.dart';
 
+enum VialKey {
+  no(0x0000, 'No'),
+
+  // Letters
+  a(0x0400, 'A'),
+  b(0x0500, 'B'),
+  c(0x0600, 'C'),
+  d(0x0700, 'D'),
+  e(0x0800, 'E'),
+  f(0x0900, 'F'),
+  g(0x0A00, 'G'),
+  h(0x0B00, 'H'),
+  i(0x0C00, 'I'),
+  j(0x0D00, 'J'),
+  k(0x0E00, 'K'),
+  l(0x0F00, 'L'),
+  m(0x1000, 'M'),
+  n(0x1100, 'N'),
+  o(0x1200, 'O'),
+  p(0x1300, 'P'),
+  q(0x1400, 'Q'),
+  r(0x1500, 'R'),
+  s(0x1600, 'S'),
+  t(0x1700, 'T'),
+  u(0x1800, 'U'),
+  v(0x1900, 'V'),
+  w(0x1A00, 'W'),
+  x(0x1B00, 'X'),
+  y(0x1C00, 'Y'),
+  z(0x1D00, 'Z'),
+
+  // Digits
+  digit1(0x5900, '1'),
+  digit2(0x5A00, '2'),
+  digit3(0x5B00, '3'),
+  digit4(0x5C00, '4'),
+  digit5(0x5D00, '5'),
+  digit6(0x5E00, '6'),
+  digit7(0x5F00, '7'),
+  digit8(0x6000, '8'),
+  digit9(0x6100, '9'),
+  digit0(0x6200, '0'),
+
+  // Basic keys
+  enter(0x2800, 'Enter'),
+  esc(0x2900, 'Esc'),
+  bksp(0x2A00, 'Bksp'),
+  tab(0x2B00, 'Tab'),
+  space(0x2C00, 'Space'),
+  minus(0x2D00, '-'),
+  equal(0x2E00, '='),
+  lbracket(0x2F00, '['),
+  rbracket(0x3000, ']'),
+  backslash(0x3100, '\\'),
+  semicolon(0x3300, ';'),
+  quote(0x3400, "'"),
+  grave(0x3500, '`'),
+  comma(0x3600, ','),
+  dot(0x3700, '.'),
+  slash(0x3800, '/'),
+  caps(0x3900, 'Caps'),
+
+  // Function keys
+  f1(0x3A00, 'F1'),
+  f2(0x3B00, 'F2'),
+  f3(0x3C00, 'F3'),
+  f4(0x3D00, 'F4'),
+  f5(0x3E00, 'F5'),
+  f6(0x3F00, 'F6'),
+  f7(0x4000, 'F7'),
+  f8(0x4100, 'F8'),
+  f9(0x4200, 'F9'),
+  f10(0x4300, 'F10'),
+  f11(0x4400, 'F11'),
+  f12(0x4500, 'F12'),
+
+  // Modifiers
+  lctrl(0xE000, 'LCtrl'),
+  lshift(0xE100, 'LShift'),
+  lalt(0xE200, 'LAlt'),
+  win(0xE300, 'Win'),
+  rctrl(0xE400, 'RCtrl'),
+  rshift(0xE500, 'RShift'),
+  ralt(0xE600, 'RAlt'),
+  rwin(0xE700, 'RWin'),
+
+  // Navigation
+  home(0x4A00, 'Home'),
+  pgup(0x4B00, 'PgUp'),
+  end(0x4D00, 'End'),
+  pgdn(0x4E00, 'PgDn'),
+  right(0x4F00, '→'),
+  left(0x5000, '←'),
+  down(0x5100, '↓'),
+  up(0x5200, '↑'),
+
+  // Shifted symbols (project-specific representation)
+  exclam(0x1E02, '!'),
+  at(0x1F02, '@'),
+  hash(0x2002, '#'),
+  dollar(0x2102, r'$'),
+  percent(0x2202, '%'),
+  caret(0x2302, '^'),
+  amp(0x2402, '&'),
+  asterisk(0x2502, '*'),
+  lparen(0x2602, '('),
+  rparen(0x2702, ')'),
+  underscore(0x2D02, '_'),
+
+  // Macros
+  m1(0x6800, 'M1'),
+  m2(0x6900, 'M2'),
+  m3(0x6A00, 'M3'),
+  m4(0x6B00, 'M4'),
+  m5(0x6C00, 'M5'),
+  m6(0x6D00, 'M6'),
+  m7(0x6E00, 'M7'),
+  m8(0x6F00, 'M8'),
+  m9(0x7000, 'M9'),
+  m10(0x7100, 'M10'),
+  m11(0x7200, 'M11'),
+  m12(0x7300, 'M12'),
+
+  circle(0x0100, '◯');
+
+  const VialKey(this.code, this.label);
+
+  final int code;
+  final String label;
+
+  static final Map<int, VialKey> _byCode = {for (final v in values) v.code: v};
+  static final Map<String, VialKey> _byLabel = {
+    for (final v in values) _normalizeLabel(v.label): v,
+  };
+
+  static bool isNoLabel(String label) {
+    return _normalizeLabel(label) == 'NO';
+  }
+
+  static VialKey? fromCode(int code) {
+    return _byCode[code];
+  }
+
+  static String labelFromCode(int code) {
+    final hit = fromCode(code);
+    if (hit != null) return hit.label;
+    return '0x${code.toRadixString(16).toUpperCase()}';
+  }
+
+  static VialKey? fromLabel(String label) {
+    final normalized = _normalizeLabel(label);
+    if (normalized.isEmpty) return no;
+
+    // Also allow matching by upper-cased canonical label (e.g. Esc/Enter)
+    return _byLabel[normalized];
+  }
+
+  static String _normalizeLabel(String label) {
+    return label.trim().toUpperCase();
+  }
+}
+
 class VialNotifier extends Notifier<VialState> {
   final _service = VialService();
 
@@ -157,7 +319,7 @@ class VialNotifier extends Notifier<VialState> {
 
     // Map label to basic QMK keycode
     final keycode = labelToKeycode(newLabel);
-    if (keycode == 0 && newLabel != "No") {
+    if (keycode == 0 && !VialKey.isNoLabel(newLabel)) {
       state = state.copyWith(statusMessage: "Unknown key label: $newLabel");
       return;
     }
@@ -221,485 +383,12 @@ class VialNotifier extends Notifier<VialState> {
   }
 
   static String keycodeToLabel(int keycode) {
-    // Simple reverse mapping.
-    // Since labelToKeycode maps multiple strings to same int, this might be ambiguous (e.g. LSHIFT vs SHIFT).
-    // We pick canonical names.
-    switch (keycode) {
-      case 0x400:
-        return "A";
-      case 0x500:
-        return "B";
-      case 0x600:
-        return "C";
-      case 0x700:
-        return "D";
-      case 0x800:
-        return "E";
-      case 0x900:
-        return "F";
-      case 0xA00:
-        return "G";
-      case 0xB00:
-        return "H";
-      case 0xC00:
-        return "I";
-      case 0xD00:
-        return "J";
-      case 0xE00:
-        return "K";
-      case 0xF00:
-        return "L";
-      case 0x1000:
-        return "M";
-      case 0x1100:
-        return "N";
-      case 0x1200:
-        return "O";
-      case 0x1300:
-        return "P";
-      case 0x1400:
-        return "Q";
-      case 0x1500:
-        return "R";
-      case 0x1600:
-        return "S";
-      case 0x1700:
-        return "T";
-      case 0x1800:
-        return "U";
-      case 0x1900:
-        return "V";
-      case 0x1A00:
-        return "W";
-      case 0x1B00:
-        return "X";
-      case 0x1C00:
-        return "Y";
-      case 0x1D00:
-        return "Z";
-
-      case 0x5900:
-        return "1";
-      case 0x5A00:
-        return "2";
-      case 0x5B00:
-        return "3";
-      case 0x5C00:
-        return "4";
-      case 0x5D00:
-        return "5";
-      case 0x5E00:
-        return "6";
-      case 0x5F00:
-        return "7";
-      case 0x6000:
-        return "8";
-      case 0x6100:
-        return "9";
-      case 0x6200:
-        return "0";
-
-      case 0x2800:
-        return "Enter";
-      case 0x2900:
-        return "Esc";
-      case 0x2A00:
-        return "Bksp";
-      case 0x2B00:
-        return "Tab";
-      case 0x2C00:
-        return "Space";
-
-      case 0x2D00:
-        return "-";
-      case 0x2E00:
-        return "=";
-      case 0x2F00:
-        return "[";
-      case 0x3000:
-        return "]";
-      case 0x3100:
-        return "\\";
-
-      case 0x3300:
-        return ";";
-      case 0x3400:
-        return "'";
-      case 0x3500:
-        return "`";
-      case 0x3600:
-        return ",";
-      case 0x3700:
-        return ".";
-      case 0x3800:
-        return "/";
-
-      case 0x3A00:
-        return "F1";
-      case 0x3B00:
-        return "F2";
-      case 0x3C00:
-        return "F3";
-      case 0x3D00:
-        return "F4";
-      case 0x3E00:
-        return "F5";
-      case 0x3F00:
-        return "F6";
-      case 0x4000:
-        return "F7";
-      case 0x4100:
-        return "F8";
-      case 0x4200:
-        return "F9";
-      case 0x4300:
-        return "F10";
-      case 0x4400:
-        return "F11";
-      case 0x4500:
-        return "F12";
-
-      case 0xE000:
-        return "LCtrl";
-      case 0xE100:
-        return "LShift";
-      case 0xE200:
-        return "LAlt";
-      case 0xE300:
-        return "Win";
-      case 0xE400:
-        return "RCtrl";
-      case 0xE500:
-        return "RShift";
-      case 0xE600:
-        return "RAlt";
-      case 0xE700:
-        return "RWin";
-      case 0x4A00:
-        return "Home";
-      case 0x4B00:
-        return "PgUp";
-      case 0x4D00:
-        return "End";
-      case 0x4E00:
-        return "PgDn";
-      case 0x4F00:
-        return "→";
-      case 0x5000:
-        return "←";
-      case 0x5100:
-        return "↓";
-      case 0x5200:
-        return "↑";
-
-      case 0x1E02:
-        return "!";
-      case 0x1F02:
-        return "@";
-      case 0x2002:
-        return "#";
-      case 0x2102:
-        return "\$";
-      case 0x2202:
-        return "%";
-      case 0x2302:
-        return "^";
-      case 0x2402:
-        return "&";
-      case 0x2502:
-        return "*";
-      case 0x2602:
-        return "(";
-      case 0x2702:
-        return ")";
-      case 0x2D02:
-        return "_";
-      case 0x6800:
-        return "M1";
-      case 0x6900:
-        return "M2";
-      case 0x6A00:
-        return "M3";
-      case 0x6B00:
-        return "M4";
-      case 0x6C00:
-        return "M5";
-      case 0x6D00:
-        return "M6";
-      case 0x6E00:
-        return "M7";
-      case 0x6F00:
-        return "M8";
-      case 0x7000:
-        return "M9";
-      case 0x7100:
-        return "M10";
-      case 0x7200:
-        return "M11";
-      case 0x7300:
-        return "M12";
-
-      case 0x100:
-        return "◯";
-
-      default:
-        return "0x${keycode.toRadixString(16).toUpperCase()}";
-    }
+    return VialKey.labelFromCode(keycode);
   }
 
   static int labelToKeycode(String label) {
-    // `keycodeToLabel` 側が扱っているのは「上位バイトにHID keycode」を載せた16bit値（例: A=0x0400）なので、
-    // ここも同じ形式で返す。
-    // 例外: "No" は 0x0000。
-    final normalized = label.trim();
-    if (normalized.isEmpty) return 0x0000;
-
-    final upper = normalized.toUpperCase();
-    switch (upper) {
-      case "NO":
-        return 0x0000;
-
-      case "A":
-        return 0x0400;
-      case "B":
-        return 0x0500;
-      case "C":
-        return 0x0600;
-      case "D":
-        return 0x0700;
-      case "E":
-        return 0x0800;
-      case "F":
-        return 0x0900;
-      case "G":
-        return 0x0A00;
-      case "H":
-        return 0x0B00;
-      case "I":
-        return 0x0C00;
-      case "J":
-        return 0x0D00;
-      case "K":
-        return 0x0E00;
-      case "L":
-        return 0x0F00;
-      case "M":
-        return 0x1000;
-      case "N":
-        return 0x1100;
-      case "O":
-        return 0x1200;
-      case "P":
-        return 0x1300;
-      case "Q":
-        return 0x1400;
-      case "R":
-        return 0x1500;
-      case "S":
-        return 0x1600;
-      case "T":
-        return 0x1700;
-      case "U":
-        return 0x1800;
-      case "V":
-        return 0x1900;
-      case "W":
-        return 0x1A00;
-      case "X":
-        return 0x1B00;
-      case "Y":
-        return 0x1C00;
-      case "Z":
-        return 0x1D00;
-
-      case "1":
-        return 0x5900;
-      case "2":
-        return 0x5A00;
-      case "3":
-        return 0x5B00;
-      case "4":
-        return 0x5C00;
-      case "5":
-        return 0x5D00;
-      case "6":
-        return 0x5E00;
-      case "7":
-        return 0x5F00;
-      case "8":
-        return 0x6000;
-      case "9":
-        return 0x6100;
-      case "0":
-        return 0x6200;
-
-      case "ENTER":
-        return 0x2800;
-      case "ESC":
-        return 0x2900;
-      case "BKSP":
-      case "BSPC":
-      case "BACKSPACE":
-        return 0x2A00;
-      case "TAB":
-        return 0x2B00;
-      case "SPACE":
-        return 0x2C00;
-
-      case "-":
-        return 0x2D00;
-      case "=":
-        return 0x2E00;
-      case "[":
-        return 0x2F00;
-      case "]":
-        return 0x3000;
-      case "\\":
-        return 0x3100;
-
-      case ";":
-        return 0x3300;
-      case "'":
-        return 0x3400;
-      case "`":
-        return 0x3500;
-      case ",":
-        return 0x3600;
-      case ".":
-        return 0x3700;
-      case "/":
-        return 0x3800;
-
-      case "CAPS":
-      case "CAPSLOCK":
-        return 0x3900;
-
-      case "F1":
-        return 0x3A00;
-      case "F2":
-        return 0x3B00;
-      case "F3":
-        return 0x3C00;
-      case "F4":
-        return 0x3D00;
-      case "F5":
-        return 0x3E00;
-      case "F6":
-        return 0x3F00;
-      case "F7":
-        return 0x4000;
-      case "F8":
-        return 0x4100;
-      case "F9":
-        return 0x4200;
-      case "F10":
-        return 0x4300;
-      case "F11":
-        return 0x4400;
-      case "F12":
-        return 0x4500;
-
-      case "LCTRL":
-      case "CTRL":
-        return 0xE000;
-      case "LSHIFT":
-      case "SHIFT":
-        return 0xE100;
-      case "LALT":
-      case "ALT":
-        return 0xE200;
-      case "LGUI":
-      case "WIN":
-        return 0xE300;
-      case "RCTRL":
-        return 0xE400;
-      case "RSHIFT":
-        return 0xE500;
-      case "RALT":
-        return 0xE600;
-      case "RGUI":
-      case "RWIN":
-        return 0xE700;
-
-      case "HOME":
-        return 0x4A00;
-      case "PGUP":
-      case "PAGEUP":
-        return 0x4B00;
-      case "END":
-        return 0x4D00;
-      case "PGDN":
-      case "PAGEDOWN":
-        return 0x4E00;
-      case "→":
-      case "RIGHT":
-        return 0x4F00;
-      case "←":
-      case "LEFT":
-        return 0x5000;
-      case "↓":
-      case "DOWN":
-        return 0x5100;
-      case "↑":
-      case "UP":
-        return 0x5200;
-
-      // シフト記号（`keycodeToLabel` に合わせた表現）
-      case "!":
-        return 0x1E02;
-      case "@":
-        return 0x1F02;
-      case "#":
-        return 0x2002;
-      case "\$":
-        return 0x2102;
-      case "%":
-        return 0x2202;
-      case "^":
-        return 0x2302;
-      case "&":
-        return 0x2402;
-      case "*":
-        return 0x2502;
-      case "(":
-        return 0x2602;
-      case ")":
-        return 0x2702;
-      case "_":
-        return 0x2D02;
-
-      // Macro
-      case "M1":
-        return 0x6800;
-      case "M2":
-        return 0x6900;
-      case "M3":
-        return 0x6A00;
-      case "M4":
-        return 0x6B00;
-      case "M5":
-        return 0x6C00;
-      case "M6":
-        return 0x6D00;
-      case "M7":
-        return 0x6E00;
-      case "M8":
-        return 0x6F00;
-      case "M9":
-        return 0x7000;
-      case "M10":
-        return 0x7100;
-      case "M11":
-        return 0x7200;
-      case "M12":
-        return 0x7300;
-
-      case "◯":
-        return 0x0100;
-
-      default:
-        return 0x0000; // Unknown
-    }
+    final hit = VialKey.fromLabel(label);
+    return hit?.code ?? 0x0000;
   }
 }
 
