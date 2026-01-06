@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:mc_hub/pages/editor_page/key_data.dart';
-import 'package:mc_hub/pages/editor_page/key_unit.dart';
+import 'package:mc_hub/pages/editor_page/widgets/key_unit.dart';
 
 class KeyboardLayout extends StatelessWidget {
   final List<List<KeyData>> layoutData;

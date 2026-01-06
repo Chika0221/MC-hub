@@ -10,9 +10,9 @@ import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/models/vial_state.dart';
 import 'package:mc_hub/pages/editor_page/key_data.dart';
-import 'package:mc_hub/pages/editor_page/key_palette.dart';
-import 'package:mc_hub/pages/editor_page/keyboard_layout.dart';
 import 'package:mc_hub/pages/editor_page/layout_data.dart';
+import 'package:mc_hub/pages/editor_page/widgets/key_palette.dart';
+import 'package:mc_hub/pages/editor_page/widgets/keyboard_layout.dart';
 import 'package:mc_hub/pages/editor_page/widgets/layer_button.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 

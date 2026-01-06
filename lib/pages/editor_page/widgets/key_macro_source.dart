@@ -14,7 +14,6 @@ class KeyMacroSource extends StatelessWidget {
   Widget build(BuildContext context) {
     const double size = 48.0;
     const double spacing = 8.0;
-    const double expandedWidth = size * 4 + spacing * 3;
 
     return Draggable<String>(
       data: data,
@@ -46,34 +45,13 @@ class KeyMacroSource extends StatelessWidget {
         ),
       ),
       childWhenDragging: Container(
-        width: expandedWidth,
+        width: size,
         height: size,
-        child: Row(
-          children: [
-            Container(
-              width: size,
-              height: size,
-              decoration: BoxDecoration(
-                color: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(6.0),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                width: size,
-                height: size,
-                decoration: BoxDecoration(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.surfaceContainerHighest.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(6.0),
-                ),
-                child: MacroInfomationContainer(),
-              ),
-            ),
-          ],
+        decoration: BoxDecoration(
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceContainerHighest.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(6.0),
         ),
       ),
       child: Container(
@@ -100,20 +78,82 @@ class KeyMacroSource extends StatelessWidget {
   }
 }
 
-class MacroInfomationContainer extends HookConsumerWidget {
-  const MacroInfomationContainer({super.key});
+class MacroSettingMacroSource extends HookConsumerWidget {
+  const MacroSettingMacroSource({
+    super.key,
+    required this.label,
+    required this.data,
+  });
+
+  final String label;
+  final String data;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
+    const double size = 48.0;
+    const double spacing = 8.0;
+    const double expandedWidth = size * 5 + spacing * 4;
+
+    return Container(
+      width: expandedWidth,
+      height: size,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          KeyMacroSource(label: label, data: data),
+          MacroInfomationContainer(height: size, width: expandedWidth - size),
+        ],
+      ),
+    );
+  }
+}
+
+class MacroInfomationContainer extends HookConsumerWidget {
+  const MacroInfomationContainer({
+    super.key,
+    required this.width,
+    required this.height,
+  });
+
+  final double width;
+  final double height;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      width: width,
+      height: height,
       padding: const EdgeInsets.all(4.0),
+      decoration: BoxDecoration(
+        color: Theme.of(
+          context,
+        ).colorScheme.surfaceContainerHighest.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(6.0),
+      ),
       child: Container(
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onSurface,
           borderRadius: BorderRadius.circular(6.0),
-          // border: Border.all(
-          //   color: Theme.of(context).colorScheme.outlineVariant,
-          // ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Icon(
+              Icons.edit,
+              size: 16,
+              color: Theme.of(context).colorScheme.surface,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              "Edit",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.surface,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );
