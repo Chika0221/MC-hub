@@ -6,7 +6,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:mc_hub/pages/editor_page/widgets/key_macro_source.dart';
 import 'package:mc_hub/pages/editor_page/widgets/key_source.dart';
 import 'package:mc_hub/pages/editor_page/widgets/macro_key_palette.dart';
 import 'package:mc_hub/widgets/folder_border_container_tabs.dart';
