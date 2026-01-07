@@ -16,7 +16,6 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.sizeOf(context);
-    const sizePadding = 8.0;
 
     final currentStep = useState(0);
 
