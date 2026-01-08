@@ -1,4 +1,6 @@
 // Package imports:
+
+// Package imports:
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Project imports:
@@ -30,6 +32,6 @@ class AppPreferences {
   }
 
   static Future<String?> getMacro(MonitorKeycodes keycode) async {
-    return (await getPreferences(keycode.name)) as String?;
+    return (await getPreferences(keycode.name));
   }
 }
