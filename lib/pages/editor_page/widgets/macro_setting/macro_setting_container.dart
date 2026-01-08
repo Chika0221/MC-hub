@@ -56,7 +56,7 @@ class MacroSettingContainer extends HookConsumerWidget {
 }
 
 class MacroSelecterContainer extends HookConsumerWidget {
-  MacroSelecterContainer({
+  const MacroSelecterContainer({
     super.key,
     required this.select,
     required this.title,
@@ -65,7 +65,7 @@ class MacroSelecterContainer extends HookConsumerWidget {
 
   final bool select;
   final String title;
-  String? subtitle;
+  final String? subtitle;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

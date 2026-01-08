@@ -8,10 +8,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 
 class CustomFullPageDialog extends HookConsumerWidget {
-  CustomFullPageDialog({super.key, required this.child, this.title});
+  const CustomFullPageDialog({super.key, required this.child, this.title});
 
   final Widget child;
-  String? title;
+  final String? title;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
