@@ -69,6 +69,19 @@ enum VialKey {
   slash(0x3800, '/'),
   caps(0x3900, 'Caps'),
 
+  // Shifted symbols (project-specific representation)
+  exclam(0x1E02, '!'),
+  at(0x1F02, '@'),
+  hash(0x2002, '#'),
+  dollar(0x2102, r'$'),
+  percent(0x2202, '%'),
+  caret(0x2302, '^'),
+  amp(0x2402, '&'),
+  asterisk(0x2502, '*'),
+  lparen(0x2602, '('),
+  rparen(0x2702, ')'),
+  underscore(0x2D02, '_'),
+
   // Function keys
   f1(0x3A00, 'F1'),
   f2(0x3B00, 'F2'),
@@ -103,19 +116,6 @@ enum VialKey {
   down(0x5100, '↓'),
   up(0x5200, '↑'),
 
-  // Shifted symbols (project-specific representation)
-  exclam(0x1E02, '!'),
-  at(0x1F02, '@'),
-  hash(0x2002, '#'),
-  dollar(0x2102, r'$'),
-  percent(0x2202, '%'),
-  caret(0x2302, '^'),
-  amp(0x2402, '&'),
-  asterisk(0x2502, '*'),
-  lparen(0x2602, '('),
-  rparen(0x2702, ')'),
-  underscore(0x2D02, '_'),
-
   // Macros
   m1(0x6800, 'M1'),
   m2(0x6900, 'M2'),
@@ -129,6 +129,11 @@ enum VialKey {
   m10(0x7100, 'M10'),
   m11(0x7200, 'M11'),
   m12(0x7300, 'M12'),
+
+  layer0(0x2052, 'L0'),
+  layer1(0x2152, 'L1'),
+  layer2(0x2252, 'L2'),
+  layer3(0x2352, 'L3'),
 
   circle(0x0100, '◯');
 
@@ -166,6 +171,27 @@ enum VialKey {
 
   static String _normalizeLabel(String label) {
     return label.trim().toUpperCase();
+  }
+
+  static List<String> basicLabels() {
+    return values
+        .sublist(VialKey.a.index, VialKey.m1.index)
+        .map((e) => e.label)
+        .toList();
+  }
+
+  static List<String> macroLabels() {
+    return values
+        .sublist(VialKey.m1.index, VialKey.layer0.index)
+        .map((e) => e.label)
+        .toList();
+  }
+
+  static List<String> layerLabels() {
+    return values
+        .sublist(VialKey.layer0.index, VialKey.circle.index)
+        .map((e) => e.label)
+        .toList();
   }
 }
 
