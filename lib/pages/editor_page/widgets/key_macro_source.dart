@@ -1,10 +1,16 @@
+// Dart imports:
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
+import 'package:mc_hub/infrastructure/macro/run_macro.dart';
+import 'package:mc_hub/models/macro.dart';
 import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_dialog.dart';
 
 class KeyMacroSource extends StatelessWidget {
@@ -128,6 +134,19 @@ class MacroInfomationContainer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final macro = useState<Macro?>(null);
+
+    void getMacroInfo() async {
+      macro.value = await AppPreferences.getMacro(
+        MonitorKeycodes.values.firstWhere((e) => e.shortName == label),
+      );
+    }
+
+    useEffect(() {
+      getMacroInfo();
+      return null;
+    }, [ModalRoute.of(context)?.settings.name]);
+
     return Container(
       width: width,
       height: height,
@@ -154,14 +173,16 @@ class MacroInfomationContainer extends HookConsumerWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               const SizedBox(width: 4),
-              Text(
-                'Macro Info',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.surface,
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  macro.value != null ? macro.value!.name : "未設定",
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.surface,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Spacer(),
               Icon(
                 Icons.arrow_forward_ios_rounded,
                 color: Theme.of(context).colorScheme.surface,

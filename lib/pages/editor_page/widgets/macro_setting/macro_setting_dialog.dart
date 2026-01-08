@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
 import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
+import 'package:mc_hub/models/macro.dart';
 import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_container.dart';
 
 class MacroSettingDialog extends HookConsumerWidget {
@@ -47,10 +48,17 @@ class MacroSettingDialog extends HookConsumerWidget {
                       final docId = await ref
                           .read(firebaseCodesStreamProvider.notifier)
                           .getDocIdByName(codes[index].name);
+
+                      final macro = Macro(
+                        name: codes[index].name,
+                        type: MacroType.infrared,
+                        docId: docId,
+                      );
+
                       if (docId == null) {
                         return;
                       }
-                      await AppPreferences.setMacro(title, docId);
+                      await AppPreferences.setMacro(title, macro);
                     },
                     itemCount: codes.length,
                     builder: (index) {

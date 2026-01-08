@@ -2,7 +2,7 @@
 import 'package:windows_notification/notification_message.dart';
 import 'package:windows_notification/windows_notification.dart';
 
-void send_notification(String title, String content) {
+void sendNotification(String title, String content) {
   final _winNotifyPlugin = WindowsNotification(applicationId: "MC HUB");
 
   final NotificationMessage message = NotificationMessage.fromPluginTemplate(
