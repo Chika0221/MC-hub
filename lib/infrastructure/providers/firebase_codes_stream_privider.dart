@@ -33,7 +33,7 @@ class FirebaseCodesStreamNotifier extends StreamNotifier<List<InfraredCode>> {
     return code;
   }
 
-  deleteCode(InfraredCode code) async {
+  Future<void> deleteCode(InfraredCode code) async {
     final querySnapshot =
         await code_collection.where("name", isEqualTo: code.name).get();
 
