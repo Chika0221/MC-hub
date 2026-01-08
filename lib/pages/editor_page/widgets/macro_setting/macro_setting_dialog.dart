@@ -43,7 +43,14 @@ class MacroSettingDialog extends HookConsumerWidget {
                     selected: codeSelected.value,
                     onAttach: (index) async {
                       codeSelected.value = index;
-                      await AppPreferences.setMacro(title, codes[index].code);
+
+                      final docId = await ref
+                          .read(firebaseCodesStreamProvider.notifier)
+                          .getDocIdByName(codes[index].name);
+                      if (docId == null) {
+                        return;
+                      }
+                      await AppPreferences.setMacro(title, docId);
                     },
                     itemCount: codes.length,
                     builder: (index) {

@@ -1,11 +1,15 @@
 // Project imports:
 
+// Project imports:
+import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
+import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
+
 class MacroService {
   final MonitorKeycodes keycode;
 
   MacroService({required this.keycode});
 
-  void runMacro() {
+  void runMacro() async {
     switch (keycode) {
       case MonitorKeycodes.macro1:
         print("Running Macro 1");
@@ -15,8 +19,16 @@ class MacroService {
 
         // print("Hit: 0x${hit!.code.toRadixString(16)}");
         // print("Semd: 0x${sendCode.toRadixString(16)}");
+        final String docId = await AppPreferences.getMacro(
+          MonitorKeycodes.macro1,
+        );
 
-        // Add your macro logic here
+        final InCode = await FirebaseCodesStreamNotifier().getCode(docId);
+
+        final updateCode = InCode.copyWith(state: true);
+
+        FirebaseCodesStreamNotifier().updateCodes(updateCode);
+
         break;
       case MonitorKeycodes.macro2:
         print("Running Macro 2");

@@ -22,6 +22,12 @@ class FirebaseCodesStreamNotifier extends StreamNotifier<List<InfraredCode>> {
     await querySnapshot.docs.first.reference.update(code.toJson());
   }
 
+  Future<InfraredCode> getCode(String docId) async {
+    final docSnapshot = await code_collection.doc(docId).get();
+    final code = InfraredCode.fromJson(docSnapshot.data()!);
+    return code;
+  }
+
   deleteCode(InfraredCode code) async {
     final querySnapshot =
         await code_collection.where("name", isEqualTo: code.name).get();

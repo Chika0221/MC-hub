@@ -25,7 +25,7 @@ class AppPreferences {
     print("Set Macro: ${key.name} -> $value");
   }
 
-  static Future<String?> getMacro(MonitorKeycodes keycode) async {
+  static Future<String> getMacro(MonitorKeycodes keycode) async {
     return await getPreferences(keycode.name);
   }
 }
