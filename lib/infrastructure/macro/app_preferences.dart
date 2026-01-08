@@ -16,13 +16,17 @@ class AppPreferences {
   }
 
   static Future<void> setMacro(String macroShortName, String value) async {
-    final key = MonitorKeycodes.values.firstWhere(
-      (e) => e.shortName == macroShortName,
-    );
+    try {
+      final key = MonitorKeycodes.values.firstWhere(
+        (e) => e.shortName == macroShortName,
+      );
 
-    await setPreferences(key.name, value);
+      await setPreferences(key.name, value);
 
-    print("Set Macro: ${key.name} -> $value");
+      print("Set Macro: ${key.name} -> $value");
+    } on StateError {
+      print("Warning: Macro with short name '$macroShortName' not found.");
+    }
   }
 
   static Future<String> getMacro(MonitorKeycodes keycode) async {
