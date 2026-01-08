@@ -19,15 +19,22 @@ class MacroService {
 
         // print("Hit: 0x${hit!.code.toRadixString(16)}");
         // print("Semd: 0x${sendCode.toRadixString(16)}");
-        final String docId = await AppPreferences.getMacro(
+        final String? docId = await AppPreferences.getMacro(
           MonitorKeycodes.macro1,
         );
 
-        final InCode = await FirebaseCodesStreamNotifier().getCode(docId);
+        if (docId == null) {
+          print("Macro for ${MonitorKeycodes.macro1.name} is not set.");
+          break;
+        }
 
-        final updateCode = InCode.copyWith(state: true);
+        // If using Riverpod, you'll need access to the provider's notifier instance.
+        final firebaseNotifier = FirebaseCodesStreamNotifier();
+        final inCode = await firebaseNotifier.getCode(docId);
 
-        FirebaseCodesStreamNotifier().updateCodes(updateCode);
+        final updateCode = inCode.copyWith(state: true);
+
+        await firebaseNotifier.updateCodes(updateCode);
 
         break;
       case MonitorKeycodes.macro2:
