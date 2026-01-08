@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LayerButton extends HookConsumerWidget {
-  const LayerButton({super.key, required this.icon, required this.onPressed});
+  const LayerButton({super.key, required this.child, required this.onPressed});
 
-  final Icon icon;
+  final Widget child;
   final void Function() onPressed;
 
   @override
@@ -17,7 +17,7 @@ class LayerButton extends HookConsumerWidget {
         backgroundColor: Theme.of(context).colorScheme.tertiary,
         foregroundColor: Theme.of(context).colorScheme.onTertiary,
       ),
-      icon: icon,
+      icon: child,
       onPressed: onPressed,
     );
   }

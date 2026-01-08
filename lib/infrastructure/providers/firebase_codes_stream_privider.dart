@@ -22,11 +22,33 @@ class FirebaseCodesStreamNotifier extends StreamNotifier<List<InfraredCode>> {
     await querySnapshot.docs.first.reference.update(code.toJson());
   }
 
-  deleteCode(InfraredCode code) async {
+  Future<InfraredCode> getCode(String docId) async {
+    final docSnapshot = await code_collection.doc(docId).get();
+
+    if (!docSnapshot.exists || docSnapshot.data() == null) {
+      throw Exception('Document with ID $docId does not exist.');
+    }
+
+    final code = InfraredCode.fromJson(docSnapshot.data()!);
+    return code;
+  }
+
+  Future<void> deleteCode(InfraredCode code) async {
     final querySnapshot =
         await code_collection.where("name", isEqualTo: code.name).get();
 
     await querySnapshot.docs.first.reference.delete();
+  }
+
+  Future<String?> getDocIdByName(String name) async {
+    final querySnapshot =
+        await code_collection.where("name", isEqualTo: name).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      final docId = querySnapshot.docs.first.id;
+      return docId;
+    }
+    return null;
   }
 }
 

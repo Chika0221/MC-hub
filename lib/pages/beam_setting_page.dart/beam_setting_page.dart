@@ -56,11 +56,6 @@ class BeamSettingPage extends HookConsumerWidget {
   }
 }
 
-
-
-
-
-
 class BeamSendingContainer extends HookConsumerWidget {
   const BeamSendingContainer({super.key});
   @override
@@ -73,7 +68,13 @@ class BeamSendingContainer extends HookConsumerWidget {
           backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           title: "コード一覧",
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: () => showNewCodeRegisterDialog(context),
+            onPressed:
+                () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return NewCodeRegisterDialog();
+                  },
+                ),
             label: Text("登録"),
             icon: Icon(Icons.add),
             elevation: 0,

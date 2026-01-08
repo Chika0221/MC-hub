@@ -6,8 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:mc_hub/pages/editor_page/widgets/key_macro_source.dart';
 import 'package:mc_hub/pages/editor_page/widgets/key_source.dart';
+import 'package:mc_hub/pages/editor_page/widgets/macro_key_palette.dart';
 import 'package:mc_hub/widgets/folder_border_container_tabs.dart';
 
 class KeyPalette extends HookConsumerWidget {
@@ -60,7 +60,7 @@ class KeyPalette extends HookConsumerWidget {
             ...functionKeys,
           ]),
           _buildGrid(["VolUp", "VolDn", "Mute", "Play", "Next", "Prev"]),
-          _buildMacroGrid(macroKeys),
+          MacroKeyPalette(items: macroKeys),
           Center(child: Text("Layers coming soon")),
         ],
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
@@ -86,17 +86,17 @@ class KeyPalette extends HookConsumerWidget {
     );
   }
 
-  Widget _buildMacroGrid(List<String> items) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
-      child: Wrap(
-        spacing: 8.0,
-        runSpacing: 8.0,
-        children:
-            items.map((label) {
-              return MacroSettingMacroSource(label: label, data: label);
-            }).toList(),
-      ),
-    );
-  }
+  // Widget _buildMacroGrid(List<String> items) {
+  //   return SingleChildScrollView(
+  //     padding: const EdgeInsets.all(16.0),
+  //     child: Wrap(
+  //       spacing: 8.0,
+  //       runSpacing: 8.0,
+  //       children:
+  //           items.map((label) {
+  //             return MacroSettingMacroSource(label: label, data: label);
+  //           }).toList(),
+  //     ),
+  //   );
+  // }
 }

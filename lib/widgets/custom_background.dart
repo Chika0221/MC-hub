@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomBackground extends HookConsumerWidget {
-  CustomBackground({
+  const CustomBackground({
     super.key,
     required this.backGroundWidget,
     required this.foragroundWidget,
@@ -14,7 +14,7 @@ class CustomBackground extends HookConsumerWidget {
 
   final Widget backGroundWidget;
   final Widget foragroundWidget;
-  bool byRail;
+  final bool byRail;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

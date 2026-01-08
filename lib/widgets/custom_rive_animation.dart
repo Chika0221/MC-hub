@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rive/rive.dart';
 
 class CustomRiveAnimation extends HookConsumerWidget {
-  CustomRiveAnimation({
+  const CustomRiveAnimation({
     super.key,
     required this.size,
     required this.fileLoader,
@@ -17,7 +17,7 @@ class CustomRiveAnimation extends HookConsumerWidget {
   final Size size;
   final FileLoader fileLoader;
   final Fit fit;
-  String? artBoardName;
+  final String? artBoardName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

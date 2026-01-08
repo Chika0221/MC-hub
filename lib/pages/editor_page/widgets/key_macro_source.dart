@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+// Project imports:
+import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_dialog.dart';
+
 class KeyMacroSource extends StatelessWidget {
   final String label;
   final String data;
@@ -13,7 +16,6 @@ class KeyMacroSource extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double size = 48.0;
-    const double spacing = 8.0;
 
     return Draggable<String>(
       data: data,
@@ -101,7 +103,11 @@ class MacroSettingMacroSource extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           KeyMacroSource(label: label, data: data),
-          MacroInfomationContainer(height: size, width: expandedWidth - size),
+          MacroInfomationContainer(
+            height: size,
+            width: expandedWidth - size,
+            label: label,
+          ),
         ],
       ),
     );
@@ -113,10 +119,12 @@ class MacroInfomationContainer extends HookConsumerWidget {
     super.key,
     required this.width,
     required this.height,
+    required this.label,
   });
 
   final double width;
   final double height;
+  final String label;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -130,30 +138,37 @@ class MacroInfomationContainer extends HookConsumerWidget {
         ).colorScheme.surfaceContainerHighest.withOpacity(0.5),
         borderRadius: BorderRadius.circular(6.0),
       ),
-      child: Container(
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSurface,
-          borderRadius: BorderRadius.circular(6.0),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Icon(
-              Icons.edit,
-              size: 16,
-              color: Theme.of(context).colorScheme.surface,
+      child: InkWell(
+        onTap:
+            () => showDialog(
+              context: context,
+              builder: (context) => MacroSettingDialog(title: label),
             ),
-            const SizedBox(width: 4),
-            Text(
-              "Edit",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.surface,
-                fontWeight: FontWeight.bold,
+        child: Container(
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onSurface,
+            borderRadius: BorderRadius.circular(6.0),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const SizedBox(width: 4),
+              Text(
+                'Macro Info',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.surface,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
+              Spacer(),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Theme.of(context).colorScheme.surface,
+              ),
+              const SizedBox(width: 4),
+            ],
+          ),
         ),
       ),
     );

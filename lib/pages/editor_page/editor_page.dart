@@ -104,7 +104,12 @@ class EditorPage extends HookConsumerWidget {
                       spacing: 8,
                       children: List.generate(4, (index) {
                         return LayerButton(
-                          icon: Icon(Icons.add),
+                          child: Text(
+                            index.toString(),
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.onTertiary,
+                            ),
+                          ),
                           onPressed: () {
                             selectedLayer.value = index;
                           },
