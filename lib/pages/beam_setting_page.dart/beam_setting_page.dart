@@ -27,7 +27,7 @@ class BeamSettingPage extends HookConsumerWidget {
           "assets/animations/background.riv",
           riveFactory: Factory.rive,
         ),
-        fit: Fit.fitWidth,
+        fit: Fit.scaleDown,
       ),
       foragroundWidget: Scaffold(
         backgroundColor: Colors.transparent,
