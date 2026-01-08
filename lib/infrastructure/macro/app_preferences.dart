@@ -11,7 +11,7 @@ class AppPreferences {
     await asyncPrefs.setString(key, value);
   }
 
-  static Future<dynamic> getPreferences(String key) async {
+  static Future<String?> getPreferences(String key) async {
     return await asyncPrefs.getString(key);
   }
 
