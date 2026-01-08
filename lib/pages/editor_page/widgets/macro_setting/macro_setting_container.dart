@@ -17,8 +17,8 @@ class MacroSettingContainer extends HookConsumerWidget {
   final String title;
   final int? selected;
   final int itemCount;
+  final void Function(int index) onAttach;
   final Widget Function(int index) builder;
-  final void Function(String docId, int index) onAttach;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,7 +42,7 @@ class MacroSettingContainer extends HookConsumerWidget {
                 runSpacing: 8.0,
                 children: List.generate(itemCount, (index) {
                   return InkWell(
-                    onTap: () => onAttach("docId_$index", index),
+                    onTap: () => onAttach(index),
                     child: builder(index),
                   );
                 }),

@@ -6,6 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
+import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
 import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_container.dart';
 
 class MacroSettingDialog extends HookConsumerWidget {
@@ -18,6 +20,8 @@ class MacroSettingDialog extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
 
     final codeSelected = useState<int?>(null);
+
+    final codesStream = ref.watch(firebaseCodesStreamProvider);
 
     return AlertDialog(
       title: Text(title),
@@ -32,16 +36,31 @@ class MacroSettingDialog extends HookConsumerWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              MacroSettingContainer(
-                title: "スマートリモコン操作",
-                selected: codeSelected.value,
-                onAttach: (docId, index) => codeSelected.value = index,
-                itemCount: 20,
-                builder: (index) {
-                  return MacroSelecterContainer(
-                    select: codeSelected.value == index,
-                    title: "aaaa",
+              codesStream.when(
+                data: (codes) {
+                  return MacroSettingContainer(
+                    title: "スマートリモコン操作",
+                    selected: codeSelected.value,
+                    onAttach: (index) async {
+                      codeSelected.value = index;
+                      await AppPreferences.setMacro(title, codes[index].code);
+                    },
+                    itemCount: codes.length,
+                    builder: (index) {
+                      final code = codes[index];
+                      return MacroSelecterContainer(
+                        select: codeSelected.value == index,
+                        title: code.name,
+                        subtitle: code.code,
+                      );
+                    },
                   );
+                },
+                error: (error, stackTrace) {
+                  return Text("エラーが発生しました: $error");
+                },
+                loading: () {
+                  return const CircularProgressIndicator();
                 },
               ),
             ],

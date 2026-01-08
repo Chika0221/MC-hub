@@ -1,6 +1,5 @@
 // Project imports:
 
-
 class MacroService {
   final MonitorKeycodes keycode;
 
@@ -68,19 +67,20 @@ class MacroService {
 }
 
 enum MonitorKeycodes {
-  macro1(0x7C),
-  macro2(0x7D),
-  macro3(0x7E),
-  macro4(0x7F),
-  macro5(0x80),
-  macro6(0x81),
-  macro7(0x82),
-  macro8(0x83),
-  macro9(0x84),
-  macro10(0x85),
-  macro11(0x86),
-  macro12(0x87);
+  macro1(0x7C, "M1"),
+  macro2(0x7D, "M2"),
+  macro3(0x7E, "M3"),
+  macro4(0x7F, "M4"),
+  macro5(0x80, "M5"),
+  macro6(0x81, "M6"),
+  macro7(0x82, "M7"),
+  macro8(0x83, "M8"),
+  macro9(0x84, "M9"),
+  macro10(0x85, "M10"),
+  macro11(0x86, "M11"),
+  macro12(0x87, "M12");
 
   final int vkCode;
-  const MonitorKeycodes(this.vkCode);
+  final String shortName;
+  const MonitorKeycodes(this.vkCode, this.shortName);
 }
