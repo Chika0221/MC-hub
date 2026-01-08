@@ -29,7 +29,7 @@ class AppPreferences {
     }
   }
 
-  static Future<String> getMacro(MonitorKeycodes keycode) async {
-    return await getPreferences(keycode.name);
+  static Future<String?> getMacro(MonitorKeycodes keycode) async {
+    return (await getPreferences(keycode.name)) as String?;
   }
 }

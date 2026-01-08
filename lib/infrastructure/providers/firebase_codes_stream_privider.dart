@@ -24,6 +24,11 @@ class FirebaseCodesStreamNotifier extends StreamNotifier<List<InfraredCode>> {
 
   Future<InfraredCode> getCode(String docId) async {
     final docSnapshot = await code_collection.doc(docId).get();
+
+    if (!docSnapshot.exists || docSnapshot.data() == null) {
+      throw Exception('Document with ID $docId does not exist.');
+    }
+
     final code = InfraredCode.fromJson(docSnapshot.data()!);
     return code;
   }

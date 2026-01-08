@@ -34,7 +34,7 @@ class MacroService {
 
         final updateCode = inCode.copyWith(state: true);
 
-        await firebaseNotifier.updateCodes(updateCode);
+        firebaseNotifier.updateCodes(updateCode);
 
         break;
       case MonitorKeycodes.macro2:
