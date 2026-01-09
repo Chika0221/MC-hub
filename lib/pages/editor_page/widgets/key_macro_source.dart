@@ -10,6 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
 import 'package:mc_hub/infrastructure/macro/run_macro.dart';
+import 'package:mc_hub/infrastructure/providers/macros_provider.dart';
 import 'package:mc_hub/models/macro.dart';
 import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_dialog.dart';
 
@@ -134,18 +135,11 @@ class MacroInfomationContainer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final macro = useState<Macro?>(null);
+    final int index = MonitorKeycodes.values.indexWhere(
+      (e) => e.shortName == label,
+    );
 
-    void getMacroInfo() async {
-      macro.value = await AppPreferences.getMacro(
-        MonitorKeycodes.values.firstWhere((e) => e.shortName == label),
-      );
-    }
-
-    useEffect(() {
-      getMacroInfo();
-      return null;
-    }, [ModalRoute.of(context)?.settings.name]);
+    final macrosAsync = ref.watch(MacrosProvider);
 
     return Container(
       width: width,
@@ -174,13 +168,31 @@ class MacroInfomationContainer extends HookConsumerWidget {
             children: [
               const SizedBox(width: 4),
               Expanded(
-                child: Text(
-                  macro.value != null ? macro.value!.name : "未設定",
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: macrosAsync.when(
+                  data: (macros) {
+                    final macro = macros[index];
+                    return Text(
+                      macro != null ? macro.name : "未設定",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.surface,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
+                  loading:
+                      () => Center(child: const CircularProgressIndicator()),
+                  error: (error, stackTrace) {
+                    print(error.toString());
+                    return Text(
+                      error.toString(),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.error,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
                 ),
               ),
               Icon(
