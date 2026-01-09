@@ -4,14 +4,11 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
 import 'package:mc_hub/infrastructure/macro/run_macro.dart';
 import 'package:mc_hub/infrastructure/providers/macros_provider.dart';
-import 'package:mc_hub/models/macro.dart';
 import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_dialog.dart';
 
 class KeyMacroSource extends StatelessWidget {
