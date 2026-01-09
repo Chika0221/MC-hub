@@ -85,8 +85,8 @@ class BeamSendingContainer extends HookConsumerWidget {
             itemBuilder: (context, index) {
               return CodeContainer(
                 code: infraredCodes[index],
-                onPressed: () {
-                  ref
+                onPressed: () async {
+                  await ref
                       .read(firebaseCodesStreamProvider.notifier)
                       .updateCodes(infraredCodes[index].copyWith(state: true));
                 },

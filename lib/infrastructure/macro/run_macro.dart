@@ -22,7 +22,7 @@ class MacroService {
 
           final updateCode = inCode.copyWith(state: true);
 
-          firebaseNotifier.updateCodes(updateCode);
+          await firebaseNotifier.updateCodes(updateCode);
 
         case MacroType.combo:
           print("Executing Combo Macro: ${macro.name}");

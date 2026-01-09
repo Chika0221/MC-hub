@@ -15,7 +15,7 @@ class FirebaseCodesStreamNotifier extends StreamNotifier<List<InfraredCode>> {
     });
   }
 
-  void updateCodes(InfraredCode code) async {
+  Future<void> updateCodes(InfraredCode code) async {
     final querySnapshot =
         await code_collection.where("name", isEqualTo: code.name).get();
 
