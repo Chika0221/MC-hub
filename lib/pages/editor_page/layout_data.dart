@@ -1,0 +1,81 @@
+// Project imports:
+import 'package:mc_hub/pages/editor_page/key_data.dart';
+
+final List<List<KeyData>> keyboardLayout60 = [
+  // Row 1
+  [
+    KeyData(id: "k41", defaultLabel: "Esc"),
+    KeyData(id: "k30", defaultLabel: "1"),
+    KeyData(id: "k31", defaultLabel: "2"),
+    KeyData(id: "k32", defaultLabel: "3"),
+    KeyData(id: "k33", defaultLabel: "4"),
+    KeyData(id: "k34", defaultLabel: "5"),
+    KeyData(id: "k35", defaultLabel: "6"),
+    KeyData(id: "k36", defaultLabel: "7"),
+    KeyData(id: "k37", defaultLabel: "8"),
+    KeyData(id: "k38", defaultLabel: "9"),
+    KeyData(id: "k39", defaultLabel: "0"),
+    KeyData(id: "k45", defaultLabel: "-"),
+    KeyData(id: "k46", defaultLabel: "="),
+    KeyData(id: "k42", defaultLabel: "Bksp", width: 2.0),
+  ],
+  // Row 2
+  [
+    KeyData(id: "k43", defaultLabel: "Tab", width: 1.5),
+    KeyData(id: "k20", defaultLabel: "Q"),
+    KeyData(id: "k26", defaultLabel: "W"),
+    KeyData(id: "k08", defaultLabel: "E"),
+    KeyData(id: "k21", defaultLabel: "R"),
+    KeyData(id: "k23", defaultLabel: "T"),
+    KeyData(id: "k28", defaultLabel: "Y"),
+    KeyData(id: "k24", defaultLabel: "U"),
+    KeyData(id: "k12", defaultLabel: "I"),
+    KeyData(id: "k18", defaultLabel: "O"),
+    KeyData(id: "k19", defaultLabel: "P"),
+    KeyData(id: "k47", defaultLabel: "["),
+    KeyData(id: "k48", defaultLabel: "]"),
+    KeyData(id: "k49", defaultLabel: "\\", width: 1.5),
+  ],
+  // Row 3
+  [
+    KeyData(id: "k57", defaultLabel: "Caps", width: 1.75),
+    KeyData(id: "k04", defaultLabel: "A"),
+    KeyData(id: "k22", defaultLabel: "S"),
+    KeyData(id: "k07", defaultLabel: "D"),
+    KeyData(id: "k09", defaultLabel: "F"),
+    KeyData(id: "k10", defaultLabel: "G"),
+    KeyData(id: "k11", defaultLabel: "H"),
+    KeyData(id: "k13", defaultLabel: "J"),
+    KeyData(id: "k14", defaultLabel: "K"),
+    KeyData(id: "k15", defaultLabel: "L"),
+    KeyData(id: "k51", defaultLabel: ";"),
+    KeyData(id: "k52", defaultLabel: "'"),
+    KeyData(id: "k40", defaultLabel: "Enter", width: 2.25),
+  ],
+  // Row 4
+  [
+    KeyData(id: "k225", defaultLabel: "Shift", width: 2.25),
+    KeyData(id: "k29", defaultLabel: "Z"),
+    KeyData(id: "k27", defaultLabel: "X"),
+    KeyData(id: "k06", defaultLabel: "C"),
+    KeyData(id: "k25", defaultLabel: "V"),
+    KeyData(id: "k05", defaultLabel: "B"),
+    KeyData(id: "k17", defaultLabel: "N"),
+    KeyData(id: "k16", defaultLabel: "M"),
+    KeyData(id: "k54", defaultLabel: ","),
+    KeyData(id: "k55", defaultLabel: "."),
+    KeyData(id: "k56", defaultLabel: "/"),
+    KeyData(id: "k229", defaultLabel: "Shift", width: 2.75),
+  ],
+  // Row 5
+  [
+    KeyData(id: "k224", defaultLabel: "Ctrl", width: 1.25),
+    KeyData(id: "k227", defaultLabel: "Win", width: 1.25),
+    KeyData(id: "k226", defaultLabel: "Alt", width: 1.25),
+    KeyData(id: "k44", defaultLabel: "Space", width: 6.25),
+    KeyData(id: "k230", defaultLabel: "Alt", width: 1.25),
+    KeyData(id: "k231", defaultLabel: "Win", width: 1.25),
+    KeyData(id: "k101", defaultLabel: "Menu", width: 1.25),
+    KeyData(id: "k228", defaultLabel: "Ctrl", width: 1.25),
+  ],
+];

@@ -1,0 +1,99 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+// Project imports:
+import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
+import 'package:mc_hub/models/infrared_code.dart';
+
+class CodeContainer extends HookConsumerWidget {
+  const CodeContainer({super.key, required this.code, required this.onPressed});
+
+  final InfraredCode code;
+  final void Function() onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
+      decoration: BoxDecoration(
+        color:
+            (code.state)
+                ? Theme.of(context).colorScheme.secondary
+                : Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(code.name),
+                      content: Text("${code.code}"),
+                      actions: [
+                        FilledButton.tonal(
+                          onPressed: () {
+                            ref
+                                .read(firebaseCodesStreamProvider.notifier)
+                                .deleteCode(code);
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("削除"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("閉じる"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    code.name,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color:
+                          (code.state)
+                              ? Theme.of(context).colorScheme.onSecondary
+                              : Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  Text(
+                    code.code,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color:
+                          (code.state)
+                              ? Theme.of(context).colorScheme.onSecondary
+                              : Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(width: 16),
+          IconButton.filled(
+            icon: Icon(Icons.play_arrow_rounded),
+            onPressed: onPressed,
+          ),
+        ],
+      ),
+    );
+  }
+}
