@@ -37,7 +37,7 @@ class MacroService {
         case MacroType.openApp:
           final result = await Process.run("powershell", [
             "start",
-            macro.appPath!,
+            "\"${macro.appPath!}\"",
           ], runInShell: true);
 
           // "C:\Program Files\Google\Chrome\Application\chrome.exe",

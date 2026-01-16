@@ -13,6 +13,7 @@ import 'package:rive/rive.dart';
 // Project imports:
 import 'package:mc_hub/firebase_options.dart';
 import 'package:mc_hub/infrastructure/hooks/keyboard_hooks.dart';
+import 'package:mc_hub/infrastructure/hooks/virtual_key_codes.dart';
 import 'package:mc_hub/infrastructure/macro/run_macro.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
 import 'package:mc_hub/pages/home_page/home_page.dart';
@@ -47,7 +48,7 @@ class MyApp extends HookConsumerWidget {
               "0x${event.vkCode.toRadixString(16).padLeft(2, '0').toUpperCase()} SCAN: ${event.scanCode}";
           lastLog.value = event.vkCode;
 
-          print(log);
+          print(VirtualKeyCode.tryFromVkCode(event.vkCode)?.name);
 
           if (MonitorKeycodes.macro1.vkCode <= lastLog.value &&
               lastLog.value <= MonitorKeycodes.macro12.vkCode) {

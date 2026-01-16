@@ -91,6 +91,7 @@ class MacroSelecterContainer extends HookConsumerWidget {
               children: [
                 Text(
                   title,
+                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color:
                         (select)
