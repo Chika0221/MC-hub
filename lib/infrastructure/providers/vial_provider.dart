@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/hid/list_of_mydevices.dart';
-import 'package:mc_hub/infrastructure/hid/vial_service%20copy.dart';
+import 'package:mc_hub/infrastructure/hid/vial_service.dart';
 import 'package:mc_hub/models/vial_state.dart';
 
 enum VialKey {
