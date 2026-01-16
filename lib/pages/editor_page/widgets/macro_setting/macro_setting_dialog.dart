@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
 import 'package:mc_hub/infrastructure/providers/macros_provider.dart';
+import 'package:mc_hub/infrastructure/providers/open_app_provider.dart';
 import 'package:mc_hub/models/macro.dart';
 import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_container.dart';
 
@@ -21,8 +22,30 @@ class MacroSettingDialog extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
 
     final codeSelected = useState<int?>(null);
+    final appSelected = useState<int?>(null);
+    final comboSelected = useState<int?>(null);
+
+    void selectCode(int index) {
+      codeSelected.value = index;
+      appSelected.value = null;
+      comboSelected.value = null;
+    }
+
+    void selectApp(int index) {
+      appSelected.value = index;
+      codeSelected.value = null;
+      comboSelected.value = null;
+    }
+
+    void selectCombo(int index) {
+      comboSelected.value = index;
+      codeSelected.value = null;
+      appSelected.value = null;
+    }
 
     final codesStream = ref.watch(firebaseCodesStreamProvider);
+
+    final runAppFuture = ref.watch(openAppProvider);
 
     return AlertDialog(
       title: Text(title),
@@ -43,7 +66,7 @@ class MacroSettingDialog extends HookConsumerWidget {
                     title: "スマートリモコン操作",
                     selected: codeSelected.value,
                     onAttach: (index) async {
-                      codeSelected.value = index;
+                      selectCode(index);
 
                       final docId = await ref
                           .read(firebaseCodesStreamProvider.notifier)
@@ -67,6 +90,35 @@ class MacroSettingDialog extends HookConsumerWidget {
                         select: codeSelected.value == index,
                         title: code.name,
                         subtitle: code.code,
+                      );
+                    },
+                  );
+                },
+                error: (error, stackTrace) {
+                  return Text("エラーが発生しました: $error");
+                },
+                loading: () {
+                  return const CircularProgressIndicator();
+                },
+              ),
+              runAppFuture.when(
+                data: (apps) {
+                  return MacroSettingContainer(
+                    title: "アプリ実行",
+                    selected: appSelected.value,
+                    onAttach: (index) {
+                      selectApp(index);
+                      ref
+                          .read(MacrosProvider.notifier)
+                          .setMacro(title, apps[index]);
+                    },
+                    itemCount: apps.length,
+                    builder: (index) {
+                      final app = apps[index];
+                      return MacroSelecterContainer(
+                        select: appSelected.value == index,
+                        title: app.name,
+                        subtitle: app.appPath,
                       );
                     },
                   );

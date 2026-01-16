@@ -1,5 +1,8 @@
 // Project imports:
 
+// Dart imports:
+import 'dart:io';
+
 // Project imports:
 import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
 import 'package:mc_hub/infrastructure/notification/send_notification.dart';
@@ -32,14 +35,25 @@ class MacroService {
           );
           break;
         case MacroType.openApp:
-          final appPath = macro.appPath;
-          if (appPath != null) {
-            print("Opening Application at path: $appPath");
-            sendNotification(
-              "Macro Executed",
-              "Opened Application at path: $appPath",
-            );
-          }
+          final result = await Process.run("powershell", [
+            "start",
+            macro.appPath!,
+          ], runInShell: true);
+
+          // "C:\Program Files\Google\Chrome\Application\chrome.exe",
+
+          print('Exit Code: ${result.exitCode}');
+          print('stderr: ${result.stderr}');
+          print('stdout: ${result.stdout}');
+
+          // final appPath = macro.appPath;
+          // if (appPath != null) {
+          //   print("Opening Application at path: $appPath");
+          //   sendNotification(
+          //     "Macro Executed",
+          //     "Opened Application at path: $appPath",
+          //   );
+          // }
           break;
       }
 
