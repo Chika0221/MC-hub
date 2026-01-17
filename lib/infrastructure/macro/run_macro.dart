@@ -62,6 +62,8 @@ class MacroService {
         case MacroType.aiTextConvert:
           final aiPrompt = macro.aiPrompt;
           if (aiPrompt != null) {
+            sendNotification("マクロ実行中", "");
+
             KeySender.sendMultiKeyPush([
               VirtualKeyCode.leftControl.vkCode,
               VirtualKeyCode.keyC.vkCode,

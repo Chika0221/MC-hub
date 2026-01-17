@@ -15,7 +15,7 @@ class AiTextConvertPromptProfile {
     String input,
   ) async {
     final String tomlString = await rootBundle.loadString(
-      'assets/prompts/ai_text_convert_prompt.toml',
+      'assets/prompts/ai_text_convert.toml',
     );
 
     final Map<String, dynamic> promptConfig =

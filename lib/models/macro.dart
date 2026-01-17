@@ -18,4 +18,12 @@ class Macro with _$Macro {
   factory Macro.fromJson(Map<String, dynamic> json) => _$MacroFromJson(json);
 }
 
-enum MacroType { infrared, combo, openApp, aiTextConvert }
+enum MacroType {
+  infrared(displayName: "Beam"),
+  combo(displayName: "Com"),
+  openApp(displayName: "App"),
+  aiTextConvert(displayName: "AI");
+
+  final String displayName;
+  const MacroType({required this.displayName});
+}
