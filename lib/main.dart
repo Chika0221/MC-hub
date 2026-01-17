@@ -48,7 +48,8 @@ class MyApp extends HookConsumerWidget {
               "0x${event.vkCode.toRadixString(16).padLeft(2, '0').toUpperCase()} SCAN: ${event.scanCode}";
           lastLog.value = event.vkCode;
 
-          print(VirtualKeyCode.tryFromVkCode(event.vkCode)?.name);
+          // print(VirtualKeyCode.tryFromVkCode(event.vkCode)?.name);
+          print(log);
 
           if (MonitorKeycodes.macro1.vkCode <= lastLog.value &&
               lastLog.value <= MonitorKeycodes.macro12.vkCode) {
