@@ -46,7 +46,55 @@ class EditorPage extends HookConsumerWidget {
   List<List<KeyData>> setLayout(VialState vialState, int index) {
     List<List<KeyData>> activeLayout = [];
 
-    if (vialState.matrix != null && vialState.matrix!.isNotEmpty) {
+    final deviceDef = myDevices.firstWhere(
+      (d) => d.name == vialState.deviceName,
+      orElse: () => myDevices.first,
+    );
+
+    final visualLayoutDef =
+        vialState.deviceName != null
+            ? deviceVisualLayouts[vialState.deviceName]
+            : null;
+
+    if (visualLayoutDef != null &&
+        vialState.matrix != null &&
+        vialState.matrix!.isNotEmpty) {
+      final matrix = vialState.matrix!;
+      final safeLayerIndex = index.clamp(0, matrix.length - 1);
+      final layer = matrix[safeLayerIndex];
+
+      for (final rowIds in visualLayoutDef) {
+        final List<KeyData> row = [];
+        for (final id in rowIds) {
+          final parts = id.split(',');
+          if (parts.length != 2) continue;
+          final r = int.tryParse(parts[0]);
+          final c = int.tryParse(parts[1]);
+
+          if (r != null &&
+              c != null &&
+              r < layer.length &&
+              c < layer[r].length) {
+            final keycode = layer[r][c];
+
+            try {
+              final keyDef = deviceDef.keys.firstWhere(
+                (k) => k.id == id,
+                orElse: () => KeyData(id: id, defaultLabel: "?"),
+              );
+
+              final keydata = KeyData(
+                id: id,
+                defaultLabel: VialNotifier.keycodeToLabel(keycode),
+                width: keyDef.width,
+              );
+              row.add(keydata);
+            } catch (e) {}
+          }
+        }
+        activeLayout.add(row);
+      }
+    } else if (vialState.matrix != null && vialState.matrix!.isNotEmpty) {
       final matrix = vialState.matrix!;
       final safeLayerIndex = index.clamp(0, matrix.length - 1);
       final layer0 = matrix[safeLayerIndex];
@@ -60,7 +108,7 @@ class EditorPage extends HookConsumerWidget {
               id: "$r,$c",
               defaultLabel: VialNotifier.keycodeToLabel(keycode),
               width:
-                  myDevices.first.keys
+                  deviceDef.keys
                       .where((key) => key.id == "$r,$c")
                       .first
                       .width,
