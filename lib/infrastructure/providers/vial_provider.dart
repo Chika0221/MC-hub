@@ -277,14 +277,21 @@ class VialNotifier extends Notifier<VialState> {
 
   Future<void> connect(HidDevice selectDevice) async {
     state = state.copyWith(statusMessage: "Connecting...");
-    final deviceDef = myDevices.first;
+
+    final deviceDef = myDevices.firstWhere(
+      (d) =>
+          d.vendorId == selectDevice.vendorId &&
+          d.productId == selectDevice.productId,
+      orElse: () => myDevices.first,
+    );
+
     final success = await _service.connect(selectDevice);
 
     if (success) {
       state = state.copyWith(
         isConnected: true,
         // deviceName: _service.productName ?? deviceDef.name,
-        deviceName: myDevices.first.name,
+        deviceName: deviceDef.name,
         statusMessage: "Connected to ${deviceDef.name}",
       );
 
@@ -371,7 +378,10 @@ class VialNotifier extends Notifier<VialState> {
 
     if (row != -1 && col != -1) {
       // Get dimensions from config
-      final deviceDef = myDevices.first;
+      final deviceDef = myDevices.firstWhere(
+        (d) => d.name == state.deviceName,
+        orElse: () => myDevices.first,
+      );
       final config = deviceLayouts[deviceDef.name];
       final rows = config?.rows ?? 4; // Default fallback
       final cols = config?.cols ?? 14;

@@ -46,8 +46,15 @@ class EditorPage extends HookConsumerWidget {
   List<List<KeyData>> setLayout(VialState vialState, int index) {
     List<List<KeyData>> activeLayout = [];
 
+    final deviceDef = myDevices.firstWhere(
+      (d) => d.name == vialState.deviceName,
+      orElse: () => myDevices.first,
+    );
+
     final visualLayoutDef =
-        deviceVisualLayouts[vialState.deviceName ?? "MCKeyboard"];
+        vialState.deviceName != null
+            ? deviceVisualLayouts[vialState.deviceName]
+            : null;
 
     if (visualLayoutDef != null &&
         vialState.matrix != null &&
@@ -71,8 +78,10 @@ class EditorPage extends HookConsumerWidget {
             final keycode = layer[r][c];
 
             try {
-              final keyDef = myDevices.first.keys.firstWhere((k) => k.id == id,
-                  orElse: () => KeyData(id: id, defaultLabel: "?"));
+              final keyDef = deviceDef.keys.firstWhere(
+                (k) => k.id == id,
+                orElse: () => KeyData(id: id, defaultLabel: "?"),
+              );
 
               final keydata = KeyData(
                 id: id,
@@ -99,7 +108,7 @@ class EditorPage extends HookConsumerWidget {
               id: "$r,$c",
               defaultLabel: VialNotifier.keycodeToLabel(keycode),
               width:
-                  myDevices.first.keys
+                  deviceDef.keys
                       .where((key) => key.id == "$r,$c")
                       .first
                       .width,
