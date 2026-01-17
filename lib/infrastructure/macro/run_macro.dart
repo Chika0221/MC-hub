@@ -4,7 +4,6 @@
 import 'dart:io';
 
 // Flutter imports:
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 // Package imports:
