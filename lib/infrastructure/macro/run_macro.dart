@@ -3,8 +3,18 @@
 // Dart imports:
 import 'dart:io';
 
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:firebase_ai/firebase_ai.dart';
+
 // Project imports:
+import 'package:mc_hub/infrastructure/hooks/virtual_key_codes.dart';
 import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
+import 'package:mc_hub/infrastructure/macro/key_sender.dart';
+import 'package:mc_hub/infrastructure/macro/prompt_loader.dart';
 import 'package:mc_hub/infrastructure/notification/send_notification.dart';
 import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
 import 'package:mc_hub/models/macro.dart';
@@ -52,9 +62,43 @@ class MacroService {
         case MacroType.aiTextConvert:
           final aiPrompt = macro.aiPrompt;
           if (aiPrompt != null) {
-            
+            KeySender.sendMultiKeyPush([
+              VirtualKeyCode.leftControl.vkCode,
+              VirtualKeyCode.keyC.vkCode,
+            ]);
+            await Future.delayed(const Duration(milliseconds: 100));
+            final clipboardText = await Clipboard.getData('text/plain');
 
+            final targetText = clipboardText?.text ?? "";
 
+            if (targetText.isNotEmpty) {
+              final promptProfile =
+                  await AiTextConvertPromptProfile.createAiTextConvertPrompt(
+                    aiPrompt,
+                    targetText,
+                  );
+
+              final model = FirebaseAI.googleAI().generativeModel(
+                model: promptProfile.model,
+              );
+
+              final prompt = [Content.text(promptProfile.prompt)];
+
+              final response = await model.generateContent(prompt);
+
+              final outputText = response.text;
+              if (outputText == null) {
+                sendNotification("マクロ実行失敗", "AIの応答が空です");
+                return;
+              }
+              await Clipboard.setData(ClipboardData(text: outputText!));
+              KeySender.sendMultiKeyPush([
+                VirtualKeyCode.leftControl.vkCode,
+                VirtualKeyCode.keyV.vkCode,
+              ]);
+            } else {
+              sendNotification("マクロ実行失敗", "テキストを選択してください");
+            }
           }
 
           break;

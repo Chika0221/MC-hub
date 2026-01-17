@@ -130,6 +130,7 @@ class MacroSettingDialog extends HookConsumerWidget {
                   return const CircularProgressIndicator();
                 },
               ),
+              
             ],
           ),
         ),

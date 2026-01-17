@@ -55,6 +55,8 @@ dependencies:
   ffi: ^2.1.4
   win32: ^5.15.0
   shared_preferences: ^2.5.4
+  firebase_ai: ^3.6.1
+  toml: ^0.18.0
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +89,7 @@ flutter:
     - assets/animations/background.riv
     - assets/icons/tray_icon.ico
     - assets/icons/app_icon.png
+    - assets/prompts/ai_text_convert.toml
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
