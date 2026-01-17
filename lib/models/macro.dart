@@ -12,9 +12,10 @@ class Macro with _$Macro {
     String? docId,
     List<int>? keys,
     String? appPath,
+    String? aiPrompt,
   }) = _Macro;
 
   factory Macro.fromJson(Map<String, dynamic> json) => _$MacroFromJson(json);
 }
 
-enum MacroType { infrared, combo, openApp }
+enum MacroType { infrared, combo, openApp, aiTextConvert }

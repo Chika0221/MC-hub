@@ -25,8 +25,11 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
     final windowList = await WindowWatcher.getWindows(getExe: true);
     final macros =
         windowList.map((window) {
+          // final appName = window.exePath?.split('\\').last.split('.').first;
+          final appName = window.title.split(' - ').last;
+
           return Macro(
-            name: window.title,
+            name: appName ?? 'Unknown App',
             type: MacroType.openApp,
             appPath: window.exePath,
           );
