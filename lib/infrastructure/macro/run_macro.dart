@@ -92,7 +92,7 @@ class MacroService {
                 sendNotification("マクロ実行失敗", "AIの応答が空です");
                 return;
               }
-              await Clipboard.setData(ClipboardData(text: outputText!));
+              await Clipboard.setData(ClipboardData(text: outputText));
               KeySender.sendMultiKeyPush([
                 VirtualKeyCode.leftControl.vkCode,
                 VirtualKeyCode.keyV.vkCode,

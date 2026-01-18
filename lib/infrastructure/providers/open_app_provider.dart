@@ -5,7 +5,6 @@ import 'dart:io';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:window_watcher/window_watcher.dart';
 
 // Project imports:
 import 'package:mc_hub/models/app_info.dart';
