@@ -38,6 +38,13 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
         listJson
             .map((e) => AppInfo.fromJson(e))
             .where((e) => !(e.DisplayIcon.contains(".ico")))
+            .map((e) {
+              String iconPath = e.DisplayIcon;
+              if (iconPath.contains(',')) {
+                iconPath = iconPath.split(',')[0];
+              }
+              return AppInfo(DisplayName: e.DisplayName, DisplayIcon: iconPath);
+            })
             .toList();
 
     apps.sort((a, b) => a.DisplayName.compareTo(b.DisplayName));
