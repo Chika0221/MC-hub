@@ -70,7 +70,23 @@ class MacroSettingDialog extends HookConsumerWidget {
     final runAppFuture = ref.watch(openAppProvider);
 
     return AlertDialog(
-      title: Text(title),
+      title: Row(
+        children: [
+          Text(title),
+          Spacer(),
+          OutlinedButton.icon(
+            onPressed: () {
+              MacroService(
+                keycode: MonitorKeycodes.values.firstWhere(
+                  (e) => e.shortName == title,
+                ),
+              ).runMacro();
+            },
+            icon: Icon(Icons.play_arrow_rounded),
+            label: Text("テスト実行"),
+          ),
+        ],
+      ),
       content: Container(
         constraints: BoxConstraints(
           minWidth: size.width * 0.5,
@@ -229,18 +245,9 @@ class MacroSettingDialog extends HookConsumerWidget {
           ),
         ),
       ),
+
       actions: [
-        OutlinedButton(
-          onPressed: () {
-            MacroService(
-              keycode: MonitorKeycodes.values.firstWhere(
-                (e) => e.shortName == title,
-              ),
-            ).runMacro();
-          },
-          child: Text("テスト実行"),
-        ),
-        FilledButton(
+        FilledButton.icon(
           onPressed: () {
             // AIが選択されている場合のみ、ここで保存する（入力中に毎回保存しない）
             if (aiSelected.value) {
@@ -260,13 +267,15 @@ class MacroSettingDialog extends HookConsumerWidget {
             }
             Navigator.of(context).pop();
           },
-          child: Text("適応"),
+          icon: Icon(Icons.check_rounded),
+          label: Text("適応"),
         ),
-        FilledButton.tonal(
+        FilledButton.tonalIcon(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text("閉じる"),
+          icon: Icon(Icons.close_rounded),
+          label: Text("閉じる"),
         ),
       ],
     );

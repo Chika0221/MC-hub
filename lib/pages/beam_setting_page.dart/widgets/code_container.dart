@@ -40,20 +40,22 @@ class CodeContainer extends HookConsumerWidget {
                       title: Text(code.name),
                       content: Text("${code.code}"),
                       actions: [
-                        FilledButton.tonal(
+                        FilledButton.tonalIcon(
                           onPressed: () {
                             ref
                                 .read(firebaseCodesStreamProvider.notifier)
                                 .deleteCode(code);
                             Navigator.of(context).pop();
                           },
-                          child: Text("削除"),
+                          icon: Icon(Icons.delete_rounded),
+                          label: Text("削除"),
                         ),
-                        TextButton(
+                        TextButton.icon(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text("閉じる"),
+                          icon: Icon(Icons.close_rounded),
+                          label: Text("閉じる"),
                         ),
                       ],
                     );
