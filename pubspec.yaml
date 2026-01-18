@@ -57,6 +57,7 @@ dependencies:
   shared_preferences: ^2.5.4
   firebase_ai: ^3.6.1
   toml: ^0.18.0
+  desktop_multi_window: ^0.3.0
 
 dev_dependencies:
   flutter_test:

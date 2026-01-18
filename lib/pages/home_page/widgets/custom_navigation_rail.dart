@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+// Project imports:
+import 'package:mc_hub/infrastructure/notification/send_notification.dart';
+
 class CustomNavigationRail extends HookConsumerWidget {
   const CustomNavigationRail({super.key, required this.selectedIndex});
 
@@ -47,6 +50,12 @@ class CustomNavigationRail extends HookConsumerWidget {
           label: Text('Settings'),
         ),
       ],
+      trailing: IconButton.filledTonal(
+        onPressed: () {
+          sendAppNotification();
+        },
+        icon: Icon(Icons.logout_rounded),
+      ),
     );
   }
 }

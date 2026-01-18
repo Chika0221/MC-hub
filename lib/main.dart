@@ -1,10 +1,14 @@
 // Flutter imports:
 
+// Dart imports:
+import 'dart:convert';
+
 // Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,24 +18,35 @@ import 'package:rive/rive.dart';
 import 'package:mc_hub/firebase_options.dart';
 import 'package:mc_hub/infrastructure/hooks/keyboard_hooks.dart';
 import 'package:mc_hub/infrastructure/macro/run_macro.dart';
+import 'package:mc_hub/infrastructure/notification/notification_content.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
 import 'package:mc_hub/pages/home_page/home_page.dart';
 import 'package:mc_hub/tasktray/tasktray.dart';
 import 'package:mc_hub/theme/custom_theme.dart';
 
-void main() async {
+void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await RiveNative.init();
 
-  runApp(ProviderScope(child: TaskTray(child: MyApp())));
+  if (args.firstOrNull == "notification") {
+    final int windowId = int.parse(args[1]);
+    final Map<String, dynamic> argument =
+        args[2].isEmpty
+            ? const {}
+            : jsonDecode(args[2]) as Map<String, dynamic>;
 
-  doWhenWindowReady(() {
-    // const initialSize = Size(600, 450);
-    // appWindow.minSize = initialSize;
-    // appWindow.size = initialSize;
-    appWindow.show();
-  });
+    runApp(NotificationApp(windowId: windowId, arguments: argument));
+  } else {
+    runApp(ProviderScope(child: TaskTray(child: MyApp())));
+
+    doWhenWindowReady(() {
+      // const initialSize = Size(600, 450);
+      // appWindow.minSize = initialSize;
+      // appWindow.size = initialSize;
+      appWindow.show();
+    });
+  }
 }
 
 class MyApp extends HookConsumerWidget {
