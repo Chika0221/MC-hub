@@ -231,6 +231,16 @@ class MacroSettingDialog extends HookConsumerWidget {
         ),
       ),
       actions: [
+        OutlinedButton(
+          onPressed: () {
+            MacroService(
+              keycode: MonitorKeycodes.values.firstWhere(
+                (e) => e.shortName == title,
+              ),
+            ).runMacro();
+          },
+          child: Text("テスト実行"),
+        ),
         FilledButton(
           onPressed: () {
             // AIが選択されている場合のみ、ここで保存する（入力中に毎回保存しない）

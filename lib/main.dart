@@ -76,7 +76,8 @@ class MyApp extends HookConsumerWidget {
       title: "MC Hub",
       theme: CustomTheme().mainLightTheme,
       darkTheme: CustomTheme().mainDarkTheme,
-      initialRoute: AppRoute.home.path,
+      // initialRoute: AppRoute.home.path,
+      initialRoute: AppRoute.editor.path,
       routes: {
         AppRoute.editor.path: (context) => const EditorPage(),
         AppRoute.home.path: (context) => const HomePage(),

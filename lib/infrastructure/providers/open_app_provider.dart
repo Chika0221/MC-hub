@@ -35,25 +35,39 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
     final List<dynamic> listJson = jsonDecode(out);
 
     final List<AppInfo> apps =
-        listJson.map((e) => AppInfo.fromJson(e)).toList();
+        listJson
+            .map((e) => AppInfo.fromJson(e))
+            .where((e) => !(e.DisplayIcon.contains(".ico")))
+            .toList();
+
+    apps.sort((a, b) => a.DisplayName.compareTo(b.DisplayName));
 
     apps.forEach((app) {
-      print('${app.DisplayName} -> ${app.DisplayIcon}');
+      print('${app.DisplayName} => ${app.DisplayIcon}');
     });
     print(apps.length);
 
-    final windowList = await WindowWatcher.getWindows(getExe: true);
     final macros =
-        windowList.map((window) {
-          // final appName = window.exePath?.split('\\').last.split('.').first;
-          final appName = window.title.split(' - ').last;
-
+        apps.map((app) {
           return Macro(
-            name: appName ?? 'Unknown App',
+            name: app.DisplayName,
             type: MacroType.openApp,
-            appPath: window.exePath,
+            appPath: app.DisplayIcon,
           );
         }).toList();
+
+    // final windowList = await WindowWatcher.getWindows(getExe: true);
+    // final macros =
+    //     windowList.map((window) {
+    //       // final appName = window.exePath?.split('\\').last.split('.').first;
+    //       final appName = window.title.split(' - ').last;
+
+    //       return Macro(
+    //         name: appName ?? 'Unknown App',
+    //         type: MacroType.openApp,
+    //         appPath: window.exePath,
+    //       );
+    //     }).toList();
 
     return macros;
   }
