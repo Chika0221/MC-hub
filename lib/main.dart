@@ -13,6 +13,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rive/rive.dart';
+import 'package:window_manager/window_manager.dart';
 
 // Project imports:
 import 'package:mc_hub/firebase_options.dart';
@@ -29,12 +30,27 @@ void main(List<String> args) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await RiveNative.init();
 
+  await windowManager.ensureInitialized();
+
   if (args.firstOrNull == "notification") {
     final int windowId = int.parse(args[1]);
     final Map<String, dynamic> argument =
         args[2].isEmpty
             ? const {}
             : jsonDecode(args[2]) as Map<String, dynamic>;
+
+    WindowOptions windowOptions = const WindowOptions(
+      size: Size(600, 600),
+      center: true,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.hidden,
+      windowButtonVisibility: false,
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
 
     runApp(NotificationApp(windowId: windowId, arguments: argument));
   } else {

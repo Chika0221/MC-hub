@@ -18,7 +18,8 @@ class NotificationApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.transparent, // 透過させる場合
         body: Container(
-          
+          width: 200,
+          height: 200,
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.8),

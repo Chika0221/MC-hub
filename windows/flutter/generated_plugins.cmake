@@ -11,7 +11,9 @@ list(APPEND FLUTTER_PLUGIN_LIST
   hid4flutter
   keyboard_event
   rive_native
+  screen_retriever_windows
   tray_manager
+  window_manager
   windows_notification
 )
 
