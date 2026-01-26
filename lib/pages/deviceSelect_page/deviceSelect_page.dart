@@ -43,7 +43,6 @@ class DeviceSelectPage extends HookConsumerWidget {
     }, []);
 
     return CustomBackground(
-      byRail: true,
       backGroundWidget: CustomRiveAnimation(
         size: Size.infinite,
         fileLoader: FileLoader.fromAsset(
@@ -92,7 +91,7 @@ class DeviceSelectPage extends HookConsumerWidget {
                       children: List.generate(devices.value.length, (
                         int index,
                       ) {
-                      return SelectDeviceContainer(
+                        return SelectDeviceContainer(
                           device: devices.value[index],
                         );
                       }),

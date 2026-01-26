@@ -20,7 +20,6 @@ class BeamSettingPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomBackground(
-      byRail: true,
       backGroundWidget: CustomRiveAnimation(
         size: Size.infinite,
         fileLoader: FileLoader.fromAsset(
