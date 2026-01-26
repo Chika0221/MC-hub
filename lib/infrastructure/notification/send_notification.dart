@@ -3,10 +3,12 @@ import 'package:windows_notification/notification_message.dart';
 import 'package:windows_notification/windows_notification.dart';
 
 void sendNotification(String title, String content) {
-  final _winNotifyPlugin = WindowsNotification(applicationId: "MC HUB");
+  final _winNotifyPlugin = WindowsNotification(
+    applicationId: "SwitchController",
+  );
 
   final NotificationMessage message = NotificationMessage.fromPluginTemplate(
-    "remocon_push",
+    "notification",
     title,
     content,
     // image:

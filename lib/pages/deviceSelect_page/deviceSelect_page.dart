@@ -55,52 +55,24 @@ class DeviceSelectPage extends HookConsumerWidget {
       foragroundWidget: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: CustomAppbar(),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Flexible(
-              flex: 1,
-              child: Text(
-                "MC Hub",
-                style: CustomTheme()
-                    .titleTheme(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(
-                      fontSize: MediaQuery.of(context).size.height * 0.08,
-                      fontWeight: FontWeight.bold,
-                    ),
-                // style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                //   fontSize: MediaQuery.of(context).size.height * 0.08,
-                //   fontWeight: FontWeight.bold,
-                // ),
+        body: Center(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 64),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                spacing: 16,
+                children: List.generate(devices.value.length, (
+                  int index,
+                ) {
+                  return SelectDeviceContainer(
+                    device: devices.value[index],
+                  );
+                }),
               ),
             ),
-            Flexible(
-              flex: 2,
-              child: Center(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 64),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      spacing: 16,
-                      children: List.generate(devices.value.length, (
-                        int index,
-                      ) {
-                        return SelectDeviceContainer(
-                          device: devices.value[index],
-                        );
-                      }),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

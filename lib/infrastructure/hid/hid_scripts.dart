@@ -22,12 +22,9 @@ Future<List<HidDevice>> deviceList() async {
   // print(devices);
   final keyboards = filterMyKeyboards(devices);
   print(keyboards);
-  
 
   return keyboards;
 }
-
-
 
 // class VialKeyboardService {
 //   // ターゲットとするキーボードのID（ご自身のキーボードに合わせて変更してください）

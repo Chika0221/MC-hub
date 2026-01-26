@@ -72,7 +72,7 @@ class MyApp extends HookConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
-      title: "MC Hub",
+      title: "SwitchController",
       theme: CustomTheme().mainLightTheme,
       darkTheme: CustomTheme().mainDarkTheme,
       // initialRoute: AppRoute.home.path,

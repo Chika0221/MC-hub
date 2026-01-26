@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+// Project imports:
+import 'package:mc_hub/theme/custom_theme.dart';
+
 class CustomNavigationRail extends HookConsumerWidget {
   const CustomNavigationRail({super.key, required this.selectedIndex});
 
@@ -11,6 +14,11 @@ class CustomNavigationRail extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final size = MediaQuery.sizeOf(context);
+
+    final double labelHeight =
+        (size.height > 600) ? MediaQuery.sizeOf(context).height * 0.6 : 0;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
@@ -45,13 +53,6 @@ class CustomNavigationRail extends HookConsumerWidget {
                 SizedBox(height: 24),
                 Image.asset("assets/icons/app_icon.png", width: 40),
                 SizedBox(height: 24),
-                Text(
-                  "MC Hub",
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                SizedBox(height: 24),
               ],
             ),
             destinations: [
@@ -64,6 +65,39 @@ class CustomNavigationRail extends HookConsumerWidget {
                 label: Text('Settings'),
               ),
             ],
+            trailingAtBottom: true,
+            // trailing: RotationTransition(
+            //   turns: AlwaysStoppedAnimation(180 / 360),
+            //   child: Text("ああああ"),
+            // ),
+            trailing: Padding(
+              padding: const EdgeInsets.fromLTRB(4, 4, 4, 8),
+              child: Container(
+                decoration: ShapeDecoration(
+                  shape: StadiumBorder(),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                height: labelHeight,
+                width: 64,
+                child: Center(
+                  child: RotatedBox(
+                    quarterTurns: 3,
+                    child: Text(
+                      "Switch Controller",
+                      style: CustomTheme()
+                          .titleTheme(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                      // style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      //   fontSize: MediaQuery.of(context).size.height * 0.08,
+                      //   fontWeight: FontWeight.bold,
+                      // ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       ),
