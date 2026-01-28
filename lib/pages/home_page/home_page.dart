@@ -18,12 +18,16 @@ class HomePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = useState(0);
+    final subSelectedIndex = useState(0);
 
     return Scaffold(
       body: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          CustomNavigationRail(selectedIndex: selectedIndex),
+          CustomNavigationRail(
+            selectedIndex: selectedIndex,
+            subSelectedIndex: subSelectedIndex,
+          ),
           Expanded(
             child: EasyAnimatedIndexedStack(
               index: selectedIndex.value,
@@ -32,7 +36,10 @@ class HomePage extends HookConsumerWidget {
                       FadeTransition(opacity: animation, child: child),
               curve: Curves.easeInOutSine,
               duration: Duration(milliseconds: 240),
-              children: [DeviceSelectPage(), BeamSettingPage()],
+              children: [
+                DeviceSelectPage(),
+                BeamSettingPage(selectedIndex: subSelectedIndex.value),
+              ],
             ),
           ),
         ],

@@ -16,7 +16,10 @@ import 'package:mc_hub/widgets/custom_rive_animation.dart';
 import 'package:mc_hub/widgets/folder_border_containar.dart';
 
 class BeamSettingPage extends HookConsumerWidget {
-  const BeamSettingPage({super.key});
+  const BeamSettingPage({super.key, required this.selectedIndex});
+
+  final int selectedIndex;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomBackground(

@@ -63,10 +63,6 @@ class CustomNavigationRail extends HookConsumerWidget {
             ),
           ],
           trailingAtBottom: true,
-          // trailing: RotationTransition(
-          //   turns: AlwaysStoppedAnimation(180 / 360),
-          //   child: Text("ああああ"),
-          // ),
           trailing: Padding(
             padding: const EdgeInsets.fromLTRB(4, 4, 4, 8),
             child: Container(
