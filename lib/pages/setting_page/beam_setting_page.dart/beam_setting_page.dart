@@ -13,6 +13,7 @@ import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/new_cod
 import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/widgets/custom_background.dart';
 import 'package:mc_hub/widgets/custom_rive_animation.dart';
+import 'package:mc_hub/widgets/double_line_border_container.dart';
 import 'package:mc_hub/widgets/folder_border_containar.dart';
 
 class BeamSettingPage extends HookConsumerWidget {
@@ -64,34 +65,60 @@ class BeamSendingContainer extends HookConsumerWidget {
 
     return codesAsyncValue.when(
       data: (infraredCodes) {
-        return FolderBorderContainar(
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-          title: "コード一覧",
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed:
-                () => showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return NewCodeRegisterDialog();
-                  },
-                ),
-            label: Text("登録"),
-            icon: Icon(Icons.add),
-            elevation: 0,
-          ),
-          child: BeamItemGridView(
-            childrenAspectRatio: 5,
-            itemCount: infraredCodes.length,
-            itemBuilder: (context, index) {
-              return CodeContainer(
-                code: infraredCodes[index],
-                onPressed: () async {
-                  await ref
-                      .read(firebaseCodesStreamProvider.notifier)
-                      .updateCodes(infraredCodes[index].copyWith(state: true));
+        // return FolderBorderContainar(
+        //   backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+        //   title: "コード一覧",
+        //   floatingActionButton: FloatingActionButton.extended(
+        //     onPressed:
+        //         () => showDialog(
+        //           context: context,
+        //           builder: (BuildContext context) {
+        //             return NewCodeRegisterDialog();
+        //           },
+        //         ),
+        //     label: Text("登録"),
+        //     icon: Icon(Icons.add),
+        //     elevation: 0,
+        //   ),
+        //   child: BeamItemGridView(
+        //     childrenAspectRatio: 5,
+        //     itemCount: infraredCodes.length,
+        //     itemBuilder: (context, index) {
+        //       return CodeContainer(
+        //         code: infraredCodes[index],
+        //         onPressed: () async {
+        //           await ref
+        //               .read(firebaseCodesStreamProvider.notifier)
+        //               .updateCodes(infraredCodes[index].copyWith(state: true));
+        //         },
+        //       );
+        //     },
+        //   ),
+        // );
+        return Expanded(
+          child: DoubleLineBorderContainer(
+            borderType: DoubleLineBorderType.roundedRectangle,
+            borderRadius: 48,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BeamItemGridView(
+                childrenAspectRatio: 5,
+                itemCount: infraredCodes.length,
+                itemBuilder: (context, index) {
+                  return CodeContainer(
+                    code: infraredCodes[index],
+                    onPressed: () async {
+                      await ref
+                          .read(firebaseCodesStreamProvider.notifier)
+                          .updateCodes(
+                            infraredCodes[index].copyWith(state: true),
+                          );
+                    },
+                  );
                 },
-              );
-            },
+              ),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           ),
         );
       },
