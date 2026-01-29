@@ -9,9 +9,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:mc_hub/pages/beam_setting_page.dart/beam_setting_page.dart';
 import 'package:mc_hub/pages/deviceSelect_page/deviceSelect_page.dart';
 import 'package:mc_hub/pages/home_page/widgets/custom_navigation_rail.dart';
+import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/beam_setting_page.dart';
+import 'package:mc_hub/pages/setting_page/setting_page.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
@@ -38,7 +39,7 @@ class HomePage extends HookConsumerWidget {
               duration: Duration(milliseconds: 240),
               children: [
                 DeviceSelectPage(),
-                BeamSettingPage(selectedIndex: subSelectedIndex.value),
+                SettingPage(selectedIndex: subSelectedIndex.value),
               ],
             ),
           ),

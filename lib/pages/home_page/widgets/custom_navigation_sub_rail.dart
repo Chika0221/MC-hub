@@ -1,33 +1,71 @@
 part of 'custom_navigation_rail.dart';
 
 class CustomNavigationSubRail extends HookConsumerWidget {
-  const CustomNavigationSubRail({super.key, required this.selectedIndex});
+  const CustomNavigationSubRail({
+    super.key,
+    required this.selectedIndex,
+    required this.onSelected,
+  });
 
-  final ValueNotifier<int> selectedIndex;
+  final int selectedIndex;
+  final ValueChanged<int> onSelected;
+
+  ButtonStyle subRailChildrenButtonStyle(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return ButtonStyle(
+      backgroundColor: WidgetStateProperty.fromMap({
+        WidgetState.selected: colorScheme.surfaceContainer,
+      }),
+      iconColor: WidgetStateProperty.fromMap({
+        WidgetState.selected: colorScheme.primary,
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final label = switch (selectedIndex) {
+      0 => 'REMOCON',
+      1 => 'WORKFLOW',
+      2 => 'CONTROL',
+      int() => "UNKNOWN",
+    };
+
     return Column(
       children: [
         SizedBox(height: 32),
-        IconButton(onPressed: () {}, icon: Icon(Icons.shape_line_rounded)),
-        IconButton(onPressed: () {}, icon: Icon(Icons.add_box_rounded)),
-        IconButton(onPressed: () {}, icon: Icon(Icons.send_rounded)),
+        IconButton(
+          isSelected: (selectedIndex == 0),
+          onPressed: () => onSelected.call(0),
+          icon: Icon(Icons.add_box_outlined),
+          selectedIcon: Icon(Icons.add_box_rounded),
+          style: subRailChildrenButtonStyle(context),
+        ),
+        IconButton(
+          isSelected: (selectedIndex == 1),
+          onPressed: () => onSelected.call(1),
+          icon: Icon(Icons.shape_line_outlined),
+          selectedIcon: Icon(Icons.shape_line_rounded),
+          style: subRailChildrenButtonStyle(context),
+        ),
+        IconButton(
+          isSelected: (selectedIndex == 2),
+          onPressed: () => onSelected.call(2),
+          icon: Icon(Icons.send_time_extension_outlined),
+          selectedIcon: Icon(Icons.send_time_extension_rounded),
+          style: subRailChildrenButtonStyle(context),
+        ),
         Spacer(),
         SizedBox(height: 32),
         RotatedBox(
           quarterTurns: 3,
           child: Text(
-            "REMOCON",
+            label,
             style: CustomTheme()
                 .titleTheme(context)
                 .textTheme
                 .titleMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
-            // style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            //   fontSize: MediaQuery.of(context).size.height * 0.08,
-            //   fontWeight: FontWeight.bold,
-            // ),
           ),
         ).animate().slideX(
           duration: 100.ms,

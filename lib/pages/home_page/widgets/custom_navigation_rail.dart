@@ -96,7 +96,10 @@ class CustomNavigationRail extends HookConsumerWidget {
                           end: 0.0,
                         )
                         : CustomNavigationSubRail(
-                          selectedIndex: subSelectedIndex,
+                          selectedIndex: subSelectedIndex.value,
+                          onSelected: (index) {
+                            subSelectedIndex.value = index;
+                          },
                         ),
               ),
             ),

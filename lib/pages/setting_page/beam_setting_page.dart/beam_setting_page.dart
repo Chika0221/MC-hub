@@ -7,18 +7,16 @@ import 'package:rive/rive.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
-import 'package:mc_hub/pages/beam_setting_page.dart/widgets/beam_item_grid_view.dart';
-import 'package:mc_hub/pages/beam_setting_page.dart/widgets/code_container.dart';
-import 'package:mc_hub/pages/beam_setting_page.dart/widgets/new_code_register_dialog.dart';
+import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/beam_item_grid_view.dart';
+import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/code_container.dart';
+import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/new_code_register_dialog.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/widgets/custom_background.dart';
 import 'package:mc_hub/widgets/custom_rive_animation.dart';
 import 'package:mc_hub/widgets/folder_border_containar.dart';
 
 class BeamSettingPage extends HookConsumerWidget {
-  const BeamSettingPage({super.key, required this.selectedIndex});
-
-  final int selectedIndex;
+  const BeamSettingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
