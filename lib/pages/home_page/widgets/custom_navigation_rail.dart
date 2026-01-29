@@ -78,7 +78,7 @@ class CustomNavigationRail extends HookConsumerWidget {
                         ? RotatedBox(
                           quarterTurns: 3,
                           child: Text(
-                            "Switch Controller",
+                            "Switch Palette",
                             style: CustomTheme()
                                 .titleTheme(context)
                                 .textTheme

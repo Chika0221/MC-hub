@@ -26,11 +26,11 @@ class _TaskTrayState extends ConsumerState<TaskTray> with TrayListener {
   void initState() {
     unawaited(() async {
       await trayManager.setIcon("assets/icons/tray_icon.ico");
-      await trayManager.setToolTip("SwitchController");
+      await trayManager.setToolTip("SwitchPalette");
       await trayManager.setContextMenu(
         Menu(
           items: [
-            MenuItem(key: 'show', label: 'SwitchControllerを開く'),
+            MenuItem(key: 'show', label: 'SwitchPaletteを開く'),
             MenuItem(key: 'exit', label: '閉じる'),
           ],
         ),

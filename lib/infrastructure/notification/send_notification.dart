@@ -3,9 +3,7 @@ import 'package:windows_notification/notification_message.dart';
 import 'package:windows_notification/windows_notification.dart';
 
 void sendNotification(String title, String content) {
-  final _winNotifyPlugin = WindowsNotification(
-    applicationId: "SwitchController",
-  );
+  final _winNotifyPlugin = WindowsNotification(applicationId: "SwitchPalette");
 
   final NotificationMessage message = NotificationMessage.fromPluginTemplate(
     "notification",
