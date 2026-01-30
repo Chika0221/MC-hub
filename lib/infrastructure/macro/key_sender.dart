@@ -25,7 +25,7 @@ class KeySender {
     }
   }
 
-  static void sendMultiKeyPush(List<int> vKCodes) {
+  static void sendMultiKeyPush(List<int> vKCodes, [bool isShortcut = false]) {
     final input = calloc<INPUT>();
 
     try {
@@ -37,12 +37,13 @@ class KeySender {
         SendInput(1, input, sizeOf<INPUT>());
       }
 
-      for (final vKCode in vKCodes.reversed) {
-        input.ref.ki.wVk = vKCode;
-        input.ref.ki.dwFlags = KEYEVENTF_KEYUP;
+      if (isShortcut)
+        for (final vKCode in vKCodes.reversed) {
+          input.ref.ki.wVk = vKCode;
+          input.ref.ki.dwFlags = KEYEVENTF_KEYUP;
 
-        SendInput(1, input, sizeOf<INPUT>());
-      }
+          SendInput(1, input, sizeOf<INPUT>());
+        }
     } finally {
       calloc.free(input);
     }

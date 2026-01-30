@@ -1,5 +1,3 @@
-// Project imports:
-
 // Dart imports:
 import 'dart:io';
 
@@ -33,15 +31,17 @@ class MacroService {
           final inCode = await firebaseNotifier.getCode(macro.docId!);
 
           final updateCode = inCode.copyWith(state: true);
-
           await firebaseNotifier.updateCodes(updateCode);
 
         case MacroType.combo:
-          print("Executing Combo Macro: ${macro.name}");
-          sendNotification(
-            "Macro Executed",
-            "Executed Combo Macro: ${macro.name}",
-          );
+          final vKCodes = macro.keys;
+
+          try {
+            KeySender.sendMultiKeyPush(vKCodes!, true);
+          } catch (e) {
+            sendNotification("マクロ実行失敗", "");
+          }
+
           break;
         case MacroType.openApp:
           final appPath = macro.appPath;
