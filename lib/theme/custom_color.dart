@@ -5,7 +5,7 @@ class CustomColorSchema {
   ColorScheme get zawaLightSchema => const ColorScheme(
     brightness: Brightness.light,
     primary: Color(0xffffdb72),
-    onPrimary: Color(0xff005fa2),
+    onPrimary: Color(0xff373c52),
     secondary: Color(0xff005fa2),
     secondaryContainer: Color(0x7f005fa2),
     onSecondary: Color(0xffffdb72),
@@ -15,7 +15,7 @@ class CustomColorSchema {
     onError: Color(0xffffffff),
     surface: Color(0xffb3babb),
     surfaceContainer: Color(0xff373c52),
-    surfaceContainerHigh: Color.fromARGB(255, 119, 129, 175),
+    surfaceContainerHigh: Color.fromARGB(255, 80, 86, 112),
     onSurface: Color(0xff373c52),
   );
 

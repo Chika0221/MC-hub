@@ -25,58 +25,57 @@ class DoubleLineBorderContainerTabs extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final double titletabHeight = 32;
+    final double titletabHeight = 38;
+
+    final colorScheme = Theme.of(context).colorScheme;
 
     return DoubleLineBorderContainer(
       backgroundColor: backgroundColor,
       borderType: DoubleLineBorderType.roundedRectangle,
-      borderRadius: 48,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          // SizedBox(
-          //   height: titletabHeight,
-          //   width: double.infinity,
-          //   child: Row(
-          //     mainAxisSize: MainAxisSize.max,
-          //     mainAxisAlignment: MainAxisAlignment.start,
-          //     children: List.generate(children.length, (int index) {
-          //       if (index == selectedIndex) {
-          //         return TabTitle(
-          //           backgroundColor: backgroundColor,
-          //           title: titles[index],
-          //         );
-          //       } else {
-          //         return GestureDetector(
-          //           onTap: () => onTabChanged.call(index),
-          //           child: TabTitle(
-          //             backgroundColor: backgroundColor.withAlpha(
-          //               (255 * backgroundColor.a * 0.5).toInt(),
-          //             ),
-          //             title: titles[index],
-          //           ),
-          //         );
-          //       }
-          //     }),
-          //   ),
-          // ),
-          // Expanded(
-          //   child: Container(
-          //     width: double.infinity,
-          //     padding: EdgeInsets.all(16),
-
-          //     decoration: BoxDecoration(
-          //       color: backgroundColor,
-          //       borderRadius: BorderRadius.only(
-          //         topRight: Radius.circular(8),
-          //         bottomRight: Radius.circular(8),
-          //         bottomLeft: Radius.circular(8),
-          //       ),
-          //     ),
-          //     child: children[selectedIndex],
-          //   ),
-          // ),
-        ],
+      borderRadius: 32,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              height: titletabHeight,
+              decoration: ShapeDecoration(
+                shape: StadiumBorder(),
+                color: colorScheme.surfaceContainerHigh,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: List.generate(children.length, (int index) {
+                  if (index == selectedIndex) {
+                    return TabTitle(
+                      textColor: colorScheme.onPrimary,
+                      backgroundColor: colorScheme.primary,
+                      title: titles[index],
+                    );
+                  } else {
+                    return GestureDetector(
+                      onTap: () => onTabChanged.call(index),
+                      child: TabTitle(
+                        textColor: colorScheme.surface,
+                        backgroundColor: Colors.transparent,
+                        title: titles[index],
+                      ),
+                    );
+                  }
+                }),
+              ),
+            ),
+            SizedBox(height: 16),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                child: children[selectedIndex],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -86,26 +85,28 @@ class TabTitle extends StatelessWidget {
   const TabTitle({
     super.key,
     required this.backgroundColor,
+    required this.textColor,
     required this.title,
   });
 
   final Color backgroundColor;
+  final Color textColor;
   final String title;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
+        shape: StadiumBorder(),
         color: backgroundColor,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
       ),
       child: Center(
         child: Text(
           title,
-          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall?.copyWith(color: textColor),
         ),
       ),
     );
