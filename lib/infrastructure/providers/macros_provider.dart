@@ -35,8 +35,6 @@ class MacrosNotifier extends AsyncNotifier<List<Macro?>> {
       loadedMacros.add(await AppPreferences.getMacro(keycode));
     }
 
-    print("Loaded Macros: $loadedMacros");
-
     return loadedMacros;
   }
 

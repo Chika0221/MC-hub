@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/pages/editor_page/widgets/key_macro_source.dart';
 import 'package:mc_hub/pages/editor_page/widgets/key_source.dart';
-import 'package:mc_hub/widgets/folder_border_container_tabs.dart';
+import 'package:mc_hub/widgets/double_line_border_container_tabs.dart';
 
 class KeyPalette extends HookConsumerWidget {
   const KeyPalette({super.key});
@@ -22,7 +22,7 @@ class KeyPalette extends HookConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: FolderBorderContainerTabs(
+      child: DoubleLineBorderContainerTabs(
         titles: ["Basic", "Media", "Macro", "Layer"],
         children: [
           _buildGrid(VialKey.basicLabels()),
@@ -30,7 +30,8 @@ class KeyPalette extends HookConsumerWidget {
           _buildMacroGrid(VialKey.macroLabels()),
           _buildGrid(VialKey.layerLabels()),
         ],
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+        // backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
         selectedIndex: tabSelectedIndex.value,
         onTabChanged: (int value) {
           tabSelectedIndex.value = value;
@@ -41,7 +42,7 @@ class KeyPalette extends HookConsumerWidget {
 
   Widget _buildGrid(List<String> items) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
+      // padding: const EdgeInsets.all(16.0),
       child: Wrap(
         spacing: 8.0,
         runSpacing: 8.0,
@@ -55,7 +56,7 @@ class KeyPalette extends HookConsumerWidget {
 
   Widget _buildMacroGrid(List<String> items) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
+      // padding: const EdgeInsets.all(16.0),
       child: Wrap(
         spacing: 8.0,
         runSpacing: 8.0,

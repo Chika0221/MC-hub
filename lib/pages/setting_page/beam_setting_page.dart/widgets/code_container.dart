@@ -18,14 +18,14 @@ class CodeContainer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
+        shape: StadiumBorder(),
         color:
             (code.state)
                 ? Theme.of(context).colorScheme.secondary
                 : Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(4),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.fromLTRB(24, 8, 16, 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,6 +68,7 @@ class CodeContainer extends HookConsumerWidget {
                 children: [
                   Text(
                     code.name,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color:
                           (code.state)

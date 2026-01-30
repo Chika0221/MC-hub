@@ -8,7 +8,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_auth
   firebase_core
   hid4flutter
-  keyboard_event
   rive_native
   tray_manager
   windows_notification

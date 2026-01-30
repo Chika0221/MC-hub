@@ -1,6 +1,7 @@
 // Flutter imports:
 
 // Flutter imports:
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -39,40 +40,41 @@ class MyApp extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lastLog = useState(0);
+    if (!kDebugMode) {
+      useEffect(() {
+        final monitor = KeyboardMonitor(
+          onKeyDetected: (event) {
+            final log =
+                "0x${event.vkCode.toRadixString(16).padLeft(2, '0').toUpperCase()} SCAN: ${event.scanCode}";
+            lastLog.value = event.vkCode;
 
-    useEffect(() {
-      final monitor = KeyboardMonitor(
-        onKeyDetected: (event) {
-          final log =
-              "0x${event.vkCode.toRadixString(16).padLeft(2, '0').toUpperCase()} SCAN: ${event.scanCode}";
-          lastLog.value = event.vkCode;
+            // print(VirtualKeyCode.tryFromVkCode(event.vkCode)?.name);
+            print(log);
 
-          // print(VirtualKeyCode.tryFromVkCode(event.vkCode)?.name);
-          print(log);
+            if (MonitorKeycodes.macro1.vkCode <= lastLog.value &&
+                lastLog.value <= MonitorKeycodes.macro12.vkCode) {
+              final macroService = MacroService(
+                keycode: MonitorKeycodes.values.firstWhere(
+                  (kc) => kc.vkCode == lastLog.value,
+                ),
+              );
+              macroService.runMacro();
+            }
+          },
+        );
 
-          if (MonitorKeycodes.macro1.vkCode <= lastLog.value &&
-              lastLog.value <= MonitorKeycodes.macro12.vkCode) {
-            final macroService = MacroService(
-              keycode: MonitorKeycodes.values.firstWhere(
-                (kc) => kc.vkCode == lastLog.value,
-              ),
-            );
-            macroService.runMacro();
-          }
-        },
-      );
+        monitor.start();
 
-      monitor.start();
-
-      return () {
-        monitor.stop();
-      };
-    }, []);
+        return () {
+          monitor.stop();
+        };
+      }, []);
+    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
-      title: "MC Hub",
+      title: "SwitchPalette",
       theme: CustomTheme().mainLightTheme,
       darkTheme: CustomTheme().mainDarkTheme,
       // initialRoute: AppRoute.home.path,

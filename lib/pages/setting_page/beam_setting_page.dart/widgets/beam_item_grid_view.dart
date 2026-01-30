@@ -19,11 +19,12 @@ class BeamItemGridView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        childAspectRatio: childrenAspectRatio,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        mainAxisExtent: 80.0,
+        maxCrossAxisExtent: 400.0,
+        mainAxisSpacing: 8.0,
+        crossAxisSpacing: 8.0,
+        childAspectRatio: 4 / 1,
       ),
       itemCount: itemCount,
       itemBuilder: itemBuilder,
