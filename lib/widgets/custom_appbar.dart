@@ -15,9 +15,10 @@ import 'package:mc_hub/main.dart';
 import 'package:mc_hub/widgets/custom_appbar_back_icon.dart';
 
 class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
-  CustomAppbar({super.key, this.title});
+  CustomAppbar({super.key, this.title, this.returnValue = null});
 
   final String? title;
+  final dynamic returnValue;
 
   @override
   final Size preferredSize = Size.fromHeight(kToolbarHeight);
@@ -62,7 +63,7 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
                       (WindowButtonContext context) =>
                           CustomBackIcon(color: context.iconColor),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pop(returnValue);
                   },
                 ),
               Expanded(child: WindowTitleBarBox(child: MoveWindow())),

@@ -9,16 +9,20 @@ part of 'workflow.dart';
 _$WorkflowImpl _$$WorkflowImplFromJson(Map<String, dynamic> json) =>
     _$WorkflowImpl(
       displayName: json['displayName'] as String,
-      workflowActions:
-          (json['workflowActions'] as List<dynamic>)
+      actions:
+          (json['actions'] as List<dynamic>)
               .map((e) => WorkflowAction.fromJson(e as Map<String, dynamic>))
               .toList(),
+      trigger: WorkflowTrigger.fromJson(
+        json['trigger'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$$WorkflowImplToJson(_$WorkflowImpl instance) =>
     <String, dynamic>{
       'displayName': instance.displayName,
-      'workflowActions': instance.workflowActions,
+      'actions': instance.actions,
+      'trigger': instance.trigger,
     };
 
 _$WorkflowActionImpl _$$WorkflowActionImplFromJson(Map<String, dynamic> json) =>
@@ -60,4 +64,26 @@ const _$ActionTypeEnumMap = {
   ActionType.Delay: 'Delay',
   ActionType.Notification: 'Notification',
   ActionType.End: 'End',
+};
+
+_$WorkflowTriggerImpl _$$WorkflowTriggerImplFromJson(
+  Map<String, dynamic> json,
+) => _$WorkflowTriggerImpl(
+  type: $enumDecode(_$TriggerTypeEnumMap, json['type']),
+  scheduledTime:
+      json['scheduledTime'] == null
+          ? null
+          : DateTime.parse(json['scheduledTime'] as String),
+);
+
+Map<String, dynamic> _$$WorkflowTriggerImplToJson(
+  _$WorkflowTriggerImpl instance,
+) => <String, dynamic>{
+  'type': _$TriggerTypeEnumMap[instance.type]!,
+  'scheduledTime': instance.scheduledTime?.toIso8601String(),
+};
+
+const _$TriggerTypeEnumMap = {
+  TriggerType.TimeBased: 'TimeBased',
+  TriggerType.EventBased: 'EventBased',
 };

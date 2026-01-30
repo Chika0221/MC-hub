@@ -22,8 +22,8 @@ Workflow _$WorkflowFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Workflow {
   String get displayName => throw _privateConstructorUsedError;
-  List<WorkflowAction> get workflowActions =>
-      throw _privateConstructorUsedError;
+  List<WorkflowAction> get actions => throw _privateConstructorUsedError;
+  WorkflowTrigger get trigger => throw _privateConstructorUsedError;
 
   /// Serializes this Workflow to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +40,13 @@ abstract class $WorkflowCopyWith<$Res> {
   factory $WorkflowCopyWith(Workflow value, $Res Function(Workflow) then) =
       _$WorkflowCopyWithImpl<$Res, Workflow>;
   @useResult
-  $Res call({String displayName, List<WorkflowAction> workflowActions});
+  $Res call({
+    String displayName,
+    List<WorkflowAction> actions,
+    WorkflowTrigger trigger,
+  });
+
+  $WorkflowTriggerCopyWith<$Res> get trigger;
 }
 
 /// @nodoc
@@ -57,7 +63,11 @@ class _$WorkflowCopyWithImpl<$Res, $Val extends Workflow>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? displayName = null, Object? workflowActions = null}) {
+  $Res call({
+    Object? displayName = null,
+    Object? actions = null,
+    Object? trigger = null,
+  }) {
     return _then(
       _value.copyWith(
             displayName:
@@ -65,14 +75,29 @@ class _$WorkflowCopyWithImpl<$Res, $Val extends Workflow>
                     ? _value.displayName
                     : displayName // ignore: cast_nullable_to_non_nullable
                         as String,
-            workflowActions:
-                null == workflowActions
-                    ? _value.workflowActions
-                    : workflowActions // ignore: cast_nullable_to_non_nullable
+            actions:
+                null == actions
+                    ? _value.actions
+                    : actions // ignore: cast_nullable_to_non_nullable
                         as List<WorkflowAction>,
+            trigger:
+                null == trigger
+                    ? _value.trigger
+                    : trigger // ignore: cast_nullable_to_non_nullable
+                        as WorkflowTrigger,
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of Workflow
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WorkflowTriggerCopyWith<$Res> get trigger {
+    return $WorkflowTriggerCopyWith<$Res>(_value.trigger, (value) {
+      return _then(_value.copyWith(trigger: value) as $Val);
+    });
   }
 }
 
@@ -85,7 +110,14 @@ abstract class _$$WorkflowImplCopyWith<$Res>
   ) = __$$WorkflowImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String displayName, List<WorkflowAction> workflowActions});
+  $Res call({
+    String displayName,
+    List<WorkflowAction> actions,
+    WorkflowTrigger trigger,
+  });
+
+  @override
+  $WorkflowTriggerCopyWith<$Res> get trigger;
 }
 
 /// @nodoc
@@ -101,7 +133,11 @@ class __$$WorkflowImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? displayName = null, Object? workflowActions = null}) {
+  $Res call({
+    Object? displayName = null,
+    Object? actions = null,
+    Object? trigger = null,
+  }) {
     return _then(
       _$WorkflowImpl(
         displayName:
@@ -109,11 +145,16 @@ class __$$WorkflowImplCopyWithImpl<$Res>
                 ? _value.displayName
                 : displayName // ignore: cast_nullable_to_non_nullable
                     as String,
-        workflowActions:
-            null == workflowActions
-                ? _value._workflowActions
-                : workflowActions // ignore: cast_nullable_to_non_nullable
+        actions:
+            null == actions
+                ? _value._actions
+                : actions // ignore: cast_nullable_to_non_nullable
                     as List<WorkflowAction>,
+        trigger:
+            null == trigger
+                ? _value.trigger
+                : trigger // ignore: cast_nullable_to_non_nullable
+                    as WorkflowTrigger,
       ),
     );
   }
@@ -124,25 +165,29 @@ class __$$WorkflowImplCopyWithImpl<$Res>
 class _$WorkflowImpl implements _Workflow {
   const _$WorkflowImpl({
     required this.displayName,
-    required final List<WorkflowAction> workflowActions,
-  }) : _workflowActions = workflowActions;
+    required final List<WorkflowAction> actions,
+    required this.trigger,
+  }) : _actions = actions;
 
   factory _$WorkflowImpl.fromJson(Map<String, dynamic> json) =>
       _$$WorkflowImplFromJson(json);
 
   @override
   final String displayName;
-  final List<WorkflowAction> _workflowActions;
+  final List<WorkflowAction> _actions;
   @override
-  List<WorkflowAction> get workflowActions {
-    if (_workflowActions is EqualUnmodifiableListView) return _workflowActions;
+  List<WorkflowAction> get actions {
+    if (_actions is EqualUnmodifiableListView) return _actions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_workflowActions);
+    return EqualUnmodifiableListView(_actions);
   }
 
   @override
+  final WorkflowTrigger trigger;
+
+  @override
   String toString() {
-    return 'Workflow(displayName: $displayName, workflowActions: $workflowActions)';
+    return 'Workflow(displayName: $displayName, actions: $actions, trigger: $trigger)';
   }
 
   @override
@@ -152,10 +197,8 @@ class _$WorkflowImpl implements _Workflow {
             other is _$WorkflowImpl &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
-            const DeepCollectionEquality().equals(
-              other._workflowActions,
-              _workflowActions,
-            ));
+            const DeepCollectionEquality().equals(other._actions, _actions) &&
+            (identical(other.trigger, trigger) || other.trigger == trigger));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -163,7 +206,8 @@ class _$WorkflowImpl implements _Workflow {
   int get hashCode => Object.hash(
     runtimeType,
     displayName,
-    const DeepCollectionEquality().hash(_workflowActions),
+    const DeepCollectionEquality().hash(_actions),
+    trigger,
   );
 
   /// Create a copy of Workflow
@@ -183,7 +227,8 @@ class _$WorkflowImpl implements _Workflow {
 abstract class _Workflow implements Workflow {
   const factory _Workflow({
     required final String displayName,
-    required final List<WorkflowAction> workflowActions,
+    required final List<WorkflowAction> actions,
+    required final WorkflowTrigger trigger,
   }) = _$WorkflowImpl;
 
   factory _Workflow.fromJson(Map<String, dynamic> json) =
@@ -192,7 +237,9 @@ abstract class _Workflow implements Workflow {
   @override
   String get displayName;
   @override
-  List<WorkflowAction> get workflowActions;
+  List<WorkflowAction> get actions;
+  @override
+  WorkflowTrigger get trigger;
 
   /// Create a copy of Workflow
   /// with the given fields replaced by the non-null parameter values.
@@ -581,5 +628,184 @@ abstract class _WorkflowAction implements WorkflowAction {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WorkflowActionImplCopyWith<_$WorkflowActionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+WorkflowTrigger _$WorkflowTriggerFromJson(Map<String, dynamic> json) {
+  return _WorkflowTrigger.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WorkflowTrigger {
+  TriggerType get type => throw _privateConstructorUsedError;
+  DateTime? get scheduledTime => throw _privateConstructorUsedError;
+
+  /// Serializes this WorkflowTrigger to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of WorkflowTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $WorkflowTriggerCopyWith<WorkflowTrigger> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WorkflowTriggerCopyWith<$Res> {
+  factory $WorkflowTriggerCopyWith(
+    WorkflowTrigger value,
+    $Res Function(WorkflowTrigger) then,
+  ) = _$WorkflowTriggerCopyWithImpl<$Res, WorkflowTrigger>;
+  @useResult
+  $Res call({TriggerType type, DateTime? scheduledTime});
+}
+
+/// @nodoc
+class _$WorkflowTriggerCopyWithImpl<$Res, $Val extends WorkflowTrigger>
+    implements $WorkflowTriggerCopyWith<$Res> {
+  _$WorkflowTriggerCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of WorkflowTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? type = null, Object? scheduledTime = freezed}) {
+    return _then(
+      _value.copyWith(
+            type:
+                null == type
+                    ? _value.type
+                    : type // ignore: cast_nullable_to_non_nullable
+                        as TriggerType,
+            scheduledTime:
+                freezed == scheduledTime
+                    ? _value.scheduledTime
+                    : scheduledTime // ignore: cast_nullable_to_non_nullable
+                        as DateTime?,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$WorkflowTriggerImplCopyWith<$Res>
+    implements $WorkflowTriggerCopyWith<$Res> {
+  factory _$$WorkflowTriggerImplCopyWith(
+    _$WorkflowTriggerImpl value,
+    $Res Function(_$WorkflowTriggerImpl) then,
+  ) = __$$WorkflowTriggerImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({TriggerType type, DateTime? scheduledTime});
+}
+
+/// @nodoc
+class __$$WorkflowTriggerImplCopyWithImpl<$Res>
+    extends _$WorkflowTriggerCopyWithImpl<$Res, _$WorkflowTriggerImpl>
+    implements _$$WorkflowTriggerImplCopyWith<$Res> {
+  __$$WorkflowTriggerImplCopyWithImpl(
+    _$WorkflowTriggerImpl _value,
+    $Res Function(_$WorkflowTriggerImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of WorkflowTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? type = null, Object? scheduledTime = freezed}) {
+    return _then(
+      _$WorkflowTriggerImpl(
+        type:
+            null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                    as TriggerType,
+        scheduledTime:
+            freezed == scheduledTime
+                ? _value.scheduledTime
+                : scheduledTime // ignore: cast_nullable_to_non_nullable
+                    as DateTime?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WorkflowTriggerImpl implements _WorkflowTrigger {
+  const _$WorkflowTriggerImpl({
+    required this.type,
+    required this.scheduledTime,
+  });
+
+  factory _$WorkflowTriggerImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WorkflowTriggerImplFromJson(json);
+
+  @override
+  final TriggerType type;
+  @override
+  final DateTime? scheduledTime;
+
+  @override
+  String toString() {
+    return 'WorkflowTrigger(type: $type, scheduledTime: $scheduledTime)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WorkflowTriggerImpl &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.scheduledTime, scheduledTime) ||
+                other.scheduledTime == scheduledTime));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, type, scheduledTime);
+
+  /// Create a copy of WorkflowTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WorkflowTriggerImplCopyWith<_$WorkflowTriggerImpl> get copyWith =>
+      __$$WorkflowTriggerImplCopyWithImpl<_$WorkflowTriggerImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WorkflowTriggerImplToJson(this);
+  }
+}
+
+abstract class _WorkflowTrigger implements WorkflowTrigger {
+  const factory _WorkflowTrigger({
+    required final TriggerType type,
+    required final DateTime? scheduledTime,
+  }) = _$WorkflowTriggerImpl;
+
+  factory _WorkflowTrigger.fromJson(Map<String, dynamic> json) =
+      _$WorkflowTriggerImpl.fromJson;
+
+  @override
+  TriggerType get type;
+  @override
+  DateTime? get scheduledTime;
+
+  /// Create a copy of WorkflowTrigger
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WorkflowTriggerImplCopyWith<_$WorkflowTriggerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

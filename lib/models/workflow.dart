@@ -13,7 +13,8 @@ part 'workflow.g.dart';
 class Workflow with _$Workflow {
   const factory Workflow({
     required String displayName,
-    required List<WorkflowAction> workflowActions,
+    required List<WorkflowAction> actions,
+    required WorkflowTrigger trigger,
   }) = _Workflow;
 
   factory Workflow.fromJson(Map<String, dynamic> json) =>
@@ -38,4 +39,17 @@ class WorkflowAction with _$WorkflowAction {
       _$WorkflowActionFromJson(json);
 }
 
+@freezed
+class WorkflowTrigger with _$WorkflowTrigger {
+  const factory WorkflowTrigger({
+    required TriggerType type,
+    required DateTime? scheduledTime,
+  }) = _WorkflowTrigger;
+
+  factory WorkflowTrigger.fromJson(Map<String, dynamic> json) =>
+      _$WorkflowTriggerFromJson(json);
+}
+
 enum ActionType { Start, Macro, Delay, Notification, End }
+
+enum TriggerType { TimeBased, EventBased }
