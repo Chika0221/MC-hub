@@ -9,7 +9,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/infrastructure/providers/firebase_unregistered_code_stream_provider.dart';
 import 'package:mc_hub/models/unregistered_code.dart';
 import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/state_animation.dart';
-import 'package:mc_hub/widgets/custom_full_page_dialog.dart';
 
 class NewCodeRegisterDialog extends HookConsumerWidget {
   const NewCodeRegisterDialog({super.key});

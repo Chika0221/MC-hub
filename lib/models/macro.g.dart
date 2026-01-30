@@ -14,6 +14,7 @@ _$MacroImpl _$$MacroImplFromJson(Map<String, dynamic> json) => _$MacroImpl(
       (json['keys'] as List<dynamic>?)?.map((e) => (e as num).toInt()).toList(),
   appPath: json['appPath'] as String?,
   aiPrompt: json['aiPrompt'] as String?,
+  text: json['text'] as String?,
 );
 
 Map<String, dynamic> _$$MacroImplToJson(_$MacroImpl instance) =>
@@ -24,11 +25,13 @@ Map<String, dynamic> _$$MacroImplToJson(_$MacroImpl instance) =>
       'keys': instance.keys,
       'appPath': instance.appPath,
       'aiPrompt': instance.aiPrompt,
+      'text': instance.text,
     };
 
 const _$MacroTypeEnumMap = {
   MacroType.infrared: 'infrared',
   MacroType.combo: 'combo',
   MacroType.openApp: 'openApp',
+  MacroType.text: 'text',
   MacroType.aiTextConvert: 'aiTextConvert',
 };

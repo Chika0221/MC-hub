@@ -13,6 +13,7 @@ class Macro with _$Macro {
     List<int>? keys,
     String? appPath,
     String? aiPrompt,
+    String? text,
   }) = _Macro;
 
   factory Macro.fromJson(Map<String, dynamic> json) => _$MacroFromJson(json);
@@ -22,6 +23,7 @@ enum MacroType {
   infrared(displayName: "Beam"),
   combo(displayName: "Com"),
   openApp(displayName: "App"),
+  text(displayName: "Text"),
   aiTextConvert(displayName: "AI");
 
   final String displayName;

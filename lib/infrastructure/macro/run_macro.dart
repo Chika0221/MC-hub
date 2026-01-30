@@ -43,6 +43,17 @@ class MacroService {
           }
 
           break;
+        case MacroType.text:
+          final text = macro.text;
+          if (text != null) {
+            await Clipboard.setData(ClipboardData(text: text));
+            KeySender.sendMultiKeyPush([
+              VirtualKeyCode.leftControl.vkCode,
+              VirtualKeyCode.keyV.vkCode,
+            ]);
+          }
+
+          break;
         case MacroType.openApp:
           final appPath = macro.appPath;
           if (appPath != null) {

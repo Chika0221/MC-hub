@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/infrastructure/macro/run_macro.dart';
 import 'package:mc_hub/infrastructure/providers/macros_provider.dart';
+import 'package:mc_hub/models/macro.dart';
 import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_dialog.dart';
 
 class KeyMacroSource extends StatelessWidget {
@@ -149,11 +150,21 @@ class MacroInfomationContainer extends HookConsumerWidget {
         borderRadius: BorderRadius.circular(6.0),
       ),
       child: InkWell(
-        onTap:
-            () => showDialog(
-              context: context,
-              builder: (context) => MacroSettingDialog(title: label),
-            ),
+        onTap: () async {
+          final Macro? macro = await showDialog(
+            context: context,
+            builder: (context) => MacroSettingDialog(title: label),
+          );
+          print("aaaaaaaaaaaaa:$macro");
+
+          if (macro != null) {
+            final setMacro = macro.copyWith(
+              name: "${macro.type.displayName}: ${macro.name}",
+            );
+
+            ref.read(MacrosProvider.notifier).setMacro(label, setMacro);
+          }
+        },
         child: Container(
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
