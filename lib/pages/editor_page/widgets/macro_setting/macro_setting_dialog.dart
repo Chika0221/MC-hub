@@ -58,10 +58,6 @@ class MacroSettingDialog extends HookConsumerWidget {
       comboSelected.value = false;
     }
 
-    final codesStream = ref.watch(firebaseCodesStreamProvider);
-
-    final runAppFuture = ref.watch(openAppProvider);
-
     return AlertDialog(
       title: Row(
         children: [
