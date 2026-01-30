@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/firebase_workflow_provider.dart';
 import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/beam_item_grid_view.dart';
-import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/code_container.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/workflow_edit_page.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/widgets/double_line_border_container.dart';
