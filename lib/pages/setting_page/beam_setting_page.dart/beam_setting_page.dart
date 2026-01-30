@@ -9,6 +9,7 @@ import 'package:rive/rive.dart';
 import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
 import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/beam_item_grid_view.dart';
 import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/code_container.dart';
+import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/new_code_register_dialog.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/widgets/custom_background.dart';
 import 'package:mc_hub/widgets/custom_rive_animation.dart';
@@ -31,6 +32,23 @@ class BeamSettingPage extends HookConsumerWidget {
       foragroundWidget: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: CustomAppbar(),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(bottom: 16.0, right: 16.0),
+          child: DoubleLineBorderContainer(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: IconButton.filled(
+              onPressed:
+                  () => showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return NewCodeRegisterDialog();
+                    },
+                  ),
+              icon: Icon(Icons.add),
+              iconSize: 48,
+            ),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

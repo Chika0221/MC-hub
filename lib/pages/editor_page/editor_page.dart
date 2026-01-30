@@ -13,7 +13,7 @@ import 'package:mc_hub/pages/editor_page/key_data.dart';
 import 'package:mc_hub/pages/editor_page/layout_data.dart';
 import 'package:mc_hub/pages/editor_page/widgets/key_palette.dart';
 import 'package:mc_hub/pages/editor_page/widgets/keyboard_layout.dart';
-import 'package:mc_hub/pages/editor_page/widgets/layer_button.dart';
+import 'package:mc_hub/pages/editor_page/widgets/layer_buttons.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 
 class EditorPage extends HookConsumerWidget {
@@ -108,10 +108,7 @@ class EditorPage extends HookConsumerWidget {
               id: "$r,$c",
               defaultLabel: VialNotifier.keycodeToLabel(keycode),
               width:
-                  deviceDef.keys
-                      .where((key) => key.id == "$r,$c")
-                      .first
-                      .width,
+                  deviceDef.keys.where((key) => key.id == "$r,$c").first.width,
             );
             row.add(keydata);
           } catch (e) {}
@@ -149,20 +146,25 @@ class EditorPage extends HookConsumerWidget {
                   child: Padding(
                     padding: EdgeInsets.all(16),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       spacing: 8,
-                      children: List.generate(4, (index) {
-                        return LayerButton(
-                          child: Text(
-                            index.toString(),
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.onTertiary,
+                      children: [
+                        SizedBox(height: 2),
+                        ...List.generate(4, (index) {
+                          return LayerButton(
+                            child: Text(
+                              index.toString(),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onTertiary,
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-                            selectedLayer.value = index;
-                          },
-                        );
-                      }),
+                            onPressed: () {
+                              selectedLayer.value = index;
+                            },
+                          );
+                        }),
+                        SizedBox(height: 0),
+                      ],
                     ),
                   ),
                 ),

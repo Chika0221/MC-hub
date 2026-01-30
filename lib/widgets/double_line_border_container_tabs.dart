@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
@@ -42,7 +43,7 @@ class DoubleLineBorderContainerTabs extends HookConsumerWidget {
               height: titletabHeight,
               decoration: ShapeDecoration(
                 shape: StadiumBorder(),
-                color: colorScheme.surfaceContainerHigh,
+                color: colorScheme.secondaryContainer,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -53,7 +54,7 @@ class DoubleLineBorderContainerTabs extends HookConsumerWidget {
                       textColor: colorScheme.onPrimary,
                       backgroundColor: colorScheme.primary,
                       title: titles[index],
-                    );
+                    ).animate().slideY(begin: -0.1, end: 0.0, duration: 100.ms);
                   } else {
                     return GestureDetector(
                       onTap: () => onTabChanged.call(index),
