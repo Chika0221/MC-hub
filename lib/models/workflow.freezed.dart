@@ -1,0 +1,585 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'workflow.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
+
+Workflow _$WorkflowFromJson(Map<String, dynamic> json) {
+  return _Workflow.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Workflow {
+  String get displayName => throw _privateConstructorUsedError;
+  List<WorkflowAction> get workflowActions =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this Workflow to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Workflow
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $WorkflowCopyWith<Workflow> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WorkflowCopyWith<$Res> {
+  factory $WorkflowCopyWith(Workflow value, $Res Function(Workflow) then) =
+      _$WorkflowCopyWithImpl<$Res, Workflow>;
+  @useResult
+  $Res call({String displayName, List<WorkflowAction> workflowActions});
+}
+
+/// @nodoc
+class _$WorkflowCopyWithImpl<$Res, $Val extends Workflow>
+    implements $WorkflowCopyWith<$Res> {
+  _$WorkflowCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Workflow
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? displayName = null, Object? workflowActions = null}) {
+    return _then(
+      _value.copyWith(
+            displayName:
+                null == displayName
+                    ? _value.displayName
+                    : displayName // ignore: cast_nullable_to_non_nullable
+                        as String,
+            workflowActions:
+                null == workflowActions
+                    ? _value.workflowActions
+                    : workflowActions // ignore: cast_nullable_to_non_nullable
+                        as List<WorkflowAction>,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$WorkflowImplCopyWith<$Res>
+    implements $WorkflowCopyWith<$Res> {
+  factory _$$WorkflowImplCopyWith(
+    _$WorkflowImpl value,
+    $Res Function(_$WorkflowImpl) then,
+  ) = __$$WorkflowImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String displayName, List<WorkflowAction> workflowActions});
+}
+
+/// @nodoc
+class __$$WorkflowImplCopyWithImpl<$Res>
+    extends _$WorkflowCopyWithImpl<$Res, _$WorkflowImpl>
+    implements _$$WorkflowImplCopyWith<$Res> {
+  __$$WorkflowImplCopyWithImpl(
+    _$WorkflowImpl _value,
+    $Res Function(_$WorkflowImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of Workflow
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? displayName = null, Object? workflowActions = null}) {
+    return _then(
+      _$WorkflowImpl(
+        displayName:
+            null == displayName
+                ? _value.displayName
+                : displayName // ignore: cast_nullable_to_non_nullable
+                    as String,
+        workflowActions:
+            null == workflowActions
+                ? _value._workflowActions
+                : workflowActions // ignore: cast_nullable_to_non_nullable
+                    as List<WorkflowAction>,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WorkflowImpl implements _Workflow {
+  const _$WorkflowImpl({
+    required this.displayName,
+    required final List<WorkflowAction> workflowActions,
+  }) : _workflowActions = workflowActions;
+
+  factory _$WorkflowImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WorkflowImplFromJson(json);
+
+  @override
+  final String displayName;
+  final List<WorkflowAction> _workflowActions;
+  @override
+  List<WorkflowAction> get workflowActions {
+    if (_workflowActions is EqualUnmodifiableListView) return _workflowActions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_workflowActions);
+  }
+
+  @override
+  String toString() {
+    return 'Workflow(displayName: $displayName, workflowActions: $workflowActions)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WorkflowImpl &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
+            const DeepCollectionEquality().equals(
+              other._workflowActions,
+              _workflowActions,
+            ));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    displayName,
+    const DeepCollectionEquality().hash(_workflowActions),
+  );
+
+  /// Create a copy of Workflow
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WorkflowImplCopyWith<_$WorkflowImpl> get copyWith =>
+      __$$WorkflowImplCopyWithImpl<_$WorkflowImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WorkflowImplToJson(this);
+  }
+}
+
+abstract class _Workflow implements Workflow {
+  const factory _Workflow({
+    required final String displayName,
+    required final List<WorkflowAction> workflowActions,
+  }) = _$WorkflowImpl;
+
+  factory _Workflow.fromJson(Map<String, dynamic> json) =
+      _$WorkflowImpl.fromJson;
+
+  @override
+  String get displayName;
+  @override
+  List<WorkflowAction> get workflowActions;
+
+  /// Create a copy of Workflow
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WorkflowImplCopyWith<_$WorkflowImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+WorkflowAction _$WorkflowActionFromJson(Map<String, dynamic> json) {
+  return _WorkflowAction.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WorkflowAction {
+  String get actionId => throw _privateConstructorUsedError;
+  String? get nextActionId => throw _privateConstructorUsedError;
+  String get ActionName => throw _privateConstructorUsedError;
+  int get positionX => throw _privateConstructorUsedError;
+  int get PositionY => throw _privateConstructorUsedError;
+  ActionType get actionType => throw _privateConstructorUsedError;
+  Macro? get macro => throw _privateConstructorUsedError;
+  Duration? get delayDuration => throw _privateConstructorUsedError;
+  String? get notificationMessage => throw _privateConstructorUsedError;
+
+  /// Serializes this WorkflowAction to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of WorkflowAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $WorkflowActionCopyWith<WorkflowAction> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WorkflowActionCopyWith<$Res> {
+  factory $WorkflowActionCopyWith(
+    WorkflowAction value,
+    $Res Function(WorkflowAction) then,
+  ) = _$WorkflowActionCopyWithImpl<$Res, WorkflowAction>;
+  @useResult
+  $Res call({
+    String actionId,
+    String? nextActionId,
+    String ActionName,
+    int positionX,
+    int PositionY,
+    ActionType actionType,
+    Macro? macro,
+    Duration? delayDuration,
+    String? notificationMessage,
+  });
+
+  $MacroCopyWith<$Res>? get macro;
+}
+
+/// @nodoc
+class _$WorkflowActionCopyWithImpl<$Res, $Val extends WorkflowAction>
+    implements $WorkflowActionCopyWith<$Res> {
+  _$WorkflowActionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of WorkflowAction
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? actionId = null,
+    Object? nextActionId = freezed,
+    Object? ActionName = null,
+    Object? positionX = null,
+    Object? PositionY = null,
+    Object? actionType = null,
+    Object? macro = freezed,
+    Object? delayDuration = freezed,
+    Object? notificationMessage = freezed,
+  }) {
+    return _then(
+      _value.copyWith(
+            actionId:
+                null == actionId
+                    ? _value.actionId
+                    : actionId // ignore: cast_nullable_to_non_nullable
+                        as String,
+            nextActionId:
+                freezed == nextActionId
+                    ? _value.nextActionId
+                    : nextActionId // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            ActionName:
+                null == ActionName
+                    ? _value.ActionName
+                    : ActionName // ignore: cast_nullable_to_non_nullable
+                        as String,
+            positionX:
+                null == positionX
+                    ? _value.positionX
+                    : positionX // ignore: cast_nullable_to_non_nullable
+                        as int,
+            PositionY:
+                null == PositionY
+                    ? _value.PositionY
+                    : PositionY // ignore: cast_nullable_to_non_nullable
+                        as int,
+            actionType:
+                null == actionType
+                    ? _value.actionType
+                    : actionType // ignore: cast_nullable_to_non_nullable
+                        as ActionType,
+            macro:
+                freezed == macro
+                    ? _value.macro
+                    : macro // ignore: cast_nullable_to_non_nullable
+                        as Macro?,
+            delayDuration:
+                freezed == delayDuration
+                    ? _value.delayDuration
+                    : delayDuration // ignore: cast_nullable_to_non_nullable
+                        as Duration?,
+            notificationMessage:
+                freezed == notificationMessage
+                    ? _value.notificationMessage
+                    : notificationMessage // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
+  }
+
+  /// Create a copy of WorkflowAction
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MacroCopyWith<$Res>? get macro {
+    if (_value.macro == null) {
+      return null;
+    }
+
+    return $MacroCopyWith<$Res>(_value.macro!, (value) {
+      return _then(_value.copyWith(macro: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$WorkflowActionImplCopyWith<$Res>
+    implements $WorkflowActionCopyWith<$Res> {
+  factory _$$WorkflowActionImplCopyWith(
+    _$WorkflowActionImpl value,
+    $Res Function(_$WorkflowActionImpl) then,
+  ) = __$$WorkflowActionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String actionId,
+    String? nextActionId,
+    String ActionName,
+    int positionX,
+    int PositionY,
+    ActionType actionType,
+    Macro? macro,
+    Duration? delayDuration,
+    String? notificationMessage,
+  });
+
+  @override
+  $MacroCopyWith<$Res>? get macro;
+}
+
+/// @nodoc
+class __$$WorkflowActionImplCopyWithImpl<$Res>
+    extends _$WorkflowActionCopyWithImpl<$Res, _$WorkflowActionImpl>
+    implements _$$WorkflowActionImplCopyWith<$Res> {
+  __$$WorkflowActionImplCopyWithImpl(
+    _$WorkflowActionImpl _value,
+    $Res Function(_$WorkflowActionImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of WorkflowAction
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? actionId = null,
+    Object? nextActionId = freezed,
+    Object? ActionName = null,
+    Object? positionX = null,
+    Object? PositionY = null,
+    Object? actionType = null,
+    Object? macro = freezed,
+    Object? delayDuration = freezed,
+    Object? notificationMessage = freezed,
+  }) {
+    return _then(
+      _$WorkflowActionImpl(
+        actionId:
+            null == actionId
+                ? _value.actionId
+                : actionId // ignore: cast_nullable_to_non_nullable
+                    as String,
+        nextActionId:
+            freezed == nextActionId
+                ? _value.nextActionId
+                : nextActionId // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        ActionName:
+            null == ActionName
+                ? _value.ActionName
+                : ActionName // ignore: cast_nullable_to_non_nullable
+                    as String,
+        positionX:
+            null == positionX
+                ? _value.positionX
+                : positionX // ignore: cast_nullable_to_non_nullable
+                    as int,
+        PositionY:
+            null == PositionY
+                ? _value.PositionY
+                : PositionY // ignore: cast_nullable_to_non_nullable
+                    as int,
+        actionType:
+            null == actionType
+                ? _value.actionType
+                : actionType // ignore: cast_nullable_to_non_nullable
+                    as ActionType,
+        macro:
+            freezed == macro
+                ? _value.macro
+                : macro // ignore: cast_nullable_to_non_nullable
+                    as Macro?,
+        delayDuration:
+            freezed == delayDuration
+                ? _value.delayDuration
+                : delayDuration // ignore: cast_nullable_to_non_nullable
+                    as Duration?,
+        notificationMessage:
+            freezed == notificationMessage
+                ? _value.notificationMessage
+                : notificationMessage // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WorkflowActionImpl implements _WorkflowAction {
+  const _$WorkflowActionImpl({
+    required this.actionId,
+    required this.nextActionId,
+    required this.ActionName,
+    required this.positionX,
+    required this.PositionY,
+    required this.actionType,
+    required this.macro,
+    required this.delayDuration,
+    required this.notificationMessage,
+  });
+
+  factory _$WorkflowActionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WorkflowActionImplFromJson(json);
+
+  @override
+  final String actionId;
+  @override
+  final String? nextActionId;
+  @override
+  final String ActionName;
+  @override
+  final int positionX;
+  @override
+  final int PositionY;
+  @override
+  final ActionType actionType;
+  @override
+  final Macro? macro;
+  @override
+  final Duration? delayDuration;
+  @override
+  final String? notificationMessage;
+
+  @override
+  String toString() {
+    return 'WorkflowAction(actionId: $actionId, nextActionId: $nextActionId, ActionName: $ActionName, positionX: $positionX, PositionY: $PositionY, actionType: $actionType, macro: $macro, delayDuration: $delayDuration, notificationMessage: $notificationMessage)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WorkflowActionImpl &&
+            (identical(other.actionId, actionId) ||
+                other.actionId == actionId) &&
+            (identical(other.nextActionId, nextActionId) ||
+                other.nextActionId == nextActionId) &&
+            (identical(other.ActionName, ActionName) ||
+                other.ActionName == ActionName) &&
+            (identical(other.positionX, positionX) ||
+                other.positionX == positionX) &&
+            (identical(other.PositionY, PositionY) ||
+                other.PositionY == PositionY) &&
+            (identical(other.actionType, actionType) ||
+                other.actionType == actionType) &&
+            (identical(other.macro, macro) || other.macro == macro) &&
+            (identical(other.delayDuration, delayDuration) ||
+                other.delayDuration == delayDuration) &&
+            (identical(other.notificationMessage, notificationMessage) ||
+                other.notificationMessage == notificationMessage));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    actionId,
+    nextActionId,
+    ActionName,
+    positionX,
+    PositionY,
+    actionType,
+    macro,
+    delayDuration,
+    notificationMessage,
+  );
+
+  /// Create a copy of WorkflowAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WorkflowActionImplCopyWith<_$WorkflowActionImpl> get copyWith =>
+      __$$WorkflowActionImplCopyWithImpl<_$WorkflowActionImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WorkflowActionImplToJson(this);
+  }
+}
+
+abstract class _WorkflowAction implements WorkflowAction {
+  const factory _WorkflowAction({
+    required final String actionId,
+    required final String? nextActionId,
+    required final String ActionName,
+    required final int positionX,
+    required final int PositionY,
+    required final ActionType actionType,
+    required final Macro? macro,
+    required final Duration? delayDuration,
+    required final String? notificationMessage,
+  }) = _$WorkflowActionImpl;
+
+  factory _WorkflowAction.fromJson(Map<String, dynamic> json) =
+      _$WorkflowActionImpl.fromJson;
+
+  @override
+  String get actionId;
+  @override
+  String? get nextActionId;
+  @override
+  String get ActionName;
+  @override
+  int get positionX;
+  @override
+  int get PositionY;
+  @override
+  ActionType get actionType;
+  @override
+  Macro? get macro;
+  @override
+  Duration? get delayDuration;
+  @override
+  String? get notificationMessage;
+
+  /// Create a copy of WorkflowAction
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WorkflowActionImplCopyWith<_$WorkflowActionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
