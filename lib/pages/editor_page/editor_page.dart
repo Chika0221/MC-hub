@@ -145,26 +145,11 @@ class EditorPage extends HookConsumerWidget {
                   width: 84,
                   child: Padding(
                     padding: EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      spacing: 8,
-                      children: [
-                        SizedBox(height: 2),
-                        ...List.generate(4, (index) {
-                          return LayerButton(
-                            child: Text(
-                              index.toString(),
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onTertiary,
-                              ),
-                            ),
-                            onPressed: () {
-                              selectedLayer.value = index;
-                            },
-                          );
-                        }),
-                        SizedBox(height: 0),
-                      ],
+                    child: LayerButtons(
+                      selectedLayerIndex: selectedLayer.value,
+                      onLayerChanged: (index) {
+                        selectedLayer.value = index;
+                      },
                     ),
                   ),
                 ),
