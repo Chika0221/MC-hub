@@ -44,7 +44,7 @@ class BeamSettingPage extends HookConsumerWidget {
                       return NewCodeRegisterDialog();
                     },
                   ),
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.add_rounded),
               iconSize: 48,
             ),
           ),
