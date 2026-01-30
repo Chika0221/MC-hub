@@ -256,7 +256,7 @@ WorkflowAction _$WorkflowActionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WorkflowAction {
   String get actionId => throw _privateConstructorUsedError;
-  String? get nextActionId => throw _privateConstructorUsedError;
+  List<String?> get nextActionIds => throw _privateConstructorUsedError;
   String get ActionName => throw _privateConstructorUsedError;
   int get positionX => throw _privateConstructorUsedError;
   int get PositionY => throw _privateConstructorUsedError;
@@ -284,7 +284,7 @@ abstract class $WorkflowActionCopyWith<$Res> {
   @useResult
   $Res call({
     String actionId,
-    String? nextActionId,
+    List<String?> nextActionIds,
     String ActionName,
     int positionX,
     int PositionY,
@@ -313,7 +313,7 @@ class _$WorkflowActionCopyWithImpl<$Res, $Val extends WorkflowAction>
   @override
   $Res call({
     Object? actionId = null,
-    Object? nextActionId = freezed,
+    Object? nextActionIds = null,
     Object? ActionName = null,
     Object? positionX = null,
     Object? PositionY = null,
@@ -329,11 +329,11 @@ class _$WorkflowActionCopyWithImpl<$Res, $Val extends WorkflowAction>
                     ? _value.actionId
                     : actionId // ignore: cast_nullable_to_non_nullable
                         as String,
-            nextActionId:
-                freezed == nextActionId
-                    ? _value.nextActionId
-                    : nextActionId // ignore: cast_nullable_to_non_nullable
-                        as String?,
+            nextActionIds:
+                null == nextActionIds
+                    ? _value.nextActionIds
+                    : nextActionIds // ignore: cast_nullable_to_non_nullable
+                        as List<String?>,
             ActionName:
                 null == ActionName
                     ? _value.ActionName
@@ -400,7 +400,7 @@ abstract class _$$WorkflowActionImplCopyWith<$Res>
   @useResult
   $Res call({
     String actionId,
-    String? nextActionId,
+    List<String?> nextActionIds,
     String ActionName,
     int positionX,
     int PositionY,
@@ -429,7 +429,7 @@ class __$$WorkflowActionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? actionId = null,
-    Object? nextActionId = freezed,
+    Object? nextActionIds = null,
     Object? ActionName = null,
     Object? positionX = null,
     Object? PositionY = null,
@@ -445,11 +445,11 @@ class __$$WorkflowActionImplCopyWithImpl<$Res>
                 ? _value.actionId
                 : actionId // ignore: cast_nullable_to_non_nullable
                     as String,
-        nextActionId:
-            freezed == nextActionId
-                ? _value.nextActionId
-                : nextActionId // ignore: cast_nullable_to_non_nullable
-                    as String?,
+        nextActionIds:
+            null == nextActionIds
+                ? _value._nextActionIds
+                : nextActionIds // ignore: cast_nullable_to_non_nullable
+                    as List<String?>,
         ActionName:
             null == ActionName
                 ? _value.ActionName
@@ -495,7 +495,7 @@ class __$$WorkflowActionImplCopyWithImpl<$Res>
 class _$WorkflowActionImpl implements _WorkflowAction {
   const _$WorkflowActionImpl({
     required this.actionId,
-    required this.nextActionId,
+    required final List<String?> nextActionIds,
     required this.ActionName,
     required this.positionX,
     required this.PositionY,
@@ -503,15 +503,21 @@ class _$WorkflowActionImpl implements _WorkflowAction {
     required this.macro,
     required this.delayDuration,
     required this.notificationMessage,
-  });
+  }) : _nextActionIds = nextActionIds;
 
   factory _$WorkflowActionImpl.fromJson(Map<String, dynamic> json) =>
       _$$WorkflowActionImplFromJson(json);
 
   @override
   final String actionId;
+  final List<String?> _nextActionIds;
   @override
-  final String? nextActionId;
+  List<String?> get nextActionIds {
+    if (_nextActionIds is EqualUnmodifiableListView) return _nextActionIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_nextActionIds);
+  }
+
   @override
   final String ActionName;
   @override
@@ -529,7 +535,7 @@ class _$WorkflowActionImpl implements _WorkflowAction {
 
   @override
   String toString() {
-    return 'WorkflowAction(actionId: $actionId, nextActionId: $nextActionId, ActionName: $ActionName, positionX: $positionX, PositionY: $PositionY, actionType: $actionType, macro: $macro, delayDuration: $delayDuration, notificationMessage: $notificationMessage)';
+    return 'WorkflowAction(actionId: $actionId, nextActionIds: $nextActionIds, ActionName: $ActionName, positionX: $positionX, PositionY: $PositionY, actionType: $actionType, macro: $macro, delayDuration: $delayDuration, notificationMessage: $notificationMessage)';
   }
 
   @override
@@ -539,8 +545,10 @@ class _$WorkflowActionImpl implements _WorkflowAction {
             other is _$WorkflowActionImpl &&
             (identical(other.actionId, actionId) ||
                 other.actionId == actionId) &&
-            (identical(other.nextActionId, nextActionId) ||
-                other.nextActionId == nextActionId) &&
+            const DeepCollectionEquality().equals(
+              other._nextActionIds,
+              _nextActionIds,
+            ) &&
             (identical(other.ActionName, ActionName) ||
                 other.ActionName == ActionName) &&
             (identical(other.positionX, positionX) ||
@@ -561,7 +569,7 @@ class _$WorkflowActionImpl implements _WorkflowAction {
   int get hashCode => Object.hash(
     runtimeType,
     actionId,
-    nextActionId,
+    const DeepCollectionEquality().hash(_nextActionIds),
     ActionName,
     positionX,
     PositionY,
@@ -591,7 +599,7 @@ class _$WorkflowActionImpl implements _WorkflowAction {
 abstract class _WorkflowAction implements WorkflowAction {
   const factory _WorkflowAction({
     required final String actionId,
-    required final String? nextActionId,
+    required final List<String?> nextActionIds,
     required final String ActionName,
     required final int positionX,
     required final int PositionY,
@@ -607,7 +615,7 @@ abstract class _WorkflowAction implements WorkflowAction {
   @override
   String get actionId;
   @override
-  String? get nextActionId;
+  List<String?> get nextActionIds;
   @override
   String get ActionName;
   @override

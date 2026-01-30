@@ -25,7 +25,7 @@ class Workflow with _$Workflow {
 class WorkflowAction with _$WorkflowAction {
   const factory WorkflowAction({
     required String actionId,
-    required String? nextActionId,
+    required List<String?> nextActionIds,
     required String ActionName,
     required int positionX,
     required int PositionY,

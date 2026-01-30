@@ -28,7 +28,10 @@ Map<String, dynamic> _$$WorkflowImplToJson(_$WorkflowImpl instance) =>
 _$WorkflowActionImpl _$$WorkflowActionImplFromJson(Map<String, dynamic> json) =>
     _$WorkflowActionImpl(
       actionId: json['actionId'] as String,
-      nextActionId: json['nextActionId'] as String?,
+      nextActionIds:
+          (json['nextActionIds'] as List<dynamic>)
+              .map((e) => e as String?)
+              .toList(),
       ActionName: json['ActionName'] as String,
       positionX: (json['positionX'] as num).toInt(),
       PositionY: (json['PositionY'] as num).toInt(),
@@ -48,7 +51,7 @@ Map<String, dynamic> _$$WorkflowActionImplToJson(
   _$WorkflowActionImpl instance,
 ) => <String, dynamic>{
   'actionId': instance.actionId,
-  'nextActionId': instance.nextActionId,
+  'nextActionIds': instance.nextActionIds,
   'ActionName': instance.ActionName,
   'positionX': instance.positionX,
   'PositionY': instance.PositionY,
