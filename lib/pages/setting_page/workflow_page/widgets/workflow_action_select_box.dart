@@ -16,10 +16,10 @@ class WorkflowActionBox extends HookConsumerWidget {
     final flow = WorkflowAction(
       actionId: "0",
       nextActionIds: ["1"],
-      actionName: 'test',
+      actionName: '曾孫',
       positionX: 0,
       positionY: 0,
-      actionType: ActionType.Start,
+      actionType: ActionType.Notification,
       macro: null,
       delayDuration: null,
       notificationMessage: null,
