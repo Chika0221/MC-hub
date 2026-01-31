@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/models/workflow.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/main_workflow_container.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/select_workflow_container.dart';
+import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_name_container.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 
 class WorkflowEditPage extends HookConsumerWidget {
@@ -32,10 +33,24 @@ class WorkflowEditPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppbar(title: workflow.value.displayName),
-      body: WorkflowBackground(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [MainWorkflowContainer(workflow: workflow,), SelectWorkflowContainer()],
+      body: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Stack(
+            children: [
+              WorkflowBoard(workflow: workflow),
+              Positioned(
+                left: 16,
+                top: 16,
+                child: WorkflowNameContainer(workflow: workflow),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: SelectWorkflowContainer(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -49,22 +64,16 @@ class WorkflowBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          color: Colors.white,
+    return Container(
+      color: Colors.white,
+      child: CustomPaint(
+        painter: DotPainter(
+          dotColor: Theme.of(context).colorScheme.surface,
+          spacing: 16,
+          dotRadius: 1,
         ),
-        child: CustomPaint(
-          painter: DotPainter(
-            dotColor: Theme.of(context).colorScheme.surface,
-            spacing: 16,
-            dotRadius: 1,
-          ),
-          size: Size.infinite,
-          child: child,
-        ),
+        size: Size.infinite,
+        child: child,
       ),
     );
   }

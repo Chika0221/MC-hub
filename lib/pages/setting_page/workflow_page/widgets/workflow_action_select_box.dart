@@ -2,29 +2,48 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 // Project imports:
 import 'package:mc_hub/models/workflow.dart';
+import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_action_container.dart';
 
 class WorkflowActionBox extends HookConsumerWidget {
-  const WorkflowActionBox({super.key});
+  const WorkflowActionBox({super.key, required this.action});
+
+  final WorkflowAction action;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final data = Container(width: 200, height: 100, color: Colors.blue);
+    final draggableAction = useState(action);
 
-    final flow = WorkflowAction(
-      actionId: "0",
-      nextActionIds: ["1"],
-      actionName: '曾孫',
-      positionX: 0,
-      positionY: 0,
-      actionType: ActionType.Notification,
-      macro: null,
-      delayDuration: null,
-      notificationMessage: null,
+    return Draggable(
+      onDragStarted: () {
+        draggableAction.value = draggableAction.value.copyWith(
+          actionId: const Uuid().v4(),
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        height: 64,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Theme.of(context).colorScheme.surface,
+        ),
+        child: Center(
+          child: Text(
+            action.actionName,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
+      ),
+      feedback: Material(
+        color: Colors.transparent,
+        child: ActionContainer(action: action),
+      ),
+      data: draggableAction.value,
     );
-
-    return Draggable(child: data, feedback: data, data: flow);
   }
 }

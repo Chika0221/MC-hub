@@ -50,6 +50,16 @@ class WorkflowTrigger with _$WorkflowTrigger {
       _$WorkflowTriggerFromJson(json);
 }
 
-enum ActionType { Start, Macro, Delay, Notification, End }
+enum ActionType {
+  Start("開始"),
+  Macro("マクロ"),
+  Delay("遅延"),
+  Notification("通知"),
+  End("終了");
+
+  final String displayName;
+
+  const ActionType(this.displayName);
+}
 
 enum TriggerType { TimeBased, EventBased }
