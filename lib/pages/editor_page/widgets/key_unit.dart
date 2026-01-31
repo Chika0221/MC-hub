@@ -41,14 +41,16 @@ class KeyUnit extends StatelessWidget {
 
           return Container(
             decoration: BoxDecoration(
-              color: isHovered
-                  ? Theme.of(context).colorScheme.primaryContainer
-                  : Theme.of(context).colorScheme.surfaceContainerHighest,
+              color:
+                  isHovered
+                      ? Theme.of(context).colorScheme.primaryContainer
+                      : Theme.of(context).colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(6.0),
               border: Border.all(
-                color: isHovered
-                    ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.outlineVariant,
+                color:
+                    isHovered
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.outlineVariant,
                 width: 1.0,
               ),
             ),
@@ -58,9 +60,10 @@ class KeyUnit extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: isHovered
-                      ? Theme.of(context).colorScheme.onPrimaryContainer
-                      : Theme.of(context).colorScheme.onSurfaceVariant,
+                  color:
+                      isHovered
+                          ? Theme.of(context).colorScheme.onPrimaryContainer
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
