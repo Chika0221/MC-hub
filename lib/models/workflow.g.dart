@@ -32,9 +32,9 @@ _$WorkflowActionImpl _$$WorkflowActionImplFromJson(Map<String, dynamic> json) =>
           (json['nextActionIds'] as List<dynamic>)
               .map((e) => e as String?)
               .toList(),
-      ActionName: json['ActionName'] as String,
-      positionX: (json['positionX'] as num).toInt(),
-      PositionY: (json['PositionY'] as num).toInt(),
+      actionName: json['actionName'] as String,
+      positionX: (json['positionX'] as num).toDouble(),
+      positionY: (json['positionY'] as num).toDouble(),
       actionType: $enumDecode(_$ActionTypeEnumMap, json['actionType']),
       macro:
           json['macro'] == null
@@ -52,9 +52,9 @@ Map<String, dynamic> _$$WorkflowActionImplToJson(
 ) => <String, dynamic>{
   'actionId': instance.actionId,
   'nextActionIds': instance.nextActionIds,
-  'ActionName': instance.ActionName,
+  'actionName': instance.actionName,
   'positionX': instance.positionX,
-  'PositionY': instance.PositionY,
+  'positionY': instance.positionY,
   'actionType': _$ActionTypeEnumMap[instance.actionType]!,
   'macro': instance.macro,
   'delayDuration': instance.delayDuration?.inMicroseconds,

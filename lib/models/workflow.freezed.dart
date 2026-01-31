@@ -257,9 +257,9 @@ WorkflowAction _$WorkflowActionFromJson(Map<String, dynamic> json) {
 mixin _$WorkflowAction {
   String get actionId => throw _privateConstructorUsedError;
   List<String?> get nextActionIds => throw _privateConstructorUsedError;
-  String get ActionName => throw _privateConstructorUsedError;
-  int get positionX => throw _privateConstructorUsedError;
-  int get PositionY => throw _privateConstructorUsedError;
+  String get actionName => throw _privateConstructorUsedError;
+  double get positionX => throw _privateConstructorUsedError;
+  double get positionY => throw _privateConstructorUsedError;
   ActionType get actionType => throw _privateConstructorUsedError;
   Macro? get macro => throw _privateConstructorUsedError;
   Duration? get delayDuration => throw _privateConstructorUsedError;
@@ -285,9 +285,9 @@ abstract class $WorkflowActionCopyWith<$Res> {
   $Res call({
     String actionId,
     List<String?> nextActionIds,
-    String ActionName,
-    int positionX,
-    int PositionY,
+    String actionName,
+    double positionX,
+    double positionY,
     ActionType actionType,
     Macro? macro,
     Duration? delayDuration,
@@ -314,9 +314,9 @@ class _$WorkflowActionCopyWithImpl<$Res, $Val extends WorkflowAction>
   $Res call({
     Object? actionId = null,
     Object? nextActionIds = null,
-    Object? ActionName = null,
+    Object? actionName = null,
     Object? positionX = null,
-    Object? PositionY = null,
+    Object? positionY = null,
     Object? actionType = null,
     Object? macro = freezed,
     Object? delayDuration = freezed,
@@ -334,21 +334,21 @@ class _$WorkflowActionCopyWithImpl<$Res, $Val extends WorkflowAction>
                     ? _value.nextActionIds
                     : nextActionIds // ignore: cast_nullable_to_non_nullable
                         as List<String?>,
-            ActionName:
-                null == ActionName
-                    ? _value.ActionName
-                    : ActionName // ignore: cast_nullable_to_non_nullable
+            actionName:
+                null == actionName
+                    ? _value.actionName
+                    : actionName // ignore: cast_nullable_to_non_nullable
                         as String,
             positionX:
                 null == positionX
                     ? _value.positionX
                     : positionX // ignore: cast_nullable_to_non_nullable
-                        as int,
-            PositionY:
-                null == PositionY
-                    ? _value.PositionY
-                    : PositionY // ignore: cast_nullable_to_non_nullable
-                        as int,
+                        as double,
+            positionY:
+                null == positionY
+                    ? _value.positionY
+                    : positionY // ignore: cast_nullable_to_non_nullable
+                        as double,
             actionType:
                 null == actionType
                     ? _value.actionType
@@ -401,9 +401,9 @@ abstract class _$$WorkflowActionImplCopyWith<$Res>
   $Res call({
     String actionId,
     List<String?> nextActionIds,
-    String ActionName,
-    int positionX,
-    int PositionY,
+    String actionName,
+    double positionX,
+    double positionY,
     ActionType actionType,
     Macro? macro,
     Duration? delayDuration,
@@ -430,9 +430,9 @@ class __$$WorkflowActionImplCopyWithImpl<$Res>
   $Res call({
     Object? actionId = null,
     Object? nextActionIds = null,
-    Object? ActionName = null,
+    Object? actionName = null,
     Object? positionX = null,
-    Object? PositionY = null,
+    Object? positionY = null,
     Object? actionType = null,
     Object? macro = freezed,
     Object? delayDuration = freezed,
@@ -450,21 +450,21 @@ class __$$WorkflowActionImplCopyWithImpl<$Res>
                 ? _value._nextActionIds
                 : nextActionIds // ignore: cast_nullable_to_non_nullable
                     as List<String?>,
-        ActionName:
-            null == ActionName
-                ? _value.ActionName
-                : ActionName // ignore: cast_nullable_to_non_nullable
+        actionName:
+            null == actionName
+                ? _value.actionName
+                : actionName // ignore: cast_nullable_to_non_nullable
                     as String,
         positionX:
             null == positionX
                 ? _value.positionX
                 : positionX // ignore: cast_nullable_to_non_nullable
-                    as int,
-        PositionY:
-            null == PositionY
-                ? _value.PositionY
-                : PositionY // ignore: cast_nullable_to_non_nullable
-                    as int,
+                    as double,
+        positionY:
+            null == positionY
+                ? _value.positionY
+                : positionY // ignore: cast_nullable_to_non_nullable
+                    as double,
         actionType:
             null == actionType
                 ? _value.actionType
@@ -496,9 +496,9 @@ class _$WorkflowActionImpl implements _WorkflowAction {
   const _$WorkflowActionImpl({
     required this.actionId,
     required final List<String?> nextActionIds,
-    required this.ActionName,
+    required this.actionName,
     required this.positionX,
-    required this.PositionY,
+    required this.positionY,
     required this.actionType,
     required this.macro,
     required this.delayDuration,
@@ -519,11 +519,11 @@ class _$WorkflowActionImpl implements _WorkflowAction {
   }
 
   @override
-  final String ActionName;
+  final String actionName;
   @override
-  final int positionX;
+  final double positionX;
   @override
-  final int PositionY;
+  final double positionY;
   @override
   final ActionType actionType;
   @override
@@ -535,7 +535,7 @@ class _$WorkflowActionImpl implements _WorkflowAction {
 
   @override
   String toString() {
-    return 'WorkflowAction(actionId: $actionId, nextActionIds: $nextActionIds, ActionName: $ActionName, positionX: $positionX, PositionY: $PositionY, actionType: $actionType, macro: $macro, delayDuration: $delayDuration, notificationMessage: $notificationMessage)';
+    return 'WorkflowAction(actionId: $actionId, nextActionIds: $nextActionIds, actionName: $actionName, positionX: $positionX, positionY: $positionY, actionType: $actionType, macro: $macro, delayDuration: $delayDuration, notificationMessage: $notificationMessage)';
   }
 
   @override
@@ -549,12 +549,12 @@ class _$WorkflowActionImpl implements _WorkflowAction {
               other._nextActionIds,
               _nextActionIds,
             ) &&
-            (identical(other.ActionName, ActionName) ||
-                other.ActionName == ActionName) &&
+            (identical(other.actionName, actionName) ||
+                other.actionName == actionName) &&
             (identical(other.positionX, positionX) ||
                 other.positionX == positionX) &&
-            (identical(other.PositionY, PositionY) ||
-                other.PositionY == PositionY) &&
+            (identical(other.positionY, positionY) ||
+                other.positionY == positionY) &&
             (identical(other.actionType, actionType) ||
                 other.actionType == actionType) &&
             (identical(other.macro, macro) || other.macro == macro) &&
@@ -570,9 +570,9 @@ class _$WorkflowActionImpl implements _WorkflowAction {
     runtimeType,
     actionId,
     const DeepCollectionEquality().hash(_nextActionIds),
-    ActionName,
+    actionName,
     positionX,
-    PositionY,
+    positionY,
     actionType,
     macro,
     delayDuration,
@@ -600,9 +600,9 @@ abstract class _WorkflowAction implements WorkflowAction {
   const factory _WorkflowAction({
     required final String actionId,
     required final List<String?> nextActionIds,
-    required final String ActionName,
-    required final int positionX,
-    required final int PositionY,
+    required final String actionName,
+    required final double positionX,
+    required final double positionY,
     required final ActionType actionType,
     required final Macro? macro,
     required final Duration? delayDuration,
@@ -617,11 +617,11 @@ abstract class _WorkflowAction implements WorkflowAction {
   @override
   List<String?> get nextActionIds;
   @override
-  String get ActionName;
+  String get actionName;
   @override
-  int get positionX;
+  double get positionX;
   @override
-  int get PositionY;
+  double get positionY;
   @override
   ActionType get actionType;
   @override

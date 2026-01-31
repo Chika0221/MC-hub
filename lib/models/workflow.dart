@@ -26,9 +26,9 @@ class WorkflowAction with _$WorkflowAction {
   const factory WorkflowAction({
     required String actionId,
     required List<String?> nextActionIds,
-    required String ActionName,
-    required int positionX,
-    required int PositionY,
+    required String actionName,
+    required double positionX,
+    required double positionY,
     required ActionType actionType,
     required Macro? macro,
     required Duration? delayDuration,

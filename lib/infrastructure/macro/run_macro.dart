@@ -50,7 +50,7 @@ class MacroService {
             KeySender.sendMultiKeyPush([
               VirtualKeyCode.leftControl.vkCode,
               VirtualKeyCode.keyV.vkCode,
-            ]);
+            ], true);
           }
 
           break;
