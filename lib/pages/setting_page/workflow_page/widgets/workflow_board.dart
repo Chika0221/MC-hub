@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/models/workflow.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_action_container.dart';
+import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_path.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/workflow_edit_page.dart';
 
 class WorkflowBoard extends HookConsumerWidget {
@@ -57,6 +58,24 @@ class WorkflowBoard extends HookConsumerWidget {
             ) {
               return Stack(
                 children: [
+                  ...List.generate(actions.value.length, (int index) {
+                    final action = actions.value[index];
+
+                    final boxsize = 180;
+
+                    return Positioned(
+                      left: action.positionX + 180 + 8 + 8 + 2,
+                      top: action.positionY + 60,
+                      child: WorkflowPath(
+                        startOffset: Offset(
+                          action.positionX + 180 + 8 + 8 + 2,
+                          action.positionY + 60,
+                        ),
+                        endOffset: Offset(1500, 1500),
+                      ),
+                    );
+                  }),
+
                   ...List.generate(actions.value.length, (int index) {
                     final action = actions.value[index];
 

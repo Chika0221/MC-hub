@@ -19,31 +19,36 @@ class WorkflowActionBox extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final draggableAction = useState(action);
 
-    return Draggable(
-      onDragStarted: () {
+    final uuid = useMemoized(() => const Uuid());
+
+    return Listener(
+      onPointerHover: (event) {
+        //TODO なんかうまいことUUID更新されないときがある
         draggableAction.value = draggableAction.value.copyWith(
-          actionId: const Uuid().v4(),
+          actionId: uuid.v4(),
         );
       },
-      child: Container(
-        width: double.infinity,
-        height: 64,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Theme.of(context).colorScheme.surface,
-        ),
-        child: Center(
-          child: Text(
-            action.actionName,
-            style: Theme.of(context).textTheme.bodyLarge,
+      child: Draggable<WorkflowAction>(
+        child: Container(
+          width: double.infinity,
+          height: 64,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: Theme.of(context).colorScheme.surface,
+          ),
+          child: Center(
+            child: Text(
+              action.actionName,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
         ),
+        feedback: Material(
+          color: Colors.transparent,
+          child: ActionContainer(action: draggableAction.value),
+        ),
+        data: draggableAction.value,
       ),
-      feedback: Material(
-        color: Colors.transparent,
-        child: ActionContainer(action: action),
-      ),
-      data: draggableAction.value,
     );
   }
 }
