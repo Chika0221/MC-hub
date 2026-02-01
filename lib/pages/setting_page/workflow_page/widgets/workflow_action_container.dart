@@ -15,12 +15,21 @@ class ActionContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return switch (action.actionType) {
-      ActionType.Start || ActionType.End => WorkflowActionContainer(
+      ActionType.Start => WorkflowActionContainer(
         backgroundColor: Colors.purple.shade100,
         highlightColor: Colors.purple,
         child: const Center(child: Text("Start Action")),
         action: action,
         icon: Icons.play_arrow,
+        isShowStartAnker: false,
+      ),
+      ActionType.End => WorkflowActionContainer(
+        backgroundColor: Colors.purple.shade100,
+        highlightColor: Colors.purple,
+        child: const Center(child: Text("End Action")),
+        action: action,
+        icon: Icons.play_arrow,
+        isShowEndAnker: false,
       ),
       ActionType.Macro => WorkflowActionContainer(
         backgroundColor: Colors.blue.shade100,
@@ -55,6 +64,8 @@ class WorkflowActionContainer extends HookConsumerWidget {
     required this.child,
     required this.action,
     required this.icon,
+    this.isShowStartAnker = true,
+    this.isShowEndAnker = true,
   });
 
   final Color backgroundColor;
@@ -62,6 +73,8 @@ class WorkflowActionContainer extends HookConsumerWidget {
   final Widget child;
   final WorkflowAction action;
   final IconData icon;
+  final bool isShowStartAnker;
+  final bool isShowEndAnker;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -119,7 +132,7 @@ class WorkflowActionContainer extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       spacing: 4,
       children: [
-        ActionTarget(),
+        if (isShowStartAnker) ActionTarget(),
         Draggable(
           data: action,
           child: body,
@@ -133,7 +146,7 @@ class WorkflowActionContainer extends HookConsumerWidget {
             ),
           ),
         ),
-        ActionTarget(),
+        if (isShowEndAnker) ActionTarget(),
       ],
     );
   }

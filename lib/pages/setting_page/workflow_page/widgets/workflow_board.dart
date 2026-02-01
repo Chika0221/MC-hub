@@ -26,7 +26,7 @@ class WorkflowBoard extends HookConsumerWidget {
     return InteractiveViewer(
       transformationController: transformationController,
       minScale: 0.1,
-      maxScale: 5.0,
+      maxScale: 4.0,
       constrained: false,
       child: WorkflowBackground(
         child: SizedBox.square(
