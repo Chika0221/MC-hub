@@ -18,7 +18,7 @@ class ActionContainer extends HookConsumerWidget {
 
     return switch (action.actionType) {
       ActionType.Start => WorkflowActionContainer(
-        backgroundColor: colorScheme.primary.withOpacity(0.15),
+        backgroundColor: colorScheme.primary.withValues(alpha: 0.15),
         highlightColor: colorScheme.primary,
         headerTextColor: colorScheme.onPrimary,
         bodyTextColor: colorScheme.onSurface,
@@ -28,7 +28,7 @@ class ActionContainer extends HookConsumerWidget {
         isShowStartAnker: false,
       ),
       ActionType.End => WorkflowActionContainer(
-        backgroundColor: colorScheme.primary.withOpacity(0.15),
+        backgroundColor: colorScheme.primary.withValues(alpha: 0.15),
         highlightColor: colorScheme.primary,
         headerTextColor: colorScheme.onPrimary,
         bodyTextColor: colorScheme.onSurface,
@@ -38,7 +38,7 @@ class ActionContainer extends HookConsumerWidget {
         isShowEndAnker: false,
       ),
       ActionType.Macro => WorkflowActionContainer(
-        backgroundColor: colorScheme.secondary.withOpacity(0.15),
+        backgroundColor: colorScheme.secondary.withValues(alpha: 0.15),
         highlightColor: colorScheme.secondary,
         headerTextColor: colorScheme.onSecondary,
         bodyTextColor: colorScheme.onSurface,
@@ -47,7 +47,7 @@ class ActionContainer extends HookConsumerWidget {
         icon: Icons.code,
       ),
       ActionType.Delay => WorkflowActionContainer(
-        backgroundColor: colorScheme.tertiary.withOpacity(0.15),
+        backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
         highlightColor: colorScheme.tertiary,
         headerTextColor: colorScheme.onTertiary,
         bodyTextColor: colorScheme.onSurface,
@@ -56,7 +56,7 @@ class ActionContainer extends HookConsumerWidget {
         icon: Icons.timer,
       ),
       ActionType.Notification => WorkflowActionContainer(
-        backgroundColor: colorScheme.tertiary.withOpacity(0.15),
+        backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
         highlightColor: colorScheme.tertiary,
         headerTextColor: colorScheme.onTertiary,
         bodyTextColor: colorScheme.onSurface,

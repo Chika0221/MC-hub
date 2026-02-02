@@ -32,7 +32,7 @@ class KeyMacroSource extends StatelessWidget {
             borderRadius: BorderRadius.circular(6.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -55,7 +55,7 @@ class KeyMacroSource extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(
             context,
-          ).colorScheme.surfaceContainerHighest.withOpacity(0.5),
+          ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(6.0),
         ),
       ),
@@ -144,7 +144,7 @@ class MacroInfomationContainer extends HookConsumerWidget {
       decoration: BoxDecoration(
         color: Theme.of(
           context,
-        ).colorScheme.surfaceContainerHighest.withOpacity(0.5),
+        ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(6.0),
       ),
       child: InkWell(
