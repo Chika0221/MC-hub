@@ -24,6 +24,40 @@ class WorkflowBoard extends HookConsumerWidget {
 
     final boardSize = 3000.0;
 
+    List<Widget> createWorkflowPaths(List<WorkflowAction> actions) {
+      const startBoxOffset = Offset(180 + 8 + 8 + 2, 60);
+      const endBoxOffset = Offset(4, 60);
+
+      final List<Widget> paths = [];
+
+      for (final action in actions) {
+        for (final nextActionId in action.nextActionIds) {
+          final nextAction = actions.firstWhere(
+            (element) => element.actionId == nextActionId,
+          );
+
+          paths.add(
+            Positioned(
+              left: action.positionX + startBoxOffset.dx,
+              top: action.positionY + startBoxOffset.dy,
+              child: WorkflowPath(
+                startOffset: Offset(
+                  action.positionX + startBoxOffset.dx,
+                  action.positionY + startBoxOffset.dy,
+                ),
+                endOffset: Offset(
+                  nextAction.positionX + endBoxOffset.dx,
+                  nextAction.positionY + endBoxOffset.dy,
+                ),
+              ),
+            ),
+          );
+        }
+      }
+
+      return paths;
+    }
+
     return InteractiveViewer(
       transformationController: transformationController,
       minScale: 0.1,
@@ -57,22 +91,42 @@ class WorkflowBoard extends HookConsumerWidget {
                   (element) => element.actionId == getActionId,
                 );
 
-                final offsetAllowedDeviation = 200.0;
+                final double offsetAllowedDeviation = 40.0;
 
-                actions.value.forEach((targetAction) {
-                  final difX = (sceneOffset.dx - targetAction.positionX).abs();
-                  final difY = (sceneOffset.dy - targetAction.positionY).abs();
+                WorkflowAction? nearestAction;
+                var minDistanceSquared = double.infinity;
+
+                for (final targetAction in actions.value) {
+                  if (targetAction.actionId == fromAction.actionId) continue;
+                  if (fromAction.nextActionIds.contains(targetAction.actionId))
+                    continue;
+
+                  final dx = sceneOffset.dx - (targetAction.positionX + 4.0);
+                  final dy = sceneOffset.dy - (targetAction.positionY + 60.0);
+                  final distanceSquared = (dx * dx) + (dy * dy);
+
+                  if (distanceSquared < minDistanceSquared) {
+                    minDistanceSquared = distanceSquared;
+                    nearestAction = targetAction;
+                  }
+                }
+
+                if (nearestAction != null) {
+                  final difX =
+                      (sceneOffset.dx - (nearestAction.positionX + 4.0)).abs();
+                  final difY =
+                      (sceneOffset.dy - (nearestAction.positionY + 60.0)).abs();
 
                   if (difX < offsetAllowedDeviation &&
                       difY < offsetAllowedDeviation) {
                     fromAction = fromAction.copyWith(
                       nextActionIds: [
                         ...fromAction.nextActionIds,
-                        targetAction.actionId,
+                        nearestAction.actionId,
                       ],
                     );
                   }
-                });
+                }
 
                 final updateActions = [...actions.value];
                 updateActions.removeWhere(
@@ -89,24 +143,7 @@ class WorkflowBoard extends HookConsumerWidget {
             ) {
               return Stack(
                 children: [
-                  ...List.generate(actions.value.length, (int index) {
-                    final action = actions.value[index];
-
-                    final boxsize = 180;
-
-                    return Positioned(
-                      left: action.positionX + 180 + 8 + 8 + 2,
-                      top: action.positionY + 60,
-                      child: WorkflowPath(
-                        startOffset: Offset(
-                          action.positionX + 180 + 8 + 8 + 2,
-                          action.positionY + 60,
-                        ),
-                        endOffset: Offset(1500, 1500),
-                      ),
-                    );
-                  }),
-
+                  ...createWorkflowPaths(actions.value),
                   ...List.generate(actions.value.length, (int index) {
                     final action = actions.value[index];
 
