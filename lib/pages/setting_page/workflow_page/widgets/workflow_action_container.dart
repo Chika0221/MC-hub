@@ -14,40 +14,52 @@ class ActionContainer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return switch (action.actionType) {
       ActionType.Start => WorkflowActionContainer(
-        backgroundColor: Colors.purple.shade100,
-        highlightColor: Colors.purple,
+        backgroundColor: colorScheme.primary.withOpacity(0.15),
+        highlightColor: colorScheme.primary,
+        headerTextColor: colorScheme.onPrimary,
+        bodyTextColor: colorScheme.onSurface,
         child: const Center(child: Text("Start Action")),
         action: action,
         icon: Icons.play_arrow,
         isShowStartAnker: false,
       ),
       ActionType.End => WorkflowActionContainer(
-        backgroundColor: Colors.purple.shade100,
-        highlightColor: Colors.purple,
+        backgroundColor: colorScheme.primary.withOpacity(0.15),
+        highlightColor: colorScheme.primary,
+        headerTextColor: colorScheme.onPrimary,
+        bodyTextColor: colorScheme.onSurface,
         child: const Center(child: Text("End Action")),
         action: action,
         icon: Icons.play_arrow,
         isShowEndAnker: false,
       ),
       ActionType.Macro => WorkflowActionContainer(
-        backgroundColor: Colors.blue.shade100,
-        highlightColor: Colors.blue,
+        backgroundColor: colorScheme.secondary.withOpacity(0.15),
+        highlightColor: colorScheme.secondary,
+        headerTextColor: colorScheme.onSecondary,
+        bodyTextColor: colorScheme.onSurface,
         child: const Center(child: Text("Macro Action")),
         action: action,
         icon: Icons.code,
       ),
       ActionType.Delay => WorkflowActionContainer(
-        backgroundColor: Colors.orange.shade100,
-        highlightColor: Colors.orange,
+        backgroundColor: colorScheme.error.withOpacity(0.15),
+        highlightColor: colorScheme.error,
+        headerTextColor: colorScheme.onError,
+        bodyTextColor: colorScheme.onSurface,
         child: const Center(child: Text("Delay Action")),
         action: action,
         icon: Icons.timer,
       ),
       ActionType.Notification => WorkflowActionContainer(
-        backgroundColor: Colors.green.shade100,
-        highlightColor: Colors.green,
+        backgroundColor: colorScheme.tertiary.withOpacity(0.15),
+        highlightColor: colorScheme.tertiary,
+        headerTextColor: colorScheme.onTertiary,
+        bodyTextColor: colorScheme.onSurface,
         child: const Center(child: Text("Notification Action")),
         action: action,
         icon: Icons.notifications,
@@ -66,6 +78,8 @@ class WorkflowActionContainer extends HookConsumerWidget {
     required this.icon,
     this.isShowStartAnker = true,
     this.isShowEndAnker = true,
+    this.headerTextColor,
+    this.bodyTextColor,
   });
 
   final Color backgroundColor;
@@ -75,6 +89,8 @@ class WorkflowActionContainer extends HookConsumerWidget {
   final IconData icon;
   final bool isShowStartAnker;
   final bool isShowEndAnker;
+  final Color? headerTextColor;
+  final Color? bodyTextColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -107,12 +123,12 @@ class WorkflowActionContainer extends HookConsumerWidget {
                     child: Text(
                       action.actionName,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: headerTextColor ?? Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  Icon(icon, color: backgroundColor),
+                  Icon(icon, color: headerTextColor ?? Colors.white),
                 ],
               ),
             ),
@@ -120,7 +136,10 @@ class WorkflowActionContainer extends HookConsumerWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-              child: child,
+              child: DefaultTextStyle.merge(
+                style: TextStyle(color: bodyTextColor),
+                child: child,
+              ),
             ),
           ),
         ],
