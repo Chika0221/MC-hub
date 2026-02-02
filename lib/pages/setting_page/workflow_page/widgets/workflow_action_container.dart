@@ -143,7 +143,7 @@ class WorkflowActionContainer extends HookConsumerWidget {
                       ),
                     ),
                   ),
-                  Icon(icon, color: headerTextColor ?? backgroundColor),
+                  Icon(icon, color: headerTextColor ?? Colors.white),
                 ],
               ),
             ),
