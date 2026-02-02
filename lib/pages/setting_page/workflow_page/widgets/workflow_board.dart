@@ -34,22 +34,56 @@ class WorkflowBoard extends HookConsumerWidget {
           dimension: boardSize,
           child: DragTarget(
             onAcceptWithDetails: (data) {
-              final offset = data.offset;
+              if (data.data is WorkflowAction) {
+                final offset = data.offset;
+                final sceneOffset = transformationController.toScene(offset);
 
-              final sceneOffset = transformationController.toScene(offset);
+                final action = (data.data as WorkflowAction).copyWith(
+                  positionX: sceneOffset.dx,
+                  positionY: sceneOffset.dy,
+                );
 
-              print(sceneOffset);
+                final updateActions = actions.value;
+                updateActions.removeWhere((e) => e.actionId == action.actionId);
 
-              final action = (data.data as WorkflowAction).copyWith(
-                positionX: sceneOffset.dx,
-                positionY: sceneOffset.dy,
-              );
+                actions.value = [...updateActions, action];
+              } else if (data.data is String) {
+                final offset = data.offset;
+                final sceneOffset = transformationController.toScene(offset);
 
-              final updateActions = [...actions.value];
+                final getActionId = data.data as String;
 
-              updateActions.removeWhere((e) => e.actionId == action.actionId);
+                var fromAction = actions.value.firstWhere(
+                  (element) => element.actionId == getActionId,
+                );
 
-              actions.value = [...updateActions, action];
+                final offsetAllowedDeviation = 50.0;
+
+                actions.value.map((targetAction) {
+                  final difX =
+                      (sceneOffset.dx + 4 - targetAction.positionX).abs();
+
+                  final difY =
+                      (sceneOffset.dy + 60 - targetAction.positionY).abs();
+
+                  if (difX < offsetAllowedDeviation &&
+                      difY < offsetAllowedDeviation) {
+                    fromAction = fromAction.copyWith(
+                      nextActionIds: [
+                        ...fromAction.nextActionIds,
+                        targetAction.actionId,
+                      ],
+                    );
+                  }
+                });
+
+                final updateActions = actions.value;
+                updateActions.removeWhere(
+                  (e) => e.actionId == fromAction.actionId,
+                );
+
+                actions.value = [...updateActions, fromAction];
+              }
             },
             builder: (
               BuildContext context,
@@ -79,10 +113,12 @@ class WorkflowBoard extends HookConsumerWidget {
                   ...List.generate(actions.value.length, (int index) {
                     final action = actions.value[index];
 
+                    print(action);
+
                     return Positioned(
                       left: action.positionX,
                       top: action.positionY,
-                      child: ActionContainer(action: action),
+                      child: ActionContainer(action: action, actions: actions),
                     );
                   }),
                 ],

@@ -39,45 +39,34 @@ class MyCustomPainter extends CustomPainter {
     final paint =
         Paint()
           ..color = Theme.of(context).colorScheme.onSurface
-          ..strokeWidth = 2.0;
+          ..strokeWidth = 2.0
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round;
+    final path = Path();
+
+    final double arrowSize = 8.0;
 
     if (delta.dx < 0) {
       const double outlierValue = 48.0;
 
-      canvas.drawLine(Offset(0, 0), Offset(outlierValue, 0), paint);
-      canvas.drawLine(
-        Offset(outlierValue, 0),
-        Offset(outlierValue, delta.dy / 2),
-        paint,
-      );
-      canvas.drawLine(
-        Offset(outlierValue, delta.dy / 2),
-        Offset(delta.dx - (outlierValue * 2.0), delta.dy / 2),
-        paint,
-      );
-      canvas.drawLine(
-        Offset(delta.dx - (outlierValue * 2.0), delta.dy / 2),
-        Offset(delta.dx - (outlierValue * 2.0), delta.dy),
-        paint,
-      );
-      canvas.drawLine(
-        Offset(delta.dx - (outlierValue * 2.0), delta.dy),
-        Offset(delta.dx - (outlierValue * 1.0), delta.dy),
-        paint,
-      );
+      path
+        ..lineTo(outlierValue, 0)
+        ..lineTo(outlierValue, delta.dy / 2)
+        ..lineTo(delta.dx - (outlierValue * 2.0), delta.dy / 2)
+        ..lineTo(delta.dx - (outlierValue * 2.0), delta.dy)
+        ..lineTo(delta.dx, delta.dy);
     } else {
-      canvas.drawLine(Offset(0, 0), Offset(delta.dx / 2, 0), paint);
-      canvas.drawLine(
-        Offset(delta.dx / 2, 0),
-        Offset(delta.dx / 2, delta.dy),
-        paint,
-      );
-      canvas.drawLine(
-        Offset(delta.dx / 2, delta.dy),
-        Offset(delta.dx, delta.dy),
-        paint,
-      );
+      path
+        ..lineTo(delta.dx / 2, 0)
+        ..lineTo(delta.dx / 2, delta.dy)
+        ..lineTo(delta.dx, delta.dy);
     }
+    // 矢印
+    path
+      ..moveTo(delta.dx - arrowSize, delta.dy - arrowSize)
+      ..lineTo(delta.dx, delta.dy)
+      ..lineTo(delta.dx - arrowSize, delta.dy + arrowSize);
+    canvas.drawPath(path, paint);
   }
 
   @override

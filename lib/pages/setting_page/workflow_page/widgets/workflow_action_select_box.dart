@@ -45,7 +45,10 @@ class WorkflowActionBox extends HookConsumerWidget {
         ),
         feedback: Material(
           color: Colors.transparent,
-          child: ActionContainer(action: draggableAction.value),
+          child: ActionContainer(
+            action: draggableAction.value,
+            actions: ValueNotifier([]),
+          ),
         ),
         data: draggableAction.value,
       ),
