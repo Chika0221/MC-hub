@@ -62,9 +62,10 @@ class DeviceSelectPage extends HookConsumerWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 spacing: 16,
-                children: List.generate(devices.value.length, (int index) {
-                  return SelectDeviceContainer(device: devices.value[index]);
-                }),
+                children:
+                    devices.value
+                        .map((device) => SelectDeviceContainer(device: device))
+                        .toList(),
               ),
             ),
           ),

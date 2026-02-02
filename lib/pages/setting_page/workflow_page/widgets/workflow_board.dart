@@ -144,17 +144,13 @@ class WorkflowBoard extends HookConsumerWidget {
               return Stack(
                 children: [
                   ...createWorkflowPaths(actions.value),
-                  ...List.generate(actions.value.length, (int index) {
-                    final action = actions.value[index];
-
-                    print(action);
-
-                    return Positioned(
+                  ...actions.value.map(
+                    (action) => Positioned(
                       left: action.positionX,
                       top: action.positionY,
-                      child: ActionContainer(action: action, actions: actions),
-                    );
-                  }),
+                      child: ActionContainer(action: action),
+                    ),
+                  ),
                 ],
               );
             },

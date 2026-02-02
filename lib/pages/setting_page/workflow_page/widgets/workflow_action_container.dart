@@ -2,23 +2,15 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/models/workflow.dart';
-import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_path.dart';
 
 class ActionContainer extends HookConsumerWidget {
-  const ActionContainer({
-    super.key,
-    required this.action,
-    required this.actions,
-  });
+  const ActionContainer({super.key, required this.action});
 
   final WorkflowAction action;
-  final ValueNotifier<List<WorkflowAction>> actions;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,7 +20,6 @@ class ActionContainer extends HookConsumerWidget {
         highlightColor: Colors.purple,
         child: const Center(child: Text("Start Action")),
         action: action,
-        actions: actions,
         icon: Icons.play_arrow,
         isShowStartAnker: false,
       ),
@@ -37,7 +28,6 @@ class ActionContainer extends HookConsumerWidget {
         highlightColor: Colors.purple,
         child: const Center(child: Text("End Action")),
         action: action,
-        actions: actions,
         icon: Icons.play_arrow,
         isShowEndAnker: false,
       ),
@@ -46,7 +36,6 @@ class ActionContainer extends HookConsumerWidget {
         highlightColor: Colors.blue,
         child: const Center(child: Text("Macro Action")),
         action: action,
-        actions: actions,
         icon: Icons.code,
       ),
       ActionType.Delay => WorkflowActionContainer(
@@ -54,7 +43,6 @@ class ActionContainer extends HookConsumerWidget {
         highlightColor: Colors.orange,
         child: const Center(child: Text("Delay Action")),
         action: action,
-        actions: actions,
         icon: Icons.timer,
       ),
       ActionType.Notification => WorkflowActionContainer(
@@ -62,7 +50,6 @@ class ActionContainer extends HookConsumerWidget {
         highlightColor: Colors.green,
         child: const Center(child: Text("Notification Action")),
         action: action,
-        actions: actions,
         icon: Icons.notifications,
       ),
     };
@@ -76,7 +63,6 @@ class WorkflowActionContainer extends HookConsumerWidget {
     required this.highlightColor,
     required this.child,
     required this.action,
-    required this.actions,
     required this.icon,
     this.isShowStartAnker = true,
     this.isShowEndAnker = true,
@@ -86,7 +72,6 @@ class WorkflowActionContainer extends HookConsumerWidget {
   final Color highlightColor;
   final Widget child;
   final WorkflowAction action;
-  final ValueNotifier<List<WorkflowAction>> actions;
   final IconData icon;
   final bool isShowStartAnker;
   final bool isShowEndAnker;

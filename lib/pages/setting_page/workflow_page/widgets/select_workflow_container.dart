@@ -47,24 +47,22 @@ class SelectWorkflowContainer extends HookConsumerWidget {
                     child: Column(
                       spacing: 8,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: List.generate(ActionType.values.length, (
-                        index,
-                      ) {
-                        final actionType = ActionType.values[index];
-                        final action = WorkflowAction(
-                          actionId: "",
-                          nextActionIds: [],
-                          actionName: actionType.displayName,
-                          positionX: 0,
-                          positionY: 0,
-                          actionType: actionType,
-                          macro: null,
-                          delayDuration: null,
-                          notificationMessage: null,
-                        );
+                      children:
+                          ActionType.values.map((actionType) {
+                            final action = WorkflowAction(
+                              actionId: "",
+                              nextActionIds: [],
+                              actionName: actionType.displayName,
+                              positionX: 0,
+                              positionY: 0,
+                              actionType: actionType,
+                              macro: null,
+                              delayDuration: null,
+                              notificationMessage: null,
+                            );
 
-                        return WorkflowActionBox(action: action);
-                      }),
+                            return WorkflowActionBox(action: action);
+                          }).toList(),
                     ),
                   ),
                 ),

@@ -38,16 +38,6 @@ class MacroSettingContainer extends HookConsumerWidget {
               color: Theme.of(context).colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(8.0),
             ),
-            // child: Wrap(
-            //   spacing: 8.0,
-            //   runSpacing: 8.0,
-            //   children: List.generate(itemCount, (index) {
-            //     return InkWell(
-            //       onTap: () => onAttach(index),
-            //       child: builder(index),
-            //     );
-            //   }),
-            // ),
             child: GridView.builder(
               // physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
