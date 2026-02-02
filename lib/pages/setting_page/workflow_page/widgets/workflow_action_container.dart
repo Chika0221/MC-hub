@@ -47,9 +47,9 @@ class ActionContainer extends HookConsumerWidget {
         icon: Icons.code,
       ),
       ActionType.Delay => WorkflowActionContainer(
-        backgroundColor: colorScheme.error.withOpacity(0.15),
-        highlightColor: colorScheme.error,
-        headerTextColor: colorScheme.onError,
+        backgroundColor: colorScheme.tertiary.withOpacity(0.15),
+        highlightColor: colorScheme.tertiary,
+        headerTextColor: colorScheme.onTertiary,
         bodyTextColor: colorScheme.onSurface,
         child: const Center(child: Text("Delay Action")),
         action: action,

@@ -10,7 +10,7 @@ class CustomColorSchema {
     secondaryContainer: Color.fromARGB(255, 80, 86, 112),
     onSecondary: Color(0xffffdb72),
     tertiary: Color(0xff963257),
-    onTertiary: Color(0xffb3babb),
+    onTertiary: Color(0xffffdb72),
     error: Color(0xffff0000),
     onError: Color(0xffffffff),
     surface: Color(0xffb3babb),
