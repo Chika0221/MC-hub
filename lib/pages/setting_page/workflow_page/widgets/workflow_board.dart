@@ -43,7 +43,7 @@ class WorkflowBoard extends HookConsumerWidget {
                   positionY: sceneOffset.dy,
                 );
 
-                final updateActions = actions.value;
+                final updateActions = [...actions.value];
                 updateActions.removeWhere((e) => e.actionId == action.actionId);
 
                 actions.value = [...updateActions, action];
@@ -57,14 +57,11 @@ class WorkflowBoard extends HookConsumerWidget {
                   (element) => element.actionId == getActionId,
                 );
 
-                final offsetAllowedDeviation = 50.0;
+                final offsetAllowedDeviation = 200.0;
 
-                actions.value.map((targetAction) {
-                  final difX =
-                      (sceneOffset.dx + 4 - targetAction.positionX).abs();
-
-                  final difY =
-                      (sceneOffset.dy + 60 - targetAction.positionY).abs();
+                actions.value.forEach((targetAction) {
+                  final difX = (sceneOffset.dx - targetAction.positionX).abs();
+                  final difY = (sceneOffset.dy - targetAction.positionY).abs();
 
                   if (difX < offsetAllowedDeviation &&
                       difY < offsetAllowedDeviation) {
@@ -77,7 +74,7 @@ class WorkflowBoard extends HookConsumerWidget {
                   }
                 });
 
-                final updateActions = actions.value;
+                final updateActions = [...actions.value];
                 updateActions.removeWhere(
                   (e) => e.actionId == fromAction.actionId,
                 );
