@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
 import 'package:mc_hub/models/workflow.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/select_workflow_container.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_board.dart';
@@ -19,32 +20,27 @@ class WorkflowEditPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ValueNotifier<Workflow> workflow = useState(
-      openWorkflow ??
-          Workflow(
-            displayName: "名前未設定のワークフロー",
-            actions: [],
-            trigger: WorkflowTrigger(
-              type: TriggerType.EventBased,
-              scheduledTime: null,
-            ),
-          ),
+    useEffect(() {
+      if (openWorkflow != null)
+        ref.read(WorkflowEditProvider.notifier).update(openWorkflow!);
+
+      return null;
+    }, []);
+
+    final String workflowDisplayName = ref.watch(
+      WorkflowEditProvider.select((value) => value.displayName),
     );
 
     return Scaffold(
-      appBar: CustomAppbar(title: workflow.value.displayName),
+      appBar: CustomAppbar(title: workflowDisplayName),
       body: Padding(
         padding: const EdgeInsets.all(4.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Stack(
             children: [
-              WorkflowBoard(workflow: workflow),
-              Positioned(
-                left: 16,
-                top: 16,
-                child: WorkflowNameContainer(workflow: workflow),
-              ),
+              WorkflowBoard(),
+              Positioned(left: 16, top: 16, child: WorkflowNameContainer()),
               Align(
                 alignment: Alignment.centerRight,
                 child: SelectWorkflowContainer(),

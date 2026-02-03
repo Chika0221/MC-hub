@@ -6,19 +6,20 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
 import 'package:mc_hub/models/workflow.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_action_container.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_path.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/workflow_edit_page.dart';
 
 class WorkflowBoard extends HookConsumerWidget {
-  const WorkflowBoard({super.key, required this.workflow});
-
-  final ValueNotifier<Workflow> workflow;
+  const WorkflowBoard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final actions = useState<List<WorkflowAction>>(workflow.value.actions);
+    final actions = ref.watch(
+      WorkflowEditProvider.select((value) => value.actions),
+    );
 
     final transformationController = useTransformationController();
 
@@ -77,17 +78,20 @@ class WorkflowBoard extends HookConsumerWidget {
                   positionY: sceneOffset.dy,
                 );
 
-                final updateActions = [...actions.value];
+                final updateActions = [...actions];
                 updateActions.removeWhere((e) => e.actionId == action.actionId);
 
-                actions.value = [...updateActions, action];
+                ref.read(WorkflowEditProvider.notifier).updateActions([
+                  ...updateActions,
+                  action,
+                ]);
               } else if (data.data is String) {
                 final offset = data.offset;
                 final sceneOffset = transformationController.toScene(offset);
 
                 final getActionId = data.data as String;
 
-                var fromAction = actions.value.firstWhere(
+                var fromAction = actions.firstWhere(
                   (element) => element.actionId == getActionId,
                 );
 
@@ -96,7 +100,7 @@ class WorkflowBoard extends HookConsumerWidget {
                 WorkflowAction? nearestAction;
                 var minDistanceSquared = double.infinity;
 
-                for (final targetAction in actions.value) {
+                for (final targetAction in actions) {
                   if (targetAction.actionId == fromAction.actionId) continue;
                   if (fromAction.nextActionIds.contains(targetAction.actionId))
                     continue;
@@ -128,12 +132,15 @@ class WorkflowBoard extends HookConsumerWidget {
                   }
                 }
 
-                final updateActions = [...actions.value];
+                final updateActions = [...actions];
                 updateActions.removeWhere(
                   (e) => e.actionId == fromAction.actionId,
                 );
 
-                actions.value = [...updateActions, fromAction];
+                ref.read(WorkflowEditProvider.notifier).updateActions([
+                  ...updateActions,
+                  fromAction,
+                ]);
               }
             },
             builder: (
@@ -143,12 +150,12 @@ class WorkflowBoard extends HookConsumerWidget {
             ) {
               return Stack(
                 children: [
-                  ...createWorkflowPaths(actions.value),
-                  ...actions.value.map(
+                  ...createWorkflowPaths(actions),
+                  ...actions.map(
                     (action) => Positioned(
                       left: action.positionX,
                       top: action.positionY,
-                      child: ActionContainer(action: action),
+                      child: ActionContainer(actionId: action.actionId),
                     ),
                   ),
                 ],

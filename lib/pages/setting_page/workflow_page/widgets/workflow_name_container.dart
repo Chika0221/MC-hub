@@ -6,27 +6,27 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:mc_hub/models/workflow.dart';
+import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
 import 'package:mc_hub/widgets/double_line_border_container.dart';
 
 class WorkflowNameContainer extends HookConsumerWidget {
-  const WorkflowNameContainer({super.key, required this.workflow});
-
-  final ValueNotifier<Workflow> workflow;
+  const WorkflowNameContainer({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textController = useTextEditingController(
-      text: workflow.value.displayName,
+    final displayName = ref.watch(
+      WorkflowEditProvider.select((value) => value.displayName),
     );
+
+    final textController = useTextEditingController(text: displayName);
 
     final textFieldWidth = useState<double>(300);
 
     useEffect(() {
       void listener() {
-        workflow.value = workflow.value.copyWith(
-          displayName: textController.text,
-        );
+        ref
+            .read(WorkflowEditProvider.notifier)
+            .updateDisplayName(textController.text);
       }
 
       textController.addListener(listener);

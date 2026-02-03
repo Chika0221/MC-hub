@@ -5,16 +5,33 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
 import 'package:mc_hub/models/workflow.dart';
 
-class ActionContainer extends HookConsumerWidget {
-  const ActionContainer({super.key, required this.action});
+part 'actions_widgets/workflow_start_container.dart';
+part 'actions_widgets/workflow_macro_container.dart';
+part 'actions_widgets/workflow_delay_container.dart';
+part 'actions_widgets/workflow_notification_container.dart';
+part 'actions_widgets/workflow_end_container.dart';
 
-  final WorkflowAction action;
+class ActionContainer extends HookConsumerWidget {
+  const ActionContainer({
+    super.key,
+    this.actionId = null,
+    this.draggableAction = null,
+  });
+
+  final String? actionId;
+  final WorkflowAction? draggableAction;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+
+    final action =
+        (draggableAction != null)
+            ? draggableAction!
+            : ref.read(WorkflowEditProvider.notifier).getActionById(actionId!);
 
     return switch (action.actionType) {
       ActionType.Start => WorkflowActionContainer(
@@ -94,13 +111,16 @@ class WorkflowActionContainer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const borderWidth = 2.0;
+    const outerRadius = 8.0;
+
     final body = Container(
       width: 180,
       height: 120,
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: backgroundColor,
-        border: Border.all(color: highlightColor, width: 2),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(outerRadius),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -111,7 +131,7 @@ class WorkflowActionContainer extends HookConsumerWidget {
             decoration: BoxDecoration(
               color: highlightColor,
               borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(4),
+                top: Radius.circular(outerRadius - borderWidth),
               ),
             ),
             child: Padding(
