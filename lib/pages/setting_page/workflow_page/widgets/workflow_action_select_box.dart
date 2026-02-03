@@ -23,7 +23,6 @@ class WorkflowActionBox extends HookConsumerWidget {
 
     return Listener(
       onPointerHover: (event) {
-        //TODO なんかうまいことUUID更新されないときがある
         draggableAction.value = draggableAction.value.copyWith(
           actionId: uuid.v4(),
         );

@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
@@ -29,59 +31,69 @@ class ActionContainer extends HookConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final action =
-        (draggableAction != null)
-            ? draggableAction!
-            : ref.read(WorkflowEditProvider.notifier).getActionById(actionId!);
+        (actionId != null)
+            ? ref.watch(WorkflowEditProvider.notifier).getActionById(actionId!)
+            : null;
 
-    return switch (action.actionType) {
-      ActionType.Start => WorkflowActionContainer(
-        backgroundColor: colorScheme.primary.withValues(alpha: 0.15),
-        highlightColor: colorScheme.primary,
-        headerTextColor: colorScheme.onPrimary,
-        bodyTextColor: colorScheme.onSurface,
-        child: const Center(child: Text("Start Action")),
-        action: action,
-        icon: Icons.play_arrow,
-        isShowStartAnker: false,
-      ),
-      ActionType.End => WorkflowActionContainer(
-        backgroundColor: colorScheme.primary.withValues(alpha: 0.15),
-        highlightColor: colorScheme.primary,
-        headerTextColor: colorScheme.onPrimary,
-        bodyTextColor: colorScheme.onSurface,
-        child: const Center(child: Text("End Action")),
-        action: action,
-        icon: Icons.play_arrow,
-        isShowEndAnker: false,
-      ),
-      ActionType.Macro => WorkflowActionContainer(
-        backgroundColor: colorScheme.secondary.withValues(alpha: 0.15),
-        highlightColor: colorScheme.secondary,
-        headerTextColor: colorScheme.onSecondary,
-        bodyTextColor: colorScheme.onSurface,
-        child: const Center(child: Text("Macro Action")),
-        action: action,
-        icon: Icons.code,
-      ),
-      ActionType.Delay => WorkflowActionContainer(
-        backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
-        highlightColor: colorScheme.tertiary,
-        headerTextColor: colorScheme.onTertiary,
-        bodyTextColor: colorScheme.onSurface,
-        child: const Center(child: Text("Delay Action")),
-        action: action,
-        icon: Icons.timer,
-      ),
-      ActionType.Notification => WorkflowActionContainer(
-        backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
-        highlightColor: colorScheme.tertiary,
-        headerTextColor: colorScheme.onTertiary,
-        bodyTextColor: colorScheme.onSurface,
-        child: const Center(child: Text("Notification Action")),
-        action: action,
-        icon: Icons.notifications,
-      ),
-    };
+    return (draggableAction == null)
+        ? switch (action!.actionType) {
+          ActionType.Start => WorkflowStartContainer(actionId: actionId!),
+          ActionType.End => WorkflowEndContainer(actionId: actionId!),
+          ActionType.Macro => WorkflowMacroContainer(actionId: actionId!),
+          ActionType.Delay => WorkflowDelayContainer(actionId: actionId!),
+          ActionType.Notification => WorkflowNotificationContainer(
+            actionId: actionId!,
+          ),
+        }
+        : switch (draggableAction!.actionType) {
+          ActionType.Start => WorkflowActionContainer(
+            backgroundColor: colorScheme.primary.withValues(alpha: 0.15),
+            highlightColor: colorScheme.primary,
+            headerTextColor: colorScheme.onPrimary,
+            bodyTextColor: colorScheme.onSurface,
+            child: const Center(child: Text("Start Action")),
+            action: draggableAction!,
+            icon: Icons.play_arrow,
+            isShowStartAnker: false,
+          ),
+          ActionType.End => WorkflowActionContainer(
+            backgroundColor: colorScheme.primary.withValues(alpha: 0.15),
+            highlightColor: colorScheme.primary,
+            headerTextColor: colorScheme.onPrimary,
+            bodyTextColor: colorScheme.onSurface,
+            child: const Center(child: Text("End Action")),
+            action: draggableAction!,
+            icon: Icons.stop,
+            isShowEndAnker: false,
+          ),
+          ActionType.Macro => WorkflowActionContainer(
+            backgroundColor: colorScheme.secondary.withValues(alpha: 0.15),
+            highlightColor: colorScheme.secondary,
+            headerTextColor: colorScheme.onSecondary,
+            bodyTextColor: colorScheme.onSurface,
+            child: const Center(child: Text("Macro Action")),
+            action: draggableAction!,
+            icon: Icons.code,
+          ),
+          ActionType.Delay => WorkflowActionContainer(
+            backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
+            highlightColor: colorScheme.tertiary,
+            headerTextColor: colorScheme.onTertiary,
+            bodyTextColor: colorScheme.onSurface,
+            child: const Center(child: Text("Delay Action")),
+            action: draggableAction!,
+            icon: Icons.timer,
+          ),
+          ActionType.Notification => WorkflowActionContainer(
+            backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
+            highlightColor: colorScheme.tertiary,
+            headerTextColor: colorScheme.onTertiary,
+            bodyTextColor: colorScheme.onSurface,
+            child: const Center(child: Text("Notification Action")),
+            action: draggableAction!,
+            icon: Icons.notifications,
+          ),
+        };
   }
 }
 
