@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/models/workflow.dart';
 
 class FirebaseWorkflowNotifier extends StreamNotifier<List<Workflow>> {
-  final workflow_collection = FirebaseFirestore.instance.collection(
+  final workflowCollection = FirebaseFirestore.instance.collection(
     "workflows",
   );
 
