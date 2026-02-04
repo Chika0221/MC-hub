@@ -8,18 +8,58 @@ class WorkflowDelayContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isPreview = actionId == "";
+
+    final highlightColor = colorScheme.tertiary;
+    final headerTextColor = colorScheme.onTertiary;
 
     final action = ref
         .watch(WorkflowEditProvider.notifier)
         .getActionById(actionId);
 
+    final delaySeconds = action.delayDuration?.inSeconds ?? 0;
+
+    final errorText = useState<String?>(null);
+
     return WorkflowActionContainer(
       backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
-      highlightColor: colorScheme.tertiary,
-      headerTextColor: colorScheme.onTertiary,
+      highlightColor: highlightColor,
+      headerTextColor: headerTextColor,
       bodyTextColor: colorScheme.onSurface,
-      child: const Center(child: Text("Delay Action")),
+      child: Center(
+        child: Form(
+          autovalidateMode: AutovalidateMode.always,
+          child: TextFormField(
+            initialValue: delaySeconds.toString(),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: highlightColor),
+              ),
+              suffix: Text('s', style: TextStyle(color: colorScheme.onSurface)),
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              final seconds = int.tryParse(value) ?? 0;
+              final updatedAction = action.copyWith(
+                delayDuration: Duration(seconds: seconds),
+              );
+              ref
+                  .read(WorkflowEditProvider.notifier)
+                  .updateAction(updatedAction);
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return '値を入力してください';
+              }
+              try {
+                final intvalue = int.parse(value);
+              } catch (e) {
+                return '有効な数値を入力してください';
+              }
+              return null;
+            },
+          ),
+        ),
+      ),
       action: action,
       icon: Icons.timer,
     );

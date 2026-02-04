@@ -155,7 +155,10 @@ class WorkflowBoard extends HookConsumerWidget {
                     (action) => Positioned(
                       left: action.positionX,
                       top: action.positionY,
-                      child: ActionContainer(actionId: action.actionId),
+                      child: ActionContainer(
+                        key: ValueKey(action.actionId),
+                        actionId: action.actionId,
+                      ),
                     ),
                   ),
                 ],
