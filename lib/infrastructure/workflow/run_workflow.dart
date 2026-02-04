@@ -10,20 +10,16 @@ class WorkflowService {
 
   WorkflowService({required this.workflow});
 
-  void runWorkflow() {
+  void runWorkflow() async {
     WorkflowAction focusAction = workflow.actions.firstWhere(
       (action) => action.actionType == ActionType.Start,
     );
 
-    final result = runAction(focusAction);
-    if (result != null) {
-      result.then((success) {
-        if (success) {
-          print("Workflow '${workflow.displayName}' executed successfully.");
-        } else {
-          print("Workflow '${workflow.displayName}' execution failed.");
-        }
-      });
+    final success = await runAction(focusAction);
+    if (success) {
+      print("Workflow '${workflow.displayName}' executed successfully.");
+    } else {
+      print("Workflow '${workflow.displayName}' execution failed.");
     }
   }
 
@@ -36,7 +32,7 @@ class WorkflowService {
 
     switch (action.actionType) {
       case ActionType.Macro:
-        MacroService.runMacro(action.macro);
+        await MacroService.runMacro(action.macro);
         break;
       case ActionType.Delay:
         final delayDuration = action.delayDuration ?? Duration.zero;
