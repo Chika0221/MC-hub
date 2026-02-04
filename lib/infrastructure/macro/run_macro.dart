@@ -1,5 +1,3 @@
-// Project imports:
-
 // Dart imports:
 import 'dart:io';
 
@@ -19,13 +17,13 @@ import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.d
 import 'package:mc_hub/models/macro.dart';
 
 class MacroService {
-  final MonitorKeycodes keycode;
-
-  MacroService({required this.keycode});
-
-  void runMacro() async {
+  static void runMacroByKeycode(MonitorKeycodes keycode) async {
     final Macro? macro = await AppPreferences.getMacro(keycode);
 
+    await runMacro(macro);
+  }
+
+  static Future<void> runMacro(Macro? macro) async {
     if (macro != null) {
       switch (macro.type) {
         case MacroType.infrared:
@@ -33,15 +31,28 @@ class MacroService {
           final inCode = await firebaseNotifier.getCode(macro.docId!);
 
           final updateCode = inCode.copyWith(state: true);
-
           await firebaseNotifier.updateCodes(updateCode);
 
         case MacroType.combo:
-          print("Executing Combo Macro: ${macro.name}");
-          sendNotification(
-            "Macro Executed",
-            "Executed Combo Macro: ${macro.name}",
-          );
+          final vKCodes = macro.keys;
+
+          try {
+            KeySender.sendMultiKeyPush(vKCodes!, true);
+          } catch (e) {
+            sendNotification("マクロ実行失敗", "");
+          }
+
+          break;
+        case MacroType.text:
+          final text = macro.text;
+          if (text != null) {
+            await Clipboard.setData(ClipboardData(text: text));
+            KeySender.sendMultiKeyPush([
+              VirtualKeyCode.leftControl.vkCode,
+              VirtualKeyCode.keyV.vkCode,
+            ], true);
+          }
+
           break;
         case MacroType.openApp:
           final appPath = macro.appPath;

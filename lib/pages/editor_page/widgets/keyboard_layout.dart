@@ -26,19 +26,21 @@ class KeyboardLayout extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: layoutData.map((row) {
-            return Row(
-              children: row.map((keyData) {
-                return KeyUnit(
-                  keyData: keyData,
-                  currentMapping: keyMappings[keyData.id],
-                  onRemap: (newMapping) {
-                    onKeyRemap(keyData.id, newMapping);
-                  },
+          children:
+              layoutData.map((row) {
+                return Row(
+                  children:
+                      row.map((keyData) {
+                        return KeyUnit(
+                          keyData: keyData,
+                          currentMapping: keyMappings[keyData.id],
+                          onRemap: (newMapping) {
+                            onKeyRemap(keyData.id, newMapping);
+                          },
+                        );
+                      }).toList(),
                 );
               }).toList(),
-            );
-          }).toList(),
         ),
       ),
     );

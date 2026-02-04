@@ -53,12 +53,11 @@ class MyApp extends HookConsumerWidget {
 
             if (MonitorKeycodes.macro1.vkCode <= lastLog.value &&
                 lastLog.value <= MonitorKeycodes.macro12.vkCode) {
-              final macroService = MacroService(
-                keycode: MonitorKeycodes.values.firstWhere(
+              MacroService.runMacroByKeycode(
+                MonitorKeycodes.values.firstWhere(
                   (kc) => kc.vkCode == lastLog.value,
                 ),
               );
-              macroService.runMacro();
             }
           },
         );

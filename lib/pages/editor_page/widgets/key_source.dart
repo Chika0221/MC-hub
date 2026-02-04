@@ -5,11 +5,7 @@ class KeySource extends StatelessWidget {
   final String label;
   final String data;
 
-  const KeySource({
-    super.key,
-    required this.label,
-    required this.data,
-  });
+  const KeySource({super.key, required this.label, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +23,7 @@ class KeySource extends StatelessWidget {
             borderRadius: BorderRadius.circular(6.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -48,7 +44,9 @@ class KeySource extends StatelessWidget {
         width: size,
         height: size,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.5),
+          color: Theme.of(
+            context,
+          ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(6.0),
         ),
       ),
