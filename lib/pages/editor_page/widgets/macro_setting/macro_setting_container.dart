@@ -24,32 +24,40 @@ class MacroSettingContainer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Text(title, style: Theme.of(context).textTheme.headlineSmall),
-            const SizedBox(height: 8.0),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondaryContainer,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: List.generate(itemCount, (index) {
-                  return InkWell(
-                    onTap: () => onAttach(index),
-                    child: builder(index),
-                  );
-                }),
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Text(title, style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 8.0),
+          Container(
+            width: double.maxFinite,
+            height: 200,
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              borderRadius: BorderRadius.circular(8.0),
             ),
-          ],
-        ),
+            child: GridView.builder(
+              // physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                mainAxisExtent: 60.0,
+                maxCrossAxisExtent: 300.0,
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
+                childAspectRatio: 4 / 1,
+              ),
+
+              itemCount: itemCount,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () => onAttach(index),
+                  child: builder(index),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -70,8 +78,6 @@ class MacroSelecterContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: 300,
-      height: 60,
       decoration: BoxDecoration(
         color:
             (select)
@@ -91,6 +97,7 @@ class MacroSelecterContainer extends HookConsumerWidget {
               children: [
                 Text(
                   title,
+                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color:
                         (select)

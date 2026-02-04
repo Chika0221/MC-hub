@@ -7,20 +7,20 @@ import 'package:rive/rive.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
-import 'package:mc_hub/pages/beam_setting_page.dart/widgets/beam_item_grid_view.dart';
-import 'package:mc_hub/pages/beam_setting_page.dart/widgets/code_container.dart';
-import 'package:mc_hub/pages/beam_setting_page.dart/widgets/new_code_register_dialog.dart';
+import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/beam_item_grid_view.dart';
+import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/code_container.dart';
+import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/new_code_register_dialog.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/widgets/custom_background.dart';
 import 'package:mc_hub/widgets/custom_rive_animation.dart';
-import 'package:mc_hub/widgets/folder_border_containar.dart';
+import 'package:mc_hub/widgets/double_line_border_container.dart';
 
 class BeamSettingPage extends HookConsumerWidget {
   const BeamSettingPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomBackground(
-      byRail: true,
       backGroundWidget: CustomRiveAnimation(
         size: Size.infinite,
         fileLoader: FileLoader.fromAsset(
@@ -32,6 +32,23 @@ class BeamSettingPage extends HookConsumerWidget {
       foragroundWidget: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: CustomAppbar(),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(bottom: 16.0, right: 16.0),
+          child: DoubleLineBorderContainer(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: IconButton.filled(
+              onPressed:
+                  () => showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return NewCodeRegisterDialog();
+                    },
+                  ),
+              icon: Icon(Icons.add_rounded),
+              iconSize: 48,
+            ),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -64,34 +81,30 @@ class BeamSendingContainer extends HookConsumerWidget {
 
     return codesAsyncValue.when(
       data: (infraredCodes) {
-        return FolderBorderContainar(
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-          title: "コード一覧",
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed:
-                () => showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return NewCodeRegisterDialog();
-                  },
-                ),
-            label: Text("登録"),
-            icon: Icon(Icons.add),
-            elevation: 0,
-          ),
-          child: BeamItemGridView(
-            childrenAspectRatio: 5,
-            itemCount: infraredCodes.length,
-            itemBuilder: (context, index) {
-              return CodeContainer(
-                code: infraredCodes[index],
-                onPressed: () async {
-                  await ref
-                      .read(firebaseCodesStreamProvider.notifier)
-                      .updateCodes(infraredCodes[index].copyWith(state: true));
+        return Expanded(
+          child: DoubleLineBorderContainer(
+            borderType: DoubleLineBorderType.roundedRectangle,
+            borderRadius: 48,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BeamItemGridView(
+                childrenAspectRatio: 5,
+                itemCount: infraredCodes.length,
+                itemBuilder: (context, index) {
+                  return CodeContainer(
+                    code: infraredCodes[index],
+                    onPressed: () async {
+                      await ref
+                          .read(firebaseCodesStreamProvider.notifier)
+                          .updateCodes(
+                            infraredCodes[index].copyWith(state: true),
+                          );
+                    },
+                  );
                 },
-              );
-            },
+              ),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           ),
         );
       },

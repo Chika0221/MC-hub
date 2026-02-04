@@ -9,21 +9,25 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
-import 'package:mc_hub/pages/beam_setting_page.dart/beam_setting_page.dart';
 import 'package:mc_hub/pages/deviceSelect_page/deviceSelect_page.dart';
 import 'package:mc_hub/pages/home_page/widgets/custom_navigation_rail.dart';
+import 'package:mc_hub/pages/setting_page/setting_page.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = useState(0);
+    final subSelectedIndex = useState(0);
 
     return Scaffold(
       body: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          CustomNavigationRail(selectedIndex: selectedIndex),
+          CustomNavigationRail(
+            selectedIndex: selectedIndex,
+            subSelectedIndex: subSelectedIndex,
+          ),
           Expanded(
             child: EasyAnimatedIndexedStack(
               index: selectedIndex.value,
@@ -32,7 +36,10 @@ class HomePage extends HookConsumerWidget {
                       FadeTransition(opacity: animation, child: child),
               curve: Curves.easeInOutSine,
               duration: Duration(milliseconds: 240),
-              children: [DeviceSelectPage(), BeamSettingPage()],
+              children: [
+                DeviceSelectPage(),
+                SettingPage(selectedIndex: subSelectedIndex.value),
+              ],
             ),
           ),
         ],

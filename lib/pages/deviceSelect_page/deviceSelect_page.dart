@@ -14,7 +14,6 @@ import 'package:rive/rive.dart';
 import 'package:mc_hub/infrastructure/hid/hid_scripts.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/main.dart';
-import 'package:mc_hub/theme/custom_theme.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/widgets/custom_background.dart';
 import 'package:mc_hub/widgets/custom_rive_animation.dart';
@@ -43,7 +42,6 @@ class DeviceSelectPage extends HookConsumerWidget {
     }, []);
 
     return CustomBackground(
-      byRail: true,
       backGroundWidget: CustomRiveAnimation(
         size: Size.infinite,
         fileLoader: FileLoader.fromAsset(
@@ -56,52 +54,21 @@ class DeviceSelectPage extends HookConsumerWidget {
       foragroundWidget: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: CustomAppbar(),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Flexible(
-              flex: 1,
-              child: Text(
-                "MC Hub",
-                style: CustomTheme()
-                    .titleTheme(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(
-                      fontSize: MediaQuery.of(context).size.height * 0.08,
-                      fontWeight: FontWeight.bold,
-                    ),
-                // style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                //   fontSize: MediaQuery.of(context).size.height * 0.08,
-                //   fontWeight: FontWeight.bold,
-                // ),
+        body: Center(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 64),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                spacing: 16,
+                children:
+                    devices.value
+                        .map((device) => SelectDeviceContainer(device: device))
+                        .toList(),
               ),
             ),
-            Flexible(
-              flex: 2,
-              child: Center(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 64),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      spacing: 16,
-                      children: List.generate(devices.value.length, (
-                        int index,
-                      ) {
-                      return SelectDeviceContainer(
-                          device: devices.value[index],
-                        );
-                      }),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

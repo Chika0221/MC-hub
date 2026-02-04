@@ -18,14 +18,14 @@ class CodeContainer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
+        shape: StadiumBorder(),
         color:
             (code.state)
                 ? Theme.of(context).colorScheme.secondary
                 : Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(4),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.fromLTRB(24, 8, 16, 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,20 +40,22 @@ class CodeContainer extends HookConsumerWidget {
                       title: Text(code.name),
                       content: Text("${code.code}"),
                       actions: [
-                        FilledButton.tonal(
+                        FilledButton.tonalIcon(
                           onPressed: () {
                             ref
                                 .read(firebaseCodesStreamProvider.notifier)
                                 .deleteCode(code);
                             Navigator.of(context).pop();
                           },
-                          child: Text("削除"),
+                          icon: Icon(Icons.delete_rounded),
+                          label: Text("削除"),
                         ),
-                        TextButton(
+                        TextButton.icon(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text("閉じる"),
+                          icon: Icon(Icons.close_rounded),
+                          label: Text("閉じる"),
                         ),
                       ],
                     );
@@ -66,6 +68,7 @@ class CodeContainer extends HookConsumerWidget {
                 children: [
                   Text(
                     code.name,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color:
                           (code.state)

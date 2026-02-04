@@ -26,6 +26,8 @@ mixin _$Macro {
   String? get docId => throw _privateConstructorUsedError;
   List<int>? get keys => throw _privateConstructorUsedError;
   String? get appPath => throw _privateConstructorUsedError;
+  String? get aiPrompt => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
 
   /// Serializes this Macro to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,6 +49,8 @@ abstract class $MacroCopyWith<$Res> {
     String? docId,
     List<int>? keys,
     String? appPath,
+    String? aiPrompt,
+    String? text,
   });
 }
 
@@ -70,6 +74,8 @@ class _$MacroCopyWithImpl<$Res, $Val extends Macro>
     Object? docId = freezed,
     Object? keys = freezed,
     Object? appPath = freezed,
+    Object? aiPrompt = freezed,
+    Object? text = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -98,6 +104,16 @@ class _$MacroCopyWithImpl<$Res, $Val extends Macro>
                     ? _value.appPath
                     : appPath // ignore: cast_nullable_to_non_nullable
                         as String?,
+            aiPrompt:
+                freezed == aiPrompt
+                    ? _value.aiPrompt
+                    : aiPrompt // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            text:
+                freezed == text
+                    ? _value.text
+                    : text // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -118,6 +134,8 @@ abstract class _$$MacroImplCopyWith<$Res> implements $MacroCopyWith<$Res> {
     String? docId,
     List<int>? keys,
     String? appPath,
+    String? aiPrompt,
+    String? text,
   });
 }
 
@@ -140,6 +158,8 @@ class __$$MacroImplCopyWithImpl<$Res>
     Object? docId = freezed,
     Object? keys = freezed,
     Object? appPath = freezed,
+    Object? aiPrompt = freezed,
+    Object? text = freezed,
   }) {
     return _then(
       _$MacroImpl(
@@ -168,6 +188,16 @@ class __$$MacroImplCopyWithImpl<$Res>
                 ? _value.appPath
                 : appPath // ignore: cast_nullable_to_non_nullable
                     as String?,
+        aiPrompt:
+            freezed == aiPrompt
+                ? _value.aiPrompt
+                : aiPrompt // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        text:
+            freezed == text
+                ? _value.text
+                : text // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -182,6 +212,8 @@ class _$MacroImpl implements _Macro {
     this.docId,
     final List<int>? keys,
     this.appPath,
+    this.aiPrompt,
+    this.text,
   }) : _keys = keys;
 
   factory _$MacroImpl.fromJson(Map<String, dynamic> json) =>
@@ -205,10 +237,14 @@ class _$MacroImpl implements _Macro {
 
   @override
   final String? appPath;
+  @override
+  final String? aiPrompt;
+  @override
+  final String? text;
 
   @override
   String toString() {
-    return 'Macro(name: $name, type: $type, docId: $docId, keys: $keys, appPath: $appPath)';
+    return 'Macro(name: $name, type: $type, docId: $docId, keys: $keys, appPath: $appPath, aiPrompt: $aiPrompt, text: $text)';
   }
 
   @override
@@ -220,7 +256,10 @@ class _$MacroImpl implements _Macro {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.docId, docId) || other.docId == docId) &&
             const DeepCollectionEquality().equals(other._keys, _keys) &&
-            (identical(other.appPath, appPath) || other.appPath == appPath));
+            (identical(other.appPath, appPath) || other.appPath == appPath) &&
+            (identical(other.aiPrompt, aiPrompt) ||
+                other.aiPrompt == aiPrompt) &&
+            (identical(other.text, text) || other.text == text));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -232,6 +271,8 @@ class _$MacroImpl implements _Macro {
     docId,
     const DeepCollectionEquality().hash(_keys),
     appPath,
+    aiPrompt,
+    text,
   );
 
   /// Create a copy of Macro
@@ -255,6 +296,8 @@ abstract class _Macro implements Macro {
     final String? docId,
     final List<int>? keys,
     final String? appPath,
+    final String? aiPrompt,
+    final String? text,
   }) = _$MacroImpl;
 
   factory _Macro.fromJson(Map<String, dynamic> json) = _$MacroImpl.fromJson;
@@ -269,6 +312,10 @@ abstract class _Macro implements Macro {
   List<int>? get keys;
   @override
   String? get appPath;
+  @override
+  String? get aiPrompt;
+  @override
+  String? get text;
 
   /// Create a copy of Macro
   /// with the given fields replaced by the non-null parameter values.

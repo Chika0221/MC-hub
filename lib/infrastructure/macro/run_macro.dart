@@ -1,19 +1,29 @@
-// Project imports:
+// Dart imports:
+import 'dart:io';
+
+// Flutter imports:
+import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:firebase_ai/firebase_ai.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/hooks/virtual_key_codes.dart';
 import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
+import 'package:mc_hub/infrastructure/macro/key_sender.dart';
+import 'package:mc_hub/infrastructure/macro/prompt_loader.dart';
 import 'package:mc_hub/infrastructure/notification/send_notification.dart';
 import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.dart';
 import 'package:mc_hub/models/macro.dart';
 
 class MacroService {
-  final MonitorKeycodes keycode;
-
-  MacroService({required this.keycode});
-
-  void runMacro() async {
+  static void runMacroByKeycode(MonitorKeycodes keycode) async {
     final Macro? macro = await AppPreferences.getMacro(keycode);
 
+    await runMacro(macro);
+  }
+
+  static Future<void> runMacro(Macro? macro) async {
     if (macro != null) {
       switch (macro.type) {
         case MacroType.infrared:
@@ -21,25 +31,88 @@ class MacroService {
           final inCode = await firebaseNotifier.getCode(macro.docId!);
 
           final updateCode = inCode.copyWith(state: true);
-
           await firebaseNotifier.updateCodes(updateCode);
 
         case MacroType.combo:
-          print("Executing Combo Macro: ${macro.name}");
-          sendNotification(
-            "Macro Executed",
-            "Executed Combo Macro: ${macro.name}",
-          );
+          final vKCodes = macro.keys;
+
+          try {
+            KeySender.sendMultiKeyPush(vKCodes!, true);
+          } catch (e) {
+            sendNotification("マクロ実行失敗", "");
+          }
+
+          break;
+        case MacroType.text:
+          final text = macro.text;
+          if (text != null) {
+            await Clipboard.setData(ClipboardData(text: text));
+            KeySender.sendMultiKeyPush([
+              VirtualKeyCode.leftControl.vkCode,
+              VirtualKeyCode.keyV.vkCode,
+            ], true);
+          }
+
           break;
         case MacroType.openApp:
           final appPath = macro.appPath;
           if (appPath != null) {
-            print("Opening Application at path: $appPath");
-            sendNotification(
-              "Macro Executed",
-              "Opened Application at path: $appPath",
-            );
+            final result = await Process.run("powershell", [
+              "start",
+              "\"${appPath}\"",
+            ], runInShell: true);
+
+            print('Exit Code: ${result.exitCode}');
+            print('stderr: ${result.stderr}');
+            print('stdout: ${result.stdout}');
           }
+
+          break;
+
+        case MacroType.aiTextConvert:
+          final aiPrompt = macro.aiPrompt;
+          if (aiPrompt != null) {
+            sendNotification("マクロ実行中", "");
+
+            KeySender.sendMultiKeyPush([
+              VirtualKeyCode.leftControl.vkCode,
+              VirtualKeyCode.keyC.vkCode,
+            ]);
+            await Future.delayed(const Duration(milliseconds: 100));
+            final clipboardText = await Clipboard.getData('text/plain');
+
+            final targetText = clipboardText?.text ?? "";
+
+            if (targetText.isNotEmpty) {
+              final promptProfile =
+                  await AiTextConvertPromptProfile.createAiTextConvertPrompt(
+                    aiPrompt,
+                    targetText,
+                  );
+
+              final model = FirebaseAI.googleAI().generativeModel(
+                model: promptProfile.model,
+              );
+
+              final prompt = [Content.text(promptProfile.prompt)];
+
+              final response = await model.generateContent(prompt);
+
+              final outputText = response.text;
+              if (outputText == null) {
+                sendNotification("マクロ実行失敗", "AIの応答が空です");
+                return;
+              }
+              await Clipboard.setData(ClipboardData(text: outputText));
+              KeySender.sendMultiKeyPush([
+                VirtualKeyCode.leftControl.vkCode,
+                VirtualKeyCode.keyV.vkCode,
+              ]);
+            } else {
+              sendNotification("マクロ実行失敗", "テキストを選択してください");
+            }
+          }
+
           break;
       }
 
@@ -47,65 +120,6 @@ class MacroService {
     } else {
       sendNotification("マクロが登録されていません", "アプリを開いてマクロを設定してください");
     }
-
-    // switch (keycode) {
-    //   case MonitorKeycodes.macro1:
-    //     print("Running Macro 1");
-    //     // final hit = VialKey.fromLabel("Space");
-
-    //     // final sendCode = (hit!.code >> 8) + 0x3D;
-
-    //     // print("Hit: 0x${hit!.code.toRadixString(16)}");
-    //     // print("Semd: 0x${sendCode.toRadixString(16)}");
-
-    //     // If using Riverpod, you'll need access to the provider's notifier instance.
-
-    //     break;
-    //   case MonitorKeycodes.macro2:
-    //     print("Running Macro 2");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro3:
-    //     print("Running Macro 3");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro4:
-    //     print("Running Macro 4");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro5:
-    //     print("Running Macro 5");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro6:
-    //     print("Running Macro 6");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro7:
-    //     print("Running Macro 7");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro8:
-    //     print("Running Macro 8");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro9:
-    //     print("Running Macro 9");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro10:
-    //     print("Running Macro 10");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro11:
-    //     print("Running Macro 11");
-    //     // Add your macro logic here
-    //     break;
-    //   case MonitorKeycodes.macro12:
-    //     print("Running Macro 12");
-    //     // Add your macro logic here
-    //     break;
-    // }
   }
 }
 
