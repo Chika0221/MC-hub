@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/models/workflow.dart';
 
-class workflowEditInitialWorkflowNotifier extends Notifier<Workflow?> {
+class WorkflowEditInitialWorkflowNotifier extends Notifier<Workflow?> {
   @override
   build() {
     return null;
