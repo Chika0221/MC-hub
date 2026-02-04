@@ -10,7 +10,7 @@ class WorkflowEditInitialWorkflowNotifier extends Notifier<Workflow?> {
     return null;
   }
 
-  void updateInitialWorkflow(Workflow workflow) {
+  void updateInitialWorkflow(Workflow? workflow) {
     state = workflow;
   }
 }
