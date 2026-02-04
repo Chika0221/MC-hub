@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/firebase_workflow_provider.dart';
 import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
+import 'package:mc_hub/infrastructure/workflow/run_workflow.dart';
 import 'package:mc_hub/models/workflow.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/workflow_edit_page.dart';
 
@@ -85,7 +86,7 @@ class WorkflowContainer extends HookConsumerWidget {
             IconButton.filled(
               icon: Icon(Icons.play_arrow_rounded),
               onPressed: () {
-                // TODO 実行処理
+                WorkflowService(workflow: workflow).runWorkflow();
               },
             ),
           ],

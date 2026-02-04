@@ -17,13 +17,13 @@ import 'package:mc_hub/infrastructure/providers/firebase_codes_stream_privider.d
 import 'package:mc_hub/models/macro.dart';
 
 class MacroService {
-  final MonitorKeycodes keycode;
-
-  MacroService({required this.keycode});
-
-  void runMacro() async {
+  static void runMacroByKeycode(MonitorKeycodes keycode) async {
     final Macro? macro = await AppPreferences.getMacro(keycode);
 
+    await runMacro(macro);
+  }
+
+  static Future<void> runMacro(Macro? macro) async {
     if (macro != null) {
       switch (macro.type) {
         case MacroType.infrared:

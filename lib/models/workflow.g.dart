@@ -32,7 +32,7 @@ _$WorkflowActionImpl _$$WorkflowActionImplFromJson(Map<String, dynamic> json) =>
       actionId: json['actionId'] as String,
       nextActionIds:
           (json['nextActionIds'] as List<dynamic>)
-              .map((e) => e as String?)
+              .map((e) => e as String)
               .toList(),
       actionName: json['actionName'] as String,
       positionX: (json['positionX'] as num).toDouble(),

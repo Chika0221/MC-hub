@@ -65,11 +65,9 @@ class MacroSettingDialog extends HookConsumerWidget {
           Spacer(),
           FilledButton.tonalIcon(
             onPressed: () {
-              MacroService(
-                keycode: MonitorKeycodes.values.firstWhere(
-                  (e) => e.shortName == title,
-                ),
-              ).runMacro();
+              MacroService.runMacroByKeycode(
+                MonitorKeycodes.values.firstWhere((e) => e.shortName == title),
+              );
             },
             icon: Icon(Icons.play_arrow_rounded),
             label: Text("テスト実行"),

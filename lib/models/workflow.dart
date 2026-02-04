@@ -26,7 +26,7 @@ class WorkflowAction with _$WorkflowAction {
   @JsonSerializable(explicitToJson: true)
   const factory WorkflowAction({
     required String actionId,
-    required List<String?> nextActionIds,
+    required List<String> nextActionIds,
     required String actionName,
     required double positionX,
     required double positionY,
