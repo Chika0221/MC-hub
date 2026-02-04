@@ -24,6 +24,7 @@ mixin _$Workflow {
   String get displayName => throw _privateConstructorUsedError;
   List<WorkflowAction> get actions => throw _privateConstructorUsedError;
   WorkflowTrigger get trigger => throw _privateConstructorUsedError;
+  bool get state => throw _privateConstructorUsedError;
 
   /// Serializes this Workflow to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,6 +45,7 @@ abstract class $WorkflowCopyWith<$Res> {
     String displayName,
     List<WorkflowAction> actions,
     WorkflowTrigger trigger,
+    bool state,
   });
 
   $WorkflowTriggerCopyWith<$Res> get trigger;
@@ -67,6 +69,7 @@ class _$WorkflowCopyWithImpl<$Res, $Val extends Workflow>
     Object? displayName = null,
     Object? actions = null,
     Object? trigger = null,
+    Object? state = null,
   }) {
     return _then(
       _value.copyWith(
@@ -85,6 +88,11 @@ class _$WorkflowCopyWithImpl<$Res, $Val extends Workflow>
                     ? _value.trigger
                     : trigger // ignore: cast_nullable_to_non_nullable
                         as WorkflowTrigger,
+            state:
+                null == state
+                    ? _value.state
+                    : state // ignore: cast_nullable_to_non_nullable
+                        as bool,
           )
           as $Val,
     );
@@ -114,6 +122,7 @@ abstract class _$$WorkflowImplCopyWith<$Res>
     String displayName,
     List<WorkflowAction> actions,
     WorkflowTrigger trigger,
+    bool state,
   });
 
   @override
@@ -137,6 +146,7 @@ class __$$WorkflowImplCopyWithImpl<$Res>
     Object? displayName = null,
     Object? actions = null,
     Object? trigger = null,
+    Object? state = null,
   }) {
     return _then(
       _$WorkflowImpl(
@@ -155,18 +165,25 @@ class __$$WorkflowImplCopyWithImpl<$Res>
                 ? _value.trigger
                 : trigger // ignore: cast_nullable_to_non_nullable
                     as WorkflowTrigger,
+        state:
+            null == state
+                ? _value.state
+                : state // ignore: cast_nullable_to_non_nullable
+                    as bool,
       ),
     );
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$WorkflowImpl implements _Workflow {
   const _$WorkflowImpl({
     required this.displayName,
     required final List<WorkflowAction> actions,
     required this.trigger,
+    this.state = false,
   }) : _actions = actions;
 
   factory _$WorkflowImpl.fromJson(Map<String, dynamic> json) =>
@@ -184,10 +201,13 @@ class _$WorkflowImpl implements _Workflow {
 
   @override
   final WorkflowTrigger trigger;
+  @override
+  @JsonKey()
+  final bool state;
 
   @override
   String toString() {
-    return 'Workflow(displayName: $displayName, actions: $actions, trigger: $trigger)';
+    return 'Workflow(displayName: $displayName, actions: $actions, trigger: $trigger, state: $state)';
   }
 
   @override
@@ -198,7 +218,8 @@ class _$WorkflowImpl implements _Workflow {
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
             const DeepCollectionEquality().equals(other._actions, _actions) &&
-            (identical(other.trigger, trigger) || other.trigger == trigger));
+            (identical(other.trigger, trigger) || other.trigger == trigger) &&
+            (identical(other.state, state) || other.state == state));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -208,6 +229,7 @@ class _$WorkflowImpl implements _Workflow {
     displayName,
     const DeepCollectionEquality().hash(_actions),
     trigger,
+    state,
   );
 
   /// Create a copy of Workflow
@@ -229,6 +251,7 @@ abstract class _Workflow implements Workflow {
     required final String displayName,
     required final List<WorkflowAction> actions,
     required final WorkflowTrigger trigger,
+    final bool state,
   }) = _$WorkflowImpl;
 
   factory _Workflow.fromJson(Map<String, dynamic> json) =
@@ -240,6 +263,8 @@ abstract class _Workflow implements Workflow {
   List<WorkflowAction> get actions;
   @override
   WorkflowTrigger get trigger;
+  @override
+  bool get state;
 
   /// Create a copy of Workflow
   /// with the given fields replaced by the non-null parameter values.
@@ -491,7 +516,8 @@ class __$$WorkflowActionImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$WorkflowActionImpl implements _WorkflowAction {
   const _$WorkflowActionImpl({
     required this.actionId,
@@ -744,7 +770,8 @@ class __$$WorkflowTriggerImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$WorkflowTriggerImpl implements _WorkflowTrigger {
   const _$WorkflowTriggerImpl({
     required this.type,

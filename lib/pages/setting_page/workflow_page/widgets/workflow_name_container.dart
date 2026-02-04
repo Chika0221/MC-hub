@@ -40,7 +40,9 @@ class WorkflowNameContainer extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed:
+                  () =>
+                      Navigator.of(context).pop(ref.read(WorkflowEditProvider)),
               color: Theme.of(context).colorScheme.primary,
               icon: Icon(Icons.arrow_back),
             ),

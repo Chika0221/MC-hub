@@ -6,7 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/firebase_workflow_provider.dart';
+import 'package:mc_hub/models/workflow.dart';
 import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/beam_item_grid_view.dart';
+import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_container.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/workflow_edit_page.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/widgets/double_line_border_container.dart';
@@ -31,13 +33,21 @@ class WorkflowPage extends HookConsumerWidget {
                       content: Text("ワークフローを新規作成しますか？"),
                       actions: [
                         FilledButton(
-                          onPressed: () {
+                          onPressed: () async {
                             Navigator.of(context).pop();
-                            Navigator.of(context).push(
+                            final Workflow? newWorkflow = await Navigator.of(
+                              context,
+                            ).push(
                               MaterialPageRoute(
                                 builder: (context) => WorkflowEditPage(),
                               ),
                             );
+
+                            if (newWorkflow != null) {
+                              ref
+                                  .read(firebaseWorkflowProvider.notifier)
+                                  .setWorkflow(newWorkflow);
+                            }
                           },
                           child: Text("作成"),
                         ),
@@ -71,6 +81,7 @@ class WorkflowPage extends HookConsumerWidget {
                 ),
               ),
             ),
+            WorkflowSelectContainer(),
           ],
         ),
       ),
@@ -96,7 +107,7 @@ class WorkflowSelectContainer extends HookConsumerWidget {
                 childrenAspectRatio: 5,
                 itemCount: workflows.length,
                 itemBuilder: (context, index) {
-                  return Container();
+                  return WorkflowContainer(workflow: workflows[index]);
                 },
               ),
             ),

@@ -4,17 +4,36 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/models/workflow.dart';
 
-class WorkflowEditNotifier extends Notifier<Workflow> {
+class workflowEditInitialWorkflowNotifier extends Notifier<Workflow?> {
   @override
   build() {
-    return Workflow(
-      displayName: "名前未設定のワークフロー",
-      actions: [],
-      trigger: WorkflowTrigger(
-        type: TriggerType.EventBased,
-        scheduledTime: null,
-      ),
+    return null;
+  }
+
+  void updateInitialWorkflow(Workflow workflow) {
+    state = workflow;
+  }
+}
+
+final workflowEditInitialWorkflowProvider =
+    NotifierProvider<workflowEditInitialWorkflowNotifier, Workflow?>(
+      workflowEditInitialWorkflowNotifier.new,
     );
+
+class WorkflowEditNotifier extends Notifier<Workflow> {
+  @override
+  Workflow build() {
+    final initialWorkflow = ref.watch(workflowEditInitialWorkflowProvider);
+
+    return initialWorkflow ??
+        Workflow(
+          displayName: "名前未設定のワークフロー",
+          actions: [],
+          trigger: WorkflowTrigger(
+            type: TriggerType.EventBased,
+            scheduledTime: null,
+          ),
+        );
   }
 
   WorkflowAction getActionById(String actionId) {

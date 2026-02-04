@@ -16,13 +16,15 @@ _$WorkflowImpl _$$WorkflowImplFromJson(Map<String, dynamic> json) =>
       trigger: WorkflowTrigger.fromJson(
         json['trigger'] as Map<String, dynamic>,
       ),
+      state: json['state'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$WorkflowImplToJson(_$WorkflowImpl instance) =>
     <String, dynamic>{
       'displayName': instance.displayName,
-      'actions': instance.actions,
-      'trigger': instance.trigger,
+      'actions': instance.actions.map((e) => e.toJson()).toList(),
+      'trigger': instance.trigger.toJson(),
+      'state': instance.state,
     };
 
 _$WorkflowActionImpl _$$WorkflowActionImplFromJson(Map<String, dynamic> json) =>
@@ -56,7 +58,7 @@ Map<String, dynamic> _$$WorkflowActionImplToJson(
   'positionX': instance.positionX,
   'positionY': instance.positionY,
   'actionType': _$ActionTypeEnumMap[instance.actionType]!,
-  'macro': instance.macro,
+  'macro': instance.macro?.toJson(),
   'delayDuration': instance.delayDuration?.inMicroseconds,
   'message': instance.message,
 };

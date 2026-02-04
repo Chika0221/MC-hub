@@ -2,31 +2,20 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
-import 'package:mc_hub/models/workflow.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/select_workflow_container.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_board.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_name_container.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 
 class WorkflowEditPage extends HookConsumerWidget {
-  const WorkflowEditPage({super.key, this.openWorkflow = null});
-
-  final Workflow? openWorkflow;
+  const WorkflowEditPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    useEffect(() {
-      if (openWorkflow != null)
-        ref.read(WorkflowEditProvider.notifier).update(openWorkflow!);
-
-      return null;
-    }, []);
-
     final String workflowDisplayName = ref.watch(
       WorkflowEditProvider.select((value) => value.displayName),
     );

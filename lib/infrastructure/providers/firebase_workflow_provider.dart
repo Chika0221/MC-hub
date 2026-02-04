@@ -10,6 +10,32 @@ class FirebaseWorkflowNotifier extends StreamNotifier<List<Workflow>> {
     "workflows",
   );
 
+  Future<DocumentReference<Map<String, dynamic>>?> _findWorkflowDocRef(
+    String displayName,
+  ) async {
+    final primary =
+        await workflow_collection
+            .where("displayName", isEqualTo: displayName)
+            .limit(1)
+            .get();
+
+    if (primary.docs.isNotEmpty) {
+      return primary.docs.first.reference;
+    }
+
+    final legacy =
+        await workflow_collection
+            .where("DisplayName", isEqualTo: displayName)
+            .limit(1)
+            .get();
+
+    if (legacy.docs.isNotEmpty) {
+      return legacy.docs.first.reference;
+    }
+
+    return null;
+  }
+
   @override
   Stream<List<Workflow>> build() {
     return workflow_collection.snapshots().map((event) {
@@ -17,26 +43,26 @@ class FirebaseWorkflowNotifier extends StreamNotifier<List<Workflow>> {
     });
   }
 
-  void updateWorkflow(Workflow workflow) async {
-    final querySnapshot =
-        await workflow_collection
-            .where("DisplayName", isEqualTo: workflow.displayName)
-            .get();
+  Future<void> updateWorkflow(Workflow workflow) async {
+    final docRef = await _findWorkflowDocRef(workflow.displayName);
+    if (docRef == null) {
+      return;
+    }
 
-    await querySnapshot.docs.first.reference.update(workflow.toJson());
+    await docRef.update(workflow.toJson());
   }
 
-  void deleteWorkflow(Workflow workflow) async {
-    final querySnapshot =
-        await workflow_collection
-            .where("DisplayName", isEqualTo: workflow.displayName)
-            .get();
+  Future<void> deleteWorkflow(Workflow workflow) async {
+    final docRef = await _findWorkflowDocRef(workflow.displayName);
+    if (docRef == null) {
+      return;
+    }
 
-    await querySnapshot.docs.first.reference.delete();
+    await docRef.delete();
   }
 
-  void setWorkflow(Workflow workflow) async {
-    await workflow_collection.doc().set(workflow.toJson());
+  Future<void> setWorkflow(Workflow workflow) async {
+    await workflow_collection.add(workflow.toJson());
   }
 }
 

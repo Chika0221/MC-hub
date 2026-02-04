@@ -1,6 +1,3 @@
-// Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,10 +9,12 @@ part 'workflow.g.dart';
 
 @freezed
 class Workflow with _$Workflow {
+  @JsonSerializable(explicitToJson: true)
   const factory Workflow({
     required String displayName,
     required List<WorkflowAction> actions,
     required WorkflowTrigger trigger,
+    @Default(false) bool state,
   }) = _Workflow;
 
   factory Workflow.fromJson(Map<String, dynamic> json) =>
@@ -24,6 +23,7 @@ class Workflow with _$Workflow {
 
 @freezed
 class WorkflowAction with _$WorkflowAction {
+  @JsonSerializable(explicitToJson: true)
   const factory WorkflowAction({
     required String actionId,
     required List<String?> nextActionIds,
@@ -42,6 +42,7 @@ class WorkflowAction with _$WorkflowAction {
 
 @freezed
 class WorkflowTrigger with _$WorkflowTrigger {
+  @JsonSerializable(explicitToJson: true)
   const factory WorkflowTrigger({
     required TriggerType type,
     required DateTime? scheduledTime,

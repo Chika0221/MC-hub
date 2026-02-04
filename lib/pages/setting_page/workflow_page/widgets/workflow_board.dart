@@ -13,7 +13,7 @@ import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_path.da
 import 'package:mc_hub/pages/setting_page/workflow_page/workflow_edit_page.dart';
 
 class WorkflowBoard extends HookConsumerWidget {
-  const WorkflowBoard({super.key});
+const WorkflowBoard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
