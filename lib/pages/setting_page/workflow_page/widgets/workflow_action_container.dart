@@ -8,7 +8,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
+import 'package:mc_hub/models/macro.dart';
 import 'package:mc_hub/models/workflow.dart';
+import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_dialog.dart';
 
 part 'actions_widgets/workflow_start_container.dart';
 part 'actions_widgets/workflow_macro_container.dart';

@@ -57,7 +57,7 @@ class WorkflowStartContainer extends HookConsumerWidget {
             const SizedBox(height: 2),
             SizedBox(
               width: double.infinity,
-              child: FilledButton(
+              child: FilledButton.icon(
                 onPressed: () async {
                   final newTime = await showTimePicker(
                     context: context,
@@ -79,7 +79,8 @@ class WorkflowStartContainer extends HookConsumerWidget {
                         );
                   }
                 },
-                child: Text("${scheduledTime.format(context)}"),
+                icon: const Icon(Icons.schedule_rounded),
+                label: Text("${scheduledTime.format(context)}"),
               ),
             ),
           ],
