@@ -19,12 +19,13 @@ class LayerButtons extends HookConsumerWidget {
     return Container(
       decoration: ShapeDecoration(
         shape: StadiumBorder(),
-        color: Theme.of(context).colorScheme.secondaryContainer,
+        color: Theme.of(context).colorScheme.onSurface,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: 8,
         children: [
+          const SizedBox(height: 8),
           ...List.generate(4, (index) {
             return LayerButton(
               child: Text(
@@ -33,12 +34,13 @@ class LayerButtons extends HookConsumerWidget {
                   color:
                       (selectedLayerIndex == index)
                           ? Theme.of(context).colorScheme.onTertiary
-                          : Theme.of(context).colorScheme.tertiary,
+                          : Theme.of(context).colorScheme.surface,
                 ),
               ),
               onPressed: () => onLayerChanged.call(index),
             );
           }),
+          const SizedBox(height: 8),
         ],
       ),
     );
