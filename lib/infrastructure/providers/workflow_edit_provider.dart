@@ -88,7 +88,7 @@ class WorkflowEditNotifier extends Notifier<Workflow> {
   }
 }
 
-final WorkflowEditProvider =
+final workflowEditProvider =
     NotifierProvider.autoDispose<WorkflowEditNotifier, Workflow>(
       WorkflowEditNotifier.new,
     );
