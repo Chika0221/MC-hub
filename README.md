@@ -1,16 +1,54 @@
-# mc_hub
+# SwitchPalette
 
-A new Flutter project.
+## 概要
 
-## Getting Started
+SwitchPaletteは、Vial互換のカスタムキーボードやその他のデバイスを統合的に管理・制御するためのWindows向けデスクトップアプリケーションです。キーマップの変更、多様なマクロの設定・実行、赤外線リモコン信号の管理、さらにはAIを活用したテキスト操作まで、単一のアプリケーションで直感的に操作できます。
 
-This project is a starting point for a Flutter application.
+## 主な機能
 
-A few resources to get you started if this is your first Flutter project:
+-   **キーボードカスタマイズ (Vial対応)**
+    -   **デバイス自動検出**: PCに接続されたVial互換キーボードを自動的に検出します。
+    -   **リアルタイム・キーマップエディタ**: ドラッグ＆ドロップの簡単な操作で、キーボードのレイアウトを視覚的に確認しながらキーマップを自由に変更できます。変更は即座にデバイスに反映されます。
+    -   **マルチレイヤー対応**: 複数のキーマップレイヤーを切り替えて、それぞれ個別に設定できます。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+-   **高度なマクロ機能**
+    -   **GUIエディタ**: 直感的なUIでマクロを作成・割り当て可能です。
+    -   **多様なアクション**:
+        -   **スマートリモコン操作**: 登録済みの赤外線コードを送信。
+        -   **アプリ実行**: 指定したアプリケーションを起動。
+        -   **テキスト/コンボ入力**: 定型文の入力や複数キーの同時押し（ショートカット）を登録。
+        -   **AIテキスト変換**: Gemini AIを活用し、選択中のテキストを指示（要約、敬語変換など）に従って書き換えます。
+    -   **キー入力トリガー**: 特定のキー入力をトリガーとして、これらのマクロを実行します。
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-   **ワークフロー機能**
+    -   **タスク自動化**: 複数の操作（アプリ起動、通知表示、待機、マクロ実行など）を組み合わせた複雑なフローを作成・管理できます。
+    -   **視覚的な編集**: ワークフローの順序や内容をGUI上で簡単に編集可能です。
+
+-   **赤外線リモコン管理 (Beam)**
+    -   **クラウド連携**: Firebase (Firestore) と連携し、赤外線リモコンの信号コードをクラウド上で一元管理します。
+    -   **信号の登録と送信**: 新しいリモコン信号を学習・登録したり、リストから選択して信号を送信したりできます。
+
+-   **その他**
+    -   **Windowsネイティブ統合**: タスクトレイに常駐し、バックグラウンドでキー入力を監視。通知機能も備えています。
+    -   **モダンなUI**: Riveアニメーションやグラスモーフィズムを活用した、直感的で美しいユーザーインターフェース。
+    -   **(開発中) リモコンページ**: より高度なリモコン操作専用のインターフェース。
+
+## 画面構成
+
+1.  **デバイス選択ページ**: 接続中のVialキーボードを選択します。
+2.  **エディターページ**: キーボードのキーマップを編集します。下部のキーパレットからキーを選択して割り当てたり、マクロの設定を行ったりします。
+3.  **設定ページ**:
+    -   **Beam設定**: 赤外線リモコンのコードを管理します。
+    -   **ワークフロー**: 自動化タスクを作成・管理します。
+    -   **リモコン (開発中)**: リモコン操作用のUIです。
+
+## 技術スタック
+
+-   **フレームワーク**: Flutter
+-   **言語**: Dart
+-   **状態管理**: Riverpod, flutter_hooks
+-   **データベース/AI**: Cloud Firestore (Firebase), Gemini AI (firebase_ai)
+-   **デスクトップ連携**: bitsdojo_window, tray_manager, windows_notification, win32
+-   **デバイス通信**: hid4flutter (HID)
+-   **アニメーション**: Rive
+-   **設定管理**: shared_preferences, TOML

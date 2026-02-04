@@ -2,6 +2,11 @@
 cmake_minimum_required(VERSION 3.14)
 project(mc_hub LANGUAGES CXX)
 
+# Work around third-party CMake projects that still declare
+# `cmake_minimum_required(VERSION < 3.5)` which is no longer supported by
+# recent CMake releases.
+set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING "" FORCE)
+
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
 set(BINARY_NAME "mc_hub")
@@ -66,6 +71,13 @@ set(BUILD_BUNDLE_DIR "$<TARGET_FILE_DIR:${BINARY_NAME}>")
 # Make the "install" step default, as it's required to run.
 set(CMAKE_VS_INCLUDE_INSTALL_TO_DEFAULT_BUILD 1)
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${BUILD_BUNDLE_DIR}" CACHE PATH "..." FORCE)
+endif()
+
+# CMake's default install prefix on Windows is typically under Program Files,
+# which will fail in non-admin builds when Flutter drives the INSTALL target.
+# Redirect to the build bundle directory in that case.
+if(CMAKE_INSTALL_PREFIX MATCHES "^[A-Za-z]:/Program Files")
   set(CMAKE_INSTALL_PREFIX "${BUILD_BUNDLE_DIR}" CACHE PATH "..." FORCE)
 endif()
 

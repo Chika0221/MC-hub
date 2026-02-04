@@ -4,6 +4,13 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   bitsdojo_window_windows
+  cloud_firestore
+  firebase_auth
+  firebase_core
+  hid4flutter
+  rive_native
+  tray_manager
+  windows_notification
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
