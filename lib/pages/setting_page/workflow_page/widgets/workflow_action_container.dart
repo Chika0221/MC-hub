@@ -1,8 +1,13 @@
+// Dart imports:
+import 'dart:ui';
+
 // Flutter imports:
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -11,6 +16,7 @@ import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
 import 'package:mc_hub/models/macro.dart';
 import 'package:mc_hub/models/workflow.dart';
 import 'package:mc_hub/pages/editor_page/widgets/macro_setting/macro_setting_dialog.dart';
+import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_context.dart';
 
 part 'actions_widgets/workflow_start_container.dart';
 part 'actions_widgets/workflow_macro_container.dart';
@@ -186,16 +192,20 @@ class WorkflowActionContainer extends HookConsumerWidget {
       spacing: 4,
       children: [
         (isShowStartAnker) ? ActionTarget() : ActionTarget(isActive: false),
-        Draggable(
-          data: action,
-          child: body,
-          feedback: Material(color: Colors.transparent, child: body),
-          childWhenDragging: Container(
-            width: 180,
-            height: 120,
-            decoration: BoxDecoration(
-              border: Border.all(color: highlightColor, width: 2),
-              borderRadius: BorderRadius.circular(8),
+
+        WorkflowContextMenu(
+          action: action,
+          child: Draggable(
+            data: action,
+            child: body,
+            feedback: Material(color: Colors.transparent, child: body),
+            childWhenDragging: Container(
+              width: 180,
+              height: 120,
+              decoration: BoxDecoration(
+                border: Border.all(color: highlightColor, width: 2),
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
         ),

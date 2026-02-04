@@ -33,6 +33,25 @@ class WorkflowEditNotifier extends Notifier<Workflow> {
     state = state.copyWith(actions: updatedActions);
   }
 
+  void deleteAction(String actionId) {
+    final updatedActions =
+        state.actions
+            .map((targetAction) {
+              if (targetAction.nextActionIds.contains(actionId)) {
+                final newNextActionIds = List<String>.from(
+                  targetAction.nextActionIds,
+                )..remove(actionId);
+                return targetAction.copyWith(nextActionIds: newNextActionIds);
+              }
+
+              return targetAction;
+            })
+            .where((action) => action.actionId != actionId)
+            .toList();
+
+    state = state.copyWith(actions: updatedActions);
+  }
+
   void update(Workflow newWorkflow) {
     state = newWorkflow;
   }
