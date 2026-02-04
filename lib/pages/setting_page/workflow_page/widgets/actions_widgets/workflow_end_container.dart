@@ -8,18 +8,45 @@ class WorkflowEndContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
-    final isPreview = actionId == "";
 
     final action = ref
         .watch(WorkflowEditProvider.notifier)
         .getActionById(actionId);
+
+    final endMessage = action.message ?? '';
+    final isEndNotificationEnabled = endMessage.isNotEmpty;
 
     return WorkflowActionContainer(
       backgroundColor: colorScheme.primary.withValues(alpha: 0.15),
       highlightColor: colorScheme.primary,
       headerTextColor: colorScheme.onPrimary,
       bodyTextColor: colorScheme.onSurface,
-      child: const Center(child: Text("End Action")),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("終了通知"),
+            Switch(
+              value: isEndNotificationEnabled,
+              onChanged: (value) {
+                if (value) {
+                  final updatedAction = action.copyWith(
+                    message: "ワークフローが終了しました。",
+                  );
+                  ref
+                      .read(WorkflowEditProvider.notifier)
+                      .updateAction(updatedAction);
+                } else {
+                  final updatedAction = action.copyWith(message: '');
+                  ref
+                      .read(WorkflowEditProvider.notifier)
+                      .updateAction(updatedAction);
+                }
+              },
+            ),
+          ],
+        ),
+      ),
       action: action,
       icon: Icons.stop,
       isShowEndAnker: false,

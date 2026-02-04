@@ -263,7 +263,7 @@ mixin _$WorkflowAction {
   ActionType get actionType => throw _privateConstructorUsedError;
   Macro? get macro => throw _privateConstructorUsedError;
   Duration? get delayDuration => throw _privateConstructorUsedError;
-  String? get notificationMessage => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
 
   /// Serializes this WorkflowAction to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -291,7 +291,7 @@ abstract class $WorkflowActionCopyWith<$Res> {
     ActionType actionType,
     Macro? macro,
     Duration? delayDuration,
-    String? notificationMessage,
+    String? message,
   });
 
   $MacroCopyWith<$Res>? get macro;
@@ -320,7 +320,7 @@ class _$WorkflowActionCopyWithImpl<$Res, $Val extends WorkflowAction>
     Object? actionType = null,
     Object? macro = freezed,
     Object? delayDuration = freezed,
-    Object? notificationMessage = freezed,
+    Object? message = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -364,10 +364,10 @@ class _$WorkflowActionCopyWithImpl<$Res, $Val extends WorkflowAction>
                     ? _value.delayDuration
                     : delayDuration // ignore: cast_nullable_to_non_nullable
                         as Duration?,
-            notificationMessage:
-                freezed == notificationMessage
-                    ? _value.notificationMessage
-                    : notificationMessage // ignore: cast_nullable_to_non_nullable
+            message:
+                freezed == message
+                    ? _value.message
+                    : message // ignore: cast_nullable_to_non_nullable
                         as String?,
           )
           as $Val,
@@ -407,7 +407,7 @@ abstract class _$$WorkflowActionImplCopyWith<$Res>
     ActionType actionType,
     Macro? macro,
     Duration? delayDuration,
-    String? notificationMessage,
+    String? message,
   });
 
   @override
@@ -436,7 +436,7 @@ class __$$WorkflowActionImplCopyWithImpl<$Res>
     Object? actionType = null,
     Object? macro = freezed,
     Object? delayDuration = freezed,
-    Object? notificationMessage = freezed,
+    Object? message = freezed,
   }) {
     return _then(
       _$WorkflowActionImpl(
@@ -480,10 +480,10 @@ class __$$WorkflowActionImplCopyWithImpl<$Res>
                 ? _value.delayDuration
                 : delayDuration // ignore: cast_nullable_to_non_nullable
                     as Duration?,
-        notificationMessage:
-            freezed == notificationMessage
-                ? _value.notificationMessage
-                : notificationMessage // ignore: cast_nullable_to_non_nullable
+        message:
+            freezed == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
                     as String?,
       ),
     );
@@ -502,7 +502,7 @@ class _$WorkflowActionImpl implements _WorkflowAction {
     required this.actionType,
     required this.macro,
     required this.delayDuration,
-    required this.notificationMessage,
+    required this.message,
   }) : _nextActionIds = nextActionIds;
 
   factory _$WorkflowActionImpl.fromJson(Map<String, dynamic> json) =>
@@ -531,11 +531,11 @@ class _$WorkflowActionImpl implements _WorkflowAction {
   @override
   final Duration? delayDuration;
   @override
-  final String? notificationMessage;
+  final String? message;
 
   @override
   String toString() {
-    return 'WorkflowAction(actionId: $actionId, nextActionIds: $nextActionIds, actionName: $actionName, positionX: $positionX, positionY: $positionY, actionType: $actionType, macro: $macro, delayDuration: $delayDuration, notificationMessage: $notificationMessage)';
+    return 'WorkflowAction(actionId: $actionId, nextActionIds: $nextActionIds, actionName: $actionName, positionX: $positionX, positionY: $positionY, actionType: $actionType, macro: $macro, delayDuration: $delayDuration, message: $message)';
   }
 
   @override
@@ -560,8 +560,7 @@ class _$WorkflowActionImpl implements _WorkflowAction {
             (identical(other.macro, macro) || other.macro == macro) &&
             (identical(other.delayDuration, delayDuration) ||
                 other.delayDuration == delayDuration) &&
-            (identical(other.notificationMessage, notificationMessage) ||
-                other.notificationMessage == notificationMessage));
+            (identical(other.message, message) || other.message == message));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -576,7 +575,7 @@ class _$WorkflowActionImpl implements _WorkflowAction {
     actionType,
     macro,
     delayDuration,
-    notificationMessage,
+    message,
   );
 
   /// Create a copy of WorkflowAction
@@ -606,7 +605,7 @@ abstract class _WorkflowAction implements WorkflowAction {
     required final ActionType actionType,
     required final Macro? macro,
     required final Duration? delayDuration,
-    required final String? notificationMessage,
+    required final String? message,
   }) = _$WorkflowActionImpl;
 
   factory _WorkflowAction.fromJson(Map<String, dynamic> json) =
@@ -629,7 +628,7 @@ abstract class _WorkflowAction implements WorkflowAction {
   @override
   Duration? get delayDuration;
   @override
-  String? get notificationMessage;
+  String? get message;
 
   /// Create a copy of WorkflowAction
   /// with the given fields replaced by the non-null parameter values.

@@ -33,7 +33,7 @@ class WorkflowAction with _$WorkflowAction {
     required ActionType actionType,
     required Macro? macro,
     required Duration? delayDuration,
-    required String? notificationMessage,
+    required String? message,
   }) = _WorkflowAction;
 
   factory WorkflowAction.fromJson(Map<String, dynamic> json) =>

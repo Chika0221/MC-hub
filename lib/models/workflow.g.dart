@@ -44,7 +44,7 @@ _$WorkflowActionImpl _$$WorkflowActionImplFromJson(Map<String, dynamic> json) =>
           json['delayDuration'] == null
               ? null
               : Duration(microseconds: (json['delayDuration'] as num).toInt()),
-      notificationMessage: json['notificationMessage'] as String?,
+      message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$$WorkflowActionImplToJson(
@@ -58,7 +58,7 @@ Map<String, dynamic> _$$WorkflowActionImplToJson(
   'actionType': _$ActionTypeEnumMap[instance.actionType]!,
   'macro': instance.macro,
   'delayDuration': instance.delayDuration?.inMicroseconds,
-  'notificationMessage': instance.notificationMessage,
+  'message': instance.message,
 };
 
 const _$ActionTypeEnumMap = {

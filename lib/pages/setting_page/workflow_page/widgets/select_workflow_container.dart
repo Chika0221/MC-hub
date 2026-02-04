@@ -58,7 +58,7 @@ class SelectWorkflowContainer extends HookConsumerWidget {
                               actionType: actionType,
                               macro: null,
                               delayDuration: null,
-                              notificationMessage: null,
+                              message: null,
                             );
 
                             return WorkflowActionBox(action: action);
