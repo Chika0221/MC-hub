@@ -210,15 +210,18 @@ class WorkflowActionContainer extends HookConsumerWidget {
           ),
         ),
         (isShowEndAnker)
-            ? Draggable(
-              data: action.actionId,
-              child: ActionTarget(),
-              feedback: Container(
-                height: 16,
-                width: 16,
-                decoration: ShapeDecoration(
-                  shape: CircleBorder(),
-                  color: Theme.of(context).colorScheme.primary,
+            ? WorkflowPathContextMenu(
+              action: action,
+              child: Draggable(
+                data: action.actionId,
+                child: ActionTarget(),
+                feedback: Container(
+                  height: 16,
+                  width: 16,
+                  decoration: ShapeDecoration(
+                    shape: CircleBorder(),
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
             )

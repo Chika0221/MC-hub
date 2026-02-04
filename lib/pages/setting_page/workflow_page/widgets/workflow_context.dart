@@ -9,6 +9,54 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
 import 'package:mc_hub/models/workflow.dart';
 
+class WorkflowPathContextMenu extends HookConsumerWidget {
+  const WorkflowPathContextMenu({
+    super.key,
+    required this.child,
+    required this.action,
+  });
+
+  final Widget child;
+
+  final WorkflowAction action;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<ContextMenuEntry> pathsEntries =
+        action.nextActionIds.map((nextActionId) {
+          final nextAction = ref
+              .read(WorkflowEditProvider.notifier)
+              .getActionById(nextActionId!);
+
+          return CustomContextMenuEntry(
+            label: Text('${nextAction.actionName}'),
+            icon: const Icon(Icons.delete_rounded),
+            onSelected: (value) {
+              final newNextActionIds = List<String>.from(action.nextActionIds)
+                ..remove(nextActionId);
+              final updatedAction = action.copyWith(
+                nextActionIds: newNextActionIds,
+              );
+              ref
+                  .read(WorkflowEditProvider.notifier)
+                  .updateAction(updatedAction);
+            },
+          );
+        }).toList();
+
+    return ContextMenuRegion(
+      contextMenu: ContextMenu(
+        boxDecoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onSurface,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        entries: pathsEntries,
+      ),
+      child: child,
+    );
+  }
+}
+
 class WorkflowContextMenu extends HookConsumerWidget {
   const WorkflowContextMenu({
     super.key,
@@ -101,8 +149,6 @@ final class CustomContextMenuEntry<T> extends ContextMenuItem<T> {
       size: 16.0,
       color: normalTextColor,
     );
-
-    // ~~~~~~~~~~ //
 
     return ConstrainedBox(
       constraints:
