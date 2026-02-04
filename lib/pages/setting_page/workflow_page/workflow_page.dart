@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/firebase_workflow_provider.dart';
+import 'package:mc_hub/infrastructure/providers/workflow_edit_provider.dart';
 import 'package:mc_hub/models/workflow.dart';
 import 'package:mc_hub/pages/setting_page/beam_setting_page.dart/widgets/beam_item_grid_view.dart';
 import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_container.dart';
@@ -34,6 +35,12 @@ class WorkflowPage extends HookConsumerWidget {
                       actions: [
                         FilledButton(
                           onPressed: () async {
+                            ref
+                                .watch(
+                                  workflowEditInitialWorkflowProvider.notifier,
+                                )
+                                .updateInitialWorkflow(null);
+
                             Navigator.of(context).pop();
                             final Workflow? newWorkflow = await Navigator.of(
                               context,
