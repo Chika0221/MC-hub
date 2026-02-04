@@ -17,7 +17,7 @@ class WorkflowEditPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String workflowDisplayName = ref.watch(
-      WorkflowEditProvider.select((value) => value.displayName),
+      workflowEditProvider.select((value) => value.displayName),
     );
 
     return Scaffold(

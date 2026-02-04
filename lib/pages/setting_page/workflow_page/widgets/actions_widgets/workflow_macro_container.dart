@@ -12,7 +12,7 @@ class WorkflowMacroContainer extends HookConsumerWidget {
     final headerTextColor = colorScheme.onSecondary;
 
     final action = ref
-        .watch(WorkflowEditProvider.notifier)
+        .watch(workflowEditProvider.notifier)
         .getActionById(actionId);
 
     final macro = action.macro;
@@ -57,7 +57,7 @@ class WorkflowMacroContainer extends HookConsumerWidget {
                       macro: macro,
                     );
                     ref
-                        .read(WorkflowEditProvider.notifier)
+                        .read(workflowEditProvider.notifier)
                         .updateAction(updatedAction);
                   }
                 },

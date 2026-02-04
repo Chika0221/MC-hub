@@ -10,7 +10,7 @@ class WorkflowEndContainer extends HookConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final action = ref
-        .watch(WorkflowEditProvider.notifier)
+        .watch(workflowEditProvider.notifier)
         .getActionById(actionId);
 
     final endMessage = action.message ?? '';
@@ -34,12 +34,12 @@ class WorkflowEndContainer extends HookConsumerWidget {
                     message: "ワークフローが終了しました。",
                   );
                   ref
-                      .read(WorkflowEditProvider.notifier)
+                      .read(workflowEditProvider.notifier)
                       .updateAction(updatedAction);
                 } else {
                   final updatedAction = action.copyWith(message: '');
                   ref
-                      .read(WorkflowEditProvider.notifier)
+                      .read(workflowEditProvider.notifier)
                       .updateAction(updatedAction);
                 }
               },

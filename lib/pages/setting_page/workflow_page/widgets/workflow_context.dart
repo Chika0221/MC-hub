@@ -25,7 +25,7 @@ class WorkflowPathContextMenu extends HookConsumerWidget {
     final List<ContextMenuEntry> pathsEntries =
         action.nextActionIds.map((nextActionId) {
           final nextAction = ref
-              .read(WorkflowEditProvider.notifier)
+              .read(workflowEditProvider.notifier)
               .getActionById(nextActionId!);
 
           return CustomContextMenuEntry(
@@ -38,7 +38,7 @@ class WorkflowPathContextMenu extends HookConsumerWidget {
                 nextActionIds: newNextActionIds,
               );
               ref
-                  .read(WorkflowEditProvider.notifier)
+                  .read(workflowEditProvider.notifier)
                   .updateAction(updatedAction);
             },
           );
@@ -74,7 +74,7 @@ class WorkflowContextMenu extends HookConsumerWidget {
         label: const Text('削除'),
         icon: const Icon(Icons.delete_rounded),
         onSelected: (value) {
-          ref.read(WorkflowEditProvider.notifier).deleteAction(action.actionId);
+          ref.read(workflowEditProvider.notifier).deleteAction(action.actionId);
         },
       ),
     ];

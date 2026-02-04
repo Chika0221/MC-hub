@@ -40,19 +40,19 @@ class ActionContainer extends HookConsumerWidget {
 
     final action =
         (actionId != null)
-            ? ref.watch(WorkflowEditProvider.notifier).getActionById(actionId!)
+            ? ref.watch(workflowEditProvider.notifier).getActionById(actionId!)
             : null;
 
     return (draggableAction == null && action != null)
         ? switch (action.actionType) {
-            ActionType.Start => WorkflowStartContainer(actionId: actionId!),
-            ActionType.End => WorkflowEndContainer(actionId: actionId!),
-            ActionType.Macro => WorkflowMacroContainer(actionId: actionId!),
-            ActionType.Delay => WorkflowDelayContainer(actionId: actionId!),
-            ActionType.Notification => WorkflowNotificationContainer(
-                actionId: actionId!,
-              ),
-          }
+          ActionType.Start => WorkflowStartContainer(actionId: actionId!),
+          ActionType.End => WorkflowEndContainer(actionId: actionId!),
+          ActionType.Macro => WorkflowMacroContainer(actionId: actionId!),
+          ActionType.Delay => WorkflowDelayContainer(actionId: actionId!),
+          ActionType.Notification => WorkflowNotificationContainer(
+            actionId: actionId!,
+          ),
+        }
         : switch (draggableAction!.actionType) {
           ActionType.Start => WorkflowActionContainer(
             backgroundColor: colorScheme.primary.withValues(alpha: 0.15),

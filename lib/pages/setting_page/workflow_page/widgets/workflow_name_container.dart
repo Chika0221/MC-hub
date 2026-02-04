@@ -15,7 +15,7 @@ class WorkflowNameContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final displayName = ref.watch(
-      WorkflowEditProvider.select((value) => value.displayName),
+      workflowEditProvider.select((value) => value.displayName),
     );
 
     final textController = useTextEditingController(text: displayName);
@@ -25,7 +25,7 @@ class WorkflowNameContainer extends HookConsumerWidget {
     useEffect(() {
       void listener() {
         ref
-            .read(WorkflowEditProvider.notifier)
+            .read(workflowEditProvider.notifier)
             .updateDisplayName(textController.text);
       }
 
@@ -42,7 +42,7 @@ class WorkflowNameContainer extends HookConsumerWidget {
             IconButton(
               onPressed:
                   () =>
-                      Navigator.of(context).pop(ref.read(WorkflowEditProvider)),
+                      Navigator.of(context).pop(ref.read(workflowEditProvider)),
               color: Theme.of(context).colorScheme.primary,
               icon: Icon(Icons.arrow_back),
             ),

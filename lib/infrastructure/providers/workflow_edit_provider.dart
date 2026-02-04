@@ -16,8 +16,8 @@ class WorkflowEditInitialWorkflowNotifier extends Notifier<Workflow?> {
 }
 
 final workflowEditInitialWorkflowProvider =
-    NotifierProvider<workflowEditInitialWorkflowNotifier, Workflow?>(
-      workflowEditInitialWorkflowNotifier.new,
+    NotifierProvider<WorkflowEditInitialWorkflowNotifier, Workflow?>(
+      WorkflowEditInitialWorkflowNotifier.new,
     );
 
 class WorkflowEditNotifier extends Notifier<Workflow> {

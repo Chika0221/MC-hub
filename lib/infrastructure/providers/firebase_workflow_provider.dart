@@ -14,7 +14,7 @@ class FirebaseWorkflowNotifier extends StreamNotifier<List<Workflow>> {
     String displayName,
   ) async {
     final primary =
-        await workflow_collection
+        await workflowCollection
             .where("displayName", isEqualTo: displayName)
             .limit(1)
             .get();
@@ -24,7 +24,7 @@ class FirebaseWorkflowNotifier extends StreamNotifier<List<Workflow>> {
     }
 
     final legacy =
-        await workflow_collection
+        await workflowCollection
             .where("DisplayName", isEqualTo: displayName)
             .limit(1)
             .get();
@@ -38,7 +38,7 @@ class FirebaseWorkflowNotifier extends StreamNotifier<List<Workflow>> {
 
   @override
   Stream<List<Workflow>> build() {
-    return workflow_collection.snapshots().map((event) {
+    return workflowCollection.snapshots().map((event) {
       return event.docs.map((e) => Workflow.fromJson(e.data())).toList();
     });
   }
@@ -62,7 +62,7 @@ class FirebaseWorkflowNotifier extends StreamNotifier<List<Workflow>> {
   }
 
   Future<void> setWorkflow(Workflow workflow) async {
-    await workflow_collection.add(workflow.toJson());
+    await workflowCollection.add(workflow.toJson());
   }
 }
 

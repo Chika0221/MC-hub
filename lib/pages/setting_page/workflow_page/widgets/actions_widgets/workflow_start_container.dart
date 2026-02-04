@@ -10,11 +10,11 @@ class WorkflowStartContainer extends HookConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final action = ref
-        .watch(WorkflowEditProvider.notifier)
+        .watch(workflowEditProvider.notifier)
         .getActionById(actionId);
 
     final trigger = ref.watch(
-      WorkflowEditProvider.select((workflow) => workflow.trigger),
+      workflowEditProvider.select((workflow) => workflow.trigger),
     );
 
     final isTimeTrigger = (trigger.type == TriggerType.TimeBased);
@@ -40,7 +40,7 @@ class WorkflowStartContainer extends HookConsumerWidget {
                 value: isTimeTrigger,
                 onChanged: (value) {
                   ref
-                      .read(WorkflowEditProvider.notifier)
+                      .read(workflowEditProvider.notifier)
                       .updateTrigger(
                         trigger.copyWith(
                           type:
@@ -73,7 +73,7 @@ class WorkflowStartContainer extends HookConsumerWidget {
                       newTime.minute,
                     );
                     ref
-                        .read(WorkflowEditProvider.notifier)
+                        .read(workflowEditProvider.notifier)
                         .updateTrigger(
                           trigger.copyWith(scheduledTime: scheduledDateTime),
                         );

@@ -13,7 +13,7 @@ class WorkflowNotificationContainer extends HookConsumerWidget {
     final headerTextColor = colorScheme.onTertiary;
 
     final action = ref
-        .watch(WorkflowEditProvider.notifier)
+        .watch(workflowEditProvider.notifier)
         .getActionById(actionId);
 
     final notificationMessage = action.message ?? '';
@@ -38,7 +38,7 @@ class WorkflowNotificationContainer extends HookConsumerWidget {
             onChanged: (value) {
               final updatedAction = action.copyWith(message: value);
               ref
-                  .read(WorkflowEditProvider.notifier)
+                  .read(workflowEditProvider.notifier)
                   .updateAction(updatedAction);
             },
             validator: (value) {

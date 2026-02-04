@@ -13,7 +13,7 @@ class WorkflowDelayContainer extends HookConsumerWidget {
     final headerTextColor = colorScheme.onTertiary;
 
     final action = ref
-        .watch(WorkflowEditProvider.notifier)
+        .watch(workflowEditProvider.notifier)
         .getActionById(actionId);
 
     final delaySeconds = action.delayDuration?.inSeconds ?? 0;
@@ -43,7 +43,7 @@ class WorkflowDelayContainer extends HookConsumerWidget {
                 delayDuration: Duration(seconds: seconds),
               );
               ref
-                  .read(WorkflowEditProvider.notifier)
+                  .read(workflowEditProvider.notifier)
                   .updateAction(updatedAction);
             },
             validator: (value) {

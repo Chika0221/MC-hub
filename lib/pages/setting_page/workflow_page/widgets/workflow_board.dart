@@ -13,12 +13,12 @@ import 'package:mc_hub/pages/setting_page/workflow_page/widgets/workflow_path.da
 import 'package:mc_hub/pages/setting_page/workflow_page/workflow_edit_page.dart';
 
 class WorkflowBoard extends HookConsumerWidget {
-const WorkflowBoard({super.key});
+  const WorkflowBoard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final actions = ref.watch(
-      WorkflowEditProvider.select((value) => value.actions),
+      workflowEditProvider.select((value) => value.actions),
     );
 
     final transformationController = useTransformationController();
@@ -81,7 +81,7 @@ const WorkflowBoard({super.key});
                 final updateActions = [...actions];
                 updateActions.removeWhere((e) => e.actionId == action.actionId);
 
-                ref.read(WorkflowEditProvider.notifier).updateActions([
+                ref.read(workflowEditProvider.notifier).updateActions([
                   ...updateActions,
                   action,
                 ]);
@@ -137,7 +137,7 @@ const WorkflowBoard({super.key});
                   (e) => e.actionId == fromAction.actionId,
                 );
 
-                ref.read(WorkflowEditProvider.notifier).updateActions([
+                ref.read(workflowEditProvider.notifier).updateActions([
                   ...updateActions,
                   fromAction,
                 ]);
