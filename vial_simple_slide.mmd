@@ -1,0 +1,33 @@
+graph LR
+    subgraph App ["アプリ層 (Flutter)"]
+        UI["設定画面 UI"]
+        State["状態管理 (Riverpod)"]
+    end
+
+    subgraph Logic ["ロジック層 (Infrastructure)"]
+        Discovery["デバイス自動検出<br/>(VID/PID照合)"]
+        Vial["VIAL通信プロトコル<br/>(キーマップ制御)"]
+    end
+
+    subgraph OS ["接続層"]
+        HID["Raw HID 通信<br/>(hid4flutter)"]
+    end
+
+    subgraph Hardware ["ハードウェア"]
+        MCK["自作キーボード<br/>(MCKeyboard)"]
+    end
+
+    %% データの流れ
+    UI <--> State
+    State <--> Discovery
+    State <--> Vial
+    Discovery --> HID
+    Vial <--> HID
+    HID <--> MCK
+
+    %% スタイル定義 (スライドで見やすく)
+    style App fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style Logic fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style HID fill:#f3e5f5,stroke:#4a148c,stroke-width:1px
+    style Hardware fill:#fff3e0,stroke:#e65100,stroke-width:3px
+    style MCK font-weight:bold

@@ -1,0 +1,130 @@
+<mxfile host="65bd71144e">
+    <diagram id="hid_vial_arch" name="HID and Vial Service Architecture">
+        <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+
+                <!-- Layer Labels -->
+                <mxCell id="layer_ui" value="Presentation / Provider Layer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="20" width="220" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer_infra" value="Infrastructure Layer (HID / Vial)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="160" width="220" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="layer_hardware" value="Hardware Layer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="620" width="220" height="30" as="geometry"/>
+                </mxCell>
+
+                <!-- UI/Provider Components -->
+                <mxCell id="vial_provider" value="VialProvider&#10;(Riverpod Notifier)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="40" width="160" height="70" as="geometry"/>
+                </mxCell>
+
+                <!-- HID Scripts Component -->
+                <mxCell id="hid_scripts_box" value="hid_scripts.dart&#10;(Device Discovery)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="210" width="280" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="device_list_fn" value="deviceList()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="hid_scripts_box">
+                    <mxGeometry x="20" y="40" width="110" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="filter_fn" value="filterMyKeyboards()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="hid_scripts_box">
+                    <mxGeometry x="150" y="40" width="110" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="my_devices_ref" value="myDevices List&#10;(VID/PID/Usage)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" vertex="1" parent="hid_scripts_box">
+                    <mxGeometry x="85" y="100" width="110" height="50" as="geometry"/>
+                </mxCell>
+
+                <!-- Vial Service Component -->
+                <mxCell id="vial_service_box" value="vial_service.dart&#10;(Communication Protocol)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="210" width="360" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="vs_connect" value="connect(device)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="vial_service_box">
+                    <mxGeometry x="20" y="40" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="vs_send_receive" value="sendRaw() / receiveRaw()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;" vertex="1" parent="vial_service_box">
+                    <mxGeometry x="160" y="40" width="180" height="40" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="vial_cmds" value="Vial Commands" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" vertex="1" parent="vial_service_box">
+                    <mxGeometry x="20" y="100" width="320" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="cmd_proto" value="getProtocolVersion()&#10;(CMD: 0x01)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="vial_cmds">
+                    <mxGeometry x="20" y="40" width="130" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="cmd_get_map" value="getKeymap()&#10;(CMD: 0x12 dynamic_keymap_get_buffer)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="vial_cmds">
+                    <mxGeometry x="20" y="100" width="280" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="cmd_set_key" value="setKey()&#10;(CMD: 0x13 dynamic_keymap_set_buffer)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="vial_cmds">
+                    <mxGeometry x="20" y="170" width="280" height="50" as="geometry"/>
+                </mxCell>
+
+                <!-- External Library -->
+                <mxCell id="hid4flutter" value="hid4flutter Package&#10;(Native Bridge)" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=middle;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="600" width="200" height="70" as="geometry"/>
+                </mxCell>
+
+                <!-- Physical Keyboard -->
+                <mxCell id="phys_kb" value="MCKeyboard&#10;(VIAL Compatible)" style="rounded=1;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="730" width="200" height="60" as="geometry"/>
+                </mxCell>
+
+                <!-- Connections -->
+                <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vial_provider" target="device_list_fn">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="400" y="130"/>
+                            <mxPoint x="135" y="130"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vial_provider" target="vs_connect">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="400" y="130"/>
+                            <mxPoint x="520" y="130"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="device_list_fn" target="filter_fn">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="filter_fn" target="my_devices_ref">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="device_list_fn" target="hid4flutter">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="135" y="580"/>
+                            <mxPoint x="360" y="580"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="vs_send_receive" target="hid4flutter">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="710" y="580"/>
+                            <mxPoint x="480" y="580"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="hid4flutter" target="phys_kb">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e8" value="Use for low-level packet handling" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" parent="1" source="cmd_proto" target="vs_send_receive">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="125" y="400"/>
+                            <mxPoint x="710" y="400"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+
+                <!-- Interaction text -->
+                <mxCell id="txt1" value="HID Report (32 bytes)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="690" width="130" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
