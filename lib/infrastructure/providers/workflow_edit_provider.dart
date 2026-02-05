@@ -26,7 +26,7 @@ class WorkflowEditNotifier extends Notifier<Workflow> {
     final initialWorkflow = ref.watch(workflowEditInitialWorkflowProvider);
 
     return initialWorkflow ??
-        Workflow(
+        const Workflow(
           displayName: "名前未設定のワークフロー",
           actions: [],
           trigger: WorkflowTrigger(

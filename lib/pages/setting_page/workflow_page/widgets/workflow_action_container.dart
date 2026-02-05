@@ -1,13 +1,9 @@
 // Dart imports:
-import 'dart:ui';
 
 // Flutter imports:
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -27,8 +23,8 @@ part 'actions_widgets/workflow_end_container.dart';
 class ActionContainer extends HookConsumerWidget {
   const ActionContainer({
     super.key,
-    this.actionId = null,
-    this.draggableAction = null,
+    this.actionId,
+    this.draggableAction,
   });
 
   final String? actionId;
@@ -59,47 +55,47 @@ class ActionContainer extends HookConsumerWidget {
             highlightColor: colorScheme.primary,
             headerTextColor: colorScheme.onPrimary,
             bodyTextColor: colorScheme.onSurface,
-            child: const Center(child: Text("Start Action")),
             action: draggableAction!,
             icon: Icons.play_arrow,
             isShowStartAnker: false,
+            child: const Center(child: Text("Start Action")),
           ),
           ActionType.End => WorkflowActionContainer(
             backgroundColor: colorScheme.primary.withValues(alpha: 0.15),
             highlightColor: colorScheme.primary,
             headerTextColor: colorScheme.onPrimary,
             bodyTextColor: colorScheme.onSurface,
-            child: const Center(child: Text("End Action")),
             action: draggableAction!,
             icon: Icons.stop,
             isShowEndAnker: false,
+            child: const Center(child: Text("End Action")),
           ),
           ActionType.Macro => WorkflowActionContainer(
             backgroundColor: colorScheme.secondary.withValues(alpha: 0.15),
             highlightColor: colorScheme.secondary,
             headerTextColor: colorScheme.onSecondary,
             bodyTextColor: colorScheme.onSurface,
-            child: const Center(child: Text("Macro Action")),
             action: draggableAction!,
             icon: Icons.code,
+            child: const Center(child: Text("Macro Action")),
           ),
           ActionType.Delay => WorkflowActionContainer(
             backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
             highlightColor: colorScheme.tertiary,
             headerTextColor: colorScheme.onTertiary,
             bodyTextColor: colorScheme.onSurface,
-            child: const Center(child: Text("Delay Action")),
             action: draggableAction!,
             icon: Icons.timer,
+            child: const Center(child: Text("Delay Action")),
           ),
           ActionType.Notification => WorkflowActionContainer(
             backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
             highlightColor: colorScheme.tertiary,
             headerTextColor: colorScheme.onTertiary,
             bodyTextColor: colorScheme.onSurface,
-            child: const Center(child: Text("Notification Action")),
             action: draggableAction!,
             icon: Icons.notifications,
+            child: const Center(child: Text("Notification Action")),
           ),
         };
   }
@@ -191,13 +187,12 @@ class WorkflowActionContainer extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       spacing: 4,
       children: [
-        (isShowStartAnker) ? ActionTarget() : ActionTarget(isActive: false),
+        (isShowStartAnker) ? const ActionTarget() : const ActionTarget(isActive: false),
 
         WorkflowContextMenu(
           action: action,
           child: Draggable(
             data: action,
-            child: body,
             feedback: Material(color: Colors.transparent, child: body),
             childWhenDragging: Container(
               width: 180,
@@ -207,6 +202,7 @@ class WorkflowActionContainer extends HookConsumerWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
+            child: body,
           ),
         ),
         (isShowEndAnker)
@@ -214,18 +210,18 @@ class WorkflowActionContainer extends HookConsumerWidget {
               action: action,
               child: Draggable(
                 data: action.actionId,
-                child: ActionTarget(),
                 feedback: Container(
                   height: 16,
                   width: 16,
                   decoration: ShapeDecoration(
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
+                child: const ActionTarget(),
               ),
             )
-            : ActionTarget(isActive: false),
+            : const ActionTarget(isActive: false),
       ],
     );
   }
@@ -242,7 +238,7 @@ class ActionTarget extends StatelessWidget {
       height: 8,
       width: 8,
       decoration: ShapeDecoration(
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         color:
             (isActive)
                 ? Theme.of(context).colorScheme.onSurface

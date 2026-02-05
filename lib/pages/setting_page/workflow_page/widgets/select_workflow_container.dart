@@ -18,17 +18,17 @@ class SelectWorkflowContainer extends HookConsumerWidget {
     final isClose = useState(false);
 
     return AnimatedContainer(
-      duration: Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 100),
       curve: Curves.bounceInOut,
       width: (isClose.value) ? 120 : 380,
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: DoubleLineBorderContainer(
           backgroundColor: Theme.of(context).colorScheme.onSurface,
           borderRadius: 32,
           borderType: DoubleLineBorderType.roundedRectangle,
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -41,7 +41,7 @@ class SelectWorkflowContainer extends HookConsumerWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(

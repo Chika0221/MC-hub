@@ -23,6 +23,8 @@ class WorkflowNotificationContainer extends HookConsumerWidget {
       highlightColor: highlightColor,
       headerTextColor: headerTextColor,
       bodyTextColor: colorScheme.onSurface,
+      action: action,
+      icon: Icons.notifications,
       child: Center(
         child: Form(
           autovalidateMode: AutovalidateMode.always,
@@ -50,8 +52,6 @@ class WorkflowNotificationContainer extends HookConsumerWidget {
           ),
         ),
       ),
-      action: action,
-      icon: Icons.notifications,
     );
   }
 }

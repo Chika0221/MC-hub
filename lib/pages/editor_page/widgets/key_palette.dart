@@ -23,19 +23,19 @@ class KeyPalette extends HookConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: DoubleLineBorderContainerTabs(
-        titles: ["Basic", "Media", "Macro", "Layer"],
-        children: [
-          _buildGrid(VialKey.basicLabels()),
-          _buildGrid(["VolUp", "VolDn", "Mute", "Play", "Next", "Prev"]),
-          _buildMacroGrid(VialKey.macroLabels()),
-          _buildGrid(VialKey.layerLabels()),
-        ],
+        titles: const ["Basic", "Media", "Macro", "Layer"],
         // backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
         selectedIndex: tabSelectedIndex.value,
         onTabChanged: (int value) {
           tabSelectedIndex.value = value;
         },
+        children: [
+          _buildGrid(VialKey.basicLabels()),
+          _buildGrid(["VolUp", "VolDn", "Mute", "Play", "Next", "Prev"]),
+          _buildMacroGrid(VialKey.macroLabels()),
+          _buildGrid(VialKey.layerLabels()),
+        ],
       ),
     );
   }

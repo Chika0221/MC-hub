@@ -17,15 +17,15 @@ class CodeContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       decoration: ShapeDecoration(
-        shape: StadiumBorder(),
+        shape: const StadiumBorder(),
         color:
             (code.state)
                 ? Theme.of(context).colorScheme.secondary
                 : Theme.of(context).colorScheme.surface,
       ),
-      padding: EdgeInsets.fromLTRB(24, 8, 16, 8),
+      padding: const EdgeInsets.fromLTRB(24, 8, 16, 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,7 +38,7 @@ class CodeContainer extends HookConsumerWidget {
                   builder: (context) {
                     return AlertDialog(
                       title: Text(code.name),
-                      content: Text("${code.code}"),
+                      content: Text(code.code),
                       actions: [
                         FilledButton.tonalIcon(
                           onPressed: () {
@@ -47,15 +47,15 @@ class CodeContainer extends HookConsumerWidget {
                                 .deleteCode(code);
                             Navigator.of(context).pop();
                           },
-                          icon: Icon(Icons.delete_rounded),
-                          label: Text("削除"),
+                          icon: const Icon(Icons.delete_rounded),
+                          label: const Text("削除"),
                         ),
                         TextButton.icon(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          icon: Icon(Icons.close_rounded),
-                          label: Text("閉じる"),
+                          icon: const Icon(Icons.close_rounded),
+                          label: const Text("閉じる"),
                         ),
                       ],
                     );
@@ -90,9 +90,9 @@ class CodeContainer extends HookConsumerWidget {
               ),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           IconButton.filled(
-            icon: Icon(Icons.play_arrow_rounded),
+            icon: const Icon(Icons.play_arrow_rounded),
             onPressed: onPressed,
           ),
         ],

@@ -26,7 +26,7 @@ class WorkflowEditPage extends HookConsumerWidget {
         padding: const EdgeInsets.all(4.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Stack(
+          child: const Stack(
             children: [
               WorkflowBoard(),
               Positioned(left: 16, top: 16, child: WorkflowNameContainer()),

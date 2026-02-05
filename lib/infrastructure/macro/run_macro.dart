@@ -59,7 +59,7 @@ class MacroService {
           if (appPath != null) {
             final result = await Process.run("powershell", [
               "start",
-              "\"${appPath}\"",
+              "\"$appPath\"",
             ], runInShell: true);
 
             print('Exit Code: ${result.exitCode}');

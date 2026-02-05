@@ -18,7 +18,7 @@ class SelectDeviceContainer extends HookConsumerWidget {
       };
     }, []);
 
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.height * 0.7,
       height: MediaQuery.of(context).size.height * 0.6,
       child: Column(
@@ -40,7 +40,7 @@ class SelectDeviceContainer extends HookConsumerWidget {
                     ),
                     RiveLoaded() => InkWell(
                       onTap: () async {
-                        await Future.delayed(Duration(milliseconds: 100));
+                        await Future.delayed(const Duration(milliseconds: 100));
                         Navigator.of(context).pushNamed(AppRoute.editor.path);
                         ref.read(vialProvider.notifier).connect(device);
                       },
@@ -52,12 +52,12 @@ class SelectDeviceContainer extends HookConsumerWidget {
                   },
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             device.productName,
             style: Theme.of(context).textTheme.displayLarge,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Container(
             decoration: ShapeDecoration(
               shape: StadiumBorder(
@@ -67,13 +67,13 @@ class SelectDeviceContainer extends HookConsumerWidget {
                 ),
               ),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
               "0x${device.vendorId.toRadixString(16)} : 0x${device.productId.toRadixString(16)}",
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
         ],
       ),
     );

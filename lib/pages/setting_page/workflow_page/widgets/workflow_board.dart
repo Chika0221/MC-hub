@@ -23,7 +23,7 @@ class WorkflowBoard extends HookConsumerWidget {
 
     final transformationController = useTransformationController();
 
-    final boardSize = 3000.0;
+    const boardSize = 3000.0;
 
     List<Widget> createWorkflowPaths(List<WorkflowAction> actions) {
       const startBoxOffset = Offset(180 + 8 + 8 + 2, 60);
@@ -95,15 +95,16 @@ class WorkflowBoard extends HookConsumerWidget {
                   (element) => element.actionId == getActionId,
                 );
 
-                final double offsetAllowedDeviation = 40.0;
+                const double offsetAllowedDeviation = 40.0;
 
                 WorkflowAction? nearestAction;
                 var minDistanceSquared = double.infinity;
 
                 for (final targetAction in actions) {
                   if (targetAction.actionId == fromAction.actionId) continue;
-                  if (fromAction.nextActionIds.contains(targetAction.actionId))
+                  if (fromAction.nextActionIds.contains(targetAction.actionId)) {
                     continue;
+                  }
 
                   final dx = sceneOffset.dx - (targetAction.positionX + 4.0);
                   final dy = sceneOffset.dy - (targetAction.positionY + 60.0);

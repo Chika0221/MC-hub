@@ -40,7 +40,7 @@ class MacroSettingContainer extends HookConsumerWidget {
             ),
             child: GridView.builder(
               // physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 mainAxisExtent: 60.0,
                 maxCrossAxisExtent: 300.0,
                 mainAxisSpacing: 8.0,
@@ -85,7 +85,7 @@ class MacroSelecterContainer extends HookConsumerWidget {
                 : Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(4),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -118,9 +118,9 @@ class MacroSelecterContainer extends HookConsumerWidget {
               ],
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           if (select)
-            IconButton.filled(icon: Icon(Icons.check), onPressed: () {}),
+            IconButton.filled(icon: const Icon(Icons.check), onPressed: () {}),
         ],
       ),
     );

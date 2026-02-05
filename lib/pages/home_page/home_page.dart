@@ -35,9 +35,9 @@ class HomePage extends HookConsumerWidget {
                   (context, animation, child) =>
                       FadeTransition(opacity: animation, child: child),
               curve: Curves.easeInOutSine,
-              duration: Duration(milliseconds: 240),
+              duration: const Duration(milliseconds: 240),
               children: [
-                DeviceSelectPage(),
+                const DeviceSelectPage(),
                 SettingPage(selectedIndex: subSelectedIndex.value),
               ],
             ),

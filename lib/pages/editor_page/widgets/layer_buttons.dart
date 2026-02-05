@@ -18,7 +18,7 @@ class LayerButtons extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: ShapeDecoration(
-        shape: StadiumBorder(),
+        shape: const StadiumBorder(),
         color: Theme.of(context).colorScheme.onSurface,
       ),
       child: Column(

@@ -17,7 +17,7 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
   }
 
   void fetch() async {
-    state = AsyncValue.loading();
+    state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       return getOpenApps();
     });
@@ -48,9 +48,9 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
 
     apps.sort((a, b) => a.DisplayName.compareTo(b.DisplayName));
 
-    apps.forEach((app) {
+    for (var app in apps) {
       print('${app.DisplayName} => ${app.DisplayIcon}');
-    });
+    }
     print(apps.length);
 
     final macros =

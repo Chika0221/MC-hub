@@ -24,8 +24,8 @@ class WorkflowContainer extends HookConsumerWidget {
 
     final entry = <ContextMenuEntry>[
       CustomContextMenuEntry(
-        label: Text('ワークフローを削除'),
-        icon: Icon(Icons.delete_rounded),
+        label: const Text('ワークフローを削除'),
+        icon: const Icon(Icons.delete_rounded),
         onSelected: (value) {
           ref.read(firebaseWorkflowProvider.notifier).deleteWorkflow(workflow);
         },
@@ -41,15 +41,15 @@ class WorkflowContainer extends HookConsumerWidget {
         entries: entry,
       ),
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         decoration: ShapeDecoration(
-          shape: StadiumBorder(),
+          shape: const StadiumBorder(),
           color:
               (workflow.state)
                   ? Theme.of(context).colorScheme.secondary
                   : Theme.of(context).colorScheme.surface,
         ),
-        padding: EdgeInsets.fromLTRB(24, 8, 16, 8),
+        padding: const EdgeInsets.fromLTRB(24, 8, 16, 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +64,7 @@ class WorkflowContainer extends HookConsumerWidget {
                   final Workflow? returnWorkflow = await Navigator.of(
                     context,
                   ).push(
-                    MaterialPageRoute(builder: (context) => WorkflowEditPage()),
+                    MaterialPageRoute(builder: (context) => const WorkflowEditPage()),
                   );
 
                   if (returnWorkflow != null) {
@@ -102,9 +102,9 @@ class WorkflowContainer extends HookConsumerWidget {
               ),
             ),
             if (!isTimeBasedTrigger) ...[
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               IconButton.filled(
-                icon: Icon(Icons.play_arrow_rounded),
+                icon: const Icon(Icons.play_arrow_rounded),
                 onPressed: () {
                   WorkflowService(workflow: workflow).runWorkflow();
                 },

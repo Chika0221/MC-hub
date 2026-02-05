@@ -21,6 +21,9 @@ class WorkflowEndContainer extends HookConsumerWidget {
       highlightColor: colorScheme.primary,
       headerTextColor: colorScheme.onPrimary,
       bodyTextColor: colorScheme.onSurface,
+      action: action,
+      icon: Icons.stop,
+      isShowEndAnker: false,
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,9 +50,6 @@ class WorkflowEndContainer extends HookConsumerWidget {
           ],
         ),
       ),
-      action: action,
-      icon: Icons.stop,
-      isShowEndAnker: false,
     );
   }
 }

@@ -25,6 +25,8 @@ class WorkflowDelayContainer extends HookConsumerWidget {
       highlightColor: highlightColor,
       headerTextColor: headerTextColor,
       bodyTextColor: colorScheme.onSurface,
+      action: action,
+      icon: Icons.timer,
       child: Center(
         child: Form(
           autovalidateMode: AutovalidateMode.always,
@@ -60,8 +62,6 @@ class WorkflowDelayContainer extends HookConsumerWidget {
           ),
         ),
       ),
-      action: action,
-      icon: Icons.timer,
     );
   }
 }

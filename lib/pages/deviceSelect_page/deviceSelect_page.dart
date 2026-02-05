@@ -53,7 +53,7 @@ class DeviceSelectPage extends HookConsumerWidget {
       ),
       foragroundWidget: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: CustomAppbar(),
+        appBar: const CustomAppbar(),
         body: Center(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,

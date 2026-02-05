@@ -29,7 +29,7 @@ class StateAnimation extends HookConsumerWidget {
       };
     }, []);
 
-    return Container(
+    return SizedBox(
       width: size.width * 0.3,
       height: size.width * 0.3,
       child: RiveWidgetBuilder(

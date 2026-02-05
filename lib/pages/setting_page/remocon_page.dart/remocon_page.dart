@@ -11,7 +11,7 @@ class RemoconPage extends HookConsumerWidget {
   const RemoconPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return const Scaffold(
       appBar: CustomAppbar(),
       body: Center(child: Text("Remocon Page")),
     );

@@ -272,7 +272,7 @@ class VialNotifier extends Notifier<VialState> {
 
   @override
   VialState build() {
-    return VialState(statusMessage: null, matrix: null);
+    return const VialState(statusMessage: null, matrix: null);
   }
 
   Future<void> connect(HidDevice selectDevice) async {

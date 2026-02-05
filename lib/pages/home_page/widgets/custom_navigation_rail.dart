@@ -47,12 +47,12 @@ class CustomNavigationRail extends HookConsumerWidget {
           ),
           leading: Column(
             children: [
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Image.asset("assets/icons/app_icon.png", width: 40),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
             ],
           ),
-          destinations: [
+          destinations: const [
             NavigationRailDestination(
               icon: Icon(Icons.home_rounded),
               label: Text('Home'),
@@ -67,7 +67,7 @@ class CustomNavigationRail extends HookConsumerWidget {
             padding: const EdgeInsets.fromLTRB(4, 4, 4, 8),
             child: Container(
               decoration: ShapeDecoration(
-                shape: StadiumBorder(),
+                shape: const StadiumBorder(),
                 color: Theme.of(context).colorScheme.primary,
               ),
               height: labelHeight,

@@ -25,8 +25,8 @@ class SettingPage extends HookConsumerWidget {
           (context, animation, child) =>
               FadeTransition(opacity: animation, child: child),
       curve: Curves.easeInOutSine,
-      duration: Duration(milliseconds: 240),
-      children: [RemoconPage(), WorkflowPage(), BeamSettingPage()],
+      duration: const Duration(milliseconds: 240),
+      children: const [RemoconPage(), WorkflowPage(), BeamSettingPage()],
     );
   }
 }

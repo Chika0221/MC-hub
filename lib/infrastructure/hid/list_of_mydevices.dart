@@ -3,7 +3,7 @@ import 'package:mc_hub/models/my_device.dart';
 import 'package:mc_hub/pages/editor_page/key_data.dart';
 
 final myDevices = [
-  MyDevice(
+  const MyDevice(
     name: "MCKeyboard",
     vendorId: 0xfeed,
     productId: 0x6D63,

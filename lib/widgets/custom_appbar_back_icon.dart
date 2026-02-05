@@ -8,26 +8,26 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 class CustomBackIcon extends StatelessWidget {
   final Color color;
-  CustomBackIcon({Key? key, required this.color}) : super(key: key);
+  const CustomBackIcon({super.key, required this.color});
   @override
   Widget build(BuildContext context) => _AlignedPaint(_BackPainter(color));
 }
 
 class _AlignedPaint extends StatelessWidget {
-  const _AlignedPaint(this.painter, {Key? key}) : super(key: key);
+  const _AlignedPaint(this.painter);
   final CustomPainter painter;
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
-      child: CustomPaint(size: Size(10, 10), painter: painter),
+      child: CustomPaint(size: const Size(10, 10), painter: painter),
     );
   }
 }
 
 class _BackPainter extends _IconPainter {
-  _BackPainter(Color color) : super(color);
+  _BackPainter(super.color);
   @override
   void paint(Canvas canvas, Size size) {
     Paint p = getPaint(color);

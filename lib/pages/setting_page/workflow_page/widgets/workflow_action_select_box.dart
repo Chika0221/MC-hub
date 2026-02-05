@@ -28,6 +28,11 @@ class WorkflowActionBox extends HookConsumerWidget {
         );
       },
       child: Draggable<WorkflowAction>(
+        feedback: Material(
+          color: Colors.transparent,
+          child: ActionContainer(draggableAction: draggableAction.value),
+        ),
+        data: draggableAction.value,
         child: Container(
           width: double.infinity,
           height: 64,
@@ -42,11 +47,6 @@ class WorkflowActionBox extends HookConsumerWidget {
             ),
           ),
         ),
-        feedback: Material(
-          color: Colors.transparent,
-          child: ActionContainer(draggableAction: draggableAction.value),
-        ),
-        data: draggableAction.value,
       ),
     );
   }

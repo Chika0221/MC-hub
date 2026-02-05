@@ -20,7 +20,7 @@ class FolderBorderContainar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final double titletabHeight = 32;
+    const double titletabHeight = 32;
 
     return Expanded(
       child: Column(
@@ -33,7 +33,7 @@ class FolderBorderContainar extends HookConsumerWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
                   decoration: BoxDecoration(
                     color: backgroundColor,
                     borderRadius: const BorderRadius.vertical(
@@ -53,7 +53,7 @@ class FolderBorderContainar extends HookConsumerWidget {
                   child: Stack(
                     children: [
                       Align(
-                        alignment: Alignment(-1, 0),
+                        alignment: const Alignment(-1, 0),
                         child: Container(
                           width: 128,
                           height: titletabHeight,
@@ -61,13 +61,13 @@ class FolderBorderContainar extends HookConsumerWidget {
                         ),
                       ),
                       Align(
-                        alignment: Alignment(-1, 0),
+                        alignment: const Alignment(-1, 0),
                         child: Container(
                           width: 300,
                           height: titletabHeight,
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.surface,
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(8),
                             ),
                           ),
@@ -85,10 +85,10 @@ class FolderBorderContainar extends HookConsumerWidget {
                 Positioned.fill(
                   child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: backgroundColor,
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(8),
                         bottomRight: Radius.circular(8),
                         bottomLeft: Radius.circular(8),

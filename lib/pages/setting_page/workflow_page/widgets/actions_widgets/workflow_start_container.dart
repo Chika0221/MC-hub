@@ -29,13 +29,16 @@ class WorkflowStartContainer extends HookConsumerWidget {
       highlightColor: colorScheme.primary,
       headerTextColor: colorScheme.onPrimary,
       bodyTextColor: colorScheme.onSurface,
+      action: action,
+      icon: Icons.play_arrow,
+      isShowStartAnker: false,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("時間トリガー"),
+              const Text("時間トリガー"),
               Switch(
                 value: isTimeTrigger,
                 onChanged: (value) {
@@ -80,15 +83,12 @@ class WorkflowStartContainer extends HookConsumerWidget {
                   }
                 },
                 icon: const Icon(Icons.schedule_rounded),
-                label: Text("${scheduledTime.format(context)}"),
+                label: Text(scheduledTime.format(context)),
               ),
             ),
           ],
         ],
       ),
-      action: action,
-      icon: Icons.play_arrow,
-      isShowStartAnker: false,
     );
   }
 }

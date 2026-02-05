@@ -33,30 +33,30 @@ class CustomNavigationSubRail extends HookConsumerWidget {
 
     return Column(
       children: [
-        SizedBox(height: 32),
+        const SizedBox(height: 32),
         IconButton(
           isSelected: (selectedIndex == 0),
           onPressed: () => onSelected.call(0),
-          icon: Icon(Icons.add_box_outlined),
-          selectedIcon: Icon(Icons.add_box_rounded),
+          icon: const Icon(Icons.add_box_outlined),
+          selectedIcon: const Icon(Icons.add_box_rounded),
           style: subRailChildrenButtonStyle(context),
         ),
         IconButton(
           isSelected: (selectedIndex == 1),
           onPressed: () => onSelected.call(1),
-          icon: Icon(Icons.shape_line_outlined),
-          selectedIcon: Icon(Icons.shape_line_rounded),
+          icon: const Icon(Icons.shape_line_outlined),
+          selectedIcon: const Icon(Icons.shape_line_rounded),
           style: subRailChildrenButtonStyle(context),
         ),
         IconButton(
           isSelected: (selectedIndex == 2),
           onPressed: () => onSelected.call(2),
-          icon: Icon(Icons.send_time_extension_outlined),
-          selectedIcon: Icon(Icons.send_time_extension_rounded),
+          icon: const Icon(Icons.send_time_extension_outlined),
+          selectedIcon: const Icon(Icons.send_time_extension_rounded),
           style: subRailChildrenButtonStyle(context),
         ),
-        Spacer(),
-        SizedBox(height: 32),
+        const Spacer(),
+        const SizedBox(height: 32),
         RotatedBox(
           quarterTurns: 3,
           child: Text(
@@ -73,7 +73,7 @@ class CustomNavigationSubRail extends HookConsumerWidget {
           begin: -1.0,
           end: 0.0,
         ),
-        SizedBox(height: 32),
+        const SizedBox(height: 32),
       ],
     );
   }

@@ -13,13 +13,13 @@ import 'package:mc_hub/main.dart';
 import 'package:mc_hub/widgets/custom_appbar_back_icon.dart';
 
 class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
-  CustomAppbar({super.key, this.title, this.returnValue = null});
+  const CustomAppbar({super.key, this.title, this.returnValue});
 
   final String? title;
   final dynamic returnValue;
 
   @override
-  final Size preferredSize = Size.fromHeight(kToolbarHeight);
+  final Size preferredSize = const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -73,21 +73,21 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
                 colors: closeButtonColors,
                 onPressed: () {
                   final alertDialog = AlertDialog(
-                    title: Text("ソフトを終了しますか？"),
+                    title: const Text("ソフトを終了しますか？"),
                     actions: [
                       FilledButton(
                         onPressed: () {
                           appWindow.hide();
                           Navigator.of(context).pushNamed(AppRoute.home.path);
                         },
-                        child: Text("タスクトレイに収納"),
+                        child: const Text("タスクトレイに収納"),
                       ),
                       FilledButton.tonal(
                         onPressed: () {
                           appWindow.close();
                           exit(0);
                         },
-                        child: Text("ソフトを終了"),
+                        child: const Text("ソフトを終了"),
                       ),
                     ],
                   );

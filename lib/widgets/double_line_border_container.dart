@@ -37,7 +37,7 @@ class DoubleLineBorderContainer extends HookConsumerWidget {
         decoration:
             (borderType == DoubleLineBorderType.stadium)
                 ? ShapeDecoration(
-                  shape: StadiumBorder(),
+                  shape: const StadiumBorder(),
                   color: backgroundColor,
                 )
                 : BoxDecoration(
