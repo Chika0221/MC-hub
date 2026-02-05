@@ -25,8 +25,8 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
 
   Future<List<Macro>> getOpenApps() async {
     final result = await Process.run('powershell', [
-      'Get-ItemProperty',
-      r'HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*, HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*, HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayIcon | Where-Object {$_.DisplayName -ne $null -and $_.DisplayIcon -ne $null} | ConvertTo-Json',
+      '-Command',
+      '@(Get-StartApps) | Select-Object Name, AppID | ConvertTo-Json',
     ]);
 
     final out = (result.stdout ?? "").toString();
@@ -34,17 +34,14 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
     final List<dynamic> listJson = jsonDecode(out);
 
     final List<AppInfo> apps =
-        listJson
-            .map((e) => AppInfo.fromJson(e))
-            .where((e) => !(e.DisplayIcon.contains(".ico")))
-            .map((e) {
-              String iconPath = e.DisplayIcon;
-              if (iconPath.contains(',')) {
-                iconPath = iconPath.split(',')[0];
-              }
-              return AppInfo(DisplayName: e.DisplayName, DisplayIcon: iconPath);
-            })
-            .toList();
+        listJson.map((e) {
+          final name = e['Name'] as String;
+          final appId = e['AppID'] as String;
+          return AppInfo(
+            DisplayName: name,
+            DisplayIcon: 'shell:AppsFolder\\$appId',
+          );
+        }).toList();
 
     apps.sort((a, b) => a.DisplayName.compareTo(b.DisplayName));
 
