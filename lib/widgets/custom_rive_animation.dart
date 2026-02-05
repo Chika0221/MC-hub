@@ -21,7 +21,7 @@ class CustomRiveAnimation extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
+    return SizedBox(
       width: size.width,
       height: size.height,
       child: RiveWidgetBuilder(
@@ -29,7 +29,7 @@ class CustomRiveAnimation extends HookConsumerWidget {
         artboardSelector:
             (artBoardName != null)
                 ? ArtboardSelector.byName(artBoardName!)
-                : ArtboardDefault(),
+                : const ArtboardDefault(),
         builder:
             (context, state) => switch (state) {
               RiveLoading() => const Center(child: CircularProgressIndicator()),

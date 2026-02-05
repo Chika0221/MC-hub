@@ -99,7 +99,7 @@ class MacroSettingMacroSource extends HookConsumerWidget {
     const double spacing = 8.0;
     const double expandedWidth = size * 5 + spacing * 4;
 
-    return Container(
+    return SizedBox(
       width: expandedWidth,
       height: size,
       child: Row(
@@ -187,7 +187,7 @@ class MacroInfomationContainer extends HookConsumerWidget {
                     );
                   },
                   loading:
-                      () => Center(child: const CircularProgressIndicator()),
+                      () => const Center(child: CircularProgressIndicator()),
                   error: (error, stackTrace) {
                     print(error.toString());
                     return Text(

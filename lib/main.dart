@@ -25,7 +25,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await RiveNative.init();
 
-  runApp(ProviderScope(child: TaskTray(child: MyApp())));
+  runApp(const ProviderScope(child: TaskTray(child: MyApp())));
 
   doWhenWindowReady(() {
     // const initialSize = Size(600, 450);

@@ -34,6 +34,7 @@ class WorkflowNameContainer extends HookConsumerWidget {
     }, []);
 
     return DoubleLineBorderContainer(
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
@@ -44,7 +45,7 @@ class WorkflowNameContainer extends HookConsumerWidget {
                   () =>
                       Navigator.of(context).pop(ref.read(workflowEditProvider)),
               color: Theme.of(context).colorScheme.primary,
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
             ),
             const VerticalDivider(
               width: 20,
@@ -53,18 +54,17 @@ class WorkflowNameContainer extends HookConsumerWidget {
               endIndent: 0,
               color: Colors.white,
             ),
-            Container(
+            SizedBox(
               width: textFieldWidth.value,
               child: TextField(
                 controller: textController,
-                decoration: InputDecoration(border: InputBorder.none),
+                decoration: const InputDecoration(border: InputBorder.none),
                 style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
             ),
           ],
         ),
       ),
-      backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
     );
   }
 }

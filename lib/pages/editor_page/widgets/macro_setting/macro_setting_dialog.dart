@@ -62,15 +62,15 @@ class MacroSettingDialog extends HookConsumerWidget {
       title: Row(
         children: [
           Text(title),
-          Spacer(),
+          const Spacer(),
           FilledButton.tonalIcon(
             onPressed: () {
               MacroService.runMacroByKeycode(
                 MonitorKeycodes.values.firstWhere((e) => e.shortName == title),
               );
             },
-            icon: Icon(Icons.play_arrow_rounded),
-            label: Text("テスト実行"),
+            icon: const Icon(Icons.play_arrow_rounded),
+            label: const Text("テスト実行"),
           ),
         ],
       ),
@@ -132,15 +132,15 @@ class MacroSettingDialog extends HookConsumerWidget {
             }
             Navigator.of(context).pop(returnMacro.value);
           },
-          icon: Icon(Icons.check_rounded),
-          label: Text("適応"),
+          icon: const Icon(Icons.check_rounded),
+          label: const Text("適応"),
         ),
         FilledButton.tonalIcon(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.close_rounded),
-          label: Text("閉じる"),
+          icon: const Icon(Icons.close_rounded),
+          label: const Text("閉じる"),
         ),
       ],
     );

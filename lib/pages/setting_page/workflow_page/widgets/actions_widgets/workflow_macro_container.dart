@@ -22,6 +22,8 @@ class WorkflowMacroContainer extends HookConsumerWidget {
       highlightColor: highlightColor,
       headerTextColor: headerTextColor,
       bodyTextColor: colorScheme.onSurface,
+      action: action,
+      icon: Icons.code,
       child: Padding(
         padding: const EdgeInsets.only(top: 4.0),
         child: Column(
@@ -49,7 +51,7 @@ class WorkflowMacroContainer extends HookConsumerWidget {
                 onPressed: () async {
                   final Macro? macro = await showDialog(
                     context: context,
-                    builder: (context) => MacroSettingDialog(title: "マクロを選択"),
+                    builder: (context) => const MacroSettingDialog(title: "マクロを選択"),
                   );
                   if (macro != null) {
                     final updatedAction = action.copyWith(
@@ -61,15 +63,13 @@ class WorkflowMacroContainer extends HookConsumerWidget {
                         .updateAction(updatedAction);
                   }
                 },
-                label: Text("マクロを編集"),
+                label: const Text("マクロを編集"),
                 icon: Icon(macro?.type.displayIcon ?? Icons.code_rounded),
               ),
             ),
           ],
         ),
       ),
-      action: action,
-      icon: Icons.code,
     );
   }
 }

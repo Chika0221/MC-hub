@@ -31,7 +31,7 @@ class BeamSettingPage extends HookConsumerWidget {
       ),
       foragroundWidget: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: CustomAppbar(),
+        appBar: const CustomAppbar(),
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 16.0, right: 16.0),
           child: DoubleLineBorderContainer(
@@ -41,10 +41,10 @@ class BeamSettingPage extends HookConsumerWidget {
                   () => showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return NewCodeRegisterDialog();
+                      return const NewCodeRegisterDialog();
                     },
                   ),
-              icon: Icon(Icons.add_rounded),
+              icon: const Icon(Icons.add_rounded),
               iconSize: 48,
             ),
           ),
@@ -64,7 +64,7 @@ class BeamSettingPage extends HookConsumerWidget {
                   ),
                 ),
               ),
-              BeamSendingContainer(),
+              const BeamSendingContainer(),
             ],
           ),
         ),
@@ -85,6 +85,7 @@ class BeamSendingContainer extends HookConsumerWidget {
           child: DoubleLineBorderContainer(
             borderType: DoubleLineBorderType.roundedRectangle,
             borderRadius: 48,
+            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: BeamItemGridView(
@@ -104,7 +105,6 @@ class BeamSendingContainer extends HookConsumerWidget {
                 },
               ),
             ),
-            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           ),
         );
       },
@@ -112,7 +112,7 @@ class BeamSendingContainer extends HookConsumerWidget {
         return Center(child: Text("エラーが発生 $error"));
       },
       loading: () {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       },
     );
   }

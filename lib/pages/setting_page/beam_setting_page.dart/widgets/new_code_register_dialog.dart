@@ -72,15 +72,15 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
                 color: Theme.of(context).colorScheme.secondary,
                 connectorColor: Theme.of(context).colorScheme.onSurface,
               ),
-              title: Text("コードの名前の登録"),
+              title: const Text("コードの名前の登録"),
               content: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   TextField(
                     controller: textController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       filled: true,
                       border: OutlineInputBorder(),
                       labelText: 'コード名を入力してください',
@@ -93,16 +93,16 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
                         color: Theme.of(context).colorScheme.tertiary,
                       ),
                     ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                 ],
               ),
             ),
             Step(
-              title: Text("コードの登録"),
+              title: const Text("コードの登録"),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   unregisteredCodeStream.when(
                     data: (data) {
                       if (data == null) {
@@ -120,7 +120,7 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
                                         name: textController.text,
                                       ),
                                     ),
-                            child: Text("リモコンのコードの検索を始める"),
+                            child: const Text("リモコンのコードの検索を始める"),
                           ),
                         );
                       }
@@ -132,10 +132,10 @@ class NewCodeRegisterDialog extends HookConsumerWidget {
                       return Text("エラーが発生しました: $error");
                     },
                     loading: () {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     },
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                 ],
               ),
               stepStyle: StepStyle(

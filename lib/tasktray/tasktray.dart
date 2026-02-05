@@ -46,10 +46,12 @@ class _TaskTrayState extends ConsumerState<TaskTray> with TrayListener {
     super.dispose();
   }
 
+  @override
   void onTrayIconMouseDown() {
     trayManager.popUpContextMenu();
   }
 
+  @override
   void onTrayMenuItemClick(MenuItem menuItem) {
     if (menuItem.key == 'show') {
       appWindow.show();

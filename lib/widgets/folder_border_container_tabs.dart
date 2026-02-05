@@ -22,7 +22,7 @@ class FolderBorderContainerTabs extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final double titletabHeight = 32;
+    const double titletabHeight = 32;
 
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -56,11 +56,11 @@ class FolderBorderContainerTabs extends HookConsumerWidget {
         Expanded(
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
 
             decoration: BoxDecoration(
               color: backgroundColor,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(8),
                 bottomRight: Radius.circular(8),
                 bottomLeft: Radius.circular(8),
@@ -87,7 +87,7 @@ class TabTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),

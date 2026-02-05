@@ -26,7 +26,7 @@ class DoubleLineBorderContainerTabs extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final double titletabHeight = 38;
+    const double titletabHeight = 38;
 
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -42,7 +42,7 @@ class DoubleLineBorderContainerTabs extends HookConsumerWidget {
             Container(
               height: titletabHeight,
               decoration: ShapeDecoration(
-                shape: StadiumBorder(),
+                shape: const StadiumBorder(),
                 color: colorScheme.secondaryContainer,
               ),
               child: Row(
@@ -68,9 +68,9 @@ class DoubleLineBorderContainerTabs extends HookConsumerWidget {
                 }),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 child: children[selectedIndex],
               ),
@@ -97,9 +97,9 @@ class TabTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
       decoration: ShapeDecoration(
-        shape: StadiumBorder(),
+        shape: const StadiumBorder(),
         color: backgroundColor,
       ),
       child: Center(

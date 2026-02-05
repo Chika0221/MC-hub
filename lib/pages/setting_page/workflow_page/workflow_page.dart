@@ -19,7 +19,7 @@ class WorkflowPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: CustomAppbar(),
+      appBar: const CustomAppbar(),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 16.0, right: 16.0),
         child: DoubleLineBorderContainer(
@@ -30,8 +30,8 @@ class WorkflowPage extends HookConsumerWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text("ワークフローの新規作成"),
-                      content: Text("ワークフローを新規作成しますか？"),
+                      title: const Text("ワークフローの新規作成"),
+                      content: const Text("ワークフローを新規作成しますか？"),
                       actions: [
                         FilledButton(
                           onPressed: () async {
@@ -46,7 +46,7 @@ class WorkflowPage extends HookConsumerWidget {
                               context,
                             ).push(
                               MaterialPageRoute(
-                                builder: (context) => WorkflowEditPage(),
+                                builder: (context) => const WorkflowEditPage(),
                               ),
                             );
 
@@ -56,19 +56,19 @@ class WorkflowPage extends HookConsumerWidget {
                                   .setWorkflow(newWorkflow);
                             }
                           },
-                          child: Text("作成"),
+                          child: const Text("作成"),
                         ),
                         FilledButton.tonal(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text("キャンセル"),
+                          child: const Text("キャンセル"),
                         ),
                       ],
                     );
                   },
                 ),
-            icon: Icon(Icons.add_rounded),
+            icon: const Icon(Icons.add_rounded),
             iconSize: 48,
           ),
         ),
@@ -88,7 +88,7 @@ class WorkflowPage extends HookConsumerWidget {
                 ),
               ),
             ),
-            WorkflowSelectContainer(),
+            const WorkflowSelectContainer(),
           ],
         ),
       ),
@@ -108,6 +108,7 @@ class WorkflowSelectContainer extends HookConsumerWidget {
           child: DoubleLineBorderContainer(
             borderType: DoubleLineBorderType.roundedRectangle,
             borderRadius: 48,
+            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: BeamItemGridView(
@@ -118,7 +119,6 @@ class WorkflowSelectContainer extends HookConsumerWidget {
                 },
               ),
             ),
-            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           ),
         );
       },
@@ -126,7 +126,7 @@ class WorkflowSelectContainer extends HookConsumerWidget {
         return Center(child: Text("エラーが発生 $error"));
       },
       loading: () {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       },
     );
   }

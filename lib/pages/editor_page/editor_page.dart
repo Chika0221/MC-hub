@@ -144,7 +144,7 @@ class EditorPage extends HookConsumerWidget {
                 SizedBox(
                   width: 84,
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: LayerButtons(
                       selectedLayerIndex: selectedLayer.value,
                       onLayerChanged: (index) {
@@ -186,7 +186,7 @@ class EditorPage extends HookConsumerWidget {
             ),
           ),
 
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           const Expanded(flex: 2, child: KeyPalette()),
         ],
       ),

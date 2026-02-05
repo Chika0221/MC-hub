@@ -59,7 +59,7 @@ class VialService {
     try {
       final data = await _device!.receiveReport(
         32,
-        timeout: Duration(seconds: 1),
+        timeout: const Duration(seconds: 1),
       );
 
       if (data.length > 32) {

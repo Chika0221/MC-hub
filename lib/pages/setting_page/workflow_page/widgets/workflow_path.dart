@@ -44,7 +44,7 @@ class MyCustomPainter extends CustomPainter {
           ..strokeCap = StrokeCap.round;
     final path = Path();
 
-    final double arrowSize = 8.0;
+    const double arrowSize = 8.0;
 
     if (delta.dx < 0) {
       const double outlierValue = 48.0;
