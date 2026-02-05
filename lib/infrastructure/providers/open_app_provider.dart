@@ -24,10 +24,22 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
   }
 
   Future<List<Macro>> getOpenApps() async {
-    final result = await Process.run('powershell', [
-      '-Command',
-      '@(Get-StartApps) | Select-Object Name, AppID | ConvertTo-Json',
-    ]);
+    const script = r'''
+$paths = [Environment]::GetFolderPath('CommonStartMenu'), [Environment]::GetFolderPath('StartMenu');
+$list = Get-ChildItem -Path $paths -Recurse -Include *.lnk -ErrorAction SilentlyContinue;
+$shell = New-Object -ComObject WScript.Shell;
+$apps = foreach($item in $list){
+  try {
+    $s = $shell.CreateShortcut($item.FullName);
+    if($s.TargetPath -match '\.exe$'){
+      @{Name=$item.BaseName; Path=$s.TargetPath}
+    }
+  } catch {}
+};
+@($apps) | Sort-Object -Property Name -Unique | ConvertTo-Json -Compress
+''';
+
+    final result = await Process.run('powershell', ['-Command', script]);
 
     final out = (result.stdout ?? "").toString();
 
@@ -36,11 +48,8 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
     final List<AppInfo> apps =
         listJson.map((e) {
           final name = e['Name'] as String;
-          final appId = e['AppID'] as String;
-          return AppInfo(
-            DisplayName: name,
-            DisplayIcon: 'shell:AppsFolder\\$appId',
-          );
+          final path = e['Path'] as String;
+          return AppInfo(DisplayName: name, DisplayIcon: path);
         }).toList();
 
     apps.sort((a, b) => a.DisplayName.compareTo(b.DisplayName));
