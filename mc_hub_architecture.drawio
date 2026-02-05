@@ -1,43 +1,77 @@
 <mxfile host="65bd71144e">
     <diagram id="mc_hub_arch" name="mc_hub Architecture">
-        <mxGraphModel dx="685" dy="211" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="1317" dy="405" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1470" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="ext_group" value="External Systems" style="swimlane;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
-                    <mxGeometry x="20" y="40" width="180" height="540" as="geometry"/>
+                <mxCell id="edge11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="home_page" target="macros_prov" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="480" y="290"/>
+                            <mxPoint x="480" y="290"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="user" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="ext_group" vertex="1">
-                    <mxGeometry x="75" y="40" width="30" height="60" as="geometry"/>
+                <mxCell id="edge12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="editor_page" target="vial_prov" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="phys_kb" value="MCKeyboard&#xa;(Self-made / VIAL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="ext_group" vertex="1">
-                    <mxGeometry x="30" y="160" width="120" height="60" as="geometry"/>
+                <mxCell id="edge8" value="入力送信" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="key_sender" target="win_os" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="550" y="650"/>
+                            <mxPoint x="550" y="740"/>
+                            <mxPoint x="250" y="740"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ext_group" value="外部システム" style="swimlane;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="40" width="290" height="650" as="geometry"/>
+                </mxCell>
+                <mxCell id="user" value="ユーザー" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="ext_group" vertex="1">
+                    <mxGeometry x="193" y="40" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="phys_kb" value="MCKeyboard&#xa;(自作 / VIAL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="ext_group" vertex="1">
+                    <mxGeometry x="148" y="160" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="win_os" value="Windows OS&#xa;(Win32 API)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="ext_group" vertex="1">
-                    <mxGeometry x="30" y="280" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="148" y="280" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.473;entryY=0.963;entryDx=0;entryDy=0;entryPerimeter=0;rounded=0;" edge="1" parent="ext_group" source="firebase" target="9">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="90" y="460.2222222222222" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="firebase" value="Firebase&#xa;(Firestore / AI)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="ext_group" vertex="1">
-                    <mxGeometry x="40" y="420" width="100" height="80" as="geometry"/>
+                    <mxGeometry x="158" y="420" width="100" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="app_group" value="SwitchPalette (Flutter Application)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="240" y="40" width="880" height="740" as="geometry"/>
+                <mxCell id="9" value="スマートリモコン&lt;br&gt;(自作 / ラズパイ)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" vertex="1" parent="ext_group">
+                    <mxGeometry x="28" y="350" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="pres_layer" value="Presentation Layer" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="app_group" vertex="1">
+                <mxCell id="14" value="スマホアプリ&lt;br&gt;SwitchController" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" vertex="1" parent="ext_group">
+                    <mxGeometry x="28" y="530" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0;entryDx=0;entryDy=52.5;entryPerimeter=0;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="ext_group" source="14" target="firebase">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="app_group" value="SwitchPalette (Flutter アプリケーション)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="390" y="40" width="880" height="740" as="geometry"/>
+                </mxCell>
+                <mxCell id="pres_layer" value="プレゼンテーション層" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="app_group" vertex="1">
                     <mxGeometry x="20" y="40" width="400" height="200" as="geometry"/>
                 </mxCell>
-                <mxCell id="home_page" value="HomePage" style="rounded=0;whiteSpace=wrap;html=1;" parent="pres_layer" vertex="1">
+                <mxCell id="home_page" value="ホームページ" style="rounded=0;whiteSpace=wrap;html=1;" parent="pres_layer" vertex="1">
                     <mxGeometry x="20" y="40" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="editor_page" value="EditorPage" style="rounded=0;whiteSpace=wrap;html=1;" parent="pres_layer" vertex="1">
+                <mxCell id="editor_page" value="エディターページ" style="rounded=0;whiteSpace=wrap;html=1;" parent="pres_layer" vertex="1">
                     <mxGeometry x="150" y="40" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="widgets" value="Custom Widgets&#xa;(Theme / Components)" style="rounded=0;whiteSpace=wrap;html=1;" parent="pres_layer" vertex="1">
+                <mxCell id="widgets" value="カスタムウィジェット&#xa;(テーマ / コンポーネント)" style="rounded=0;whiteSpace=wrap;html=1;" parent="pres_layer" vertex="1">
                     <mxGeometry x="20" y="110" width="230" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="tasktray" value="TaskTray Manager" style="rounded=0;whiteSpace=wrap;html=1;" parent="pres_layer" vertex="1">
+                <mxCell id="tasktray" value="タスクトレイマネージャー" style="rounded=0;whiteSpace=wrap;html=1;" parent="pres_layer" vertex="1">
                     <mxGeometry x="280" y="40" width="100" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="state_layer" value="State Management (Riverpod)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="app_group" vertex="1">
+                <mxCell id="state_layer" value="状態管理 (Riverpod)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="app_group" vertex="1">
                     <mxGeometry x="20" y="260" width="400" height="120" as="geometry"/>
                 </mxCell>
                 <mxCell id="macros_prov" value="MacrosProvider" style="ellipse;whiteSpace=wrap;html=1;" parent="state_layer" vertex="1">
@@ -49,96 +83,129 @@
                 <mxCell id="firebase_prov" value="FirebaseProvider" style="ellipse;whiteSpace=wrap;html=1;" parent="state_layer" vertex="1">
                     <mxGeometry x="270" y="40" width="110" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="infra_layer" value="Infrastructure / Service Layer" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="app_group" vertex="1">
+                <mxCell id="infra_layer" value="インフラストラクチャ / サービス層" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="app_group" vertex="1">
                     <mxGeometry x="20" y="410" width="840" height="310" as="geometry"/>
                 </mxCell>
-                <mxCell id="monitor_group" value="Input Monitoring" style="swimlane;whiteSpace=wrap;html=1;" parent="infra_layer" vertex="1">
+                <mxCell id="monitor_group" value="入力モニタリング" style="swimlane;whiteSpace=wrap;html=1;" parent="infra_layer" vertex="1">
                     <mxGeometry x="20" y="40" width="180" height="120" as="geometry"/>
                 </mxCell>
-                <mxCell id="kb_monitor" value="KeyboardMonitor&#xa;(Global Hook)" style="rounded=1;whiteSpace=wrap;html=1;" parent="monitor_group" vertex="1">
+                <mxCell id="kb_monitor" value="キーボードモニター&#xa;(グローバルフック)" style="rounded=1;whiteSpace=wrap;html=1;" parent="monitor_group" vertex="1">
                     <mxGeometry x="20" y="40" width="140" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="engine_group" value="Execution Engine" style="swimlane;whiteSpace=wrap;html=1;" parent="infra_layer" vertex="1">
+                <mxCell id="engine_group" value="実行エンジン" style="swimlane;whiteSpace=wrap;html=1;" parent="infra_layer" vertex="1">
                     <mxGeometry x="220" y="40" width="400" height="250" as="geometry"/>
                 </mxCell>
-                <mxCell id="macro_service" value="MacroService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="engine_group" vertex="1">
+                <mxCell id="macro_service" value="マクロサービス" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="engine_group" vertex="1">
                     <mxGeometry x="20" y="40" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="workflow_service" value="WorkflowService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="engine_group" vertex="1">
+                <mxCell id="workflow_service" value="ワークフローサービス" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="engine_group" vertex="1">
                     <mxGeometry x="160" y="40" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="key_sender" value="KeySender&#xa;(Win32 SendInput)" style="rounded=1;whiteSpace=wrap;html=1;" parent="engine_group" vertex="1">
+                <mxCell id="key_sender" value="キー送信&#xa;(Win32 SendInput)" style="rounded=1;whiteSpace=wrap;html=1;" parent="engine_group" vertex="1">
                     <mxGeometry x="20" y="150" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="ai_service" value="FirebaseAI Service" style="rounded=1;whiteSpace=wrap;html=1;" parent="engine_group" vertex="1">
+                <mxCell id="ai_service" value="FirebaseAI サービス" style="rounded=1;whiteSpace=wrap;html=1;" parent="engine_group" vertex="1">
                     <mxGeometry x="160" y="150" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="app_prefs" value="AppPreferences&#xa;(SharedPrefs)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="engine_group" vertex="1">
+                <mxCell id="app_prefs" value="アプリ設定&#xa;(SharedPrefs)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="engine_group" vertex="1">
                     <mxGeometry x="300" y="140" width="80" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="device_group" value="Device Communication" style="swimlane;whiteSpace=wrap;html=1;" parent="infra_layer" vertex="1">
+                <mxCell id="device_group" value="デバイス通信" style="swimlane;whiteSpace=wrap;html=1;" parent="infra_layer" vertex="1">
                     <mxGeometry x="640" y="40" width="180" height="120" as="geometry"/>
                 </mxCell>
-                <mxCell id="vial_service" value="VialService&#xa;(HID/VIAL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="device_group" vertex="1">
+                <mxCell id="vial_service" value="Vial サービス&#xa;(HID/VIAL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="device_group" vertex="1">
                     <mxGeometry x="20" y="40" width="140" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="models_layer" value="Domain Models" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="app_group" vertex="1">
-                    <mxGeometry x="450" y="40" width="180" height="340" as="geometry"/>
+                <mxCell id="11" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;rounded=0;curved=0;" edge="1" parent="infra_layer" source="kb_monitor" target="workflow_service">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="210" y="110"/>
+                            <mxPoint x="210" y="70"/>
+                            <mxPoint x="410" y="70"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="model_macro" value="Macro Model" style="rounded=0;whiteSpace=wrap;html=1;" parent="models_layer" vertex="1">
-                    <mxGeometry x="20" y="40" width="140" height="40" as="geometry"/>
+                <mxCell id="4" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;rounded=0;curved=0;" edge="1" parent="app_group" source="vial_prov" target="vial_service">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="220" y="390"/>
+                            <mxPoint x="650" y="390"/>
+                            <mxPoint x="650" y="520"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="model_workflow" value="Workflow Model" style="rounded=0;whiteSpace=wrap;html=1;" parent="models_layer" vertex="1">
-                    <mxGeometry x="20" y="100" width="140" height="40" as="geometry"/>
-                </mxCell>
-                <mxCell id="model_device" value="MyDevice Model" style="rounded=0;whiteSpace=wrap;html=1;" parent="models_layer" vertex="1">
-                    <mxGeometry x="20" y="160" width="140" height="40" as="geometry"/>
+                <mxCell id="5" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;rounded=0;curved=0;" edge="1" parent="app_group" source="macros_prov" target="app_prefs">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="95" y="400"/>
+                            <mxPoint x="580" y="400"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="user" target="phys_kb" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="edge2" value="Scancode (M1-M12)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="phys_kb" target="win_os" edge="1">
+                <mxCell id="edge2" value="スキャンコード (M1-M12)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="phys_kb" target="win_os" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="edge3" value="Global Key Hook" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="win_os" target="kb_monitor" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="edge3" value="グローバルフック" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="win_os" target="kb_monitor" edge="1">
+                    <mxGeometry x="-0.3659" y="-20" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="260" y="410"/>
+                            <mxPoint x="520" y="410"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="edge4" value="Trigger Macro" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="kb_monitor" target="macro_service" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="edge4" value="マクロ実行トリガー" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="kb_monitor" edge="1">
+                    <mxGeometry y="20" relative="1" as="geometry">
+                        <mxPoint x="650" y="560" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="630" y="560"/>
+                            <mxPoint x="630" y="560"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="edge6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="macro_service" target="key_sender" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="edge8" value="SendInput" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="key_sender" target="win_os" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="400" y="650"/>
-                            <mxPoint x="400" y="760"/>
-                            <mxPoint x="100" y="760"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
                 <mxCell id="edge9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="ai_service" target="firebase" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="460" y="740"/>
-                            <mxPoint x="140" y="740"/>
+                            <mxPoint x="850" y="720"/>
+                            <mxPoint x="290" y="720"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge10" value="Raw HID / VIAL Config" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="vial_service" target="phys_kb" edge="1">
+                <mxCell id="edge10" value="Raw HID / VIAL 設定" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="vial_service" target="phys_kb" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="970" y="30"/>
-                            <mxPoint x="90" y="30"/>
+                            <mxPoint x="1120" y="30"/>
+                            <mxPoint x="240" y="30"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="edge11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="home_page" target="macros_prov" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="12" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;rounded=0;" edge="1" parent="1" source="firebase">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="650" y="575" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="340" y="500"/>
+                            <mxPoint x="340" y="620"/>
+                            <mxPoint x="620" y="620"/>
+                            <mxPoint x="620" y="575"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="edge12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="editor_page" target="vial_prov" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="13" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;rounded=0;curved=0;" edge="1" parent="1" target="workflow_service">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="600" y="620" as="sourcePoint"/>
+                        <mxPoint x="420" y="490" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="780" y="621"/>
+                            <mxPoint x="780" y="560"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>
