@@ -77,7 +77,7 @@ class MacroService {
             KeySender.sendMultiKeyPush([
               VirtualKeyCode.leftControl.vkCode,
               VirtualKeyCode.keyC.vkCode,
-            ]);
+            ], true);
             await Future.delayed(const Duration(milliseconds: 100));
             final clipboardText = await Clipboard.getData('text/plain');
 
@@ -107,7 +107,7 @@ class MacroService {
               KeySender.sendMultiKeyPush([
                 VirtualKeyCode.leftControl.vkCode,
                 VirtualKeyCode.keyV.vkCode,
-              ]);
+              ], true);
             } else {
               sendNotification("マクロ実行失敗", "テキストを選択してください");
             }

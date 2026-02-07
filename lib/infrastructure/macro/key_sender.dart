@@ -24,24 +24,33 @@ class KeySender {
   }
 
   static void sendMultiKeyPush(List<int> vKCodes, [bool isShortcut = false]) {
+    if (vKCodes.isEmpty) return;
+
     final input = calloc<INPUT>();
 
-    try {
-      for (final vKCode in vKCodes) {
-        input.ref.type = INPUT_KEYBOARD;
-        input.ref.ki.wVk = vKCode;
-        input.ref.ki.dwFlags = 0;
+    void send(int vKCode, int flags) {
+      input.ref.type = INPUT_KEYBOARD;
+      input.ref.ki
+        ..wVk = vKCode
+        ..wScan = 0
+        ..dwFlags = flags
+        ..time = 0
+        ..dwExtraInfo = 0;
 
-        SendInput(1, input, sizeOf<INPUT>());
+      SendInput(1, input, sizeOf<INPUT>());
+    }
+
+    try {
+      // KeyDown: specified order
+      for (final vKCode in vKCodes) {
+        send(vKCode, 0);
       }
 
-      if (isShortcut)
+      if (isShortcut) {
         for (final vKCode in vKCodes.reversed) {
-          input.ref.ki.wVk = vKCode;
-          input.ref.ki.dwFlags = KEYEVENTF_KEYUP;
-
-          SendInput(1, input, sizeOf<INPUT>());
+          send(vKCode, KEYEVENTF_KEYUP);
         }
+      }
     } finally {
       calloc.free(input);
     }
