@@ -24,27 +24,33 @@ class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
   }
 
   Future<List<Macro>> getOpenApps() async {
-    final result = await Process.run('powershell', [
-      'Get-ItemProperty',
-      r'HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*, HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*, HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayIcon | Where-Object {$_.DisplayName -ne $null -and $_.DisplayIcon -ne $null} | ConvertTo-Json',
-    ]);
+    const script = r'''
+$paths = [Environment]::GetFolderPath('CommonStartMenu'), [Environment]::GetFolderPath('StartMenu');
+$list = Get-ChildItem -Path $paths -Recurse -Include *.lnk -ErrorAction SilentlyContinue;
+$shell = New-Object -ComObject WScript.Shell;
+$apps = foreach($item in $list){
+  try {
+    $s = $shell.CreateShortcut($item.FullName);
+    if($s.TargetPath -match '\.exe$'){
+      @{Name=$item.BaseName; Path=$s.TargetPath}
+    }
+  } catch {}
+};
+@($apps) | Sort-Object -Property Name -Unique | ConvertTo-Json -Compress
+''';
+
+    final result = await Process.run('powershell', ['-Command', script]);
 
     final out = (result.stdout ?? "").toString();
 
     final List<dynamic> listJson = jsonDecode(out);
 
     final List<AppInfo> apps =
-        listJson
-            .map((e) => AppInfo.fromJson(e))
-            .where((e) => !(e.DisplayIcon.contains(".ico")))
-            .map((e) {
-              String iconPath = e.DisplayIcon;
-              if (iconPath.contains(',')) {
-                iconPath = iconPath.split(',')[0];
-              }
-              return AppInfo(DisplayName: e.DisplayName, DisplayIcon: iconPath);
-            })
-            .toList();
+        listJson.map((e) {
+          final name = e['Name'] as String;
+          final path = e['Path'] as String;
+          return AppInfo(DisplayName: name, DisplayIcon: path);
+        }).toList();
 
     apps.sort((a, b) => a.DisplayName.compareTo(b.DisplayName));
 
