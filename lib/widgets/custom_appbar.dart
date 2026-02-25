@@ -1,5 +1,5 @@
 // Dart imports:
-import 'dart:io';
+import 'dart:async';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/app_shutdown.dart';
 import 'package:mc_hub/main.dart';
 import 'package:mc_hub/widgets/custom_appbar_back_icon.dart';
 
@@ -84,8 +85,7 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
                       ),
                       FilledButton.tonal(
                         onPressed: () {
-                          appWindow.close();
-                          exit(0);
+                          unawaited(shutdownAndExit(ref));
                         },
                         child: Text("ソフトを終了"),
                       ),

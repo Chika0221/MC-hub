@@ -1,6 +1,5 @@
 // Dart imports:
 import 'dart:async';
-import 'dart:io';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
@@ -9,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tray_manager/tray_manager.dart';
+
+// Project imports:
+import 'package:mc_hub/infrastructure/app_shutdown.dart';
 
 class TaskTray extends StatefulHookConsumerWidget {
   const TaskTray({super.key, required this.child});
@@ -54,8 +56,7 @@ class _TaskTrayState extends ConsumerState<TaskTray> with TrayListener {
     if (menuItem.key == 'show') {
       appWindow.show();
     } else if (menuItem.key == 'exit') {
-      appWindow.close();
-      exit(0);
+      unawaited(shutdownAndExit(ref));
     }
   }
 

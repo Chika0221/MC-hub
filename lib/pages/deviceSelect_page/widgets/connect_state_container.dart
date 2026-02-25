@@ -24,16 +24,12 @@ class ConnectStateContainer extends HookConsumerWidget {
           padding: const EdgeInsets.all(16.0),
           child: connectStream.when(
             loading:
-                () => Center(
-                  child: CircularProgressIndicator(color: colorScheme.primary),
-                ),
+                () => CircularProgressIndicator(color: colorScheme.primary),
             error: (error, stackTrace) {
               print(error);
-              return Center(
-                child: Text(
-                  "$error",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
+              return Text(
+                "$error",
+                style: TextStyle(fontSize: 16, color: Colors.white),
               );
             },
             data: (connect) {

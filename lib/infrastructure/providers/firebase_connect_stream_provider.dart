@@ -19,21 +19,21 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
   bool _wasQueueNotEmpty = false;
 
   bool _isQueueNotEmpty(Connect connect) {
-    final hasMacros = connect.macroQueue?.isNotEmpty ?? false;
-    final hasWorkflows = connect.workflowQueue?.isNotEmpty ?? false;
+    final hasMacros = connect.macroQueue.isNotEmpty;
+    final hasWorkflows = connect.workflowQueue.isNotEmpty;
     return hasMacros || hasWorkflows;
   }
 
   Future<void> onQueueNotEmpty(Connect connect) async {
-    if (connect.workflowQueue?.isNotEmpty ?? false) {
-      final workflows = connect.workflowQueue!;
+    if (connect.workflowQueue.isNotEmpty) {
+      final workflows = connect.workflowQueue;
 
       for (final workflow in workflows) {
         await WorkflowService(workflow: workflow).runWorkflow();
       }
     }
-    if (connect.macroQueue?.isNotEmpty ?? false) {
-      final macros = connect.macroQueue!;
+    if (connect.macroQueue.isNotEmpty) {
+      final macros = connect.macroQueue;
 
       for (final macro in macros) {
         await MacroService.runMacro(macro);
@@ -53,7 +53,6 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
         Connect(
           hostID: deviceInfo.deviceId,
           hostName: deviceInfo.computerName,
-          state: ConnectState.ready,
           controllerID: null,
           controllerName: null,
         ).toJson();
@@ -75,6 +74,17 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
 
       yield connect;
     }
+  }
+
+  Future<void> close() async {
+    if (docId == null) {
+      final deviceInfo = await DeviceInfoPlugin().windowsInfo;
+      docId = deviceInfo.deviceId;
+    }
+
+    await connect_collection.doc(docId!).set({
+      "state": ConnectState.offline.name,
+    }, SetOptions(merge: true));
   }
 }
 

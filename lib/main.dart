@@ -1,5 +1,8 @@
 // Flutter imports:
 
+// Dart imports:
+import 'dart:async';
+
 // Flutter imports:
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +16,8 @@ import 'package:rive/rive.dart';
 
 // Project imports:
 import 'package:mc_hub/firebase_options.dart';
-import 'package:mc_hub/infrastructure/hooks/keyboard_hooks.dart';
-import 'package:mc_hub/infrastructure/macro/run_macro.dart';
+import 'package:mc_hub/infrastructure/providers/firebase_connect_stream_provider.dart';
+import 'package:mc_hub/infrastructure/providers/keyboard_monitor_controller_provider.dart';
 import 'package:mc_hub/pages/editor_page/editor_page.dart';
 import 'package:mc_hub/pages/home_page/home_page.dart';
 import 'package:mc_hub/tasktray/tasktray.dart';
@@ -39,36 +42,18 @@ class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lastLog = useState(0);
-    if (!kDebugMode) {
-      useEffect(() {
-        final monitor = KeyboardMonitor(
-          onKeyDetected: (event) {
-            final log =
-                "0x${event.vkCode.toRadixString(16).padLeft(2, '0').toUpperCase()} SCAN: ${event.scanCode}";
-            lastLog.value = event.vkCode;
+    useEffect(() {
+      if (kDebugMode) {
+        return null;
+      }
 
-            // print(VirtualKeyCode.tryFromVkCode(event.vkCode)?.name);
-            print(log);
+      unawaited(ref.read(keyboardMonitorControllerProvider).start());
 
-            if (MonitorKeycodes.macro1.vkCode <= lastLog.value &&
-                lastLog.value <= MonitorKeycodes.macro12.vkCode) {
-              MacroService.runMacroByKeycode(
-                MonitorKeycodes.values.firstWhere(
-                  (kc) => kc.vkCode == lastLog.value,
-                ),
-              );
-            }
-          },
-        );
-
-        monitor.start();
-
-        return () {
-          monitor.stop();
-        };
-      }, []);
-    }
+      return () {
+        ref.read(keyboardMonitorControllerProvider).stop();
+        unawaited(ref.read(firebaseConnectStreamProvider.notifier).close());
+      };
+    }, const []);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
