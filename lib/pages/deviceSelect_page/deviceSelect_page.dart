@@ -12,6 +12,7 @@ import 'package:rive/rive.dart';
 import 'package:mc_hub/infrastructure/hid/hid_scripts.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/main.dart';
+import 'package:mc_hub/pages/deviceSelect_page/widgets/connect_state_container.dart';
 import 'package:mc_hub/widgets/custom_appbar.dart';
 import 'package:mc_hub/widgets/custom_background.dart';
 import 'package:mc_hub/widgets/custom_rive_animation.dart';
@@ -52,7 +53,7 @@ class DeviceSelectPage extends HookConsumerWidget {
       foragroundWidget: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: CustomAppbar(),
-        
+        floatingActionButton: ConnectStateContainer(),
         body: Center(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
