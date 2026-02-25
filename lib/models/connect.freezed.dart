@@ -23,11 +23,11 @@ Connect _$ConnectFromJson(Map<String, dynamic> json) {
 mixin _$Connect {
   String? get hostID => throw _privateConstructorUsedError;
   String? get controllerID => throw _privateConstructorUsedError;
-  ConnectState get state => throw _privateConstructorUsedError;
   String? get hostName => throw _privateConstructorUsedError;
   String? get controllerName => throw _privateConstructorUsedError;
-  List<Macro>? get macroQueue => throw _privateConstructorUsedError;
-  List<Workflow>? get workflowQueue => throw _privateConstructorUsedError;
+  ConnectState get state => throw _privateConstructorUsedError;
+  List<Macro> get macroQueue => throw _privateConstructorUsedError;
+  List<Workflow> get workflowQueue => throw _privateConstructorUsedError;
 
   /// Serializes this Connect to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,11 +46,11 @@ abstract class $ConnectCopyWith<$Res> {
   $Res call({
     String? hostID,
     String? controllerID,
-    ConnectState state,
     String? hostName,
     String? controllerName,
-    List<Macro>? macroQueue,
-    List<Workflow>? workflowQueue,
+    ConnectState state,
+    List<Macro> macroQueue,
+    List<Workflow> workflowQueue,
   });
 }
 
@@ -71,11 +71,11 @@ class _$ConnectCopyWithImpl<$Res, $Val extends Connect>
   $Res call({
     Object? hostID = freezed,
     Object? controllerID = freezed,
-    Object? state = null,
     Object? hostName = freezed,
     Object? controllerName = freezed,
-    Object? macroQueue = freezed,
-    Object? workflowQueue = freezed,
+    Object? state = null,
+    Object? macroQueue = null,
+    Object? workflowQueue = null,
   }) {
     return _then(
       _value.copyWith(
@@ -89,11 +89,6 @@ class _$ConnectCopyWithImpl<$Res, $Val extends Connect>
                     ? _value.controllerID
                     : controllerID // ignore: cast_nullable_to_non_nullable
                         as String?,
-            state:
-                null == state
-                    ? _value.state
-                    : state // ignore: cast_nullable_to_non_nullable
-                        as ConnectState,
             hostName:
                 freezed == hostName
                     ? _value.hostName
@@ -104,16 +99,21 @@ class _$ConnectCopyWithImpl<$Res, $Val extends Connect>
                     ? _value.controllerName
                     : controllerName // ignore: cast_nullable_to_non_nullable
                         as String?,
+            state:
+                null == state
+                    ? _value.state
+                    : state // ignore: cast_nullable_to_non_nullable
+                        as ConnectState,
             macroQueue:
-                freezed == macroQueue
+                null == macroQueue
                     ? _value.macroQueue
                     : macroQueue // ignore: cast_nullable_to_non_nullable
-                        as List<Macro>?,
+                        as List<Macro>,
             workflowQueue:
-                freezed == workflowQueue
+                null == workflowQueue
                     ? _value.workflowQueue
                     : workflowQueue // ignore: cast_nullable_to_non_nullable
-                        as List<Workflow>?,
+                        as List<Workflow>,
           )
           as $Val,
     );
@@ -131,11 +131,11 @@ abstract class _$$ConnectImplCopyWith<$Res> implements $ConnectCopyWith<$Res> {
   $Res call({
     String? hostID,
     String? controllerID,
-    ConnectState state,
     String? hostName,
     String? controllerName,
-    List<Macro>? macroQueue,
-    List<Workflow>? workflowQueue,
+    ConnectState state,
+    List<Macro> macroQueue,
+    List<Workflow> workflowQueue,
   });
 }
 
@@ -155,11 +155,11 @@ class __$$ConnectImplCopyWithImpl<$Res>
   $Res call({
     Object? hostID = freezed,
     Object? controllerID = freezed,
-    Object? state = null,
     Object? hostName = freezed,
     Object? controllerName = freezed,
-    Object? macroQueue = freezed,
-    Object? workflowQueue = freezed,
+    Object? state = null,
+    Object? macroQueue = null,
+    Object? workflowQueue = null,
   }) {
     return _then(
       _$ConnectImpl(
@@ -173,11 +173,6 @@ class __$$ConnectImplCopyWithImpl<$Res>
                 ? _value.controllerID
                 : controllerID // ignore: cast_nullable_to_non_nullable
                     as String?,
-        state:
-            null == state
-                ? _value.state
-                : state // ignore: cast_nullable_to_non_nullable
-                    as ConnectState,
         hostName:
             freezed == hostName
                 ? _value.hostName
@@ -188,16 +183,21 @@ class __$$ConnectImplCopyWithImpl<$Res>
                 ? _value.controllerName
                 : controllerName // ignore: cast_nullable_to_non_nullable
                     as String?,
+        state:
+            null == state
+                ? _value.state
+                : state // ignore: cast_nullable_to_non_nullable
+                    as ConnectState,
         macroQueue:
-            freezed == macroQueue
+            null == macroQueue
                 ? _value._macroQueue
                 : macroQueue // ignore: cast_nullable_to_non_nullable
-                    as List<Macro>?,
+                    as List<Macro>,
         workflowQueue:
-            freezed == workflowQueue
+            null == workflowQueue
                 ? _value._workflowQueue
                 : workflowQueue // ignore: cast_nullable_to_non_nullable
-                    as List<Workflow>?,
+                    as List<Workflow>,
       ),
     );
   }
@@ -209,11 +209,11 @@ class _$ConnectImpl implements _Connect {
   const _$ConnectImpl({
     required this.hostID,
     required this.controllerID,
-    required this.state,
     required this.hostName,
     required this.controllerName,
-    final List<Macro>? macroQueue,
-    final List<Workflow>? workflowQueue,
+    this.state = ConnectState.ready,
+    final List<Macro> macroQueue = const <Macro>[],
+    final List<Workflow> workflowQueue = const <Workflow>[],
   }) : _macroQueue = macroQueue,
        _workflowQueue = workflowQueue;
 
@@ -225,34 +225,33 @@ class _$ConnectImpl implements _Connect {
   @override
   final String? controllerID;
   @override
-  final ConnectState state;
-  @override
   final String? hostName;
   @override
   final String? controllerName;
-  final List<Macro>? _macroQueue;
   @override
-  List<Macro>? get macroQueue {
-    final value = _macroQueue;
-    if (value == null) return null;
+  @JsonKey()
+  final ConnectState state;
+  final List<Macro> _macroQueue;
+  @override
+  @JsonKey()
+  List<Macro> get macroQueue {
     if (_macroQueue is EqualUnmodifiableListView) return _macroQueue;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_macroQueue);
   }
 
-  final List<Workflow>? _workflowQueue;
+  final List<Workflow> _workflowQueue;
   @override
-  List<Workflow>? get workflowQueue {
-    final value = _workflowQueue;
-    if (value == null) return null;
+  @JsonKey()
+  List<Workflow> get workflowQueue {
     if (_workflowQueue is EqualUnmodifiableListView) return _workflowQueue;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_workflowQueue);
   }
 
   @override
   String toString() {
-    return 'Connect(hostID: $hostID, controllerID: $controllerID, state: $state, hostName: $hostName, controllerName: $controllerName, macroQueue: $macroQueue, workflowQueue: $workflowQueue)';
+    return 'Connect(hostID: $hostID, controllerID: $controllerID, hostName: $hostName, controllerName: $controllerName, state: $state, macroQueue: $macroQueue, workflowQueue: $workflowQueue)';
   }
 
   @override
@@ -263,11 +262,11 @@ class _$ConnectImpl implements _Connect {
             (identical(other.hostID, hostID) || other.hostID == hostID) &&
             (identical(other.controllerID, controllerID) ||
                 other.controllerID == controllerID) &&
-            (identical(other.state, state) || other.state == state) &&
             (identical(other.hostName, hostName) ||
                 other.hostName == hostName) &&
             (identical(other.controllerName, controllerName) ||
                 other.controllerName == controllerName) &&
+            (identical(other.state, state) || other.state == state) &&
             const DeepCollectionEquality().equals(
               other._macroQueue,
               _macroQueue,
@@ -284,9 +283,9 @@ class _$ConnectImpl implements _Connect {
     runtimeType,
     hostID,
     controllerID,
-    state,
     hostName,
     controllerName,
+    state,
     const DeepCollectionEquality().hash(_macroQueue),
     const DeepCollectionEquality().hash(_workflowQueue),
   );
@@ -309,11 +308,11 @@ abstract class _Connect implements Connect {
   const factory _Connect({
     required final String? hostID,
     required final String? controllerID,
-    required final ConnectState state,
     required final String? hostName,
     required final String? controllerName,
-    final List<Macro>? macroQueue,
-    final List<Workflow>? workflowQueue,
+    final ConnectState state,
+    final List<Macro> macroQueue,
+    final List<Workflow> workflowQueue,
   }) = _$ConnectImpl;
 
   factory _Connect.fromJson(Map<String, dynamic> json) = _$ConnectImpl.fromJson;
@@ -323,15 +322,15 @@ abstract class _Connect implements Connect {
   @override
   String? get controllerID;
   @override
-  ConnectState get state;
-  @override
   String? get hostName;
   @override
   String? get controllerName;
   @override
-  List<Macro>? get macroQueue;
+  ConnectState get state;
   @override
-  List<Workflow>? get workflowQueue;
+  List<Macro> get macroQueue;
+  @override
+  List<Workflow> get workflowQueue;
 
   /// Create a copy of Connect
   /// with the given fields replaced by the non-null parameter values.

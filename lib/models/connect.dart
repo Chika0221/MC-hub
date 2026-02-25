@@ -13,11 +13,11 @@ class Connect with _$Connect {
   const factory Connect({
     required String? hostID,
     required String? controllerID,
-    required ConnectState state,
     required String? hostName,
     required String? controllerName,
-    List<Macro>? macroQueue,
-    List<Workflow>? workflowQueue,
+    @Default(ConnectState.ready) ConnectState state,
+    @Default(<Macro>[]) List<Macro> macroQueue,
+    @Default(<Workflow>[]) List<Workflow> workflowQueue,
   }) = _Connect;
 
   factory Connect.fromJson(Map<String, dynamic> json) =>
