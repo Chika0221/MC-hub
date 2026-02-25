@@ -7,6 +7,8 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/macro/run_macro.dart';
+import 'package:mc_hub/infrastructure/workflow/run_workflow.dart';
 import 'package:mc_hub/models/connect.dart';
 
 class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
@@ -14,27 +16,65 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
 
   String? docId;
 
+  bool _wasQueueNotEmpty = false;
+
+  bool _isQueueNotEmpty(Connect connect) {
+    final hasMacros = connect.macroQueue?.isNotEmpty ?? false;
+    final hasWorkflows = connect.workflowQueue?.isNotEmpty ?? false;
+    return hasMacros || hasWorkflows;
+  }
+
+  Future<void> onQueueNotEmpty(Connect connect) async {
+    if (connect.workflowQueue?.isNotEmpty ?? false) {
+      final workflows = connect.workflowQueue!;
+
+      for (final workflow in workflows) {
+        await WorkflowService(workflow: workflow).runWorkflow();
+      }
+    }
+    if (connect.macroQueue?.isNotEmpty ?? false) {
+      final macros = connect.macroQueue!;
+
+      for (final macro in macros) {
+        await MacroService.runMacro(macro);
+      }
+    }
+  }
+
   @override
   Stream<Connect> build() async* {
     final deviceInfo = await DeviceInfoPlugin().windowsInfo;
 
     docId ??= deviceInfo.deviceId;
 
-    await connect_collection
-        .doc(docId!)
-        .set(
-          Connect(
-            hostID: deviceInfo.deviceId,
-            hostName: deviceInfo.computerName,
-            state: ConnectState.ready,
-            controllerID: null,
-            controllerName: null,
-          ).toJson(),
-        );
+    final docRef = connect_collection.doc(docId!);
 
-    yield* connect_collection.doc(docId!).snapshots().map((e) {
-      return Connect.fromJson(e.data()!);
-    });
+    final initial =
+        Connect(
+          hostID: deviceInfo.deviceId,
+          hostName: deviceInfo.computerName,
+          state: ConnectState.ready,
+          controllerID: null,
+          controllerName: null,
+        ).toJson();
+
+    await docRef.set(initial, SetOptions(merge: true));
+
+    await for (final snapshot in docRef.snapshots()) {
+      final data = snapshot.data();
+      if (data == null) {
+        continue;
+      }
+
+      final connect = Connect.fromJson(data);
+      final isQueueNotEmpty = _isQueueNotEmpty(connect);
+      if (isQueueNotEmpty && !_wasQueueNotEmpty) {
+        await onQueueNotEmpty(connect);
+      }
+      _wasQueueNotEmpty = isQueueNotEmpty;
+
+      yield connect;
+    }
   }
 }
 
