@@ -23,6 +23,7 @@ Connect _$ConnectFromJson(Map<String, dynamic> json) {
 mixin _$Connect {
   String? get hostID => throw _privateConstructorUsedError;
   String? get controllerID => throw _privateConstructorUsedError;
+  ConnectState get state => throw _privateConstructorUsedError;
   String? get hostName => throw _privateConstructorUsedError;
   String? get controllerName => throw _privateConstructorUsedError;
   List<Macro>? get macroQueue => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $ConnectCopyWith<$Res> {
   $Res call({
     String? hostID,
     String? controllerID,
+    ConnectState state,
     String? hostName,
     String? controllerName,
     List<Macro>? macroQueue,
@@ -69,6 +71,7 @@ class _$ConnectCopyWithImpl<$Res, $Val extends Connect>
   $Res call({
     Object? hostID = freezed,
     Object? controllerID = freezed,
+    Object? state = null,
     Object? hostName = freezed,
     Object? controllerName = freezed,
     Object? macroQueue = freezed,
@@ -86,6 +89,11 @@ class _$ConnectCopyWithImpl<$Res, $Val extends Connect>
                     ? _value.controllerID
                     : controllerID // ignore: cast_nullable_to_non_nullable
                         as String?,
+            state:
+                null == state
+                    ? _value.state
+                    : state // ignore: cast_nullable_to_non_nullable
+                        as ConnectState,
             hostName:
                 freezed == hostName
                     ? _value.hostName
@@ -123,6 +131,7 @@ abstract class _$$ConnectImplCopyWith<$Res> implements $ConnectCopyWith<$Res> {
   $Res call({
     String? hostID,
     String? controllerID,
+    ConnectState state,
     String? hostName,
     String? controllerName,
     List<Macro>? macroQueue,
@@ -146,6 +155,7 @@ class __$$ConnectImplCopyWithImpl<$Res>
   $Res call({
     Object? hostID = freezed,
     Object? controllerID = freezed,
+    Object? state = null,
     Object? hostName = freezed,
     Object? controllerName = freezed,
     Object? macroQueue = freezed,
@@ -163,6 +173,11 @@ class __$$ConnectImplCopyWithImpl<$Res>
                 ? _value.controllerID
                 : controllerID // ignore: cast_nullable_to_non_nullable
                     as String?,
+        state:
+            null == state
+                ? _value.state
+                : state // ignore: cast_nullable_to_non_nullable
+                    as ConnectState,
         hostName:
             freezed == hostName
                 ? _value.hostName
@@ -194,6 +209,7 @@ class _$ConnectImpl implements _Connect {
   const _$ConnectImpl({
     required this.hostID,
     required this.controllerID,
+    required this.state,
     required this.hostName,
     required this.controllerName,
     final List<Macro>? macroQueue,
@@ -208,6 +224,8 @@ class _$ConnectImpl implements _Connect {
   final String? hostID;
   @override
   final String? controllerID;
+  @override
+  final ConnectState state;
   @override
   final String? hostName;
   @override
@@ -234,7 +252,7 @@ class _$ConnectImpl implements _Connect {
 
   @override
   String toString() {
-    return 'Connect(hostID: $hostID, controllerID: $controllerID, hostName: $hostName, controllerName: $controllerName, macroQueue: $macroQueue, workflowQueue: $workflowQueue)';
+    return 'Connect(hostID: $hostID, controllerID: $controllerID, state: $state, hostName: $hostName, controllerName: $controllerName, macroQueue: $macroQueue, workflowQueue: $workflowQueue)';
   }
 
   @override
@@ -245,6 +263,7 @@ class _$ConnectImpl implements _Connect {
             (identical(other.hostID, hostID) || other.hostID == hostID) &&
             (identical(other.controllerID, controllerID) ||
                 other.controllerID == controllerID) &&
+            (identical(other.state, state) || other.state == state) &&
             (identical(other.hostName, hostName) ||
                 other.hostName == hostName) &&
             (identical(other.controllerName, controllerName) ||
@@ -265,6 +284,7 @@ class _$ConnectImpl implements _Connect {
     runtimeType,
     hostID,
     controllerID,
+    state,
     hostName,
     controllerName,
     const DeepCollectionEquality().hash(_macroQueue),
@@ -289,6 +309,7 @@ abstract class _Connect implements Connect {
   const factory _Connect({
     required final String? hostID,
     required final String? controllerID,
+    required final ConnectState state,
     required final String? hostName,
     required final String? controllerName,
     final List<Macro>? macroQueue,
@@ -301,6 +322,8 @@ abstract class _Connect implements Connect {
   String? get hostID;
   @override
   String? get controllerID;
+  @override
+  ConnectState get state;
   @override
   String? get hostName;
   @override

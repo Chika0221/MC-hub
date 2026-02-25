@@ -13,6 +13,7 @@ class Connect with _$Connect {
   const factory Connect({
     required String? hostID,
     required String? controllerID,
+    required ConnectState state,
     required String? hostName,
     required String? controllerName,
     List<Macro>? macroQueue,
@@ -22,3 +23,5 @@ class Connect with _$Connect {
   factory Connect.fromJson(Map<String, dynamic> json) =>
       _$ConnectFromJson(json);
 }
+
+enum ConnectState { ready, connected, offline }

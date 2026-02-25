@@ -20,20 +20,13 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
 
     docId ??= deviceInfo.deviceId;
 
-    ref.onDispose(() {
-      final id = docId;
-      if (id == null) return;
-      scheduleMicrotask(() {
-        unawaited(connect_collection.doc(id).delete());
-      });
-    });
-
     await connect_collection
         .doc(docId!)
         .set(
           Connect(
             hostID: deviceInfo.deviceId,
             hostName: deviceInfo.computerName,
+            state: ConnectState.ready,
             controllerID: null,
             controllerName: null,
           ).toJson(),
