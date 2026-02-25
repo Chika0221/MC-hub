@@ -1,5 +1,3 @@
-// Flutterのインポート:
-
 // Flutter imports:
 import 'package:flutter/material.dart';
 
@@ -54,6 +52,7 @@ class DeviceSelectPage extends HookConsumerWidget {
       foragroundWidget: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: CustomAppbar(),
+        
         body: Center(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
