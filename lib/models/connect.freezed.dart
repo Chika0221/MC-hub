@@ -21,8 +21,10 @@ Connect _$ConnectFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Connect {
-  ConnectHost get host => throw _privateConstructorUsedError;
-  ConnectController? get controllerID => throw _privateConstructorUsedError;
+  String? get hostID => throw _privateConstructorUsedError;
+  String? get controllerID => throw _privateConstructorUsedError;
+  String? get hostName => throw _privateConstructorUsedError;
+  String? get controllerName => throw _privateConstructorUsedError;
   List<Macro>? get macroQueue => throw _privateConstructorUsedError;
   List<Workflow>? get workflowQueue => throw _privateConstructorUsedError;
 
@@ -41,14 +43,13 @@ abstract class $ConnectCopyWith<$Res> {
       _$ConnectCopyWithImpl<$Res, Connect>;
   @useResult
   $Res call({
-    ConnectHost host,
-    ConnectController? controllerID,
+    String? hostID,
+    String? controllerID,
+    String? hostName,
+    String? controllerName,
     List<Macro>? macroQueue,
     List<Workflow>? workflowQueue,
   });
-
-  $ConnectHostCopyWith<$Res> get host;
-  $ConnectControllerCopyWith<$Res>? get controllerID;
 }
 
 /// @nodoc
@@ -66,23 +67,35 @@ class _$ConnectCopyWithImpl<$Res, $Val extends Connect>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? host = null,
+    Object? hostID = freezed,
     Object? controllerID = freezed,
+    Object? hostName = freezed,
+    Object? controllerName = freezed,
     Object? macroQueue = freezed,
     Object? workflowQueue = freezed,
   }) {
     return _then(
       _value.copyWith(
-            host:
-                null == host
-                    ? _value.host
-                    : host // ignore: cast_nullable_to_non_nullable
-                        as ConnectHost,
+            hostID:
+                freezed == hostID
+                    ? _value.hostID
+                    : hostID // ignore: cast_nullable_to_non_nullable
+                        as String?,
             controllerID:
                 freezed == controllerID
                     ? _value.controllerID
                     : controllerID // ignore: cast_nullable_to_non_nullable
-                        as ConnectController?,
+                        as String?,
+            hostName:
+                freezed == hostName
+                    ? _value.hostName
+                    : hostName // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            controllerName:
+                freezed == controllerName
+                    ? _value.controllerName
+                    : controllerName // ignore: cast_nullable_to_non_nullable
+                        as String?,
             macroQueue:
                 freezed == macroQueue
                     ? _value.macroQueue
@@ -97,30 +110,6 @@ class _$ConnectCopyWithImpl<$Res, $Val extends Connect>
           as $Val,
     );
   }
-
-  /// Create a copy of Connect
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ConnectHostCopyWith<$Res> get host {
-    return $ConnectHostCopyWith<$Res>(_value.host, (value) {
-      return _then(_value.copyWith(host: value) as $Val);
-    });
-  }
-
-  /// Create a copy of Connect
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ConnectControllerCopyWith<$Res>? get controllerID {
-    if (_value.controllerID == null) {
-      return null;
-    }
-
-    return $ConnectControllerCopyWith<$Res>(_value.controllerID!, (value) {
-      return _then(_value.copyWith(controllerID: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -132,16 +121,13 @@ abstract class _$$ConnectImplCopyWith<$Res> implements $ConnectCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    ConnectHost host,
-    ConnectController? controllerID,
+    String? hostID,
+    String? controllerID,
+    String? hostName,
+    String? controllerName,
     List<Macro>? macroQueue,
     List<Workflow>? workflowQueue,
   });
-
-  @override
-  $ConnectHostCopyWith<$Res> get host;
-  @override
-  $ConnectControllerCopyWith<$Res>? get controllerID;
 }
 
 /// @nodoc
@@ -158,23 +144,35 @@ class __$$ConnectImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? host = null,
+    Object? hostID = freezed,
     Object? controllerID = freezed,
+    Object? hostName = freezed,
+    Object? controllerName = freezed,
     Object? macroQueue = freezed,
     Object? workflowQueue = freezed,
   }) {
     return _then(
       _$ConnectImpl(
-        host:
-            null == host
-                ? _value.host
-                : host // ignore: cast_nullable_to_non_nullable
-                    as ConnectHost,
+        hostID:
+            freezed == hostID
+                ? _value.hostID
+                : hostID // ignore: cast_nullable_to_non_nullable
+                    as String?,
         controllerID:
             freezed == controllerID
                 ? _value.controllerID
                 : controllerID // ignore: cast_nullable_to_non_nullable
-                    as ConnectController?,
+                    as String?,
+        hostName:
+            freezed == hostName
+                ? _value.hostName
+                : hostName // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        controllerName:
+            freezed == controllerName
+                ? _value.controllerName
+                : controllerName // ignore: cast_nullable_to_non_nullable
+                    as String?,
         macroQueue:
             freezed == macroQueue
                 ? _value._macroQueue
@@ -194,8 +192,10 @@ class __$$ConnectImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ConnectImpl implements _Connect {
   const _$ConnectImpl({
-    required this.host,
+    required this.hostID,
     required this.controllerID,
+    required this.hostName,
+    required this.controllerName,
     final List<Macro>? macroQueue,
     final List<Workflow>? workflowQueue,
   }) : _macroQueue = macroQueue,
@@ -205,9 +205,13 @@ class _$ConnectImpl implements _Connect {
       _$$ConnectImplFromJson(json);
 
   @override
-  final ConnectHost host;
+  final String? hostID;
   @override
-  final ConnectController? controllerID;
+  final String? controllerID;
+  @override
+  final String? hostName;
+  @override
+  final String? controllerName;
   final List<Macro>? _macroQueue;
   @override
   List<Macro>? get macroQueue {
@@ -230,7 +234,7 @@ class _$ConnectImpl implements _Connect {
 
   @override
   String toString() {
-    return 'Connect(host: $host, controllerID: $controllerID, macroQueue: $macroQueue, workflowQueue: $workflowQueue)';
+    return 'Connect(hostID: $hostID, controllerID: $controllerID, hostName: $hostName, controllerName: $controllerName, macroQueue: $macroQueue, workflowQueue: $workflowQueue)';
   }
 
   @override
@@ -238,9 +242,13 @@ class _$ConnectImpl implements _Connect {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConnectImpl &&
-            (identical(other.host, host) || other.host == host) &&
+            (identical(other.hostID, hostID) || other.hostID == hostID) &&
             (identical(other.controllerID, controllerID) ||
                 other.controllerID == controllerID) &&
+            (identical(other.hostName, hostName) ||
+                other.hostName == hostName) &&
+            (identical(other.controllerName, controllerName) ||
+                other.controllerName == controllerName) &&
             const DeepCollectionEquality().equals(
               other._macroQueue,
               _macroQueue,
@@ -255,8 +263,10 @@ class _$ConnectImpl implements _Connect {
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    host,
+    hostID,
     controllerID,
+    hostName,
+    controllerName,
     const DeepCollectionEquality().hash(_macroQueue),
     const DeepCollectionEquality().hash(_workflowQueue),
   );
@@ -277,8 +287,10 @@ class _$ConnectImpl implements _Connect {
 
 abstract class _Connect implements Connect {
   const factory _Connect({
-    required final ConnectHost host,
-    required final ConnectController? controllerID,
+    required final String? hostID,
+    required final String? controllerID,
+    required final String? hostName,
+    required final String? controllerName,
     final List<Macro>? macroQueue,
     final List<Workflow>? workflowQueue,
   }) = _$ConnectImpl;
@@ -286,9 +298,13 @@ abstract class _Connect implements Connect {
   factory _Connect.fromJson(Map<String, dynamic> json) = _$ConnectImpl.fromJson;
 
   @override
-  ConnectHost get host;
+  String? get hostID;
   @override
-  ConnectController? get controllerID;
+  String? get controllerID;
+  @override
+  String? get hostName;
+  @override
+  String? get controllerName;
   @override
   List<Macro>? get macroQueue;
   @override
@@ -299,358 +315,5 @@ abstract class _Connect implements Connect {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ConnectImplCopyWith<_$ConnectImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-ConnectHost _$ConnectHostFromJson(Map<String, dynamic> json) {
-  return _ConnectHost.fromJson(json);
-}
-
-/// @nodoc
-mixin _$ConnectHost {
-  String get hostID => throw _privateConstructorUsedError;
-  String get hostName => throw _privateConstructorUsedError;
-
-  /// Serializes this ConnectHost to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ConnectHost
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ConnectHostCopyWith<ConnectHost> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ConnectHostCopyWith<$Res> {
-  factory $ConnectHostCopyWith(
-    ConnectHost value,
-    $Res Function(ConnectHost) then,
-  ) = _$ConnectHostCopyWithImpl<$Res, ConnectHost>;
-  @useResult
-  $Res call({String hostID, String hostName});
-}
-
-/// @nodoc
-class _$ConnectHostCopyWithImpl<$Res, $Val extends ConnectHost>
-    implements $ConnectHostCopyWith<$Res> {
-  _$ConnectHostCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ConnectHost
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? hostID = null, Object? hostName = null}) {
-    return _then(
-      _value.copyWith(
-            hostID:
-                null == hostID
-                    ? _value.hostID
-                    : hostID // ignore: cast_nullable_to_non_nullable
-                        as String,
-            hostName:
-                null == hostName
-                    ? _value.hostName
-                    : hostName // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
-  }
-}
-
-/// @nodoc
-abstract class _$$ConnectHostImplCopyWith<$Res>
-    implements $ConnectHostCopyWith<$Res> {
-  factory _$$ConnectHostImplCopyWith(
-    _$ConnectHostImpl value,
-    $Res Function(_$ConnectHostImpl) then,
-  ) = __$$ConnectHostImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String hostID, String hostName});
-}
-
-/// @nodoc
-class __$$ConnectHostImplCopyWithImpl<$Res>
-    extends _$ConnectHostCopyWithImpl<$Res, _$ConnectHostImpl>
-    implements _$$ConnectHostImplCopyWith<$Res> {
-  __$$ConnectHostImplCopyWithImpl(
-    _$ConnectHostImpl _value,
-    $Res Function(_$ConnectHostImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of ConnectHost
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? hostID = null, Object? hostName = null}) {
-    return _then(
-      _$ConnectHostImpl(
-        hostID:
-            null == hostID
-                ? _value.hostID
-                : hostID // ignore: cast_nullable_to_non_nullable
-                    as String,
-        hostName:
-            null == hostName
-                ? _value.hostName
-                : hostName // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ConnectHostImpl implements _ConnectHost {
-  const _$ConnectHostImpl({required this.hostID, required this.hostName});
-
-  factory _$ConnectHostImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConnectHostImplFromJson(json);
-
-  @override
-  final String hostID;
-  @override
-  final String hostName;
-
-  @override
-  String toString() {
-    return 'ConnectHost(hostID: $hostID, hostName: $hostName)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ConnectHostImpl &&
-            (identical(other.hostID, hostID) || other.hostID == hostID) &&
-            (identical(other.hostName, hostName) ||
-                other.hostName == hostName));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, hostID, hostName);
-
-  /// Create a copy of ConnectHost
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ConnectHostImplCopyWith<_$ConnectHostImpl> get copyWith =>
-      __$$ConnectHostImplCopyWithImpl<_$ConnectHostImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConnectHostImplToJson(this);
-  }
-}
-
-abstract class _ConnectHost implements ConnectHost {
-  const factory _ConnectHost({
-    required final String hostID,
-    required final String hostName,
-  }) = _$ConnectHostImpl;
-
-  factory _ConnectHost.fromJson(Map<String, dynamic> json) =
-      _$ConnectHostImpl.fromJson;
-
-  @override
-  String get hostID;
-  @override
-  String get hostName;
-
-  /// Create a copy of ConnectHost
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConnectHostImplCopyWith<_$ConnectHostImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-ConnectController _$ConnectControllerFromJson(Map<String, dynamic> json) {
-  return _ConnectController.fromJson(json);
-}
-
-/// @nodoc
-mixin _$ConnectController {
-  String get controllerID => throw _privateConstructorUsedError;
-  String get controllerName => throw _privateConstructorUsedError;
-
-  /// Serializes this ConnectController to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ConnectController
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ConnectControllerCopyWith<ConnectController> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ConnectControllerCopyWith<$Res> {
-  factory $ConnectControllerCopyWith(
-    ConnectController value,
-    $Res Function(ConnectController) then,
-  ) = _$ConnectControllerCopyWithImpl<$Res, ConnectController>;
-  @useResult
-  $Res call({String controllerID, String controllerName});
-}
-
-/// @nodoc
-class _$ConnectControllerCopyWithImpl<$Res, $Val extends ConnectController>
-    implements $ConnectControllerCopyWith<$Res> {
-  _$ConnectControllerCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ConnectController
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? controllerID = null, Object? controllerName = null}) {
-    return _then(
-      _value.copyWith(
-            controllerID:
-                null == controllerID
-                    ? _value.controllerID
-                    : controllerID // ignore: cast_nullable_to_non_nullable
-                        as String,
-            controllerName:
-                null == controllerName
-                    ? _value.controllerName
-                    : controllerName // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
-  }
-}
-
-/// @nodoc
-abstract class _$$ConnectControllerImplCopyWith<$Res>
-    implements $ConnectControllerCopyWith<$Res> {
-  factory _$$ConnectControllerImplCopyWith(
-    _$ConnectControllerImpl value,
-    $Res Function(_$ConnectControllerImpl) then,
-  ) = __$$ConnectControllerImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String controllerID, String controllerName});
-}
-
-/// @nodoc
-class __$$ConnectControllerImplCopyWithImpl<$Res>
-    extends _$ConnectControllerCopyWithImpl<$Res, _$ConnectControllerImpl>
-    implements _$$ConnectControllerImplCopyWith<$Res> {
-  __$$ConnectControllerImplCopyWithImpl(
-    _$ConnectControllerImpl _value,
-    $Res Function(_$ConnectControllerImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of ConnectController
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? controllerID = null, Object? controllerName = null}) {
-    return _then(
-      _$ConnectControllerImpl(
-        controllerID:
-            null == controllerID
-                ? _value.controllerID
-                : controllerID // ignore: cast_nullable_to_non_nullable
-                    as String,
-        controllerName:
-            null == controllerName
-                ? _value.controllerName
-                : controllerName // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ConnectControllerImpl implements _ConnectController {
-  const _$ConnectControllerImpl({
-    required this.controllerID,
-    required this.controllerName,
-  });
-
-  factory _$ConnectControllerImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConnectControllerImplFromJson(json);
-
-  @override
-  final String controllerID;
-  @override
-  final String controllerName;
-
-  @override
-  String toString() {
-    return 'ConnectController(controllerID: $controllerID, controllerName: $controllerName)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ConnectControllerImpl &&
-            (identical(other.controllerID, controllerID) ||
-                other.controllerID == controllerID) &&
-            (identical(other.controllerName, controllerName) ||
-                other.controllerName == controllerName));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, controllerID, controllerName);
-
-  /// Create a copy of ConnectController
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ConnectControllerImplCopyWith<_$ConnectControllerImpl> get copyWith =>
-      __$$ConnectControllerImplCopyWithImpl<_$ConnectControllerImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConnectControllerImplToJson(this);
-  }
-}
-
-abstract class _ConnectController implements ConnectController {
-  const factory _ConnectController({
-    required final String controllerID,
-    required final String controllerName,
-  }) = _$ConnectControllerImpl;
-
-  factory _ConnectController.fromJson(Map<String, dynamic> json) =
-      _$ConnectControllerImpl.fromJson;
-
-  @override
-  String get controllerID;
-  @override
-  String get controllerName;
-
-  /// Create a copy of ConnectController
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConnectControllerImplCopyWith<_$ConnectControllerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
