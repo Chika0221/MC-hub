@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/firebase_connect_stream_provider.dart';
-import 'package:mc_hub/models/connect.dart';
+import 'package:mc_hub/models/connect.dart' hide Text;
 import 'package:mc_hub/widgets/double_line_border_container.dart';
 
 class ConnectStateContainer extends HookConsumerWidget {
