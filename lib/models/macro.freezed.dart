@@ -79,41 +79,34 @@ class _$MacroCopyWithImpl<$Res, $Val extends Macro>
   }) {
     return _then(
       _value.copyWith(
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as MacroType,
-            docId:
-                freezed == docId
-                    ? _value.docId
-                    : docId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            keys:
-                freezed == keys
-                    ? _value.keys
-                    : keys // ignore: cast_nullable_to_non_nullable
-                        as List<int>?,
-            appPath:
-                freezed == appPath
-                    ? _value.appPath
-                    : appPath // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            aiPrompt:
-                freezed == aiPrompt
-                    ? _value.aiPrompt
-                    : aiPrompt // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            text:
-                freezed == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String?,
+            name: null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                      as String,
+            type: null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                      as MacroType,
+            docId: freezed == docId
+                ? _value.docId
+                : docId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            keys: freezed == keys
+                ? _value.keys
+                : keys // ignore: cast_nullable_to_non_nullable
+                      as List<int>?,
+            appPath: freezed == appPath
+                ? _value.appPath
+                : appPath // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            aiPrompt: freezed == aiPrompt
+                ? _value.aiPrompt
+                : aiPrompt // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            text: freezed == text
+                ? _value.text
+                : text // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -163,41 +156,34 @@ class __$$MacroImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$MacroImpl(
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as MacroType,
-        docId:
-            freezed == docId
-                ? _value.docId
-                : docId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        keys:
-            freezed == keys
-                ? _value._keys
-                : keys // ignore: cast_nullable_to_non_nullable
-                    as List<int>?,
-        appPath:
-            freezed == appPath
-                ? _value.appPath
-                : appPath // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        aiPrompt:
-            freezed == aiPrompt
-                ? _value.aiPrompt
-                : aiPrompt // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        text:
-            freezed == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String?,
+        name: null == name
+            ? _value.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        type: null == type
+            ? _value.type
+            : type // ignore: cast_nullable_to_non_nullable
+                  as MacroType,
+        docId: freezed == docId
+            ? _value.docId
+            : docId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        keys: freezed == keys
+            ? _value._keys
+            : keys // ignore: cast_nullable_to_non_nullable
+                  as List<int>?,
+        appPath: freezed == appPath
+            ? _value.appPath
+            : appPath // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        aiPrompt: freezed == aiPrompt
+            ? _value.aiPrompt
+            : aiPrompt // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        text: freezed == text
+            ? _value.text
+            : text // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }

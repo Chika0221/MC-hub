@@ -18,8 +18,6 @@ class WorkflowDelayContainer extends HookConsumerWidget {
 
     final delaySeconds = action.delayDuration?.inSeconds ?? 0;
 
-    final errorText = useState<String?>(null);
-
     return WorkflowActionContainer(
       backgroundColor: colorScheme.tertiary.withValues(alpha: 0.15),
       highlightColor: highlightColor,
@@ -51,7 +49,7 @@ class WorkflowDelayContainer extends HookConsumerWidget {
                 return '値を入力してください';
               }
               try {
-                final intvalue = int.parse(value);
+                int.parse(value);
               } catch (e) {
                 return '有効な数値を入力してください';
               }

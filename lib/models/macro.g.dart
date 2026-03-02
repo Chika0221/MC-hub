@@ -10,8 +10,9 @@ _$MacroImpl _$$MacroImplFromJson(Map<String, dynamic> json) => _$MacroImpl(
   name: json['name'] as String,
   type: $enumDecode(_$MacroTypeEnumMap, json['type']),
   docId: json['docId'] as String?,
-  keys:
-      (json['keys'] as List<dynamic>?)?.map((e) => (e as num).toInt()).toList(),
+  keys: (json['keys'] as List<dynamic>?)
+      ?.map((e) => (e as num).toInt())
+      .toList(),
   appPath: json['appPath'] as String?,
   aiPrompt: json['aiPrompt'] as String?,
   text: json['text'] as String?,

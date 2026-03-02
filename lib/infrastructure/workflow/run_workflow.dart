@@ -10,7 +10,7 @@ class WorkflowService {
 
   WorkflowService({required this.workflow});
 
-  void runWorkflow() async {
+  Future<void> runWorkflow() async {
     WorkflowAction focusAction = workflow.actions.firstWhere(
       (action) => action.actionType == ActionType.Start,
     );

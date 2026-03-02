@@ -9,10 +9,9 @@ part of 'workflow.dart';
 _$WorkflowImpl _$$WorkflowImplFromJson(Map<String, dynamic> json) =>
     _$WorkflowImpl(
       displayName: json['displayName'] as String,
-      actions:
-          (json['actions'] as List<dynamic>)
-              .map((e) => WorkflowAction.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      actions: (json['actions'] as List<dynamic>)
+          .map((e) => WorkflowAction.fromJson(e as Map<String, dynamic>))
+          .toList(),
       trigger: WorkflowTrigger.fromJson(
         json['trigger'] as Map<String, dynamic>,
       ),
@@ -30,22 +29,19 @@ Map<String, dynamic> _$$WorkflowImplToJson(_$WorkflowImpl instance) =>
 _$WorkflowActionImpl _$$WorkflowActionImplFromJson(Map<String, dynamic> json) =>
     _$WorkflowActionImpl(
       actionId: json['actionId'] as String,
-      nextActionIds:
-          (json['nextActionIds'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList(),
+      nextActionIds: (json['nextActionIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       actionName: json['actionName'] as String,
       positionX: (json['positionX'] as num).toDouble(),
       positionY: (json['positionY'] as num).toDouble(),
       actionType: $enumDecode(_$ActionTypeEnumMap, json['actionType']),
-      macro:
-          json['macro'] == null
-              ? null
-              : Macro.fromJson(json['macro'] as Map<String, dynamic>),
-      delayDuration:
-          json['delayDuration'] == null
-              ? null
-              : Duration(microseconds: (json['delayDuration'] as num).toInt()),
+      macro: json['macro'] == null
+          ? null
+          : Macro.fromJson(json['macro'] as Map<String, dynamic>),
+      delayDuration: json['delayDuration'] == null
+          ? null
+          : Duration(microseconds: (json['delayDuration'] as num).toInt()),
       message: json['message'] as String?,
     );
 
@@ -75,10 +71,9 @@ _$WorkflowTriggerImpl _$$WorkflowTriggerImplFromJson(
   Map<String, dynamic> json,
 ) => _$WorkflowTriggerImpl(
   type: $enumDecode(_$TriggerTypeEnumMap, json['type']),
-  scheduledTime:
-      json['scheduledTime'] == null
-          ? null
-          : DateTime.parse(json['scheduledTime'] as String),
+  scheduledTime: json['scheduledTime'] == null
+      ? null
+      : DateTime.parse(json['scheduledTime'] as String),
 );
 
 Map<String, dynamic> _$$WorkflowTriggerImplToJson(

@@ -26,7 +26,7 @@ class WorkflowPathContextMenu extends HookConsumerWidget {
         action.nextActionIds.map((nextActionId) {
           final nextAction = ref
               .read(workflowEditProvider.notifier)
-              .getActionById(nextActionId!);
+              .getActionById(nextActionId);
 
           return CustomContextMenuEntry(
             label: Text('${nextAction.actionName}'),
