@@ -15,6 +15,7 @@ class Connect with _$Connect {
     required String? controllerID,
     required String? hostName,
     required String? controllerName,
+    required InfoAction infoAction,
     @Default(ConnectState.ready) ConnectState state,
     @Default(<Macro>[]) List<Macro> macroQueue,
     @Default(<Workflow>[]) List<Workflow> workflowQueue,
@@ -25,3 +26,25 @@ class Connect with _$Connect {
 }
 
 enum ConnectState { ready, connected, offline }
+
+@freezed
+class InfoAction with _$InfoAction {
+  const factory InfoAction.buttons({
+    required List<String> labels,
+    required List<Macro> macros,
+  }) = Buttons;
+  const factory InfoAction.text({required String text, required Macro macro}) =
+      Text;
+  const factory InfoAction.slider({
+    required String label,
+    required double min,
+    required double max,
+    required double value,
+    required Macro macro,
+  }) = Slider;
+
+  factory InfoAction.fromJson(Map<String, dynamic> json) =>
+      _$InfoActionFromJson(json);
+}
+
+enum InfoActionType { buttons, text, slider }

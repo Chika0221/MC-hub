@@ -73,26 +73,22 @@ class _$WorkflowCopyWithImpl<$Res, $Val extends Workflow>
   }) {
     return _then(
       _value.copyWith(
-            displayName:
-                null == displayName
-                    ? _value.displayName
-                    : displayName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            actions:
-                null == actions
-                    ? _value.actions
-                    : actions // ignore: cast_nullable_to_non_nullable
-                        as List<WorkflowAction>,
-            trigger:
-                null == trigger
-                    ? _value.trigger
-                    : trigger // ignore: cast_nullable_to_non_nullable
-                        as WorkflowTrigger,
-            state:
-                null == state
-                    ? _value.state
-                    : state // ignore: cast_nullable_to_non_nullable
-                        as bool,
+            displayName: null == displayName
+                ? _value.displayName
+                : displayName // ignore: cast_nullable_to_non_nullable
+                      as String,
+            actions: null == actions
+                ? _value.actions
+                : actions // ignore: cast_nullable_to_non_nullable
+                      as List<WorkflowAction>,
+            trigger: null == trigger
+                ? _value.trigger
+                : trigger // ignore: cast_nullable_to_non_nullable
+                      as WorkflowTrigger,
+            state: null == state
+                ? _value.state
+                : state // ignore: cast_nullable_to_non_nullable
+                      as bool,
           )
           as $Val,
     );
@@ -150,26 +146,22 @@ class __$$WorkflowImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$WorkflowImpl(
-        displayName:
-            null == displayName
-                ? _value.displayName
-                : displayName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        actions:
-            null == actions
-                ? _value._actions
-                : actions // ignore: cast_nullable_to_non_nullable
-                    as List<WorkflowAction>,
-        trigger:
-            null == trigger
-                ? _value.trigger
-                : trigger // ignore: cast_nullable_to_non_nullable
-                    as WorkflowTrigger,
-        state:
-            null == state
-                ? _value.state
-                : state // ignore: cast_nullable_to_non_nullable
-                    as bool,
+        displayName: null == displayName
+            ? _value.displayName
+            : displayName // ignore: cast_nullable_to_non_nullable
+                  as String,
+        actions: null == actions
+            ? _value._actions
+            : actions // ignore: cast_nullable_to_non_nullable
+                  as List<WorkflowAction>,
+        trigger: null == trigger
+            ? _value.trigger
+            : trigger // ignore: cast_nullable_to_non_nullable
+                  as WorkflowTrigger,
+        state: null == state
+            ? _value.state
+            : state // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -349,51 +341,42 @@ class _$WorkflowActionCopyWithImpl<$Res, $Val extends WorkflowAction>
   }) {
     return _then(
       _value.copyWith(
-            actionId:
-                null == actionId
-                    ? _value.actionId
-                    : actionId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            nextActionIds:
-                null == nextActionIds
-                    ? _value.nextActionIds
-                    : nextActionIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            actionName:
-                null == actionName
-                    ? _value.actionName
-                    : actionName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            positionX:
-                null == positionX
-                    ? _value.positionX
-                    : positionX // ignore: cast_nullable_to_non_nullable
-                        as double,
-            positionY:
-                null == positionY
-                    ? _value.positionY
-                    : positionY // ignore: cast_nullable_to_non_nullable
-                        as double,
-            actionType:
-                null == actionType
-                    ? _value.actionType
-                    : actionType // ignore: cast_nullable_to_non_nullable
-                        as ActionType,
-            macro:
-                freezed == macro
-                    ? _value.macro
-                    : macro // ignore: cast_nullable_to_non_nullable
-                        as Macro?,
-            delayDuration:
-                freezed == delayDuration
-                    ? _value.delayDuration
-                    : delayDuration // ignore: cast_nullable_to_non_nullable
-                        as Duration?,
-            message:
-                freezed == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String?,
+            actionId: null == actionId
+                ? _value.actionId
+                : actionId // ignore: cast_nullable_to_non_nullable
+                      as String,
+            nextActionIds: null == nextActionIds
+                ? _value.nextActionIds
+                : nextActionIds // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            actionName: null == actionName
+                ? _value.actionName
+                : actionName // ignore: cast_nullable_to_non_nullable
+                      as String,
+            positionX: null == positionX
+                ? _value.positionX
+                : positionX // ignore: cast_nullable_to_non_nullable
+                      as double,
+            positionY: null == positionY
+                ? _value.positionY
+                : positionY // ignore: cast_nullable_to_non_nullable
+                      as double,
+            actionType: null == actionType
+                ? _value.actionType
+                : actionType // ignore: cast_nullable_to_non_nullable
+                      as ActionType,
+            macro: freezed == macro
+                ? _value.macro
+                : macro // ignore: cast_nullable_to_non_nullable
+                      as Macro?,
+            delayDuration: freezed == delayDuration
+                ? _value.delayDuration
+                : delayDuration // ignore: cast_nullable_to_non_nullable
+                      as Duration?,
+            message: freezed == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -465,51 +448,42 @@ class __$$WorkflowActionImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$WorkflowActionImpl(
-        actionId:
-            null == actionId
-                ? _value.actionId
-                : actionId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        nextActionIds:
-            null == nextActionIds
-                ? _value._nextActionIds
-                : nextActionIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        actionName:
-            null == actionName
-                ? _value.actionName
-                : actionName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        positionX:
-            null == positionX
-                ? _value.positionX
-                : positionX // ignore: cast_nullable_to_non_nullable
-                    as double,
-        positionY:
-            null == positionY
-                ? _value.positionY
-                : positionY // ignore: cast_nullable_to_non_nullable
-                    as double,
-        actionType:
-            null == actionType
-                ? _value.actionType
-                : actionType // ignore: cast_nullable_to_non_nullable
-                    as ActionType,
-        macro:
-            freezed == macro
-                ? _value.macro
-                : macro // ignore: cast_nullable_to_non_nullable
-                    as Macro?,
-        delayDuration:
-            freezed == delayDuration
-                ? _value.delayDuration
-                : delayDuration // ignore: cast_nullable_to_non_nullable
-                    as Duration?,
-        message:
-            freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String?,
+        actionId: null == actionId
+            ? _value.actionId
+            : actionId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        nextActionIds: null == nextActionIds
+            ? _value._nextActionIds
+            : nextActionIds // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        actionName: null == actionName
+            ? _value.actionName
+            : actionName // ignore: cast_nullable_to_non_nullable
+                  as String,
+        positionX: null == positionX
+            ? _value.positionX
+            : positionX // ignore: cast_nullable_to_non_nullable
+                  as double,
+        positionY: null == positionY
+            ? _value.positionY
+            : positionY // ignore: cast_nullable_to_non_nullable
+                  as double,
+        actionType: null == actionType
+            ? _value.actionType
+            : actionType // ignore: cast_nullable_to_non_nullable
+                  as ActionType,
+        macro: freezed == macro
+            ? _value.macro
+            : macro // ignore: cast_nullable_to_non_nullable
+                  as Macro?,
+        delayDuration: freezed == delayDuration
+            ? _value.delayDuration
+            : delayDuration // ignore: cast_nullable_to_non_nullable
+                  as Duration?,
+        message: freezed == message
+            ? _value.message
+            : message // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -710,16 +684,14 @@ class _$WorkflowTriggerCopyWithImpl<$Res, $Val extends WorkflowTrigger>
   $Res call({Object? type = null, Object? scheduledTime = freezed}) {
     return _then(
       _value.copyWith(
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as TriggerType,
-            scheduledTime:
-                freezed == scheduledTime
-                    ? _value.scheduledTime
-                    : scheduledTime // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
+            type: null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                      as TriggerType,
+            scheduledTime: freezed == scheduledTime
+                ? _value.scheduledTime
+                : scheduledTime // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
           )
           as $Val,
     );
@@ -754,16 +726,14 @@ class __$$WorkflowTriggerImplCopyWithImpl<$Res>
   $Res call({Object? type = null, Object? scheduledTime = freezed}) {
     return _then(
       _$WorkflowTriggerImpl(
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as TriggerType,
-        scheduledTime:
-            freezed == scheduledTime
-                ? _value.scheduledTime
-                : scheduledTime // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
+        type: null == type
+            ? _value.type
+            : type // ignore: cast_nullable_to_non_nullable
+                  as TriggerType,
+        scheduledTime: freezed == scheduledTime
+            ? _value.scheduledTime
+            : scheduledTime // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
       ),
     );
   }
