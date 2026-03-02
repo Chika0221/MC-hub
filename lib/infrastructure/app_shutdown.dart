@@ -24,7 +24,7 @@ Future<void> shutdownAndExit(WidgetRef ref) async {
   await shutdownApp(ref);
   appWindow.close();
 
-  await Future<void>.delayed(const Duration(milliseconds: 50));
+  await Future<void>.delayed(const Duration(milliseconds: 100));
 
   exit(0);
 }

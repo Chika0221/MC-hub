@@ -84,8 +84,8 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
                         child: Text("タスクトレイに収納"),
                       ),
                       FilledButton.tonal(
-                        onPressed: () {
-                          unawaited(shutdownAndExit(ref));
+                        onPressed: () async {
+                          await shutdownAndExit(ref);
                         },
                         child: Text("ソフトを終了"),
                       ),
