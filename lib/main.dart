@@ -49,9 +49,9 @@ class MyApp extends HookConsumerWidget {
 
       unawaited(ref.read(keyboardMonitorControllerProvider).start());
 
-      return () {
+      return () async {
         ref.read(keyboardMonitorControllerProvider).stop();
-        unawaited(ref.read(firebaseConnectStreamProvider.notifier).close());
+        await ref.read(firebaseConnectStreamProvider.notifier).close();
       };
     }, const []);
 
