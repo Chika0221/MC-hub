@@ -1,6 +1,9 @@
 // Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/services.dart';
+
 // Package imports:
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -10,6 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/infrastructure/macro/run_macro.dart';
 import 'package:mc_hub/infrastructure/workflow/run_workflow.dart';
 import 'package:mc_hub/models/connect.dart';
+import 'package:mc_hub/models/macro.dart';
 
 class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
   final connect_collection = FirebaseFirestore.instance.collection("connect");
@@ -49,12 +53,26 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
 
     final docRef = connect_collection.doc(docId!);
 
+    // TODO 後で消す
+    final value = await Clipboard.getData(Clipboard.kTextPlain);
+    if (value != null) {
+      print("Clipboard value: ${value.text}");
+    }
+
     final initial =
         Connect(
           hostID: deviceInfo.deviceId,
           hostName: deviceInfo.computerName,
           controllerID: null,
           controllerName: null,
+          infoAction: InfoAction.text(
+            text: value?.text ?? "",
+            macro: Macro(
+              type: MacroType.text,
+              text: value?.text,
+              name: value?.text ?? "Initial Macro",
+            ),
+          ),
         ).toJson();
 
     await docRef.set(initial, SetOptions(merge: true));
