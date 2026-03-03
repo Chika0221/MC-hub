@@ -43,6 +43,7 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
         await MacroService.runMacro(macro);
       }
     }
+    await updateConnect(connect.copyWith(macroQueue: [], workflowQueue: []));
   }
 
   @override
