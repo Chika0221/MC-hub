@@ -94,6 +94,17 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
     }
   }
 
+  Future<void> updateConnect(Connect connect) async {
+    if (docId == null) {
+      final deviceInfo = await DeviceInfoPlugin().windowsInfo;
+      docId = deviceInfo.deviceId;
+    }
+
+    await connect_collection
+        .doc(docId!)
+        .set(connect.toJson(), SetOptions(merge: true));
+  }
+
   Future<void> close() async {
     if (docId == null) {
       final deviceInfo = await DeviceInfoPlugin().windowsInfo;
