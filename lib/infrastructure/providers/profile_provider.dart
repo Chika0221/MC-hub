@@ -87,12 +87,16 @@ class SelectProfileNotifier extends Notifier<KeyProfile?> {
     return null;
   }
 
-  void selectProfile(KeyProfile profile) {
+  Future<void> selectProfile(KeyProfile profile) async {
+    final keyMatrix = profile.keyMatrix;
+
+    await ref.read(vialProvider.notifier).updateKeyMatrix(keyMatrix!);
+
     state = profile;
   }
 
   void setVialMatrix(List<List<List<int>>> keyMatrix) {
-    VialService();
+    final profile = state;
   }
 }
 

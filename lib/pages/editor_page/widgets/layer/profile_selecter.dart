@@ -7,6 +7,7 @@ import 'package:riverpod/src/framework.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/providers/profile_provider.dart';
+import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/models/key_profile.dart';
 import 'package:mc_hub/pages/editor_page/widgets/layer/new_profile_dialog.dart';
 import 'package:mc_hub/widgets/has_last_child_listview.dart';
@@ -19,6 +20,7 @@ class ProfileSelecter extends HookConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
 
     final profiles = ref.watch(profilesProvider);
+    final selectedProfile = ref.watch(selectProfileProvider);
 
     return Column(
       children: [
@@ -26,7 +28,7 @@ class ProfileSelecter extends HookConsumerWidget {
           children: [
             Expanded(
               child: Text(
-                "Profile",
+                selectedProfile?.name ?? "Profile",
                 style: textTheme.headlineLarge?.copyWith(
                   color: colorScheme.primary,
                 ),
@@ -35,7 +37,7 @@ class ProfileSelecter extends HookConsumerWidget {
             ),
             const SizedBox(width: 4),
             IconButton.filledTonal(
-              onPressed: () {},
+              onPressed: () async {},
               icon: Icon(Icons.file_upload_rounded),
             ),
           ],
@@ -49,7 +51,11 @@ class ProfileSelecter extends HookConsumerWidget {
               return SizedBox(
                 width: double.infinity,
                 child: FilledButton.tonal(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref
+                        .read(selectProfileProvider.notifier)
+                        .selectProfile(profile!);
+                  },
                   child: Text(profile?.name ?? "UnKnown"),
                 ),
               );

@@ -418,6 +418,74 @@ class VialNotifier extends Notifier<VialState> {
     }
   }
 
+  Future<void> updateKeyMatrix(List<List<List<int>>> keyMatrix) async {
+    if (!state.isConnected) {
+      state = state.copyWith(statusMessage: "Not connected");
+      return;
+    }
+
+    if (keyMatrix.isEmpty || keyMatrix.first.isEmpty) {
+      state = state.copyWith(statusMessage: "Keymatrix is empty");
+      return;
+    }
+
+    final deviceDef = myDevices.firstWhere(
+      (d) => d.name == state.deviceName,
+      orElse: () => myDevices.first,
+    );
+    final config = deviceLayouts[deviceDef.name];
+
+    final rows = config?.rows ?? keyMatrix.first.length;
+    final cols =
+        config?.cols ??
+        (keyMatrix.first.isNotEmpty ? keyMatrix.first[0].length : 0);
+    final layers = config?.layers ?? keyMatrix.length;
+
+    if (keyMatrix.length != layers) {
+      state = state.copyWith(
+        statusMessage: "Layer count mismatch: expected $layers",
+      );
+      return;
+    }
+
+    for (final layer in keyMatrix) {
+      if (layer.length != rows) {
+        state = state.copyWith(
+          statusMessage: "Row count mismatch: expected $rows",
+        );
+        return;
+      }
+      for (final row in layer) {
+        if (row.length != cols) {
+          state = state.copyWith(
+            statusMessage: "Column count mismatch: expected $cols",
+          );
+          return;
+        }
+      }
+    }
+
+    try {
+      await _service.setKeymap(keymap: keyMatrix, rows: rows, cols: cols);
+
+      final Map<String, String> newMappings = {};
+      final layer0 = keyMatrix[0];
+      for (int r = 0; r < layer0.length; r++) {
+        for (int c = 0; c < layer0[r].length; c++) {
+          newMappings["$r,$c"] = keycodeToLabel(layer0[r][c]);
+        }
+      }
+
+      state = state.copyWith(
+        keyMappings: newMappings,
+        matrix: keyMatrix,
+        statusMessage: "Keymatrix updated",
+      );
+    } catch (e) {
+      state = state.copyWith(statusMessage: "Failed to update keymatrix: $e");
+    }
+  }
+
   static String keycodeToLabel(int keycode) {
     return VialKey.labelFromCode(keycode);
   }
