@@ -22,7 +22,7 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final buttonColors = WindowButtonColors(
-      iconNormal: Theme.of(context).colorScheme.secondary,
+      iconNormal: Theme.of(context).colorScheme.surfaceContainer,
       mouseOver: Theme.of(context).colorScheme.primaryContainer,
       mouseDown: Theme.of(context).colorScheme.secondaryContainer,
       iconMouseOver: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -32,7 +32,7 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
     final closeButtonColors = WindowButtonColors(
       mouseOver: Theme.of(context).colorScheme.error,
       mouseDown: Theme.of(context).colorScheme.error,
-      iconNormal: Theme.of(context).colorScheme.secondary,
+      iconNormal: Theme.of(context).colorScheme.surfaceContainer,
       iconMouseOver: Theme.of(context).colorScheme.onError,
     );
 
@@ -45,7 +45,7 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
                 child: Text(
                   title!,
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.surfaceContainer,
                   ),
                 ),
               ),
