@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod/src/framework.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/fileIO.dart/file_service.dart';
 import 'package:mc_hub/infrastructure/providers/profile_provider.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/models/key_profile.dart';
@@ -37,7 +38,13 @@ class ProfileSelecter extends HookConsumerWidget {
             ),
             const SizedBox(width: 4),
             IconButton.filledTonal(
-              onPressed: () async {},
+              onPressed: () async {
+                if (selectedProfile == null) return;
+                FileService.saveJsonFile(
+                  selectedProfile.name,
+                  selectedProfile.toJson(),
+                );
+              },
               icon: Icon(Icons.file_upload_rounded),
             ),
           ],
