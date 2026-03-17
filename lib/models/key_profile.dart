@@ -11,8 +11,8 @@ part 'key_profile.g.dart';
 class KeyProfile with _$KeyProfile {
   @JsonSerializable(explicitToJson: true)
   const factory KeyProfile({
-    required String Name,
-    required String Id,
+    required String name,
+    required String id,
     required Map<String, String> keyMappings,
   }) = _KeyProfile;
 
