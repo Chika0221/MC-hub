@@ -24,8 +24,8 @@ class KeyProfile with _$KeyProfile {
 class AppLayer with _$AppLayer {
   @JsonSerializable(explicitToJson: true)
   const factory AppLayer({
-    required String Name,
-    required String Id,
+    required String name,
+    required String id,
     required String appPath,
     required bool isFocus,
     @Default(<Macro?>[
