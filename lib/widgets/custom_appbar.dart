@@ -11,10 +11,16 @@ import 'package:mc_hub/main.dart';
 import 'package:mc_hub/widgets/custom_appbar_back_icon.dart';
 
 class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
-  CustomAppbar({super.key, this.title, this.returnValue = null});
+  CustomAppbar({
+    super.key,
+    this.title,
+    this.returnValue = null,
+    this.pullDownActions = null,
+  });
 
   final String? title;
   final dynamic returnValue;
+  final List<AppBarPullDownActionButton>? pullDownActions;
 
   @override
   final Size preferredSize = Size.fromHeight(kToolbarHeight);
@@ -62,6 +68,7 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
                     Navigator.of(context).pop(returnValue);
                   },
                 ),
+              if (pullDownActions != null) ...pullDownActions!,
               Expanded(child: WindowTitleBarBox(child: MoveWindow())),
               MinimizeWindowButton(colors: buttonColors),
               appWindow.isMaximized
@@ -98,6 +105,33 @@ class CustomAppbar extends HookConsumerWidget implements PreferredSizeWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AppBarPullDownActionButton extends HookConsumerWidget {
+  const AppBarPullDownActionButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+  });
+
+  final String label;
+  final void Function() onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SizedBox(
+      height: 30,
+      child: InkWell(
+        onTap: () => onPressed,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Center(
+            child: Text(label, style: Theme.of(context).textTheme.labelSmall),
+          ),
+        ),
       ),
     );
   }

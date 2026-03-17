@@ -131,7 +131,17 @@ class EditorPage extends HookConsumerWidget {
     final keyMappings = _keyMappingsForLayer(vialState, selectedLayer.value);
 
     return Scaffold(
-      appBar: CustomAppbar(title: vialState.deviceName),
+      appBar: CustomAppbar(
+        title: vialState.deviceName,
+        pullDownActions: [
+          AppBarPullDownActionButton(
+            label: "こんにちは",
+            onPressed: () {
+              print("Hello from pull-down action!");
+            },
+          ),
+        ],
+      ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         children: [
