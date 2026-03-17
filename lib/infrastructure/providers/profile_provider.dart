@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/fileIO.dart/file_service.dart';
 import 'package:mc_hub/infrastructure/hid/vial_service.dart';
 import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
@@ -59,6 +60,16 @@ class ProfilesAsyncNotifier extends AsyncNotifier<List<KeyProfile?>> {
 
     final newProfile = KeyProfile(name: name, id: uuid, keyMatrix: keyMatrix);
     await _saveProfile(newProfile);
+  }
+
+  Future<void> inputProfile() async {
+    final profileJson = await FileService.loadjsonFile();
+    if (profileJson == null) return;
+
+    final importProfile = KeyProfile.fromJson(profileJson);
+
+    await _saveProfile(importProfile);
+    await fetchProfiles();
   }
 }
 

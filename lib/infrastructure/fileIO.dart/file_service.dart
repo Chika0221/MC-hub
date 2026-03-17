@@ -35,4 +35,21 @@ class FileService {
       await file.saveTo(location.path);
     }
   }
+
+  static Future<Map<String, dynamic>?> loadjsonFile() async {
+    final result = await openFile(
+      acceptedTypeGroups: [
+        XTypeGroup(label: "JSON Files", extensions: ["json"]),
+      ],
+    );
+
+    if (result == null) {
+      return null;
+    } else {
+      final file = XFile(result.path);
+      // TODO インポートエラーのハンドリング
+      final content = await file.readAsString();
+      return jsonDecode(content);
+    }
+  }
 }

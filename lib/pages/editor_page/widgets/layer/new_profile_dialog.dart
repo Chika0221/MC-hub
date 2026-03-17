@@ -23,10 +23,11 @@ class NewProfileDialog extends HookConsumerWidget {
           border: OutlineInputBorder(),
         ),
       ),
+
       actions: [
         FilledButton(
           onPressed: () {
-          if (inputText.text.isEmpty) return;
+            if (inputText.text.isEmpty) return;
             ref
                 .read(profilesAsyncNotifierProvider.notifier)
                 .createProfile(inputText.text);
@@ -34,6 +35,13 @@ class NewProfileDialog extends HookConsumerWidget {
             Navigator.of(context).pop();
           },
           child: Text("作成"),
+        ),
+        FilledButton.tonal(
+          onPressed: () {
+            ref.read(profilesAsyncNotifierProvider.notifier).inputProfile();
+            Navigator.of(context).pop();
+          },
+          child: Text("インポート"),
         ),
         FilledButton.tonal(
           onPressed: () {

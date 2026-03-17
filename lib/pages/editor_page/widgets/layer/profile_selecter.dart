@@ -41,7 +41,7 @@ class ProfileSelecter extends HookConsumerWidget {
               onPressed: () async {
                 if (selectedProfile == null) return;
                 FileService.saveJsonFile(
-                  selectedProfile.name,
+                  "profile_${selectedProfile.id}",
                   selectedProfile.toJson(),
                 );
               },
