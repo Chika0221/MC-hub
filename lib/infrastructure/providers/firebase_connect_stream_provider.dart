@@ -43,6 +43,7 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
         await MacroService.runMacro(macro);
       }
     }
+    await updateConnect(connect.copyWith(macroQueue: [], workflowQueue: []));
   }
 
   @override
@@ -92,6 +93,17 @@ class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
 
       yield connect;
     }
+  }
+
+  Future<void> updateConnect(Connect connect) async {
+    if (docId == null) {
+      final deviceInfo = await DeviceInfoPlugin().windowsInfo;
+      docId = deviceInfo.deviceId;
+    }
+
+    await connect_collection
+        .doc(docId!)
+        .set(connect.toJson(), SetOptions(merge: true));
   }
 
   Future<void> close() async {
