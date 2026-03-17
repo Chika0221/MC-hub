@@ -10,14 +10,33 @@ _$KeyProfileImpl _$$KeyProfileImplFromJson(Map<String, dynamic> json) =>
     _$KeyProfileImpl(
       name: json['name'] as String,
       id: json['id'] as String,
-      keyMappings: Map<String, String>.from(json['keyMappings'] as Map),
+      keyMatrix:
+          (json['keyMatrix'] as List<dynamic>?)
+              ?.map(
+                (e) =>
+                    (e as List<dynamic>)
+                        .map(
+                          (e) =>
+                              (e as List<dynamic>)
+                                  .map((e) => (e as num).toInt())
+                                  .toList(),
+                        )
+                        .toList(),
+              )
+              .toList(),
+      appLayers:
+          (json['appLayers'] as List<dynamic>?)
+              ?.map((e) => AppLayer.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <AppLayer>[],
     );
 
 Map<String, dynamic> _$$KeyProfileImplToJson(_$KeyProfileImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'id': instance.id,
-      'keyMappings': instance.keyMappings,
+      'keyMatrix': instance.keyMatrix,
+      'appLayers': instance.appLayers.map((e) => e.toJson()).toList(),
     };
 
 _$AppLayerImpl _$$AppLayerImplFromJson(

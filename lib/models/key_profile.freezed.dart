@@ -23,7 +23,8 @@ KeyProfile _$KeyProfileFromJson(Map<String, dynamic> json) {
 mixin _$KeyProfile {
   String get name => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
-  Map<String, String> get keyMappings => throw _privateConstructorUsedError;
+  List<List<List<int>>>? get keyMatrix => throw _privateConstructorUsedError;
+  List<AppLayer> get appLayers => throw _privateConstructorUsedError;
 
   /// Serializes this KeyProfile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,7 +43,12 @@ abstract class $KeyProfileCopyWith<$Res> {
     $Res Function(KeyProfile) then,
   ) = _$KeyProfileCopyWithImpl<$Res, KeyProfile>;
   @useResult
-  $Res call({String name, String id, Map<String, String> keyMappings});
+  $Res call({
+    String name,
+    String id,
+    List<List<List<int>>>? keyMatrix,
+    List<AppLayer> appLayers,
+  });
 }
 
 /// @nodoc
@@ -62,7 +68,8 @@ class _$KeyProfileCopyWithImpl<$Res, $Val extends KeyProfile>
   $Res call({
     Object? name = null,
     Object? id = null,
-    Object? keyMappings = null,
+    Object? keyMatrix = freezed,
+    Object? appLayers = null,
   }) {
     return _then(
       _value.copyWith(
@@ -76,11 +83,16 @@ class _$KeyProfileCopyWithImpl<$Res, $Val extends KeyProfile>
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
                         as String,
-            keyMappings:
-                null == keyMappings
-                    ? _value.keyMappings
-                    : keyMappings // ignore: cast_nullable_to_non_nullable
-                        as Map<String, String>,
+            keyMatrix:
+                freezed == keyMatrix
+                    ? _value.keyMatrix
+                    : keyMatrix // ignore: cast_nullable_to_non_nullable
+                        as List<List<List<int>>>?,
+            appLayers:
+                null == appLayers
+                    ? _value.appLayers
+                    : appLayers // ignore: cast_nullable_to_non_nullable
+                        as List<AppLayer>,
           )
           as $Val,
     );
@@ -96,7 +108,12 @@ abstract class _$$KeyProfileImplCopyWith<$Res>
   ) = __$$KeyProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String id, Map<String, String> keyMappings});
+  $Res call({
+    String name,
+    String id,
+    List<List<List<int>>>? keyMatrix,
+    List<AppLayer> appLayers,
+  });
 }
 
 /// @nodoc
@@ -115,7 +132,8 @@ class __$$KeyProfileImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? id = null,
-    Object? keyMappings = null,
+    Object? keyMatrix = freezed,
+    Object? appLayers = null,
   }) {
     return _then(
       _$KeyProfileImpl(
@@ -129,11 +147,16 @@ class __$$KeyProfileImplCopyWithImpl<$Res>
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
                     as String,
-        keyMappings:
-            null == keyMappings
-                ? _value._keyMappings
-                : keyMappings // ignore: cast_nullable_to_non_nullable
-                    as Map<String, String>,
+        keyMatrix:
+            freezed == keyMatrix
+                ? _value._keyMatrix
+                : keyMatrix // ignore: cast_nullable_to_non_nullable
+                    as List<List<List<int>>>?,
+        appLayers:
+            null == appLayers
+                ? _value._appLayers
+                : appLayers // ignore: cast_nullable_to_non_nullable
+                    as List<AppLayer>,
       ),
     );
   }
@@ -146,8 +169,10 @@ class _$KeyProfileImpl implements _KeyProfile {
   const _$KeyProfileImpl({
     required this.name,
     required this.id,
-    required final Map<String, String> keyMappings,
-  }) : _keyMappings = keyMappings;
+    required final List<List<List<int>>>? keyMatrix,
+    final List<AppLayer> appLayers = const <AppLayer>[],
+  }) : _keyMatrix = keyMatrix,
+       _appLayers = appLayers;
 
   factory _$KeyProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$KeyProfileImplFromJson(json);
@@ -156,17 +181,28 @@ class _$KeyProfileImpl implements _KeyProfile {
   final String name;
   @override
   final String id;
-  final Map<String, String> _keyMappings;
+  final List<List<List<int>>>? _keyMatrix;
   @override
-  Map<String, String> get keyMappings {
-    if (_keyMappings is EqualUnmodifiableMapView) return _keyMappings;
+  List<List<List<int>>>? get keyMatrix {
+    final value = _keyMatrix;
+    if (value == null) return null;
+    if (_keyMatrix is EqualUnmodifiableListView) return _keyMatrix;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_keyMappings);
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<AppLayer> _appLayers;
+  @override
+  @JsonKey()
+  List<AppLayer> get appLayers {
+    if (_appLayers is EqualUnmodifiableListView) return _appLayers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_appLayers);
   }
 
   @override
   String toString() {
-    return 'KeyProfile(name: $name, id: $id, keyMappings: $keyMappings)';
+    return 'KeyProfile(name: $name, id: $id, keyMatrix: $keyMatrix, appLayers: $appLayers)';
   }
 
   @override
@@ -177,8 +213,12 @@ class _$KeyProfileImpl implements _KeyProfile {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(
-              other._keyMappings,
-              _keyMappings,
+              other._keyMatrix,
+              _keyMatrix,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._appLayers,
+              _appLayers,
             ));
   }
 
@@ -188,7 +228,8 @@ class _$KeyProfileImpl implements _KeyProfile {
     runtimeType,
     name,
     id,
-    const DeepCollectionEquality().hash(_keyMappings),
+    const DeepCollectionEquality().hash(_keyMatrix),
+    const DeepCollectionEquality().hash(_appLayers),
   );
 
   /// Create a copy of KeyProfile
@@ -209,7 +250,8 @@ abstract class _KeyProfile implements KeyProfile {
   const factory _KeyProfile({
     required final String name,
     required final String id,
-    required final Map<String, String> keyMappings,
+    required final List<List<List<int>>>? keyMatrix,
+    final List<AppLayer> appLayers,
   }) = _$KeyProfileImpl;
 
   factory _KeyProfile.fromJson(Map<String, dynamic> json) =
@@ -220,7 +262,9 @@ abstract class _KeyProfile implements KeyProfile {
   @override
   String get id;
   @override
-  Map<String, String> get keyMappings;
+  List<List<List<int>>>? get keyMatrix;
+  @override
+  List<AppLayer> get appLayers;
 
   /// Create a copy of KeyProfile
   /// with the given fields replaced by the non-null parameter values.

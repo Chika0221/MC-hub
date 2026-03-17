@@ -13,7 +13,8 @@ class KeyProfile with _$KeyProfile {
   const factory KeyProfile({
     required String name,
     required String id,
-    required Map<String, String> keyMappings,
+    required List<List<List<int>>>? keyMatrix,
+    @Default(<AppLayer>[]) List<AppLayer> appLayers,
   }) = _KeyProfile;
 
   factory KeyProfile.fromJson(Map<String, dynamic> json) =>

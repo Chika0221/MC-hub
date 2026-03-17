@@ -29,19 +29,6 @@ class EditorPage extends HookConsumerWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            // SizedBox(
-            //   width: 84,
-            //   height: 300,
-            //   child: Padding(
-            //     padding: EdgeInsets.all(16),
-            //     child: LayerButtons(
-            //       selectedLayerIndex: selectedLayer.value,
-            //       onLayerChanged: (index) {
-            //         selectedLayer.value = index;
-            //       },
-            //     ),
-            //   ),
-            // ),
             LayerProfileContainer(
               selectedIndex: selectedLayer.value,
               onLayerSelected: (int index) => selectedLayer.value = index,
