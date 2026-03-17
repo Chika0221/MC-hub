@@ -125,7 +125,7 @@ class AppBarPullDownActionButton extends HookConsumerWidget {
     return SizedBox(
       height: 30,
       child: InkWell(
-        onTap: () => onPressed,
+        onTap: onPressed,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Center(

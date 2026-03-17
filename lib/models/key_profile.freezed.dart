@@ -21,8 +21,8 @@ KeyProfile _$KeyProfileFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$KeyProfile {
-  String get Name => throw _privateConstructorUsedError;
-  String get Id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   Map<String, String> get keyMappings => throw _privateConstructorUsedError;
 
   /// Serializes this KeyProfile to a JSON map.
@@ -42,7 +42,7 @@ abstract class $KeyProfileCopyWith<$Res> {
     $Res Function(KeyProfile) then,
   ) = _$KeyProfileCopyWithImpl<$Res, KeyProfile>;
   @useResult
-  $Res call({String Name, String Id, Map<String, String> keyMappings});
+  $Res call({String name, String id, Map<String, String> keyMappings});
 }
 
 /// @nodoc
@@ -60,21 +60,21 @@ class _$KeyProfileCopyWithImpl<$Res, $Val extends KeyProfile>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? Name = null,
-    Object? Id = null,
+    Object? name = null,
+    Object? id = null,
     Object? keyMappings = null,
   }) {
     return _then(
       _value.copyWith(
-            Name:
-                null == Name
-                    ? _value.Name
-                    : Name // ignore: cast_nullable_to_non_nullable
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
                         as String,
-            Id:
-                null == Id
-                    ? _value.Id
-                    : Id // ignore: cast_nullable_to_non_nullable
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
                         as String,
             keyMappings:
                 null == keyMappings
@@ -96,7 +96,7 @@ abstract class _$$KeyProfileImplCopyWith<$Res>
   ) = __$$KeyProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String Name, String Id, Map<String, String> keyMappings});
+  $Res call({String name, String id, Map<String, String> keyMappings});
 }
 
 /// @nodoc
@@ -113,21 +113,21 @@ class __$$KeyProfileImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? Name = null,
-    Object? Id = null,
+    Object? name = null,
+    Object? id = null,
     Object? keyMappings = null,
   }) {
     return _then(
       _$KeyProfileImpl(
-        Name:
-            null == Name
-                ? _value.Name
-                : Name // ignore: cast_nullable_to_non_nullable
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
                     as String,
-        Id:
-            null == Id
-                ? _value.Id
-                : Id // ignore: cast_nullable_to_non_nullable
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
                     as String,
         keyMappings:
             null == keyMappings
@@ -144,8 +144,8 @@ class __$$KeyProfileImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$KeyProfileImpl implements _KeyProfile {
   const _$KeyProfileImpl({
-    required this.Name,
-    required this.Id,
+    required this.name,
+    required this.id,
     required final Map<String, String> keyMappings,
   }) : _keyMappings = keyMappings;
 
@@ -153,9 +153,9 @@ class _$KeyProfileImpl implements _KeyProfile {
       _$$KeyProfileImplFromJson(json);
 
   @override
-  final String Name;
+  final String name;
   @override
-  final String Id;
+  final String id;
   final Map<String, String> _keyMappings;
   @override
   Map<String, String> get keyMappings {
@@ -166,7 +166,7 @@ class _$KeyProfileImpl implements _KeyProfile {
 
   @override
   String toString() {
-    return 'KeyProfile(Name: $Name, Id: $Id, keyMappings: $keyMappings)';
+    return 'KeyProfile(name: $name, id: $id, keyMappings: $keyMappings)';
   }
 
   @override
@@ -174,8 +174,8 @@ class _$KeyProfileImpl implements _KeyProfile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$KeyProfileImpl &&
-            (identical(other.Name, Name) || other.Name == Name) &&
-            (identical(other.Id, Id) || other.Id == Id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(
               other._keyMappings,
               _keyMappings,
@@ -186,8 +186,8 @@ class _$KeyProfileImpl implements _KeyProfile {
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    Name,
-    Id,
+    name,
+    id,
     const DeepCollectionEquality().hash(_keyMappings),
   );
 
@@ -207,8 +207,8 @@ class _$KeyProfileImpl implements _KeyProfile {
 
 abstract class _KeyProfile implements KeyProfile {
   const factory _KeyProfile({
-    required final String Name,
-    required final String Id,
+    required final String name,
+    required final String id,
     required final Map<String, String> keyMappings,
   }) = _$KeyProfileImpl;
 
@@ -216,9 +216,9 @@ abstract class _KeyProfile implements KeyProfile {
       _$KeyProfileImpl.fromJson;
 
   @override
-  String get Name;
+  String get name;
   @override
-  String get Id;
+  String get id;
   @override
   Map<String, String> get keyMappings;
 
@@ -236,8 +236,8 @@ AppLayer _$AppLayerFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AppLayer {
-  String get Name => throw _privateConstructorUsedError;
-  String get Id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get appPath => throw _privateConstructorUsedError;
   bool get isFocus => throw _privateConstructorUsedError;
   List<Macro?> get macros => throw _privateConstructorUsedError;
@@ -258,8 +258,8 @@ abstract class $AppLayerCopyWith<$Res> {
       _$AppLayerCopyWithImpl<$Res, AppLayer>;
   @useResult
   $Res call({
-    String Name,
-    String Id,
+    String name,
+    String id,
     String appPath,
     bool isFocus,
     List<Macro?> macros,
@@ -281,23 +281,23 @@ class _$AppLayerCopyWithImpl<$Res, $Val extends AppLayer>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? Name = null,
-    Object? Id = null,
+    Object? name = null,
+    Object? id = null,
     Object? appPath = null,
     Object? isFocus = null,
     Object? macros = null,
   }) {
     return _then(
       _value.copyWith(
-            Name:
-                null == Name
-                    ? _value.Name
-                    : Name // ignore: cast_nullable_to_non_nullable
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
                         as String,
-            Id:
-                null == Id
-                    ? _value.Id
-                    : Id // ignore: cast_nullable_to_non_nullable
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
                         as String,
             appPath:
                 null == appPath
@@ -330,8 +330,8 @@ abstract class _$$AppLayerImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String Name,
-    String Id,
+    String name,
+    String id,
     String appPath,
     bool isFocus,
     List<Macro?> macros,
@@ -352,23 +352,23 @@ class __$$AppLayerImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? Name = null,
-    Object? Id = null,
+    Object? name = null,
+    Object? id = null,
     Object? appPath = null,
     Object? isFocus = null,
     Object? macros = null,
   }) {
     return _then(
       _$AppLayerImpl(
-        Name:
-            null == Name
-                ? _value.Name
-                : Name // ignore: cast_nullable_to_non_nullable
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
                     as String,
-        Id:
-            null == Id
-                ? _value.Id
-                : Id // ignore: cast_nullable_to_non_nullable
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
                     as String,
         appPath:
             null == appPath
@@ -395,8 +395,8 @@ class __$$AppLayerImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$AppLayerImpl implements _AppLayer {
   const _$AppLayerImpl({
-    required this.Name,
-    required this.Id,
+    required this.name,
+    required this.id,
     required this.appPath,
     required this.isFocus,
     final List<Macro?> macros = const <Macro?>[
@@ -419,9 +419,9 @@ class _$AppLayerImpl implements _AppLayer {
       _$$AppLayerImplFromJson(json);
 
   @override
-  final String Name;
+  final String name;
   @override
-  final String Id;
+  final String id;
   @override
   final String appPath;
   @override
@@ -437,7 +437,7 @@ class _$AppLayerImpl implements _AppLayer {
 
   @override
   String toString() {
-    return 'AppLayer(Name: $Name, Id: $Id, appPath: $appPath, isFocus: $isFocus, macros: $macros)';
+    return 'AppLayer(name: $name, id: $id, appPath: $appPath, isFocus: $isFocus, macros: $macros)';
   }
 
   @override
@@ -445,8 +445,8 @@ class _$AppLayerImpl implements _AppLayer {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppLayerImpl &&
-            (identical(other.Name, Name) || other.Name == Name) &&
-            (identical(other.Id, Id) || other.Id == Id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.appPath, appPath) || other.appPath == appPath) &&
             (identical(other.isFocus, isFocus) || other.isFocus == isFocus) &&
             const DeepCollectionEquality().equals(other._macros, _macros));
@@ -456,8 +456,8 @@ class _$AppLayerImpl implements _AppLayer {
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    Name,
-    Id,
+    name,
+    id,
     appPath,
     isFocus,
     const DeepCollectionEquality().hash(_macros),
@@ -479,8 +479,8 @@ class _$AppLayerImpl implements _AppLayer {
 
 abstract class _AppLayer implements AppLayer {
   const factory _AppLayer({
-    required final String Name,
-    required final String Id,
+    required final String name,
+    required final String id,
     required final String appPath,
     required final bool isFocus,
     final List<Macro?> macros,
@@ -490,9 +490,9 @@ abstract class _AppLayer implements AppLayer {
       _$AppLayerImpl.fromJson;
 
   @override
-  String get Name;
+  String get name;
   @override
-  String get Id;
+  String get id;
   @override
   String get appPath;
   @override
