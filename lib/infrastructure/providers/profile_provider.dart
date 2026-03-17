@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 // Project imports:
+import 'package:mc_hub/infrastructure/hid/vial_service.dart';
 import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/models/key_profile.dart';
@@ -79,3 +80,23 @@ final profilesProvider = Provider<List<KeyProfile?>>((ref) {
     loading: () => [],
   );
 });
+
+class SelectProfileNotifier extends Notifier<KeyProfile?> {
+  @override
+  build() {
+    return null;
+  }
+
+  void selectProfile(KeyProfile profile) {
+    state = profile;
+  }
+
+  void setVialMatrix(List<List<List<int>>> keyMatrix) {
+    VialService();
+  }
+}
+
+final selectProfileProvider =
+    NotifierProvider<SelectProfileNotifier, KeyProfile?>(
+      SelectProfileNotifier.new,
+    );
