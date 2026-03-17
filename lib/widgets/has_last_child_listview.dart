@@ -1,8 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-class HasLastChildListview extends StatelessWidget {
-  const HasLastChildListview({
+class HasLastChildListView extends StatelessWidget {
+  const HasLastChildListView({
     super.key,
     required this.itemBuilder,
     required this.separatorBuilder,
