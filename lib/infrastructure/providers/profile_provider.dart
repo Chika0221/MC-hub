@@ -106,7 +106,9 @@ class SelectProfileNotifier extends Notifier<KeyProfile?> {
     state = profile;
     final keyMatrix = profile.keyMatrix;
 
-    await ref.read(vialProvider.notifier).updateKeyMatrix(keyMatrix!);
+    if (keyMatrix != null) {
+      await ref.read(vialProvider.notifier).updateKeyMatrix(keyMatrix);
+    }
     await updateSelectProfilePrefarences(profile);
   }
 
