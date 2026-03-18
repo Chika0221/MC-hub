@@ -69,7 +69,6 @@ class ProfilesAsyncNotifier extends AsyncNotifier<List<KeyProfile?>> {
     final importProfile = KeyProfile.fromJson(profileJson);
 
     await _saveProfile(importProfile);
-    await fetchProfiles();
   }
 }
 
@@ -94,20 +93,41 @@ final profilesProvider = Provider<List<KeyProfile?>>((ref) {
 
 class SelectProfileNotifier extends Notifier<KeyProfile?> {
   @override
-  build() {
+  KeyProfile? build() {
+    unawaited(_loadSelectedProfile());
     return null;
   }
 
   Future<void> selectProfile(KeyProfile profile) async {
+    state = profile;
     final keyMatrix = profile.keyMatrix;
 
     await ref.read(vialProvider.notifier).updateKeyMatrix(keyMatrix!);
-
-    state = profile;
+    await updateSelectProfilePrefarences();
   }
 
-  void setVialMatrix(List<List<List<int>>> keyMatrix) {
-    final profile = state;
+  Future<void> _loadSelectedProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    final selectedProfileId = prefs.getString("select_profile_id");
+    if (selectedProfileId == null) {
+      state = null;
+      return;
+    }
+
+    final profiles = ref.read(profilesProvider);
+    final selectedProfile = profiles.firstWhere(
+      (profile) => profile?.id == selectedProfileId,
+      orElse: () => null,
+    );
+    state = selectedProfile;
+  }
+
+  Future<void> updateSelectProfilePrefarences() async {
+    final selectedProfile = state;
+    if (selectedProfile == null) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("select_profile_id", selectedProfile.id);
   }
 }
 
