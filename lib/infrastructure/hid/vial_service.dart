@@ -178,4 +178,38 @@ class VialService {
 
     await dynamicKeymapSetBuffer(offset, data);
   }
+
+  Future<void> setKeymap({
+    required List<List<List<int>>> keymap,
+    required int rows,
+    required int cols,
+  }) async {
+    final layers = keymap.length;
+    final totalBytes = layers * rows * cols * 2;
+    final buffer = Uint8List(totalBytes);
+    int ptr = 0;
+
+    for (int l = 0; l < layers; l++) {
+      final layer = keymap[l];
+      for (int r = 0; r < rows; r++) {
+        final row = layer[r];
+        for (int c = 0; c < cols; c++) {
+          final keycode = row[c];
+          buffer[ptr] = keycode & 0xFF;
+          buffer[ptr + 1] = (keycode >> 8) & 0xFF;
+          ptr += 2;
+        }
+      }
+    }
+
+    const blockSize = 28;
+    for (int offset = 0; offset < totalBytes; offset += blockSize) {
+      var size = blockSize;
+      if (offset + size > totalBytes) {
+        size = totalBytes - offset;
+      }
+      final chunk = buffer.sublist(offset, offset + size);
+      await dynamicKeymapSetBuffer(offset, chunk);
+    }
+  }
 }
