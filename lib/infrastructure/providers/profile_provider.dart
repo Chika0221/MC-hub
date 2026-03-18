@@ -62,6 +62,10 @@ class ProfilesAsyncNotifier extends AsyncNotifier<List<KeyProfile?>> {
     await _saveProfile(newProfile);
   }
 
+  Future<void> updateProfile(KeyProfile profile) async {
+    await _saveProfile(profile);
+  }
+
   Future<void> inputProfile() async {
     final profileJson = await FileService.loadjsonFile();
     if (profileJson == null) return;
@@ -92,6 +96,8 @@ final profilesProvider = Provider<List<KeyProfile?>>((ref) {
 });
 
 class SelectProfileNotifier extends Notifier<KeyProfile?> {
+  final prefs = SharedPreferencesAsync();
+
   @override
   KeyProfile? build() {
     unawaited(_loadSelectedProfile());
@@ -103,11 +109,10 @@ class SelectProfileNotifier extends Notifier<KeyProfile?> {
     final keyMatrix = profile.keyMatrix;
 
     await ref.read(vialProvider.notifier).updateKeyMatrix(keyMatrix!);
-    await updateSelectProfilePrefarences();
+    await updateSelectProfilePrefarences(profile);
   }
 
   Future<void> _loadSelectedProfile() async {
-    final prefs = await SharedPreferences.getInstance();
     final selectedProfileId = prefs.getString("select_profile_id");
     if (selectedProfileId == null) {
       state = null;
@@ -122,12 +127,9 @@ class SelectProfileNotifier extends Notifier<KeyProfile?> {
     state = selectedProfile;
   }
 
-  Future<void> updateSelectProfilePrefarences() async {
-    final selectedProfile = state;
-    if (selectedProfile == null) return;
-
+  Future<void> updateSelectProfilePrefarences(KeyProfile profile) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString("select_profile_id", selectedProfile.id);
+    await prefs.setString("select_profile_id", profile.id);
   }
 }
 

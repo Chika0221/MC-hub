@@ -55,15 +55,54 @@ class ProfileSelecter extends HookConsumerWidget {
             itemBuilder: (context, index) {
               final profile = profiles[index];
 
-              return SizedBox(
-                width: double.infinity,
-                child: FilledButton.tonal(
-                  onPressed: () {
-                    ref
-                        .read(selectProfileProvider.notifier)
-                        .selectProfile(profile!);
+              // return SizedBox(
+              //   width: double.infinity,
+              //   child: FilledButton.tonal(
+              //     onPressed: () {
+              //       if (profile != null) {
+              //         ref
+              //             .read(selectProfileProvider.notifier)
+              //             .selectProfile(profile);
+              //       }
+              //     },
+              //     child: Text(profile?.name ?? "UnKnown"),
+              //   ),
+              // );
+              return Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: ListTile(
+                  title: Text(
+                    profile?.name ?? "UnKnown",
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                  ),
+                  onTap: () {
+                    if (profile != null) {
+                      ref
+                          .read(selectProfileProvider.notifier)
+                          .selectProfile(profile);
+                    }
                   },
-                  child: Text(profile?.name ?? "UnKnown"),
+                  trailing:
+                      profile == selectedProfile
+                          ? IconButton(
+                            onPressed: () async {
+                              if (profile == null) return;
+                              await ref
+                                  .read(profilesAsyncNotifierProvider.notifier)
+                                  .updateProfile(profile);
+                            },
+                            icon: Icon(
+                              Icons.save_rounded,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          )
+                          : null,
                 ),
               );
             },
