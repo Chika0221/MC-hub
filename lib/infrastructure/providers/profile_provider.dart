@@ -12,8 +12,6 @@ import 'package:uuid/uuid.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/fileIO.dart/file_service.dart';
-import 'package:mc_hub/infrastructure/hid/vial_service.dart';
-import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
 import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
 import 'package:mc_hub/models/key_profile.dart';
 
