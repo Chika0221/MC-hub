@@ -12,6 +12,9 @@ import 'package:mc_hub/widgets/has_last_child_listview.dart';
 
 class ProfileSelecter extends HookConsumerWidget {
   const ProfileSelecter({super.key});
+
+  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -68,7 +71,7 @@ class ProfileSelecter extends HookConsumerWidget {
               return Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: ListTile(
                   title: Text(

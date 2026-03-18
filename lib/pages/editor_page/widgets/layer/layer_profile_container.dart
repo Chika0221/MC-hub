@@ -42,8 +42,13 @@ class LayerProfileContainer extends HookConsumerWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Flexible(flex: 1, child: ProfileSelecter()),
-                      Divider(color: Theme.of(context).colorScheme.surface),
-                      Flexible(flex: 2, child: LayerSelecter()),
+                      Flexible(
+                        flex: 2,
+                        child: LayerSelecter(
+                          onLayerSelected: onLayerSelected,
+                          selectedIndex: selectedIndex,
+                        ),
+                      ),
                       const SizedBox(height: 8),
                       SizedBox(
                         width: double.infinity,
