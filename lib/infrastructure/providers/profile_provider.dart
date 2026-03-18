@@ -124,7 +124,6 @@ class SelectProfileNotifier extends Notifier<KeyProfile?> {
   }
 
   Future<void> updateSelectProfilePrefarences(KeyProfile profile) async {
-    final prefs = await SharedPreferences.getInstance();
     await prefs.setString("select_profile_id", profile.id);
   }
 }

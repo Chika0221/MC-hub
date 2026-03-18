@@ -37,7 +37,9 @@ class EditorPage extends HookConsumerWidget {
                 children: [
                   Expanded(
                     flex: 3,
-                    child: KeyCanvas(layerIndex: selectedLayer.value),
+                    child: FittedBox(
+                      child: KeyCanvas(layerIndex: selectedLayer.value),
+                    ),
                   ),
                   SizedBox(height: 8),
                   const Expanded(flex: 2, child: KeyPalette()),

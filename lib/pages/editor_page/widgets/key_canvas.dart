@@ -127,25 +127,21 @@ class KeyCanvas extends HookConsumerWidget {
     final layoutData = setLayout(vialState, layerIndex);
     final keyMappings = _keyMappingsForLayer(vialState, layerIndex);
 
-    return Center(
-      child: SingleChildScrollView(
-        child: KeyboardLayout(
-          layoutData: layoutData,
-          keyMappings: keyMappings,
-          onKeyRemap: (keyId, newMapping) {
-            ref
-                .read(vialProvider.notifier)
-                .updateKey(layerIndex, keyId, newMapping);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Mapped $newMapping to key"),
-                duration: const Duration(milliseconds: 500),
-                behavior: SnackBarBehavior.floating,
-              ),
-            );
-          },
-        ),
-      ),
+    return KeyboardLayout(
+      layoutData: layoutData,
+      keyMappings: keyMappings,
+      onKeyRemap: (keyId, newMapping) {
+        ref
+            .read(vialProvider.notifier)
+            .updateKey(layerIndex, keyId, newMapping);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Mapped $newMapping to key"),
+            duration: const Duration(milliseconds: 500),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      },
     );
   }
 }
