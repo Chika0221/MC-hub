@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod/src/framework.dart';
 
 // Project imports:
 import 'package:mc_hub/infrastructure/fileIO.dart/file_service.dart';
 import 'package:mc_hub/infrastructure/providers/profile_provider.dart';
-import 'package:mc_hub/infrastructure/providers/vial_provider.dart';
-import 'package:mc_hub/models/key_profile.dart';
 import 'package:mc_hub/pages/editor_page/widgets/layer/new_profile_dialog.dart';
 import 'package:mc_hub/widgets/has_last_child_listview.dart';
 

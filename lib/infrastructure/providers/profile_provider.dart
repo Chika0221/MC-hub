@@ -114,10 +114,6 @@ class SelectProfileNotifier extends Notifier<KeyProfile?> {
 
   Future<void> _loadSelectedProfile() async {
     final selectedProfileId = prefs.getString("select_profile_id");
-    if (selectedProfileId == null) {
-      state = null;
-      return;
-    }
 
     final profiles = ref.read(profilesProvider);
     final selectedProfile = profiles.firstWhere(
