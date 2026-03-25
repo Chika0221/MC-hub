@@ -16,16 +16,16 @@ class FileService {
     Map<String, dynamic> json,
   ) async {
     final suggestionNameWithExtension =
-        suggestionName.endsWith(".json")
+        suggestionName.endsWith(".spkp")
             ? suggestionName
-            : "$suggestionName.json";
+            : "$suggestionName.spkp";
 
     final jsonString = jsonEncode(json);
 
     FileSaveLocation? location = await getSaveLocation(
       suggestedName: suggestionNameWithExtension,
       acceptedTypeGroups: [
-        XTypeGroup(label: "JSON Files", extensions: ["json"]),
+        XTypeGroup(label: "Switch Palette Key Profile", extensions: ["spkp"]),
       ],
     );
     print(location?.path);
@@ -42,7 +42,7 @@ class FileService {
   static Future<Map<String, dynamic>?> loadjsonFile() async {
     final result = await openFile(
       acceptedTypeGroups: [
-        XTypeGroup(label: "JSON Files", extensions: ["json"]),
+        XTypeGroup(label: "Switch Palette Key Profile", extensions: ["spkp"]),
       ],
     );
 
