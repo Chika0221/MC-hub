@@ -7,6 +7,8 @@ import 'package:mc_hub/models/macro.dart';
 part 'workflow.freezed.dart';
 part 'workflow.g.dart';
 
+// ignore_for_file: invalid_annotation_target
+
 @freezed
 class Workflow with _$Workflow {
   @JsonSerializable(explicitToJson: true)

@@ -8,6 +8,8 @@ import 'package:mc_hub/models/workflow.dart';
 part 'connect.freezed.dart';
 part 'connect.g.dart';
 
+// ignore_for_file: invalid_annotation_target
+
 @freezed
 class Connect with _$Connect {
   @JsonSerializable(explicitToJson: true)

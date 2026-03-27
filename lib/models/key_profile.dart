@@ -7,6 +7,8 @@ import 'package:mc_hub/models/macro.dart';
 part 'key_profile.freezed.dart';
 part 'key_profile.g.dart';
 
+// ignore_for_file: invalid_annotation_target
+
 @freezed
 class KeyProfile with _$KeyProfile {
   @JsonSerializable(explicitToJson: true)
