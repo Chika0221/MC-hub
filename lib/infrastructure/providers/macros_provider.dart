@@ -9,7 +9,7 @@ import 'package:mc_hub/infrastructure/macro/app_preferences.dart';
 import 'package:mc_hub/infrastructure/macro/run_macro.dart';
 import 'package:mc_hub/models/macro.dart';
 
-class MacrosNotifier extends AsyncNotifier<List<Macro?>> {
+class MacrosNotifier extends AutoDisposeAsyncNotifier<List<Macro?>> {
   @override
   FutureOr<List<Macro?>> build() async {
     return _fetchMacros();

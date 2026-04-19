@@ -15,7 +15,7 @@ import 'package:mc_hub/infrastructure/workflow/run_workflow.dart';
 import 'package:mc_hub/models/connect.dart';
 import 'package:mc_hub/models/macro.dart';
 
-class FirebaseConnectStreamNotifier extends StreamNotifier<Connect> {
+class FirebaseConnectStreamNotifier extends AutoDisposeStreamNotifier<Connect> {
   final connect_collection = FirebaseFirestore.instance.collection("connect");
 
   String? docId;

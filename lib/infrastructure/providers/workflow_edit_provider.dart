@@ -20,7 +20,7 @@ final workflowEditInitialWorkflowProvider =
       WorkflowEditInitialWorkflowNotifier.new,
     );
 
-class WorkflowEditNotifier extends Notifier<Workflow> {
+class WorkflowEditNotifier extends AutoDisposeNotifier<Workflow> {
   @override
   Workflow build() {
     final initialWorkflow = ref.watch(workflowEditInitialWorkflowProvider);

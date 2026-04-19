@@ -5,7 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // Project imports:
 import 'package:mc_hub/models/infrared_code.dart';
 
-class FirebaseCodesStreamNotifier extends StreamNotifier<List<InfraredCode>> {
+class FirebaseCodesStreamNotifier
+    extends AutoDisposeStreamNotifier<List<InfraredCode>> {
   final code_collection = FirebaseFirestore.instance.collection("codes");
 
   @override

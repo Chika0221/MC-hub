@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/models/app_info.dart';
 import 'package:mc_hub/models/macro.dart';
 
-class OpenAppNotifier extends AsyncNotifier<List<Macro>> {
+class OpenAppNotifier extends AutoDisposeAsyncNotifier<List<Macro>> {
   @override
   FutureOr<List<Macro>> build() {
     return getOpenApps();

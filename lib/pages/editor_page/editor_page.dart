@@ -47,10 +47,10 @@ class EditorPage extends HookConsumerWidget {
               ),
             ),
             const SizedBox(width: 8),
-            LayerProfileContainer(
-              selectedIndex: selectedLayer.value,
-              onLayerSelected: (int index) => selectedLayer.value = index,
-            ),
+            // LayerProfileContainer(
+            //   selectedIndex: selectedLayer.value,
+            //   onLayerSelected: (int index) => selectedLayer.value = index,
+            // ),
           ],
         ),
       ),

@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mc_hub/models/unregistered_code.dart';
 
 class FirebaseUnregisteredCodeStreamNotifier
-    extends StreamNotifier<UnregisteredCode?> {
+    extends AutoDisposeStreamNotifier<UnregisteredCode?> {
   final unregi_collection = FirebaseFirestore.instance.collection(
     "unregisteredCodes",
   );
